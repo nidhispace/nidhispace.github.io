@@ -150,6 +150,10 @@ h6 {
 /*--------------------------------------------------------------
 # Header Social Links
 --------------------------------------------------------------*/
+.social-links i {
+  font-size: 50px; /* Adjust the size as needed */
+}
+
 .header-social-links {
   padding-right: 15px;
 }
