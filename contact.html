@@ -77,10 +77,23 @@
 
         <div class="section-title">
           <h2>Contact</h2>
-          <div class="col-lg-4">
-            <img src="assets/img/portfolio/mainz-center.jpg" class="img-fluid" alt="" oncontextmenu="return false;" style="width: 90%; height: auto;">
-          </div> 
-          <p></p>
+          
+          <div class="slider">
+            <div class="slides">
+              <img src="assets/img/portfolio/mainz-center.jpg" alt="image 1">
+              <img src="assets/img/portfolio/mainz-1.jpg" alt="Image 2">
+              <img src="assets/img/portfolio/mainz-2.jpg" alt="Image 3">
+              <img src="assets/img/portfolio/mainz-3.jpg" alt="Image 4">
+              <img src="assets/img/portfolio/mainz-4.jpg" alt="Image 5">
+              <img src="assets/img/portfolio/mainz-5.jpg" alt="Image 6">
+              <img src="assets/img/portfolio/mainz-6.jpg" alt="Image 7">
+              <img src="assets/img/portfolio/mainz-7.jpg" alt="Image 8">
+              <img src="assets/img/portfolio/mainz-8.jpg" alt="Image 9">
+              <img src="assets/img/portfolio/mainz-10.jpg" alt="Image 11">
+              <img src="assets/img/portfolio/mainz-11.jpg" alt="Image 12">
+            </div>
+            <div class="dots"></div>
+          </div>
           <br>
           <h4 class="left-align">Current city: Mainz Germany</h4>
             <p class="left-align">Located in the picturesque region of Rheinland-Pfalz, Mainz stands as a vibrant city graced by the majestic Rhine River. Steeped in history, culture, and modernity, Mainz offers residents and visitors alike a unique blend of old-world charm and contemporary allure.</p>
@@ -118,7 +131,9 @@
             <h4 class="left-align">Natural Beauty:</h4>
             <p class="left-align">With its blend of historical charm, cultural richness, and modern amenities, Mainz offers an exceptional quality of life for its residents. The city's strong economy, excellent healthcare facilities, and renowned educational institutions further enhance its appeal, making it an ideal destination for individuals and families seeking a vibrant yet peaceful place to call home.</p>
           </div>
-          <br><br>
+          
+          <p></p>
+          <br>
 
         <div>
           <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d82126.3159235072!2d8.160129922792994!3d49.96546824286007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47bd912e33df1379%3A0x422d4d510db1ba0!2sMainz%2C%20Germany!5e0!3m2!1sen!2sus!4v1709383263742!5m2!1sen!2sus" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -208,6 +223,61 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+<!-- JavaScript -->
+<script>
+  let slideIndex = 0;
+  const slides = document.querySelectorAll('.slides img');
+  const totalSlides = slides.length;
+  const dotsContainer = document.querySelector('.dots');
+
+  function showSlides() {
+    slides.forEach((slide, index) => {
+      slide.style.transform = `translateX(-${slideIndex * 100}%)`;
+    });
+    updateDots();
+  }
+
+  function nextSlide() {
+    slideIndex = (slideIndex + 1) % totalSlides;
+    showSlides();
+  }
+
+  function prevSlide() {
+    slideIndex = (slideIndex - 1 + totalSlides) % totalSlides;
+    showSlides();
+  }
+
+  function createDots() {
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      dot.setAttribute('data-slide', i);
+      dot.addEventListener('click', () => {
+        slideIndex = i;
+        showSlides();
+      });
+      dotsContainer.appendChild(dot);
+    }
+    updateDots();
+  }
+
+  function updateDots() {
+    const dotElements = dotsContainer.querySelectorAll('.dot');
+    dotElements.forEach((dot, index) => {
+      if (index === slideIndex) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+    });
+  }
+
+  createDots();
+
+  // Automatic sliding
+  setInterval(nextSlide, 3000); // Change slides every 3 seconds
+</script>
 
 </body>
 

@@ -1306,3 +1306,46 @@ section {
 #footer .credits a {
   color: #34b7a7;
 }
+
+
+
+/*--------------------------------------------------------------
+# slider setting 
+---------------------------------------------------------------*/
+/* CSS styles */
+.slider {
+  width: 100%;
+  margin: auto;
+  overflow: hidden; /* Ensure overflow is hidden to hide extra images */
+  position: relative;
+}
+.slides {
+  display: flex;
+  transition: transform 0.5s ease; /* Adjust transition time as needed */
+  overflow: hidden; /* Hide any content that overflows */
+}
+.slides img {
+  width: auto; /* Set width to auto to maintain original size */
+  height: auto; /* Set height to auto to maintain original size */
+  max-width: 100%; /* Ensure images don't exceed container width */
+  max-height: 100%; /* Ensure images don't exceed container height */
+  object-fit: contain; /* Fit the entire image inside the container without stretching */
+}
+.dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #bbb;
+  border-radius: 50%;
+  margin: 0 5px;
+  cursor: pointer;
+}
+.dot.active {
+  background-color: #555;
+}
