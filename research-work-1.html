@@ -80,9 +80,14 @@
             <img src="assets/img/portfolio/atmo-1.png" alt="Image 2" width="80%" height="auto"><br><br>
   
         </div>
-        <button onclick="redirectToResearch()">Go back </button>
+    
+        <!-- Button container with two buttons -->
+        <div class="button-container">
+        <!-- Button to navigate to research.html -->
+        <button onclick="redirectToResearch()"> Go back </button>
+        <!-- Button to navigate to research-work-1.html -->
         <button onclick="redirectToNextPage()">Go to Next page</button>
-
+    </div>
        
 
       </div>
@@ -114,13 +119,12 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  
   <script>
     function redirectToResearch() {
-      window.location.href = "research-work.html";
+        window.location.href = "research-work.html";
     }
-</script>
 
-<script>
     function redirectToNextPage() {
         window.location.href = "research-work-1.html";
     }

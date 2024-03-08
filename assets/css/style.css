@@ -1371,3 +1371,19 @@ section {
 .profile .name {
   font-size: 18px;
 }
+
+
+/* Flex container styles */
+.button-container {
+  display: flex;
+  justify-content: space-between; /* Distribute buttons evenly */
+  align-items: center; /* Align buttons vertically */
+  margin: 20px; /* Add some margin for spacing */
+}
+
+/* Button styles */
+.button-container button {
+  padding: 10px 20px; /* Add padding for better appearance */
+  border: none;
+  cursor: pointer;
+}
