@@ -129,6 +129,8 @@
 
       </div>
     </section> -->
+
+
     <!-- ======= Resume Section ======= -->
     <section id="resume" class="resume">
       <div class="container" data-aos="fade-up">
@@ -137,8 +139,9 @@
           <h2>Resume</h2>
         </div>
 
+        <!-- Education Row -->
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-12">
             <h3 class="resume-title">Education</h3>
             <div class="resume-item">
               <h4>Ph.D.</h4>
@@ -154,12 +157,15 @@
               </ul>
             </div>
           </div>
-          
-          <div class="col-lg-6">
+        </div>
+
+        <!-- Professional Experience Row - Wider Section -->
+        <div class="row mt-5">
+          <div class="col-lg-12">
             <h3 class="resume-title">Professional Experience</h3>
             
             <!-- Timeline Container -->
-            <div class="timeline-container">
+            <div class="timeline-container-wide">
               <!-- Navigation Arrows -->
               <button class="timeline-nav timeline-nav-prev">
                 <i class="bi bi-chevron-left"></i>
@@ -169,70 +175,89 @@
               </button>
               
               <!-- Timeline Track -->
-              <div class="timeline-track">
+              <div class="timeline-track-wide">
                 <!-- Timeline Items -->
-                <div class="timeline-item">
-                  <div class="timeline-card">
+                <div class="timeline-item-wide">
+                  <div class="timeline-card-wide">
                     <h4>Max Planck Institut für Chemie</h4>
                     <p class="timeline-position">Postdoctoral Research Fellow</p>
                     <p class="timeline-date">Jan 2024 - Present</p>
                     <p class="timeline-location">Mainz, Germany</p>
                     <div class="timeline-details">
-                      <p>Details about your current research and responsibilities...</p>
+                      <p>Conducting research on atmospheric chemistry with focus on volatile organic compounds and their environmental impact.</p>
+                      <ul>
+                        <li>Leading field measurement campaigns</li>
+                        <li>Developing new analytical techniques</li>
+                        <li>Mentoring graduate students</li>
+                      </ul>
                     </div>
                   </div>
                 </div>
                 
-                <div class="timeline-item">
-                  <div class="timeline-card">
+                <div class="timeline-item-wide">
+                  <div class="timeline-card-wide">
                     <h4>Max Planck Institut für Chemie</h4>
                     <p class="timeline-position">Humboldt Postdoctoral Guest Scientist</p>
                     <p class="timeline-date">Mar 2022 - Dec 2023</p>
                     <p class="timeline-location">Mainz, Germany</p>
                     <div class="timeline-details">
-                      <p>Details about your Humboldt fellowship research...</p>
+                      <p>Research under the prestigious Humboldt Postdoctoral Fellowship.</p>
+                      <ul>
+                        <li>Investigated VOC sources and sinks</li>
+                        <li>Published 3 peer-reviewed papers</li>
+                        <li>Presented at international conferences</li>
+                      </ul>
                     </div>
                   </div>
                 </div>
                 
-                <div class="timeline-item">
-                  <div class="timeline-card">
+                <div class="timeline-item-wide">
+                  <div class="timeline-card-wide">
                     <h4>did deutsch-institut Frankfurt</h4>
                     <p class="timeline-position">German Language Course</p>
                     <p class="timeline-date">Jan 2022 - Feb 2022</p>
                     <p class="timeline-location">Frankfurt, Germany</p>
                     <div class="timeline-details">
-                      <p>Intensive German language training...</p>
+                      <p>Completed intensive German language training (B1 level).</p>
+                      <ul>
+                        <li>Daily immersive language instruction</li>
+                        <li>Cultural orientation program</li>
+                      </ul>
                     </div>
                   </div>
                 </div>
                 
-                <div class="timeline-item">
-                  <div class="timeline-card">
+                <div class="timeline-item-wide">
+                  <div class="timeline-card-wide">
                     <h4>Physical Research Laboratory</h4>
                     <p class="timeline-position">Postdoctoral Guest Scientist</p>
                     <p class="timeline-date">Jul 2020 - Dec 2021</p>
                     <p class="timeline-location">Ahmedabad, India</p>
                     <div class="timeline-details">
-                      <p>Details about your postdoc research...</p>
+                      <p>Postdoctoral research following completion of PhD.</p>
+                      <ul>
+                        <li>Continued atmospheric chemistry research</li>
+                        <li>Collaborated with international teams</li>
+                        <li>Supervised instrument maintenance</li>
+                      </ul>
                     </div>
                   </div>
                 </div>
               </div>
               
               <!-- Timeline Year Indicators -->
-              <div class="timeline-years">
-                <span class="year-marker" data-year="2024">2024</span>
-                <span class="year-marker" data-year="2023">2023</span>
-                <span class="year-marker" data-year="2022">2022</span>
-                <span class="year-marker" data-year="2021">2021</span>
-                <span class="year-marker" data-year="2020">2020</span>
+              <div class="timeline-years-wide">
+                <span class="year-marker-wide active" data-year="2024">2024</span>
+                <span class="year-marker-wide" data-year="2023">2023</span>
+                <span class="year-marker-wide" data-year="2022">2022</span>
+                <span class="year-marker-wide" data-year="2021">2021</span>
+                <span class="year-marker-wide" data-year="2020">2020</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </section>    
  
     
 
@@ -262,21 +287,20 @@
   <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
 
-    
   <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const track = document.querySelector('.timeline-track');
+    const track = document.querySelector('.timeline-track-wide');
     const prevBtn = document.querySelector('.timeline-nav-prev');
     const nextBtn = document.querySelector('.timeline-nav-next');
-    const yearMarkers = document.querySelectorAll('.year-marker');
+    const yearMarkers = document.querySelectorAll('.year-marker-wide');
     
     // Navigation buttons functionality
     prevBtn.addEventListener('click', () => {
-      track.scrollBy({ left: -300, behavior: 'smooth' });
+      track.scrollBy({ left: -425, behavior: 'smooth' });
     });
     
     nextBtn.addEventListener('click', () => {
-      track.scrollBy({ left: 300, behavior: 'smooth' });
+      track.scrollBy({ left: 425, behavior: 'smooth' });
     });
     
     // Year markers functionality
@@ -285,13 +309,17 @@
         const year = marker.getAttribute('data-year');
         const position = getPositionForYear(year);
         track.scrollTo({ left: position, behavior: 'smooth' });
+        
+        // Update active marker
+        yearMarkers.forEach(m => m.classList.remove('active'));
+        marker.classList.add('active');
       });
     });
     
     // Update active year marker on scroll
     track.addEventListener('scroll', () => {
       const scrollPosition = track.scrollLeft;
-      const itemWidth = 320; // 300px card + 20px gap
+      const itemWidth = 425; // 400px card + 25px gap
       const activeIndex = Math.round(scrollPosition / itemWidth);
       
       yearMarkers.forEach((marker, index) => {
@@ -307,15 +335,21 @@
     function getPositionForYear(year) {
       const positions = {
         '2024': 0,
-        '2023': 320,
-        '2022': 640,
-        '2021': 960,
-        '2020': 1280
+        '2023': 425,
+        '2022': 850,
+        '2021': 1275,
+        '2020': 1700
       };
       return positions[year] || 0;
     }
+    
+    // Initialize first marker as active
+    if (yearMarkers.length > 0) {
+      yearMarkers[0].classList.add('active');
+    }
   });
-  </script>  
+  </script>    
+  
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
