@@ -1387,3 +1387,38 @@ section {
   border: none;
   cursor: pointer;
 }
+
+
+
+.timeline-container {
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 1rem 0;
+}
+
+.timeline {
+  display: flex;
+  gap: 30px;
+  padding-bottom: 1rem;
+}
+
+.timeline-item {
+  background: #f7f7f7;
+  border-left: 4px solid #0078ff;
+  padding: 1rem;
+  min-width: 250px;
+  max-width: 300px;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.timeline-item::before {
+  content: attr(data-year);
+  position: absolute;
+  top: -1.5rem;
+  left: 0;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: #0078ff;
+}
