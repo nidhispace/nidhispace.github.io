@@ -337,66 +337,87 @@
 
   <script>
   document.addEventListener('DOMContentLoaded', function() {
-    const track = document.querySelector('.timeline-track-wide');
-    const prevBtn = document.querySelector('.timeline-nav-prev');
-    const nextBtn = document.querySelector('.timeline-nav-next');
-    const yearMarkers = document.querySelectorAll('.year-marker-wide');
+    // Initialize both timelines
+    initTimeline('.education .timeline-track', '.education .timeline-nav-prev', '.education .timeline-nav-next', '.education .year-marker');
+    initTimeline('.experience .timeline-track', '.experience .timeline-nav-prev', '.experience .timeline-nav-next', '.experience .year-marker');
     
-    // Navigation buttons functionality
-    prevBtn.addEventListener('click', () => {
-      track.scrollBy({ left: -425, behavior: 'smooth' });
-    });
-    
-    nextBtn.addEventListener('click', () => {
-      track.scrollBy({ left: 425, behavior: 'smooth' });
-    });
-    
-    // Year markers functionality
-    yearMarkers.forEach(marker => {
-      marker.addEventListener('click', () => {
-        const year = marker.getAttribute('data-year');
-        const position = getPositionForYear(year);
-        track.scrollTo({ left: position, behavior: 'smooth' });
-        
-        // Update active marker
-        yearMarkers.forEach(m => m.classList.remove('active'));
-        marker.classList.add('active');
-      });
-    });
-    
-    // Update active year marker on scroll
-    track.addEventListener('scroll', () => {
-      const scrollPosition = track.scrollLeft;
-      const itemWidth = 425; // 400px card + 25px gap
-      const activeIndex = Math.round(scrollPosition / itemWidth);
+    function initTimeline(trackSelector, prevBtnSelector, nextBtnSelector, yearMarkerSelector) {
+      const track = document.querySelector(trackSelector);
+      if (!track) return;
       
-      yearMarkers.forEach((marker, index) => {
-        if (index === activeIndex) {
+      const prevBtn = document.querySelector(prevBtnSelector);
+      const nextBtn = document.querySelector(nextBtnSelector);
+      const yearMarkers = document.querySelectorAll(yearMarkerSelector);
+      
+      // Navigation buttons functionality
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          track.scrollBy({ left: -405, behavior: 'smooth' });
+        });
+      }
+      
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          track.scrollBy({ left: 405, behavior: 'smooth' });
+        });
+      }
+      
+      // Year markers functionality
+      yearMarkers.forEach(marker => {
+        marker.addEventListener('click', () => {
+          const year = marker.getAttribute('data-year');
+          const position = getPositionForYear(year, trackSelector);
+          track.scrollTo({ left: position, behavior: 'smooth' });
+          
+          // Update active marker
+          document.querySelectorAll(yearMarkerSelector).forEach(m => m.classList.remove('active'));
           marker.classList.add('active');
-        } else {
-          marker.classList.remove('active');
-        }
+        });
       });
-    });
-    
-    // Helper function to get scroll position for year
-    function getPositionForYear(year) {
-      const positions = {
-        '2024': 0,
-        '2023': 425,
-        '2022': 850,
-        '2021': 1275,
-        '2020': 1700
-      };
-      return positions[year] || 0;
-    }
-    
-    // Initialize first marker as active
-    if (yearMarkers.length > 0) {
-      yearMarkers[0].classList.add('active');
+      
+      // Update active year marker on scroll
+      track.addEventListener('scroll', () => {
+        const scrollPosition = track.scrollLeft;
+        const itemWidth = 405; // 380px card + 25px gap
+        const activeIndex = Math.round(scrollPosition / itemWidth);
+        
+        document.querySelectorAll(yearMarkerSelector).forEach((marker, index) => {
+          if (index === activeIndex) {
+            marker.classList.add('active');
+          } else {
+            marker.classList.remove('active');
+          }
+        });
+      });
+      
+      // Helper function to get scroll position for year
+      function getPositionForYear(year, selector) {
+        // This is a simplified version - you might need to customize based on your actual items
+        const positions = {
+          '.education .timeline-track': {
+            '2020': 0,
+            '2014': 405,
+            '2012': 810
+          },
+          '.experience .timeline-track': {
+            '2024': 0,
+            '2023': 405,
+            '2022': 810,
+            '2021': 1215,
+            '2020': 1620
+          }
+        };
+        
+        return positions[selector]?.[year] || 0;
+      }
+      
+      // Initialize first marker as active
+      if (yearMarkers.length > 0) {
+        yearMarkers[0].classList.add('active');
+      }
     }
   });
-  </script>    
+  </script>
   
 
   <!-- Template Main JS File -->
