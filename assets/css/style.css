@@ -1390,35 +1390,46 @@ section {
 
 
 
-.timeline-container {
-  overflow-x: auto;
-  white-space: nowrap;
-  padding: 1rem 0;
-}
-
-.timeline {
-  display: flex;
-  gap: 30px;
-  padding-bottom: 1rem;
-}
-
-.timeline-item {
-  background: #f7f7f7;
-  border-left: 4px solid #0078ff;
-  padding: 1rem;
-  min-width: 250px;
-  max-width: 300px;
-  border-radius: 8px;
+.timeline-wrapper {
   position: relative;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin: 3rem 0;
+  height: 150px;
+  border-top: 2px solid #0078ff;
 }
 
-.timeline-item::before {
-  content: attr(data-year);
+.timeline-line {
   position: absolute;
-  top: -1.5rem;
+  top: 50%;
   left: 0;
-  font-weight: bold;
-  font-size: 0.9rem;
-  color: #0078ff;
+  right: 0;
+  height: 2px;
+  background: #0078ff;
+  z-index: 1;
 }
+
+.timeline-event {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.event-content {
+  background: #f9f9f9;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: center;
+  font-size: 0.9rem;
+  min-width: 180px;
+}
+
+.timeline-year {
+  position: absolute;
+  top: 100%;
+  transform: translateX(-50%);
+  margin-top: 5px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
