@@ -1575,6 +1575,113 @@ section {
   }
 }
 
+/* Vertical Timeline Styles (Separate from existing styles) */
+.vertical-timeline {
+  position: relative;
+  max-width: 700px;
+  margin: 40px auto;
+  padding-left: 50px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.vertical-timeline::before {
+  content: "";
+  position: absolute;
+  left: 30px;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #0a3d62, #3c6382);
+  border-radius: 2px;
+  z-index: 0;
+}
+
+.vertical-timeline-item {
+  position: relative;
+  margin-bottom: 3rem;
+  padding-left: 40px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  z-index: 1;
+}
+
+.vertical-timeline-item::before {
+  content: "";
+  position: absolute;
+  left: 22px;
+  top: 12px;
+  width: 16px;
+  height: 16px;
+  background: #0a3d62;
+  border-radius: 50%;
+  border: 3px solid #82ccdd;
+  box-shadow: 0 0 8px rgba(130, 204, 221, 0.6);
+  z-index: 2;
+}
+
+.vertical-timeline-info {
+  max-width: 300px;
+}
+
+.vertical-timeline-date {
+  font-weight: 700;
+  color: #0a3d62;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.vertical-timeline-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.vertical-timeline-desc {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #555;
+}
+
+.vertical-timeline-image {
+  flex-shrink: 0;
+  width: 180px;
+  height: 120px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.vertical-timeline-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 720px) {
+  .vertical-timeline {
+    padding-left: 30px;
+  }
+  .vertical-timeline-item {
+    flex-direction: column;
+    padding-left: 0;
+  }
+  .vertical-timeline-item::before {
+    left: 0;
+    top: 0;
+  }
+  .vertical-timeline-info {
+    max-width: 100%;
+  }
+  .vertical-timeline-image {
+    width: 100%;
+    height: 180px;
+    margin-top: 1rem;
+  }
+}
+
 
 /* Publication list */
 .filters {
@@ -1733,4 +1840,3 @@ strong {
 }
 
 
-@import 'vertical-timeline';
