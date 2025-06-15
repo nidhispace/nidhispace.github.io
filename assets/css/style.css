@@ -1623,7 +1623,7 @@ section {
 }
 
 .vertical-timeline-info {
-  max-width: 600px; /* Much wider for content */
+  max-width: 100%; /* Much wider for content */
   flex: 1;
 }
 
