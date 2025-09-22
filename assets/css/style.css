@@ -147,6 +147,29 @@ h6 {
   }
 }
 
+.logos-section .logo-item img {
+  height: 80px;              /* uniform height */
+  object-fit: contain;       
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: grayscale(50%);    /* slightly muted colors */
+}
+
+.logos-section .logo-item img:hover {
+  transform: scale(1.1);     /* subtle zoom on hover */
+  filter: grayscale(0%);     /* full color on hover */
+}
+
+@media (max-width: 768px) {
+  .logos-section .logo-item img {
+    height: 60px;             /* smaller on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .logos-section .logo-item img {
+    height: 50px;             /* even smaller on very small screens */
+  }
+}
 
 /*--------------------------------------------------------------
 # Header Social Links
