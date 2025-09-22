@@ -147,27 +147,35 @@ h6 {
   }
 }
 
-.logos-section .logo-item img {
-  height: 80px;              /* uniform height */
-  object-fit: contain;       
+.logos-wrapper {
+  flex-wrap: wrap;           /* allow wrapping on very small screens */
+  justify-content: center;   
+  align-items: center;
+  gap: 30px;                 /* space between logos */
+}
+
+.logo-item img {
+  max-width: 120px;          /* control max width */
+  height: auto;
+  object-fit: contain;
   transition: transform 0.3s ease, filter 0.3s ease;
   filter: grayscale(50%);    /* slightly muted colors */
 }
 
-.logos-section .logo-item img:hover {
+.logo-item img:hover {
   transform: scale(1.1);     /* subtle zoom on hover */
   filter: grayscale(0%);     /* full color on hover */
 }
 
 @media (max-width: 768px) {
-  .logos-section .logo-item img {
-    height: 60px;             /* smaller on mobile */
+  .logo-item img {
+    max-width: 90px;
   }
 }
 
 @media (max-width: 480px) {
-  .logos-section .logo-item img {
-    height: 50px;             /* even smaller on very small screens */
+  .logo-item img {
+    max-width: 70px;
   }
 }
 
