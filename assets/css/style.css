@@ -732,12 +732,12 @@ section {
   margin-bottom: 20px;
 }
 
-/* Scroll Buttons */
-.scroll-buttons {
+/* Scroll buttons at top, spaced left and right */
+.scroll-buttons-top {
   display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-bottom: 10px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
 }
 
 .scroll-btn {
