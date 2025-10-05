@@ -733,7 +733,7 @@ section {
 }
 
 /* Scroll Buttons */
-.scroll-buttons {
+/* .scroll-buttons {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
@@ -749,7 +749,8 @@ section {
   cursor: pointer;
   border-radius: 5px;
   transition: background 0.3s ease;
-}
+} */
+
 
 .scroll-btn:hover {
   background-color: #2aa391;
