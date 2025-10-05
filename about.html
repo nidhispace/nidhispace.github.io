@@ -292,11 +292,16 @@
 
         <div class="section-title">
           <h2>References</h2>
-          <p></p>
         </div>
 
-        <!-- Testimonials grid -->
-        <div class="testimonials-grid">
+        <!-- Scroll buttons -->
+        <div class="scroll-buttons">
+          <button class="scroll-btn left" onclick="scrollTestimonials(-1)">&#8592;</button>
+          <button class="scroll-btn right" onclick="scrollTestimonials(1)">&#8594;</button>
+        </div>
+
+        <!-- Horizontal scroll row -->
+        <div class="testimonials-row" id="testimonialsRow">
           <div class="testimonial-item">
             <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
             <h3>Prof. Dr. Lokesh Sahu (Ph.D. supervisor)</h3>
@@ -354,13 +359,15 @@
               Institut für Atmosphäre und Umwelt, Goethe-Universität Frankfurt am Main, Germany
               <i class="bx bxs-quote-alt-right quote-icon-right"></i>
             </p>
-            <a href="https://www.uni-frankfurt.de/158264841/AG_Aerosol_und_Spurengase" target="_blank">https://www.uni-frankfurt.de/172181425/Prof__Dr__Joachim_Curtius</a>
+            <a href="https://www.uni-frankfurt.de/172181425/Prof__Dr__Joachim_Curtius" target="_blank">https://www.uni-frankfurt.de/172181425/Prof__Dr__Joachim_Curtius</a>
           </div>
         </div>
-        
 
       </div>
-    </section><!-- End Testimonials Section -->
+    </section>
+    <!-- End Testimonials Section -->
+
+
 
   </main><!-- End #main -->
 
@@ -389,6 +396,14 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <script>
+    function scrollTestimonials(direction) {
+      const container = document.getElementById('testimonialsRow');
+      const scrollAmount = 320; // adjust based on card width
+      container.scrollLeft += direction * scrollAmount;
+    }
+  </script>
 
 </body>
 
