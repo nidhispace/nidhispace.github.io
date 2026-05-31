@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Indian History | Nidhi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;800;900&family=Open+Sans:wght@300;400;600&family=Playfair+Display:ital,wght@1,400;0,700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    :root {
+      --teal:#34b7a7; --teal-light:#51cdbe; --teal-pale:#e7f8f6;
+      --saffron:#FF9933; --saffron-pale:#fff4e6; --saffron-deep:#e67e22;
+      --india-green:#138808; --india-green-pale:#eafbea;
+      --navy:#0a3d62; --navy-mid:#1a5276;
+      --dark:#222222; --mid:#555555; --light-bg:#e9e8e6; --white:#ffffff;
+      --text-muted:#888888;
+      --card-shadow:0 8px 32px rgba(52,183,167,.10),0 2px 8px rgba(0,0,0,.06);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:"Open Sans",sans-serif;color:var(--dark);background:#f5f5f3;overflow-x:hidden;}
+    a{color:var(--teal);text-decoration:none;} a:hover{color:var(--teal-light);}
+    h1,h2,h3,h4,h5,h6{font-family:"Raleway",sans-serif;}
+
+    /* HEADER */
+    #header{background:var(--light-bg);box-shadow:0 0 25px rgba(0,0,0,.08);position:fixed;top:0;left:0;right:0;z-index:997;padding:15px 0;}
+    .header-inner{max-width:1200px;margin:0 auto;padding:0 20px;display:flex;justify-content:space-between;align-items:center;}
+    .logo{font-size:32px;font-weight:400;letter-spacing:2px;text-transform:uppercase;}
+    .logo a{color:var(--dark);}
+    .navbar ul{display:flex;list-style:none;}
+    .navbar li{padding:10px 0 10px 28px;position:relative;}
+    .navbar a{font-family:"Raleway",sans-serif;font-size:15px;font-weight:600;color:var(--text-muted);transition:.3s;position:relative;}
+    .navbar a::before{content:"";position:absolute;width:0;height:2px;bottom:-5px;left:0;background:var(--teal);visibility:hidden;transition:all .3s ease-in-out;}
+    .navbar a:hover::before,.navbar a.active::before{visibility:visible;width:25px;}
+    .navbar a:hover,.navbar a.active{color:var(--dark);}
+    .header-social-links a{color:#6f6f6f;padding-left:6px;font-size:16px;line-height:0;display:inline-block;transition:.3s;}
+    .header-social-links a:hover{color:var(--teal);}
+    @media(max-width:991px){.navbar ul{display:none;}}
+
+    /* HERO */
+    .history-hero{position:relative;margin-top:70px;min-height:420px;display:flex;align-items:center;justify-content:center;overflow:hidden;
+      background:linear-gradient(135deg,#7b1200 0%,#b5451b 30%,#e67e22 60%,#138808 100%);}
+    .history-hero::before{content:"";position:absolute;inset:0;
+      background:radial-gradient(ellipse 55% 50% at 80% 50%,rgba(255,153,51,.28) 0%,transparent 70%),
+                 radial-gradient(ellipse 40% 60% at 15% 40%,rgba(19,136,8,.2) 0%,transparent 65%);}
+    .hero-grid{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+    .hero-grid svg{width:100%;height:100%;opacity:.09;}
+    .hero-content{position:relative;z-index:2;text-align:center;padding:60px 20px;animation:fadeInDown .9s ease both;}
+
+    /* Ashoka Chakra SVG */
+    .chakra-wrap{display:inline-block;margin-bottom:22px;animation:spinIn 1.1s cubic-bezier(.34,1.56,.64,1) .2s both;}
+    .chakra-wrap svg{width:72px;height:72px;filter:drop-shadow(0 4px 16px rgba(0,0,0,.35));}
+    @keyframes spinIn{from{opacity:0;transform:scale(.4) rotate(-180deg);}to{opacity:1;transform:scale(1) rotate(0deg);}}
+
+    /* Indian flag tricolour strip */
+    .hero-flag{display:inline-flex;border-radius:6px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.35);margin-bottom:24px;animation:flagPop .8s cubic-bezier(.34,1.56,.64,1) .4s both;}
+    .hero-flag span{display:block;width:60px;height:36px;}
+    .flag-saffron{background:#FF9933;} .flag-white{background:#fff;} .flag-green{background:#138808;}
+    @keyframes flagPop{from{opacity:0;transform:scale(.6) rotate(-4deg);}to{opacity:1;transform:scale(1) rotate(0deg);}}
+    @keyframes fadeInDown{from{opacity:0;transform:translateY(-30px);}to{opacity:1;transform:translateY(0);}}
+
+    .history-hero h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;color:#fff;letter-spacing:.5px;line-height:1.15;margin-bottom:14px;}
+    .history-hero h1 span{color:#FFD700;}
+    .history-hero p{font-size:1.05rem;color:rgba(255,255,255,.82);max-width:620px;margin:0 auto 30px;font-weight:300;line-height:1.7;}
+    .hero-stats{display:flex;gap:36px;justify-content:center;flex-wrap:wrap;}
+    .hero-stat .num{font-family:"Raleway",sans-serif;font-size:2rem;font-weight:800;color:#FFD700;line-height:1;}
+    .hero-stat .lbl{font-size:.72rem;color:rgba(255,255,255,.62);text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+
+    /* MAIN */
+    #main{max-width:1160px;margin:0 auto;padding:60px 20px 80px;}
+    .section-header{text-align:center;margin-bottom:56px;}
+    .section-header .eyebrow{display:inline-block;font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--saffron);font-weight:700;margin-bottom:12px;}
+    .section-header h2{font-size:2rem;font-weight:800;color:var(--dark);margin-bottom:16px;}
+    .section-header h2::after{content:"";display:block;width:50px;height:3px;background:var(--saffron);margin:14px auto 0;}
+    .section-header p{color:var(--mid);max-width:620px;margin:0 auto;font-size:.95rem;line-height:1.7;}
+
+    /* PROGRESS STRIP */
+    .progress-strip{background:var(--white);border-radius:16px;padding:24px 32px;box-shadow:var(--card-shadow);margin-bottom:60px;overflow-x:auto;}
+    .strip-title{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);font-weight:600;margin-bottom:16px;}
+    .strip-track{display:flex;align-items:center;position:relative;min-width:900px;}
+    .strip-line{position:absolute;top:50%;left:0;right:0;height:3px;background:linear-gradient(90deg,#FF9933 0%,#138808 100%);transform:translateY(-50%);z-index:0;}
+    .strip-event{position:relative;z-index:1;flex:1;text-align:center;cursor:pointer;}
+    .strip-dot{width:13px;height:13px;background:var(--white);border:3px solid var(--saffron);border-radius:50%;margin:0 auto 7px;transition:all .25s;}
+    .strip-event:hover .strip-dot,.strip-event.active .strip-dot{background:var(--saffron);transform:scale(1.4);}
+    .strip-label{font-size:.66rem;color:var(--text-muted);font-weight:600;line-height:1.3;}
+    .strip-event:hover .strip-label,.strip-event.active .strip-label{color:var(--saffron);}
+
+    /* EPOCH GROUP HEADERS */
+    .epoch-divider{text-align:center;margin:60px 0 40px;position:relative;}
+    .epoch-divider::before{content:"";position:absolute;top:50%;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--saffron),transparent);transform:translateY(-50%);}
+    .epoch-label{display:inline-block;background:#f5f5f3;padding:8px 28px;border-radius:30px;border:2px solid var(--saffron);font-family:"Raleway",sans-serif;font-size:.85rem;font-weight:700;color:var(--saffron);letter-spacing:2px;text-transform:uppercase;position:relative;z-index:1;}
+
+    /* TIMELINE */
+    .timeline{position:relative;}
+    .timeline::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#FF9933 0%,#138808 100%);transform:translateX(-50%);border-radius:2px;}
+    .tl-item{position:relative;display:flex;align-items:flex-start;margin-bottom:68px;opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease;}
+    .tl-item.visible{opacity:1;transform:translateY(0);}
+    .tl-item:nth-child(odd){flex-direction:row;}
+    .tl-item:nth-child(even){flex-direction:row-reverse;}
+    .tl-dot{position:absolute;left:50%;top:24px;transform:translateX(-50%);width:22px;height:22px;background:var(--white);border:4px solid var(--saffron);border-radius:50%;z-index:3;box-shadow:0 0 0 5px rgba(255,153,51,.18);transition:all .3s;}
+    .tl-item:hover .tl-dot{background:var(--saffron);box-shadow:0 0 0 8px rgba(255,153,51,.22);transform:translateX(-50%) scale(1.2);}
+    .tl-year{position:absolute;left:50%;top:-4px;transform:translateX(-50%) translateY(-145%);background:var(--navy);color:#fff;font-family:"Raleway",sans-serif;font-size:.72rem;font-weight:700;padding:4px 13px;border-radius:20px;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.2);z-index:4;}
+    .tl-step-num{position:absolute;left:50%;top:18px;transform:translateX(-50%);width:26px;height:26px;background:var(--saffron);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:"Raleway",sans-serif;font-size:.72rem;font-weight:800;color:#fff;z-index:5;box-shadow:0 2px 8px rgba(255,153,51,.4);}
+
+    /* CARD */
+    .tl-left,.tl-right{width:calc(50% - 52px);position:relative;}
+    .tl-card{background:var(--white);border-radius:16px;padding:0;box-shadow:var(--card-shadow);border:1px solid rgba(255,153,51,.12);transition:transform .3s ease,box-shadow .3s ease;overflow:hidden;}
+    .tl-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(255,153,51,.15),0 4px 12px rgba(0,0,0,.08);}
+    .tl-item:nth-child(odd) .tl-card::after{content:"";position:absolute;top:30px;right:-10px;border:10px solid transparent;border-left-color:var(--white);border-right:0;}
+    .tl-item:nth-child(even) .tl-card::after{content:"";position:absolute;top:30px;left:-10px;border:10px solid transparent;border-right-color:var(--white);border-left:0;}
+    .card-header-band{padding:16px 22px 14px;border-bottom:1px solid #f4f4f4;display:flex;align-items:center;gap:12px;}
+    .card-icon{width:38px;height:38px;background:var(--saffron-pale);color:var(--saffron);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+    .tl-era{display:inline-block;font-size:.67rem;letter-spacing:2px;text-transform:uppercase;color:var(--saffron);font-weight:700;background:var(--saffron-pale);padding:2px 9px;border-radius:20px;margin-bottom:4px;}
+    .tl-card h3{font-size:1.08rem;font-weight:700;color:var(--dark);line-height:1.3;margin:0;}
+    .card-body{padding:16px 22px 20px;}
+    .card-body p{font-size:.875rem;color:var(--mid);line-height:1.78;margin-bottom:11px;}
+    .card-body p:last-child{margin-bottom:0;}
+
+    /* KEY FACTS */
+    .key-facts{background:var(--saffron-pale);border-radius:10px;padding:13px 15px;margin-top:13px;}
+    .key-facts.green{background:var(--india-green-pale);}
+    .key-facts-title{font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--saffron);font-weight:700;margin-bottom:9px;}
+    .key-facts.green .key-facts-title{color:var(--india-green);}
+    .fact-row{display:flex;align-items:flex-start;gap:8px;margin-bottom:7px;font-size:.82rem;color:var(--mid);line-height:1.4;}
+    .fact-row:last-child{margin-bottom:0;}
+    .fact-row i{color:var(--saffron);flex-shrink:0;margin-top:2px;font-size:.8rem;}
+    .key-facts.green .fact-row i{color:var(--india-green);}
+    .fact-row strong{color:var(--dark);}
+
+    /* FIGURES */
+    .figures-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px;}
+    .figure-chip{background:#f7f7f7;border-radius:8px;padding:6px 11px;font-size:.77rem;color:var(--mid);border:1px solid #ebebeb;}
+    .figure-chip strong{color:var(--dark);display:block;font-size:.79rem;margin-bottom:1px;}
+    .figure-chip span{color:var(--text-muted);}
+
+    /* IMPACT */
+    .impact-badge{display:inline-flex;align-items:center;gap:5px;margin-top:11px;font-size:.73rem;font-weight:600;padding:4px 12px;border-radius:20px;}
+    .impact-gold{background:#fffbe6;color:#b7860a;}
+    .impact-high{background:#fff0f0;color:#c0392b;}
+    .impact-pos{background:var(--india-green-pale);color:var(--india-green);}
+    .impact-blue{background:#e8f4ff;color:#1a5276;}
+
+    /* IMAGE PANEL */
+    .tl-image-panel{width:calc(50% - 52px);display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:flex-start;padding-top:6px;}
+    .tl-image-panel .main-img{width:100%;max-width:340px;height:210px;object-fit:cover;border-radius:14px;box-shadow:0 12px 32px rgba(0,0,0,.13);transition:transform .4s ease,box-shadow .4s ease;}
+    .tl-item:hover .tl-image-panel .main-img{transform:scale(1.04) rotate(-.5deg);box-shadow:0 20px 48px rgba(0,0,0,.18);}
+    .img-caption{font-size:.71rem;color:var(--text-muted);text-align:center;max-width:300px;line-height:1.4;font-style:italic;}
+
+    /* QUOTE */
+    .tl-quote{background:var(--navy);color:#fff;border-radius:12px;padding:13px 17px;margin-top:12px;position:relative;}
+    .tl-quote::before{content:"\201C";font-family:"Playfair Display",serif;font-size:3rem;color:var(--saffron);position:absolute;top:-8px;left:12px;line-height:1;}
+    .tl-quote p{font-style:italic;font-size:.81rem;line-height:1.65;padding-top:14px;color:rgba(255,255,255,.85);}
+    .tl-quote cite{font-size:.71rem;color:var(--saffron);margin-top:6px;display:block;font-style:normal;font-weight:600;}
+
+    /* RESPONSIVE */
+    @media(max-width:860px){
+      .timeline::before{left:18px;}
+      .tl-item,.tl-item:nth-child(even){flex-direction:column;padding-left:48px;}
+      .tl-dot{left:18px;} .tl-step-num{left:18px;} .tl-year{left:18px;transform:translateX(-50%) translateY(-150%);}
+      .tl-left,.tl-right,.tl-image-panel{width:100%;}
+      .tl-image-panel{margin-top:14px;}
+      .tl-image-panel .main-img{max-width:100%;height:190px;}
+      .tl-card::after,.tl-item:nth-child(even) .tl-card::after{display:none;}
+    }
+
+    #footer{background:var(--light-bg);padding:30px 0;color:var(--dark);font-size:14px;text-align:center;}
+    .back-to-top{position:fixed;right:15px;bottom:15px;z-index:996;background:var(--saffron);width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;opacity:0;visibility:hidden;transition:all .4s;box-shadow:0 4px 14px rgba(255,153,51,.4);}
+    .back-to-top.active{opacity:1;visibility:visible;} .back-to-top:hover{background:var(--saffron-deep);}
+  </style>
+</head>
+<body>
+
+<header id="header">
+  <div class="header-inner">
+    <h1 class="logo"><a href="index.html">Nidhi</a></h1>
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="german_history.html">German History</a></li>
+        <li><a href="indian_history.html">Indian History</a></li>
+      </ul>
+    </nav>
+    <div class="header-social-links">
+      <a href="https://twitter.com/nidhispace" target="_blank"><i class="bi bi-twitter"></i></a>
+      <a href="https://www.linkedin.com/in/nidhispace/" target="_blank"><i class="bi bi-linkedin"></i></a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="history-hero">
+  <div class="hero-grid">
+    <svg viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid slice">
+      <line x1="0" y1="70"  x2="1200" y2="70"  stroke="#fff" stroke-width="1"/>
+      <line x1="0" y1="140" x2="1200" y2="140" stroke="#fff" stroke-width="1"/>
+      <line x1="0" y1="210" x2="1200" y2="210" stroke="#fff" stroke-width="1"/>
+      <line x1="0" y1="280" x2="1200" y2="280" stroke="#fff" stroke-width="1"/>
+      <line x1="0" y1="350" x2="1200" y2="350" stroke="#fff" stroke-width="1"/>
+      <line x1="200"  y1="0" x2="200"  y2="420" stroke="#fff" stroke-width="1"/>
+      <line x1="400"  y1="0" x2="400"  y2="420" stroke="#fff" stroke-width="1"/>
+      <line x1="600"  y1="0" x2="600"  y2="420" stroke="#fff" stroke-width="1"/>
+      <line x1="800"  y1="0" x2="800"  y2="420" stroke="#fff" stroke-width="1"/>
+      <line x1="1000" y1="0" x2="1000" y2="420" stroke="#fff" stroke-width="1"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <!-- Ashoka Chakra -->
+    <div class="chakra-wrap">
+      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="46" fill="none" stroke="#FFD700" stroke-width="3"/>
+        <circle cx="50" cy="50" r="6" fill="#FFD700"/>
+        <circle cx="50" cy="50" r="38" fill="none" stroke="#FFD700" stroke-width="1.5"/>
+        <!-- 24 spokes -->
+        <g stroke="#FFD700" stroke-width="1.8">
+          <line x1="50" y1="12" x2="50" y2="88"/>
+          <line x1="12" y1="50" x2="88" y2="50"/>
+          <line x1="23.4" y1="23.4" x2="76.6" y2="76.6"/>
+          <line x1="76.6" y1="23.4" x2="23.4" y2="76.6"/>
+          <line x1="15.6" y1="35.7" x2="84.4" y2="64.3"/>
+          <line x1="35.7" y1="15.6" x2="64.3" y2="84.4"/>
+          <line x1="84.4" y1="35.7" x2="15.6" y2="64.3"/>
+          <line x1="64.3" y1="15.6" x2="35.7" y2="84.4"/>
+          <line x1="19.1" y1="42.7" x2="80.9" y2="57.3"/>
+          <line x1="42.7" y1="19.1" x2="57.3" y2="80.9"/>
+          <line x1="80.9" y1="42.7" x2="19.1" y2="57.3"/>
+          <line x1="57.3" y1="19.1" x2="42.7" y2="80.9"/>
+        </g>
+      </svg>
+    </div>
+    <div class="hero-flag">
+      <span class="flag-saffron"></span><span class="flag-white"></span><span class="flag-green"></span>
+    </div>
+    <h1>The <span>Story of India</span></h1>
+    <p>From the world's oldest civilisation on the banks of the Indus to a 21st-century space power — 5,000 years of kings, empires, philosophies, invasions, and renaissance spanning every era of human history.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num"><span class="counter-num" data-target="5000">0</span>+</div><div class="lbl">Years of History</div></div>
+      <div class="hero-stat"><div class="num"><span class="counter-num" data-target="13">0</span></div><div class="lbl">Major Empires</div></div>
+      <div class="hero-stat"><div class="num"><span class="counter-num" data-target="4">0</span></div><div class="lbl">World Religions Born Here</div></div>
+      <div class="hero-stat"><div class="num"><span class="counter-num" data-target="1947">0</span></div><div class="lbl">Year of Independence</div></div>
+    </div>
+  </div>
+</section>
+
+<main id="main">
+  <div class="section-header">
+    <span class="eyebrow">Bharatvarsha — भारतवर्ष</span>
+    <h2>A Civilisation Through the Ages</h2>
+    <p>Explore India's complete historical journey — from Vedic sages and warrior kings to Mughal emperors and freedom fighters — in chronological detail.</p>
+  </div>
+
+  <!-- PROGRESS STRIP -->
+  <div class="progress-strip">
+    <div class="strip-title">Navigate Timeline</div>
+    <div class="strip-track">
+      <div class="strip-line"></div>
+      <div class="strip-event active" data-target="#era-indus"><div class="strip-dot"></div><div class="strip-label">3300 BCE<br>Indus</div></div>
+      <div class="strip-event" data-target="#era-vedic"><div class="strip-dot"></div><div class="strip-label">1500 BCE<br>Vedic</div></div>
+      <div class="strip-event" data-target="#era-mahajanapadas"><div class="strip-dot"></div><div class="strip-label">600 BCE<br>Kingdoms</div></div>
+      <div class="strip-event" data-target="#era-maurya"><div class="strip-dot"></div><div class="strip-label">321 BCE<br>Maurya</div></div>
+      <div class="strip-event" data-target="#era-gupta"><div class="strip-dot"></div><div class="strip-label">320 CE<br>Gupta</div></div>
+      <div class="strip-event" data-target="#era-medieval"><div class="strip-dot"></div><div class="strip-label">600–1200<br>Medieval</div></div>
+      <div class="strip-event" data-target="#era-delhi"><div class="strip-dot"></div><div class="strip-label">1206<br>Delhi</div></div>
+      <div class="strip-event" data-target="#era-mughal"><div class="strip-dot"></div><div class="strip-label">1526<br>Mughal</div></div>
+      <div class="strip-event" data-target="#era-maratha"><div class="strip-dot"></div><div class="strip-label">1674<br>Maratha</div></div>
+      <div class="strip-event" data-target="#era-british"><div class="strip-dot"></div><div class="strip-label">1757<br>British</div></div>
+      <div class="strip-event" data-target="#era-freedom"><div class="strip-dot"></div><div class="strip-label">1857–1947<br>Freedom</div></div>
+      <div class="strip-event" data-target="#era-republic"><div class="strip-dot"></div><div class="strip-label">1947+<br>Republic</div></div>
+      <div class="strip-event" data-target="#era-modern"><div class="strip-dot"></div><div class="strip-label">2000+<br>Modern</div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ TIMELINE ═══════════════════════════════ -->
+  <div class="timeline">
+
+    <div class="epoch-divider"><span class="epoch-label">⚱ Ancient India · 3300 BCE – 600 CE</span></div>
+
+    <!-- 1. INDUS VALLEY -->
+    <div class="tl-item" id="era-indus">
+      <span class="tl-year">3300 – 1300 BCE</span>
+      <div class="tl-step-num">1</div>
+      <div class="tl-left">
+        <div class="tl-card">
+          <div class="card-header-band">
+            <div class="card-icon"><i class="bi bi-water"></i></div>
+            <div>
+              <div class="tl-era">Bronze Age · World's First Urban Civilisation</div>
+              <h3>The Indus Valley Civilisation (Harappan)</h3>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>The Indus Valley Civilisation — also called the Harappan Civilisation — was one of the three earliest urban civilisations in the world alongside Mesopotamia and Ancient Egypt, and the <strong>largest of the three by area</strong>, spanning over 1.25 million km² across modern-day Pakistan, northwest India, and Afghanistan. It emerged around 3300 BCE in the Bronze Age and flourished from approximately 2600–1900 BCE.</p>
+            <p>At its peak, cities like <strong>Mohenjo-daro</strong> (in Sindh) and <strong>Harappa</strong> (in Punjab) housed populations of 30,000–50,000. These were extraordinarily sophisticated urban centres: they featured grid-planned streets, the world's first known urban sanitation and sewage systems, multi-storey brick houses with private bathrooms, public granaries, and a remarkable standardisation of weights and measures across thousands of kilometres. The "Great Bath" of Mohenjo-daro is considered among the earliest public water tanks in history.</p>
+            <p>The Harappans had a writing system (the Indus Script) with over 400 known signs, which remains undeciphered to this day. Trade networks extended to Mesopotamia via the Persian Gulf. Artefacts of seals, jewellery, terracotta figurines (including the famous "Dancing Girl" bronze), and toy carts reveal a rich cultural life. Around 1900 BCE the mature civilisation declined — causes debated include climate change, shifts in the monsoon, and the drying of the Ghaggar-Hakra river (possibly the Vedic Saraswati).</p>
+            <div class="key-facts">
+              <div class="key-facts-title"><i class="bi bi-info-circle"></i> Key Facts</div>
+              <div class="fact-row"><i class="bi bi-geo-alt"></i><span><strong>Sites discovered:</strong> Over 2,000 across India, Pakistan and Afghanistan</span></div>
+              <div class="fact-row"><i class="bi bi-people"></i><span><strong>Population at peak:</strong> Est. 1–5 million across all settlements</span></div>
+              <div class="fact-row"><i class="bi bi-buildings"></i><span><strong>Major cities:</strong> Mohenjo-daro, Harappa, Dholavira, Lothal, Rakhigarhi</span></div>
+              <div class="fact-row"><i class="bi bi-truck"></i><span><strong>Lothal:</strong> World's first known dockyards (2400 BCE), in Gujarat</span></div>
+              <div class="fact-row"><i class="bi bi-puzzle"></i><span><strong>Indus Script:</strong> 400+ symbols; still undeciphered</span></div>
+            </div>
+            <div class="figures-row">
+              <div class="figure-chip"><strong>Mohenjo-daro</strong><span>"Mound of the Dead" — largest city</span></div>
+              <div class="figure-chip"><strong>Harappa</strong><span>Namesake city, Punjab</span></div>
+              <div class="figure-chip"><strong>Dholavira</strong><span>Major city in Rann of Kutch, Gujarat</span></div>
+              <div class="figure-chip"><strong>Lothal</strong><span>First known dockyard, trade hub</span></div>
+            </div>
+            <span class="impact-badge impact-gold"><i class="bi bi-star-fill"></i> Foundation of Indian civilisation</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-image-panel">
+        <img class="main-img"
+          src="/assets/img/history/indus_civilisation.png"
+          alt="Mohenjo-daro ruins" loading="lazy"/>
+        <p class="img-caption">Ruins of Mohenjo-daro, Sindh — one of the world's first planned cities, c. 2500 BCE</p>
+        <div class="tl-quote">
+          <p>The cities of the Indus were built with a sophistication that would not be matched in Europe for another two thousand years.</p>
+          <cite>— Sir Mortimer Wheeler, archaeologist who excavated Harappa (1944)</cite>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. VEDIC AGE -->
+    <div class="tl-item" id="era-vedic">
+      <span class="tl-year">1500 – 500 BCE</span>
+      <div class="tl-step-num">2</div>
+      <div class="tl-right">
+        <div class="tl-card">
+          <div class="card-header-band">
+            <div class="card-icon"><i class="bi bi-fire"></i></div>
+            <div>
+              <div class="tl-era">Vedic Age · Sacred Knowledge &amp; Epics</div>
+              <h3>The Vedic Period — Gods, Sages &amp; the Birth of Dharma</h3>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>The Vedic Period marks the composition of the world's oldest surviving scriptures — the four <strong>Vedas</strong>: Rigveda, Samaveda, Yajurveda, and Atharvaveda. The Rigveda (~1500 BCE) is the oldest known religious text still in active use, containing 1,028 hymns addressed to deities such as <strong>Indra</strong> (king of gods, thunder), <strong>Agni</strong> (fire), <strong>Varuna</strong> (cosmic order), <strong>Surya</strong> (sun), and <strong>Soma</strong> (sacred drink). The Vedas were composed in Sanskrit and transmitted orally with extraordinary precision for centuries before being written down.</p>
+            <p>The later Vedic period saw the composition of the <strong>Upanishads</strong> (~800–500 BCE) — philosophical texts exploring the nature of the Self (<em>Atman</em>), Ultimate Reality (<em>Brahman</em>), karma, dharma, and liberation (<em>moksha</em>). These became the foundation of Indian philosophy and influenced global thought. Alongside emerged the great epics: the <strong>Mahabharata</strong> (the longest poem in world literature, ~1.8 million words, including the Bhagavad Gita) and the <strong>Ramayana</strong> (the story of Rama and Sita, foundational to Hindu culture across South and Southeast Asia).</p>
+            <p>The Vedic social structure introduced the <em>varna</em> system (Brahmin, Kshatriya, Vaishya, Shudra). Vedic rituals (<em>yajnas</em>) were elaborate fire sacrifices. The <em>Ashvamedha</em> (horse sacrifice) was performed by kings to assert sovereignty. The period saw the gradual shift from nomadic pastoralism to settled agriculture in the Gangetic plains, establishing the socio-cultural foundations of Hindu civilisation.</p>
+            <div class="key-facts">
+              <div class="key-facts-title"><i class="bi bi-info-circle"></i> Key Facts &amp; Texts</div>
+              <div class="fact-row"><i class="bi bi-book"></i><span><strong>Rigveda:</strong> ~1500 BCE; 1,028 hymns; world's oldest known religious literature in use</span></div>
+              <div class="fact-row"><i class="bi bi-book"></i><span><strong>Mahabharata:</strong> ~400 BCE–400 CE; 1.8 million words; includes the Bhagavad Gita (battlefield dialogue of Krishna and Arjuna)</span></div>
+              <div class="fact-row"><i class="bi bi-book"></i><span><strong>Ramayana:</strong> by sage Valmiki; 24,000 verses; story of Rama, Sita &amp; Hanuman</span></div>
+              <div class="fact-row"><i class="bi bi-lightning"></i><span><strong>Key deities:</strong> Brahma (creator), Vishnu (preserver), Shiva (destroyer), Indra, Saraswati, Lakshmi, Durga, Ganesha, Krishna, Rama</span></div>
+              <div class="fact-row"><i class="bi bi-diagram-3"></i><span><strong>Varna system:</strong> Brahmin (priests/scholars), Kshatriya (warriors/kings), Vaishya (merchants), Shudra (artisans/farmers)</span></div>
+            </div>
+            <div class="figures-row">
+              <div class="figure-chip"><strong>Lord Rama</strong><span>7th avatar of Vishnu, hero of Ramayana</span></div>
+              <div class="figure-chip"><strong>Lord Krishna</strong><span>8th avatar of Vishnu, Mahabharata &amp; Bhagavad Gita</span></div>
+              <div class="figure-chip"><strong>Sage Vyasa</strong><span>Author of Mahabharata &amp; Vedas compiler</span></div>
+              <div class="figure-chip"><strong>Sage Valmiki</strong><span>Author of the Ramayana</span></div>
+              <div class="figure-chip"><strong>Yajnavalkya</strong><span>Great Upanishadic philosopher</span></div>
+            </div>
+            <span class="impact-badge impact-gold"><i class="bi bi-brightness-high"></i> Spiritual &amp; philosophical foundation of Hinduism</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-image-panel">
+        <img class="main-img"
+          src="assets/img/history/mahabharat.png"
+          alt="Mahabharata scene" loading="lazy"
+          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Shatapatha_Brahmana.jpg/480px-Shatapatha_Brahmana.jpg'"/>
+        <p class="img-caption">The Kurukshetra War from the Mahabharata — Krishna counsels Arjuna, depicted in the Bhagavad Gita</p>
+        <div class="tl-quote">
+          <p>You have a right to perform your prescribed duties, but you are not entitled to the fruits of your actions. Never consider yourself the cause of the results of your activities, and never be attached to not doing your duty.</p>
+          <cite>— Lord Krishna, Bhagavad Gita, Chapter 2, Verse 47</cite>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. MAHAJANAPADAS / BUDDHA / MAHAVIRA -->
+    <div class="tl-item" id="era-mahajanapadas">
+      <span class="tl-year">600 – 321 BCE</span>
+      <div class="tl-step-num">3</div>
+      <div class="tl-left">
+        <div class="tl-card">
+          <div class="card-header-band">
+            <div class="card-icon"><i class="bi bi-diagram-2"></i></div>
+            <div>
+              <div class="tl-era">Axial Age · Kingdoms, Buddha &amp; Mahavira</div>
+              <h3>The Sixteen Mahajanapadas, Buddha &amp; the Age of Enlightenment</h3>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>By 600 BCE, northern India was divided into <strong>sixteen Mahajanapadas</strong> (great kingdoms) — among them Magadha, Kosala, Kashi (Varanasi), Vajji, Avanti, and Gandhara. These were governed as kingdoms or oligarchic republics (<em>ganas</em>). Of these, <strong>Magadha</strong> (in modern Bihar) emerged dominant, later forming the base of India's first great empire.</p>
+            <p>This period witnessed two of history's most influential spiritual awakenings. <strong>Siddhartha Gautama</strong> (~563–483 BCE), born a prince of the Shakya clan in Lumbini (modern Nepal), renounced worldly life and after years of ascetic practice attained enlightenment under the Bodhi tree at <strong>Bodh Gaya</strong>. As the <strong>Buddha</strong> ("The Awakened One"), he taught the <em>Four Noble Truths</em> and the <em>Eightfold Path</em> to end suffering (<em>dukkha</em>). Buddhism eventually spread across Asia and today has ~500 million adherents worldwide.</p>
+            <p>Simultaneously, <strong>Vardhamana Mahavira</strong> (~599–527 BCE) revitalised and systematised <strong>Jainism</strong>, preaching radical non-violence (<em>ahimsa</em>), truthfulness (<em>satya</em>), and non-possessiveness (<em>aparigraha</em>) — principles that would later deeply influence Mahatma Gandhi. The period also saw the rise of <strong>Ajatashatru</strong> of Magadha and the early philosophical schools of the <em>Charvaka</em> (materialists) and the <em>Ajivikas</em>.</p>
+            <div class="key-facts">
+              <div class="key-facts-title"><i class="bi bi-info-circle"></i> Key Facts</div>
+              <div class="fact-row"><i class="bi bi-geo-alt"></i><span><strong>16 Mahajanapadas:</strong> Anga, Magadha, Kashi, Kosala, Vrijji, Malla, Chedi, Vatsa, Kuru, Panchala, Matsya, Surasena, Assaka, Avanti, Gandhara, Kamboja</span></div>
+              <div class="fact-row"><i class="bi bi-person-check"></i><span><strong>Buddha's birth:</strong> c. 563 BCE, Lumbini; enlightenment at Bodh Gaya; first sermon at Sarnath</span></div>
+              <div class="fact-row"><i class="bi bi-person-check"></i><span><strong>Mahavira:</strong> c. 599 BCE; 24th Tirthankara of Jainism; attained liberation at Pavapuri</span></div>
+              <div class="fact-row"><i class="bi bi-book"></i><span><strong>Arthashastra:</strong> Treatise on statecraft by Kautilya (Chanakya), ~300 BCE — ancient India's equivalent of Machiavelli's <em>The Prince</em></span></div>
+            </div>
+            <div class="figures-row">
+              <div class="figure-chip"><strong>Siddhartha Gautama / Buddha</strong><span>Founder of Buddhism</span></div>
+              <div class="figure-chip"><strong>Mahavira</strong><span>24th Tirthankara, Jainism reformer</span></div>
+              <div class="figure-chip"><strong>Bimbisara</strong><span>King of Magadha, contemporary of Buddha</span></div>
+              <div class="figure-chip"><strong>Ajatashatru</strong><span>Expanded Magadha kingdom</span></div>
+              <div class="figure-chip"><strong>Chanakya (Kautilya)</strong><span>Political philosopher, kingmaker</span></div>
+            </div>
+            <span class="impact-badge impact-gold"><i class="bi bi-heart"></i> Two of the world's great religions born in this era</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-image-panel">
+        <img class="main-img"
+          src="assets/img/history/buddha_sarnath.png"
+          alt="Buddha statue Sarnath" loading="lazy"/>
+        <p class="img-caption">The famous Buddha statue from Sarnath — site of the first sermon (Dhammacakkappavattana Sutta)</p>
+        <div class="tl-quote">
+          <p>Peace comes from within. Do not seek it without.</p>
+          <cite>— Attributed to Gautama Buddha</cite>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. MAURYA EMPIRE -->
+    <div class="tl-item" id="era-maurya">
+      <span class="tl-year">321 – 185 BCE</span>
+      <div class="tl-step-num">4</div>
+      <div class="tl-right">
+        <div class="tl-card">
+          <div class="card-header-band">
+            <div class="card-icon"><i class="bi bi-crown-fill"></i></div>
+            <div>
+              <div class="tl-era">Classical Era · India's First Great Empire</div>
+              <h3>The Maurya Empire — Chandragupta, Bindusara &amp; Emperor Ashoka</h3>
+            </div>
+          </div>
+          <div class="card-body">
+            <p><strong>Chandragupta Maurya</strong> (r. 321–297 BCE), guided by his mentor-strategist <strong>Chanakya (Kautilya)</strong>, overthrew the Nanda dynasty of Magadha and founded the Maurya Empire — the first pan-Indian empire. He repelled Alexander the Great's general Seleucus Nicator (~305 BCE) and expanded the empire from Afghanistan to Bengal, from the Himalayas to the Deccan. In his later years Chandragupta abdicated and became a Jain monk, reportedly fasting to death in Karnataka.</p>
+            <p>His grandson <strong>Ashoka the Great</strong> (r. 268–232 BCE) expanded the empire to its maximum extent — encompassing nearly the entire Indian subcontinent. But the bloody <strong>Kalinga War</strong> (~261 BCE), in which 100,000 soldiers died and 150,000 were deported, horrified Ashoka so profoundly that he converted to Buddhism and renounced further conquest. He transformed into history's most remarkable example of a conqueror becoming a champion of peace. Ashoka spread Buddhism throughout Asia, sent missionaries to Sri Lanka (his son Mahinda and daughter Sanghamitta), Central Asia, and the Hellenistic world. His edicts, inscribed on pillars and rocks across the empire, proclaimed tolerance, welfare of people and animals, and non-violence. The <strong>Ashoka Chakra</strong> (24-spoked wheel) from his Lion Capital at Sarnath is today the centrepiece of India's national flag.</p>
+            <div class="key-facts">
+              <div class="key-facts-title"><i class="bi bi-info-circle"></i> Key Facts</div>
+              <div class="fact-row"><i class="bi bi-map"></i><span><strong>Territory at peak (Ashoka):</strong> ~5 million km² — from Afghanistan to Bangladesh, Kashmir to Karnataka</span></div>
+              <div class="fact-row"><i class="bi bi-people"></i><span><strong>Population:</strong> ~50–60 million (est. 25% of world population)</span></div>
+              <div class="fact-row"><i class="bi bi-geo-alt"></i><span><strong>Capital:</strong> Pataliputra (modern Patna, Bihar)</span></div>
+              <div class="fact-row"><i class="bi bi-flag"></i><span><strong>Ashoka Chakra:</strong> 24-spoke wheel — now on India's national flag</span></div>
+              <div class="fact-row"><i class="bi bi-file-text"></i><span><strong>Arthashastra:</strong> Kautilya's statecraft manual — covers administration, taxation, foreign policy, espionage &amp; war</span></div>
+            </div>
+            <div class="figures-row">
+              <div class="figure-chip"><strong>Chandragupta Maurya</strong><span>Founder, 321 BCE</span></div>
+              <div class="figure-chip"><strong>Chanakya / Kautilya</strong><span>Prime Minister &amp; strategist</span></div>
+              <div class="figure-chip"><strong>Bindusara</strong><span>Second Mauryan emperor</span></div>
+              <div class="figure-chip"><strong>Ashoka the Great</strong><span>"Devanampiya Piyadasi" — beloved of gods</span></div>
+            </div>
+            <span class="impact-badge impact-gold"><i class="bi bi-globe-asia-australia"></i> First unified Indian state; Buddhism spread to Asia from here</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-image-panel">
+        <img class="main-img"
+          src="assets/img/history/ashoka_chkra.png"
+          alt="Ashoka Chakra" loading="lazy"
+          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/India_-_Sarnath_museum_sculpture.jpg/480px-India_-_Sarnath_museum_sculpture.jpg'"/>
+        <p class="img-caption">The Ashoka Chakra — 24-spoked Dhamma Wheel from the Lion Capital, Sarnath. Now adorns India's national flag</p>
+        <div class="tl-quote">
+          <p>All men are my children. What I desire for my own children — their welfare and happiness — that I desire for all men.</p>
+          <cite>— Emperor Ashoka, Rock Edict I, c. 257 BCE</cite>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. GUPTA GOLDEN AGE -->
+    <div class="tl-item" id="era-gupta">
+      <span class="tl-year">320 – 550 CE</span>
+      <div class="tl-step-num">5</div>
+      <div class="tl-left">
+        <div class="tl-card">
+          <div class="card-header-band">
+            <div class="card-icon"><i class="bi bi-brightness-high-fill"></i></div>
+            <div>
+              <div class="tl-era">Classical Golden Age · Art, Science &amp; Mathematics</div>
+              <h3>The Gupta Empire — India's Golden Age</h3>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>The Gupta Empire, founded by <strong>Sri Gupta</strong> and reaching its zenith under <strong>Chandragupta I</strong> (r. 319–335 CE), <strong>Samudragupta</strong> (r. 335–375 CE, "the Napoleon of India") and <strong>Chandragupta II Vikramaditya</strong> (r. 375–415 CE), ushered in India's classical Golden Age. Sanskrit literature, Hindu philosophy, and scientific inquiry flourished simultaneously across the empire stretching from the Indus to Bengal and from the Himalayas to the Narmada.</p>
+            <p>The mathematician-astronomer <strong>Aryabhata</strong> (476–550 CE) was arguably the greatest scientific mind of his era: he correctly calculated π (pi) to 4 decimal places, proposed that the Earth rotates on its own axis (1,000 years before Copernicus), calculated the length of the solar year as 365.358 days, and worked on algebra and trigonometry. <strong>Brahmagupta</strong> formalised the rules for arithmetic with zero. The decimal system and positional notation invented in India during this period later transformed mathematics worldwide via Arab transmission.</p>
+            <p>The poet-playwright <strong>Kalidasa</strong> composed timeless classics including <em>Abhijnanashakuntalam</em> (which Goethe later called the finest drama ever written) and <em>Meghaduta</em>. The <strong>Nalanda University</strong> (founded ~450 CE) in Bihar became the world's first residential university, hosting 10,000 students and 2,000 teachers from across Asia. The Gupta period also produced the <strong>Kamasutra</strong> (Vatsyayana) and Varahamihira's encyclopedic <em>Brihat Samhita</em>. The cave frescoes of <strong>Ajanta</strong> were painted in this era.</p>
+            <div class="key-facts">
+              <div class="key-facts-title"><i class="bi bi-info-circle"></i> Key Achievements</div>
+              <div class="fact-row"><i class="bi bi-calculator"></i><span><strong>Zero &amp; decimal system:</strong> Invented in India during this era; transmitted to Europe via Arab world</span></div>
+              <div class="fact-row"><i class="bi bi-globe"></i><span><strong>Aryabhata:</strong> Earth rotates on axis; solar year = 365.358 days; π ≈ 3.1416</span></div>
+              <div class="fact-row"><i class="bi bi-mortarboard"></i><span><strong>Nalanda University:</strong> ~450 CE; 10,000 students; subjects: theology, logic, grammar, medicine, mathematics</span></div>
+              <div class="fact-row"><i class="bi bi-palette"></i><span><strong>Ajanta Caves:</strong> Buddhist frescoes of unparalleled beauty, painted c. 400–650 CE</span></div>
+              <div class="fact-row"><i class="bi bi-book"></i><span><strong>Kalidasa's works:</strong> Shakuntala, Meghaduta, Raghuvamsha — classical Sanskrit literature's pinnacle</span></div>
+            </div>
+            <div class="figures-row">
+              <div class="figure-chip"><strong>Chandragupta I</strong><span>Gupta dynasty founder</span></div>
+              <div class="figure-chip"><strong>Samudragupta</strong><span>"Napoleon of India"</span></div>
+              <div class="figure-chip"><strong>Chandragupta II</strong><span>Vikramaditya — peak of empire</span></div>
+              <div class="figure-chip"><strong>Aryabhata</strong><span>Mathematician-astronomer</span></div>
+              <div class="figure-chip"><strong>Kalidasa</strong><span>Greatest Sanskrit poet &amp; playwright</span></div>
+              <div class="figure-chip"><strong>Fa-Hien</strong><span>Chinese Buddhist pilgrim, visited ~400 CE</span></div>
+            </div>
+            <span class="impact-badge impact-gold"><i class="bi bi-star"></i> Golden Age — mathematics, astronomy &amp; Sanskrit arts peak</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-image-panel">
+        <img class="main-img"
+          src="assets/img/history/Padmapani_Bodhisattva.png"
+          alt="Ajanta Caves fresco" loading="lazy"/>
+        <p class="img-caption">Padmapani Bodhisattva fresco, Ajanta Cave 1, c. 5th century CE — masterpiece of Gupta-era Buddhist art (Copyrights Britanica)</p>
+        <div class="tl-quote">
+          <p>The earth is round. It rotates on its own axis. What we call sunrise and sunset — these are phenomena of the earth's own motion.</p>
+          <cite>— Aryabhata, Aryabhatiya, 499 CE — ~1,000 years before Copernicus</cite>
+        </div>
+      </div>
+    </div>
+
+    <div class="epoch-divider"><span class="epoch-label">⚔ Medieval India · 600 – 1526 CE</span></div>
+
+    <!-- 6. MEDIEVAL KINGDOMS -->
+    <div class="tl-item" id="era-medieval">
+      <span class="tl-year">600 – 1200 CE</span>
+      <div class="tl-step-num">6</div>
+      <div class="tl-right">
+        <div class="tl-card">
+          <div class="card-header-band">
+            <div class="card-icon"><i class="bi bi-bank2"></i></div>
+            <div>
+              <div class="tl-era">Early Medieval · Regional Kingdoms &amp; Temple Culture</div>
+              <h3>Pallava, Chalukya, Chola &amp; Rajput Kingdoms</h3>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>After the Gupta decline, India fractured into powerful regional kingdoms that each left indelible cultural legacies. In the <strong>Deccan</strong>, the <strong>Chalukyas of Badami</strong> (550–753 CE) under <strong>Pulakesi II</strong> famously halted the northward advance of Harsha of Kanauj (606–647 CE) — the last great northern emperor. The <strong>Pallavas of Kanchipuram</strong> (275–897 CE) under <strong>Narasimhavarman I</strong> defeated the Chalukyas and built the extraordinary Shore Temple and Mahabalipuram rock-cut sculptures in Tamil Nadu.</p>
+            <p>The <strong>Chola Empire</strong> of Tamil Nadu reached its zenith under <strong>Raja Raja Chola I</strong> (r. 985–1014 CE) and his son <strong>Rajendra Chola I</strong> (r. 1014–1044 CE). Rajendra Chola led a naval expedition all the way to the Malay Peninsula and Sumatra — the most dramatic overseas campaign in Indian history — asserting Indian cultural and commercial dominance across maritime Southeast Asia. The Cholas built the magnificent <strong>Brihadeeswara Temple</strong> at Thanjavur, a UNESCO World Heritage Site.</p>
+            <p>In northern India, the <strong>Rajput</strong> clans — Pratiharas, Paramaras, Chandellas, Chahamanas — dominated from the 7th to 12th centuries. They commissioned extraordinary temples: the <strong>Khajuraho temples</strong> (Chandellas, ~950–1050 CE), the <strong>Sun Temple at Modhera</strong>, and the <strong>Qutb Minar complex</strong> site's earlier temples. <strong>Prithviraj Chauhan</strong> (1149–1192 CE), the last Hindu ruler of Delhi, defeated Mohammed of Ghor at the First Battle of Tarain (1191) but was defeated and killed at the Second Battle (1192), ending Hindu supremacy in northern India.</p>
+            <div class="key-facts">
+              <div class="key-facts-title"><i class="bi bi-info-circle"></i> Key Facts</div>
+              <div class="fact-row"><i class="bi bi-building"></i><span><strong>Brihadeeswara Temple (1010 CE):</strong> 66m tall vimana; built without mortar; UNESCO World Heritage Site</span></div>
+              <div class="fact-row"><i class="bi bi-ship"></i><span><strong>Rajendra Chola's naval campaign:</strong> Reached Kedah (Malaysia) and Sri Vijaya (Sumatra) ~1025 CE</span></div>
+              <div class="fact-row"><i class="bi bi-palette"></i><span><strong>Khajuraho temples:</strong> 85 temples built ~950–1050 CE; masterpiece of Nagara architecture; UNESCO site</span></div>
+              <div class="fact-row"><i class="bi bi-person-x"></i><span><strong>Battle of Tarain II (1192):</strong> Prithviraj Chauhan defeated; Islamic rule established in Delhi</span></div>
+            </div>
+            <div class="figures-row">
+              <div class="figure-chip"><strong>Harshavardhana</strong><span>Last great northern emperor, 606–647</span></div>
+              <div class="figure-chip"><strong>Pulakesi II</strong><span>Chalukya king, halted Harsha</span></div>
+              <div class="figure-chip"><strong>Raja Raja Chola I</strong><span>Built Brihadeeswara Temple</span></div>
+              <div class="figure-chip"><strong>Rajendra Chola I</strong><span>Naval campaign to Southeast Asia</span></div>
+              <div class="figure-chip"><strong>Prithviraj Chauhan</strong><span>Last Hindu king of Delhi</span></div>
+              <div class="figure-chip"><strong>Adi Shankaracharya</strong><span>Hindu philosopher, revived Advaita Vedanta, ~788–820 CE</span></div>
+            </div>
+            <span class="impact-badge impact-blue"><i class="bi bi-columns-gap"></i> Remarkable temple architecture; Indian culture spread to Southeast Asia</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-image-panel">
+        <img class="main-img"
+          src="assets/img/history/Brihadeeswara_temple.png
+          alt="Brihadeeswara Temple" loading="lazy"/>
+        <p class="img-caption">Brihadeeswara Temple, Thanjavur — built by Raja Raja Chola I in 1010 CE; 66 metres tall (Copyrights: Britanica)</p>
+        <div class="tl-quote">
+          <p>The Cholas gave us maritime empire, monumental architecture, and the finest classical dance — Bharatanatyam. Their legacy lives in every Tamil home today.</p>
+          <cite>— T.V. Mahalingam, historian of South India</cite>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. DELHI SULTANATE -->
+    <div class="tl-item" id="era-delhi">
+      <span class="tl-year">1206 – 1526 CE</span>
+      <div class="tl-step-num">7</div>
+      <div class="tl-left">
+        <div class="tl-card">
+          <div class="card-header-band">
+            <div class="card-icon"><i class="bi bi-building-fill"></i></div>
+            <div>
+              <div class="tl-era">Medieval · Islamic Sultanates</div>
+              <h3>The Delhi Sultanate — Five Dynasties, 320 Years</h3>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>The Delhi Sultanate (1206–1526) was established by <strong>Qutb-ud-din Aibak</strong>, a former slave-general of Mohammed of Ghor, founding the <strong>Mamluk (Slave) Dynasty</strong>. The Sultanate spanned five dynasties — Mamluk, Khalji, Tughlaq, Sayyid, and Lodi — and at its peak controlled most of the Indian subcontinent. It repelled the <strong>Mongol invasions</strong> led by Genghis Khan's successors (especially under Alauddin Khalji), which ravaged Persia, Central Asia, and China but were stopped at India's northwest border.</p>
+            <p><strong>Alauddin Khalji</strong> (r. 1296–1316) was the most powerful Delhi Sultan: he conquered Gujarat, Rajputana, and most of the Deccan (through his general Malik Kafur), introduced sweeping market reforms controlling prices of goods, and repelled four major Mongol invasions. <strong>Muhammad bin Tughlaq</strong> was notorious for ambitious but failed experiments — moving the capital from Delhi to Daulatabad and introducing token currency. <strong>Firuz Shah Tughlaq</strong> built canals, hospitals, and madrasas. The Sultanate was fatally weakened by Timur's devastating invasion of 1398, which sacked Delhi and depopulated the region.</p>
+            <p>The period saw profound synthesis of Persian-Islamic and Indian cultures: the <strong>Quwwat-ul-Islam mosque</strong> and the <strong>Qutb Minar</strong> (73m, tallest brick minaret in the world), built with material from demolished Hindu temples, epitomised this complex interaction. The Sufi movement — especially the <strong>Chishti order</strong> of saints like <strong>Hazrat Nizamuddin Auliya</strong> and <strong>Amir Khusrau</strong> — helped bridge Hindu and Muslim communities.</p>
+            <div class="key-facts">
+              <div class="key-facts-title"><i class="bi bi-info-circle"></i> Key Facts</div>
+              <div class="fact-row"><i class="bi bi-layers"></i><span><strong>Five dynasties:</strong> Mamluk (1206–90), Khalji (1290–1320), Tughlaq (1320–1414), Sayyid (1414–51), Lodi (1451–1526)</span></div>
+              <div class="fact-row"><i class="bi bi-building"></i><span><strong>Qutb Minar:</strong> 73m; begun 1193 CE; tallest brick minaret in the world; UNESCO site</span></div>
+              <div class="fact-row"><i class="bi bi-shield-check"></i><span><strong>Mongol invasions repelled:</strong> 6+ major invasions stopped at India's borders, 1221–1306</span></div>
+              <div class="fact-row"><i class="bi bi-music-note-list"></i><span><strong>Amir Khusrau:</strong> Poet-musician who invented the sitar, tabla &amp; qawwali musical forms</span></div>
+              <div class="fact-row"><i class="bi bi-person-lines-fill"></i><span><strong>Razia Sultana</strong> (r. 1236–40): First female ruler of Delhi; refused purdah, rode elephants into battle</span></div>
+            </div>
+            <div class="figures-row">
+              <div class="figure-chip"><strong>Qutb-ud-din Aibak</strong><span>Founder, first Sultan</span></div>
+              <div class="figure-chip"><strong>Iltutmish</strong><span>Consolidated Sultanate</span></div>
+              <div class="figure-chip"><strong>Razia Sultana</strong><span>First woman ruler of Delhi</span></div>
+              <div class="figure-chip"><strong>Alauddin Khalji</strong><span>Most powerful Sultan</span></div>
+              <div class="figure-chip"><strong>Nizamuddin Auliya</strong><span>Greatest Sufi saint of Delhi</span></div>
+              <div class="figure-chip"><strong>Amir Khusrau</strong><span>Poet, sitar inventor</span></div>
+            </div>
+            <span class="impact-badge impact-blue"><i class="bi bi-intersect"></i> Syncretic Indo-Islamic culture emerges; Mongols repelled</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-image-panel">
+        <img class="main-img"
+          src="assets/img/history/kutubminar.png"
+          alt="Qutb Minar Delhi" loading="lazy"/>
+        <p class="img-caption">The Qutb Minar, Delhi — 73 metres tall; begun 1193 CE by Qutb-ud-din Aibak; tallest brick minaret in the world</p>
+        <div class="tl-quote">
+          <p>I am the parrot of India. If you want to know the mysteries of Hindustan, ask me.</p>
+          <cite>— Amir Khusrau, Sufi poet-musician at the court of Delhi, c. 1300 CE</cite>
+        </div>
+      </div>
+    </div>
+
+    <div class="epoch-divider"><span class="epoch-label">🕌 Mughal India · 1526 – 1857 CE</span></div>
+
+    <!-- 8. MUGHAL EMPIRE -->
+    <div class="tl-item" id="era-mughal">
+      <span class="tl-year">1526 – 1857 CE</span>
+      <div class="tl-step-num">8</div>
+      <div class="tl-right">
+        <div class="tl-card">
+          <div class="card-header-band">
+            <div class="card-icon"><i class="bi bi-gem"></i></div>
+            <div>
+              <div class="tl-era">Mughal Era · Splendour &amp; Synthesis</div>
+              <h3>The Mughal Empire — From Babur to Bahadur Shah Zafar</h3>
+            </div>
+          </div>
+          <div class="card-body">
+            <p><strong>Babur</strong>, a descendant of Timur and Genghis Khan, defeated Ibrahim Lodi at the <strong>First Battle of Panipat</strong> (21 April 1526) using artillery — the first decisive use of gunpowder in Indian warfare — founding the Mughal Empire. His grandson <strong>Akbar the Great</strong> (r. 1556–1605) was the empire's greatest consolidator: he unified most of the subcontinent, abolished the <em>jizya</em> (poll tax on non-Muslims), held interfaith debates at his <em>Ibadat Khana</em>, and created <em>Din-i-Ilahi</em> — a syncretic faith blending Islam, Hinduism, Zoroastrianism and Christianity. He married <strong>Jodha Bai</strong>, a Rajput princess, embodying Hindu-Muslim synthesis.</p>
+            <p>The reign of <strong>Shah Jahan</strong> (r. 1628–1658) produced the crowning glory of Mughal architecture: the <strong>Taj Mahal</strong>, built 1632–1653 in memory of his beloved wife Mumtaz Mahal, employing 20,000 workers and artisans from across the world. It is considered the finest example of Mughal architecture and is today the world's most visited monument. Shah Jahan also built the Red Fort and Jama Masjid in Delhi and the Pearl Mosque in Agra.</p>
+            <p><strong>Aurangzeb</strong> (r. 1658–1707) expanded the empire to its greatest territorial extent (covering ~4 million km²) but his strict Islamic policies — reimposing jizya, demolishing some Hindu temples — alienated the Rajputs, Marathas, Sikhs, and Deccan sultans, sowing the seeds of Mughal decline. After his death, the empire fragmented rapidly, weakened by the <strong>Nadir Shah's sack of Delhi</strong> (1739), in which the Peacock Throne and Koh-i-Noor diamond were looted, and the <strong>Ahmad Shah Durrani's invasions</strong>. The last Mughal emperor <strong>Bahadur Shah Zafar</strong> was exiled by the British after the 1857 Uprising.</p>
+            <div class="key-facts">
+              <div class="key-facts-title"><i class="bi bi-info-circle"></i> Key Facts</div>
+              <div class="fact-row"><i class="bi bi-building-heart"></i><span><strong>Taj Mahal:</strong> Built 1632–1653; 20,000 workers; white Makrana marble inlaid with 28 precious stones; UNESCO &amp; New 7 Wonders</span></div>
+              <div class="fact-row"><i class="bi bi-currency-dollar"></i><span><strong>Mughal GDP share:</strong> At Akbar's peak, Mughal India produced ~25% of world GDP</span></div>
+              <div class="fact-row"><i class="bi bi-map"></i><span><strong>Peak territory (Aurangzeb):</strong> ~4 million km²; population ~150 million</span></div>
+              <div class="fact-row"><i class="bi bi-gem"></i><span><strong>Koh-i-Noor diamond:</strong> Possibly 793 carats rough; in Mughal treasury until looted by Nadir Shah 1739; now in British Crown Jewels</span></div>
+              <div class="fact-row"><i class="bi bi-palette"></i><span><strong>Mughal miniature painting:</strong> Fusion of Persian and Indian styles under Akbar; masters Mir Sayyid Ali &amp; Abd al-Samad</span></div>
+            </div>
+            <div class="figures-row">
+              <div class="figure-chip"><strong>Babur</strong><span>Founder, 1526</span></div>
+              <div class="figure-chip"><strong>Humayun</strong><span>Son of Babur; lost &amp; regained empire</span></div>
+              <div class="figure-chip"><strong>Akbar the Great</strong><span>Greatest Mughal — religious tolerance</span></div>
+              <div class="figure-chip"><strong>Jahangir</strong><span>Patron of arts &amp; Nur Jahan's husband</span></div>
+              <div class="figure-chip"><strong>Shah Jahan</strong><span>Builder of Taj Mahal</span></div>
+              <div class="figure-chip"><strong>Aurangzeb</strong><span>Last great Mughal</span></div>
+              <div class="figure-chip"><strong>Birbal &amp; Tansen</strong><span>Akbar's legendary Navratnas</span></div>
+            </div>
+            <span class="impact-badge impact-gold"><i class="bi bi-buildings"></i> Taj Mahal; Indo-Islamic art &amp; architecture at pinnacle</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-image-panel">
+        <img class="main-img"
+          src="assets/img/history/tajmahal.png"
+          alt="Taj Mahal Agra" loading="lazy"/>
+        <p class="img-caption">The Taj Mahal, Agra — built by Shah Jahan 1632–1653 in memory of Mumtaz Mahal; New 7 Wonders of the World</p>
+        <div class="tl-quote">
+          <p>Should guilty seek asylum here, like one pardoned, he becomes free from sin. Should the sinner make his way to this mansion, all his past sins are to be washed away.</p>
+          <cite>— Quranic inscription on the Taj Mahal gateway, by Shah Jahan, c. 1648</cite>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. MARATHA EMPIRE -->
+    <div class="tl-item" id="era-maratha">
+      <span class="tl-year">1674 – 1818 CE</span>
+      <div class="tl-step-num">9</div>
+      <div class="tl-left">
+        <div class="tl-card">
+          <div class="card-header-band">
+            <div class="card-icon"><i class="bi bi-shield-fill-check"></i></div>
+            <div>
+              <div class="tl-era">Late Medieval · Rise of the Marathas</div>
+              <h3>Chhatrapati Shivaji &amp; the Maratha Empire</h3>
+            </div>
+          </div>
+          <div class="card-body">
+            <p><strong>Chhatrapati Shivaji Maharaj</strong> (1630–1680) is one of India's greatest military geniuses and nation-builders. Born of a Maratha chieftain's family in the Sahyadri hills, he carved out an independent kingdom from the Bijapur Sultanate and the Mughal Empire through guerrilla warfare (<em>ganimi kava</em>), innovative use of terrain, and an extraordinary navy. He was formally crowned at Raigad Fort on 6 June 1674, creating the <strong>Maratha Empire</strong> — the first Hindu empire in centuries to challenge Mughal hegemony.</p>
+            <p>Shivaji built an efficient administrative system, maintained naval supremacy with a fleet of 200 warships along the Konkan coast, respected all religions (he reportedly protected mosques and Muslim women during raids), and established the concept of <em>Swarajya</em> (self-rule). His confrontation with Aurangzeb — including the dramatic escape from Agra in 1666 hidden in sweet-boxes — became legendary. The Maratha Confederacy expanded under the <strong>Peshwas</strong> (Prime Ministers) of Pune, especially <strong>Bajirao I</strong> (r. 1720–1740), who remained undefeated in 41 battles. At its peak the Maratha Confederacy controlled most of the Indian subcontinent, from Attock in the northwest to Odisha in the east.</p>
+            <p>The <strong>Third Battle of Panipat</strong> (14 January 1761) between the Marathas and Ahmad Shah Durrani's Afghan forces resulted in a devastating Maratha defeat — over 40,000 soldiers killed — ending Maratha dreams of pan-Indian hegemony. They were ultimately subjugated by the British in the <strong>Third Anglo-Maratha War</strong> (1817–18).</p>
+            <div class="key-facts">
+              <div class="key-facts-title"><i class="bi bi-info-circle"></i> Key Facts</div>
+              <div class="fact-row"><i class="bi bi-calendar3"></i><span><strong>Shivaji's coronation:</strong> 6 June 1674, Raigad Fort</span></div>
+              <div class="fact-row"><i class="bi bi-ship"></i><span><strong>Maratha Navy:</strong> 200 warships; the only organised Indian navy before British era</span></div>
+              <div class="fact-row"><i class="bi bi-map"></i><span><strong>Peak territory:</strong> From Punjab to Bengal; ~2.8 million km² under Maratha Confederacy</span></div>
+              <div class="fact-row"><i class="bi bi-person-fill-slash"></i><span><strong>Battle of Panipat III (1761):</strong> Maratha defeat by Ahmad Shah Durrani; 40,000+ killed in one day</span></div>
+              <div class="fact-row"><i class="bi bi-person-check-fill"></i><span><strong>Bajirao I:</strong> Peshwa 1720–40; fought 41 battles, never lost one</span></div>
+            </div>
+            <div class="figures-row">
+              <div class="figure-chip"><strong>Chhatrapati Shivaji</strong><span>Founder, father of Indian Navy</span></div>
+              <div class="figure-chip"><strong>Sambhaji</strong><span>Son of Shivaji; executed by Aurangzeb 1689</span></div>
+              <div class="figure-chip"><strong>Bajirao I</strong><span>Greatest Peshwa, undefeated in 41 battles</span></div>
+              <div class="figure-chip"><strong>Ahilyabai Holkar</strong><span>Queen of Indore; remarkable ruler &amp; temple builder</span></div>
+              <div class="figure-chip"><strong>Baji Rao II</strong><span>Last Peshwa, surrendered to British 1818</span></div>
+            </div>
+            <span class="impact-badge impact-gold"><i class="bi bi-shield-check"></i> Last major Hindu empire; concept of Swarajya — self-rule — born here</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-image-panel">
+        <img class="main-img"
+          src="assets/img/history/maharaj.png"
+          alt="Shivaji Maharaj" loading="lazy"/>
+        <p class="img-caption">Chhatrapati Shivaji Maharaj — founder of the Maratha Empire and father of the Indian Navy</p>
+        <div class="tl-quote">
+          <p>Do not think of the enemy as powerful. Have faith in God, courage in yourself, and the hills are yours.</p>
+          <cite>— Chhatrapati Shivaji Maharaj</cite>
+        </div>
+      </div>
+    </div>
+
+    <div class="epoch-divider"><span class="epoch-label">🏛 British India · 1757 – 1947 CE</span></div>
+
+    <!-- 10. BRITISH RULE -->
+    <div class="tl-item" id="era-british">
+      <span class="tl-year">1757 – 1857 CE</span>
+      <div class="tl-step-num">10</div>
+      <div class="tl-right">
+        <div class="tl-card">
+          <div class="card-header-band">
+            <div class="card-icon"><i class="bi bi-bank"></i></div>
+            <div>
+              <div class="tl-era">Colonial Era · East India Company</div>
+              <h3>The British East India Company &amp; Colonial Conquest</h3>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>The British East India Company (EIC), founded in 1600 as a trading venture, transformed into a colonial power through war and diplomacy. The <strong>Battle of Plassey</strong> (23 June 1757) was the pivot: Robert Clive's EIC army defeated Nawab Siraj ud-Daulah of Bengal through treachery (bribing his general Mir Jafar), establishing British political control over Bengal — the richest province in the subcontinent. The <strong>Battle of Buxar</strong> (1764) consolidated this, giving the EIC the <em>diwani</em> (revenue collection rights) of Bengal, Bihar and Orissa.</p>
+            <p>The EIC systematically expanded through the <strong>Subsidiary Alliance</strong> (lords surrendering sovereignty in exchange for British military protection) and the <strong>Doctrine of Lapse</strong> (Lord Dalhousie's policy of annexing states without male heirs). Tipu Sultan, "the Tiger of Mysore" and one of the most capable Indian rulers of the era, fought four Anglo-Mysore Wars before being killed defending his capital <strong>Seringapatam</strong> in 1799. The Marathas were defeated in three wars (1775–1818). The Sikhs, under Maharaja <strong>Ranjit Singh</strong> (the "Lion of Punjab"), maintained independence until his death in 1839, after which the Punjab was annexed in 1849.</p>
+            <p>British rule caused devastating famines: the <strong>Great Bengal Famine of 1770</strong> killed an estimated 10 million people (one-third of Bengal's population) — a direct result of EIC revenue extraction policies. A total of 30–50 million Indians died in famines under British rule between 1850–1900 according to historians like Mike Davis. The colonial economy systematically deindustrialised India: India's share of world manufacturing fell from ~25% in 1750 to 2% by 1900.</p>
+            <div class="key-facts">
+              <div class="key-facts-title"><i class="bi bi-info-circle"></i> Key Facts</div>
+              <div class="fact-row"><i class="bi bi-calendar3"></i><span><strong>Battle of Plassey:</strong> 23 June 1757 — decisive British victory through bribery of Mir Jafar</span></div>
+              <div class="fact-row"><i class="bi bi-currency-dollar"></i><span><strong>Wealth drain:</strong> Economist Utsa Patnaik estimates £45 trillion drained from India by Britain 1765–1938</span></div>
+              <div class="fact-row"><i class="bi bi-graph-down"></i><span><strong>India's GDP share:</strong> fell from ~25% (1700) to ~4% (1947) of world output</span></div>
+              <div class="fact-row"><i class="bi bi-person-x"></i><span><strong>Great Bengal Famine 1770:</strong> ~10 million dead; EIC doubled taxes during the famine</span></div>
+              <div class="fact-row"><i class="bi bi-person-exclamation"></i><span><strong>Tipu Sultan:</strong> First Indian ruler to use rocket artillery in warfare; his iron rockets inspired Congreve rockets</span></div>
+            </div>
+            <div class="figures-row">
+              <div class="figure-chip"><strong>Robert Clive</strong><span>Architect of British Bengal</span></div>
+              <div class="figure-chip"><strong>Tipu Sultan</strong><span>"Tiger of Mysore"; died defending Seringapatam 1799</span></div>
+              <div class="figure-chip"><strong>Ranjit Singh</strong><span>"Lion of Punjab"; Sikh Empire 1799–1839</span></div>
+              <div class="figure-chip"><strong>Raja Ram Mohan Roy</strong><span>Social reformer; abolished sati 1829</span></div>
+              <div class="figure-chip"><strong>Lord Dalhousie</strong><span>Doctrine of Lapse; railways &amp; telegraph introduced</span></div>
+            </div>
+            <span class="impact-badge impact-high"><i class="bi bi-arrow-down-circle"></i> Systematic deindustrialisation; catastrophic famines; cultural humiliation</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-image-panel">
+        <img class="main-img"
+          src="assets/img/history/tipu_sultan.png"
+          alt="Tipu Sultan" loading="lazy"
+          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Ranjit_Singh_with_his_court.jpg/480px-Ranjit_Singh_with_his_court.jpg'"/>
+        <p class="img-caption">Tipu Sultan of Mysore — "Tiger of Mysore"; first to use iron war rockets; killed defending Seringapatam, 1799</p>
+        <div class="tl-quote">
+          <p>It is better to live one day as a lion than a thousand years as a sheep.</p>
+          <cite>— Attributed to Tipu Sultan of Mysore</cite>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11. FREEDOM STRUGGLE -->
+    <div class="tl-item" id="era-freedom">
+      <span class="tl-year">1857 – 1947 CE</span>
+      <div class="tl-step-num">11</div>
+      <div class="tl-left">
+        <div class="tl-card">
+          <div class="card-header-band">
+            <div class="card-icon"><i class="bi bi-flag-fill"></i></div>
+            <div>
+              <div class="tl-era">Independence Movement · The Long Road to Freedom</div>
+              <h3>The Freedom Struggle — From 1857 to Independence</h3>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>The <strong>Revolt of 1857</strong> (called the Sepoy Mutiny by the British, the First War of Independence by Indians) began on 10 May 1857 in Meerut. Sepoys (Indian soldiers) rebelled against the introduction of greased cartridges for the Enfield rifle, which were rumoured to contain beef and pork fat offensive to Hindu and Muslim soldiers. The revolt spread across northern and central India under leaders including <strong>Rani Lakshmibai of Jhansi</strong> (who died fighting), <strong>Tantia Tope</strong>, and the Mughal emperor Bahadur Shah Zafar. Though suppressed by 1858, it ended the EIC's rule — the British Crown assumed direct sovereignty over India via the Government of India Act 1858.</p>
+            <p>The <strong>Indian National Congress</strong> was founded in 1885. The independence movement entered its decisive phase with <strong>Mahatma Gandhi</strong>'s return to India from South Africa in 1915. Gandhi transformed the Congress into a mass movement, deploying <em>Satyagraha</em> (truth-force, non-violent resistance): the <strong>Non-Cooperation Movement</strong> (1920–22), the <strong>Civil Disobedience Movement</strong> and the iconic <strong>Salt March</strong> (240 miles, 12 March–6 April 1930), and the <strong>Quit India Movement</strong> (1942). Alongside, <strong>Bal Gangadhar Tilak</strong> ("Swaraj is my birthright"), <strong>Subhas Chandra Bose</strong> (who formed the <strong>Indian National Army</strong> with Japanese support to fight the British from the east), and <strong>Bhagat Singh</strong> (revolutionary executed in 1931 at age 23) inspired millions.</p>
+            <p><strong>B.R. Ambedkar</strong> led the Dalit liberation movement, later drafting the Indian Constitution. The <strong>Jallianwala Bagh Massacre</strong> (13 April 1919) — in which General Dyer ordered troops to fire on 20,000 unarmed civilians celebrating Baisakhi, killing at least 379–1,000+ — turned moderate Indian opinion permanently against British rule. India achieved independence at midnight on <strong>14–15 August 1947</strong> through Partition into India and Pakistan — one of history's largest forced migrations, displacing 10–20 million people and causing 200,000–2 million deaths in communal violence.</p>
+            <div class="key-facts">
+              <div class="key-facts-title"><i class="bi bi-info-circle"></i> Key Facts</div>
+              <div class="fact-row"><i class="bi bi-person-fill-exclamation"></i><span><strong>Jallianwala Bagh (1919):</strong> Gen. Dyer fired 1,650 rounds at unarmed crowd; 379+ killed officially; 1,000+ estimated</span></div>
+              <div class="fact-row"><i class="bi bi-signpost-split"></i><span><strong>Salt March (1930):</strong> Gandhi walked 240 miles to Dandi; broke salt laws; triggered global attention to Indian independence</span></div>
+              <div class="fact-row"><i class="bi bi-people-fill"></i><span><strong>Partition displacement:</strong> 10–20 million people displaced in 1947; 200,000–2 million killed</span></div>
+              <div class="fact-row"><i class="bi bi-calendar3"></i><span><strong>Independence:</strong> 14–15 August 1947, midnight — Jawaharlal Nehru's "Tryst with Destiny" speech</span></div>
+              <div class="fact-row"><i class="bi bi-person-check"></i><span><strong>INA (Netaji Bose):</strong> 43,000 soldiers recruited from POWs and overseas Indians; fought in Burma 1944</span></div>
+            </div>
+            <div class="figures-row">
+              <div class="figure-chip"><strong>Mahatma Gandhi</strong><span>Father of the Nation; Satyagraha</span></div>
+              <div class="figure-chip"><strong>Jawaharlal Nehru</strong><span>First Prime Minister of India</span></div>
+              <div class="figure-chip"><strong>Subhas Chandra Bose</strong><span>"Netaji"; INA commander</span></div>
+              <div class="figure-chip"><strong>B.R. Ambedkar</strong><span>Constitution framer; Dalit rights champion</span></div>
+              <div class="figure-chip"><strong>Rani Lakshmibai</strong><span>Queen of Jhansi; died fighting 1858</span></div>
+              <div class="figure-chip"><strong>Bhagat Singh</strong><span>Revolutionary martyr; executed 1931, age 23</span></div>
+              <div class="figure-chip"><strong>Sarojini Naidu</strong><span>Poet; first woman President of INC</span></div>
+            </div>
+            <span class="impact-badge impact-pos"><i class="bi bi-check-circle-fill"></i> 90 years of struggle ended — the world's largest democracy born</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-image-panel">
+        <img class="main-img"
+          src="assets/img/history/gandhi.png"
+          alt="Mahatma Gandhi" loading="lazy"/>
+        <p class="img-caption">Mahatma Gandhi — architect of non-violent resistance; led India to independence through Satyagraha</p>
+        <div class="tl-quote">
+          <p>At the stroke of the midnight hour, when the world sleeps, India will awake to life and freedom. A moment comes, which comes but rarely in history, when we step out from the old to the new.</p>
+          <cite>— Jawaharlal Nehru, "Tryst with Destiny" speech, 14–15 August 1947</cite>
+        </div>
+      </div>
+    </div>
+
+    <div class="epoch-divider"><span class="epoch-label">🇮🇳 Modern India · 1947 – Present</span></div>
+
+    <!-- 12. REPUBLIC OF INDIA -->
+    <div class="tl-item" id="era-republic">
+      <span class="tl-year">1947 – 2000 CE</span>
+      <div class="tl-step-num">12</div>
+      <div class="tl-right">
+        <div class="tl-card">
+          <div class="card-header-band">
+            <div class="card-icon"><i class="bi bi-file-earmark-text-fill"></i></div>
+            <div>
+              <div class="tl-era">Post-Independence · Building a Nation</div>
+              <h3>The Republic of India — Constitution, Wars &amp; Green Revolution</h3>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>India became a republic on <strong>26 January 1950</strong> when the Constitution drafted by <strong>B.R. Ambedkar</strong> came into force — the world's longest written constitution, guaranteeing fundamental rights and establishing a secular federal democracy. The first general elections in 1951–52 saw 173 million voters participate — the largest democratic exercise in history at that time. Nehru's vision of a <em>mixed economy</em> with planned industrialisation through Five-Year Plans created institutions like the IITs, ISRO, BARC, and heavy industries like TISCO and Bhilai Steel Plant.</p>
+            <p>Independent India faced immediate crises: <strong>Integration of 565 Princely States</strong> (masterminded by Sardar Vallabhbhai Patel), the <strong>Kashmir War</strong> (1947–48) which left the Kashmir dispute unresolved, the <strong>Sino-Indian War</strong> (1962) in which China inflicted a humiliating defeat, and the <strong>Indo-Pakistani Wars</strong> of 1947, 1965, and 1971. The <strong>1971 War</strong> (under PM Indira Gandhi and General Sam Manekshaw) resulted in the liberation of Bangladesh, with Pakistan's surrender of 93,000 troops being the largest military surrender since WWII. India conducted its first nuclear test (<strong>Smiling Buddha</strong>) in 1974 at Pokhran.</p>
+            <p>The <strong>Green Revolution</strong> (1960s–70s), led by scientist <strong>M.S. Swaminathan</strong>, transformed India from a food-deficit nation to self-sufficiency in wheat and rice. The <strong>White Revolution</strong> (Operation Flood) under <strong>Verghese Kurien</strong> made India the world's largest milk producer. The period also included the dark chapter of the <strong>Emergency</strong> (1975–77) declared by Indira Gandhi, the <strong>Punjab insurgency</strong>, Operation Blue Star (1984), Indira Gandhi's assassination, and the Bhopal Gas Tragedy (1984) — the world's worst industrial disaster, killing 3,700–16,000 people.</p>
+            <div class="key-facts">
+              <div class="key-facts-title"><i class="bi bi-info-circle"></i> Key Facts</div>
+              <div class="fact-row"><i class="bi bi-file-text"></i><span><strong>Constitution:</strong> World's longest; 395 articles; came into force 26 January 1950 (Republic Day)</span></div>
+              <div class="fact-row"><i class="bi bi-people"></i><span><strong>First election (1951–52):</strong> 173 million voters; Congress won 364/489 seats; world's largest democratic exercise</span></div>
+              <div class="fact-row"><i class="bi bi-trophy"></i><span><strong>1971 War:</strong> 93,000 Pakistani soldiers surrendered — largest military surrender since WWII; Bangladesh liberated</span></div>
+              <div class="fact-row"><i class="bi bi-radioactive"></i><span><strong>Pokhran I "Smiling Buddha" (1974):</strong> India's first nuclear test; India entered nuclear club</span></div>
+              <div class="fact-row"><i class="bi bi-droplet-fill"></i><span><strong>White Revolution:</strong> India became world's largest milk producer; Operation Flood — Verghese Kurien</span></div>
+            </div>
+            <div class="figures-row">
+              <div class="figure-chip"><strong>B.R. Ambedkar</strong><span>Father of Indian Constitution</span></div>
+              <div class="figure-chip"><strong>Sardar Patel</strong><span>Iron Man; united 565 princely states</span></div>
+              <div class="figure-chip"><strong>Indira Gandhi</strong><span>PM 1966–77, 1980–84; 1971 war hero</span></div>
+              <div class="figure-chip"><strong>Homi Bhabha</strong><span>Father of Indian Nuclear Programme</span></div>
+              <div class="figure-chip"><strong>APJ Abdul Kalam</strong><span>Missile scientist; later President</span></div>
+              <div class="figure-chip"><strong>M.S. Swaminathan</strong><span>Father of Green Revolution in India</span></div>
+            </div>
+            <span class="impact-badge impact-pos"><i class="bi bi-check2-all"></i> Largest democracy established; survived partition, wars &amp; famines</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-image-panel">
+        <img class="main-img"
+          src="assets/img/history/nehru.png
+          alt="Jawaharlal Nehru" loading="lazy"/>
+        <p class="img-caption">Jawaharlal Nehru — first Prime Minister of India; architect of Indian democracy and Non-Aligned Movement</p>
+        <div class="tl-quote">
+          <p>The service of India means the service of millions who suffer. It means the ending of poverty and ignorance and disease and inequality of opportunity.</p>
+          <cite>— Jawaharlal Nehru, 1947</cite>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13. MODERN INDIA -->
+    <div class="tl-item" id="era-modern">
+      <span class="tl-year">1991 – Present</span>
+      <div class="tl-step-num">13</div>
+      <div class="tl-left">
+        <div class="tl-card">
+          <div class="card-header-band">
+            <div class="card-icon"><i class="bi bi-rocket-takeoff-fill"></i></div>
+            <div>
+              <div class="tl-era">21st Century · Rising Global Power</div>
+              <h3>Modern India — Liberalisation, Space &amp; Global Influence</h3>
+            </div>
+          </div>
+          <div class="card-body">
+            <p>The <strong>1991 economic liberalisation</strong> under PM Narasimha Rao and Finance Minister <strong>Manmohan Singh</strong> — forced by a balance-of-payments crisis that required India to airlift gold reserves to London as collateral — dismantled the "Licence Raj," opened up foreign investment, and unleashed sustained economic growth of 6–9% annually. The IT and software sector boomed, with Bangalore becoming Asia's Silicon Valley. India's economy grew from $270 billion in 1991 to over $3.7 trillion today (nominal GDP), making it the <strong>5th largest economy in the world</strong> and on track to become 3rd by 2030.</p>
+            <p>India's <strong>space programme</strong> (ISRO) achieved remarkable milestones at a fraction of Western costs: <strong>Chandrayaan-1</strong> (2008) discovered water molecules on the Moon; <strong>Mangalyaan</strong> (Mars Orbiter Mission, 2014) reached Mars on the first attempt at a record cost of ₹450 crore ($74 million) — less than the budget of the Hollywood film <em>Gravity</em>; and <strong>Chandrayaan-3</strong> (August 2023) made India the <strong>first nation to land on the Moon's south pole</strong>, a region of prime scientific interest for water ice. The <strong>Pokhran II nuclear tests</strong> (Operation Shakti, 1998) under PM Vajpayee confirmed India as a nuclear weapons state. The <strong>Kargil War</strong> (1999) was won decisively against Pakistani intrusion.</p>
+            <p>21st-century India is defined by its demographic dividend (median age 28, youngest major economy), digital revolution (760 million internet users, world's largest digital payments ecosystem via UPI processing $2 trillion annually), and growing geopolitical weight in the G20, QUAD, BRICS, and SCO. Landmark domestic events include the <strong>2016 demonetisation</strong>, the <strong>Goods and Services Tax (GST) reform</strong> (2017), the <strong>Ram Mandir consecration at Ayodhya</strong> (January 2024), and India hosting the <strong>G20 Presidency</strong> in 2023, with the historic agreement to include the African Union as a permanent member.</p>
+            <div class="key-facts">
+              <div class="key-facts-title"><i class="bi bi-info-circle"></i> India Today</div>
+              <div class="fact-row"><i class="bi bi-bar-chart-fill"></i><span><strong>GDP (2024):</strong> ~$3.7 trillion nominal; 5th globally; fastest-growing major economy at ~8%</span></div>
+              <div class="fact-row"><i class="bi bi-people-fill"></i><span><strong>Population (2023):</strong> 1.44 billion — surpassed China as world's most populous nation</span></div>
+              <div class="fact-row"><i class="bi bi-moon-stars"></i><span><strong>Chandrayaan-3 (2023):</strong> First soft landing on Moon's south pole; India 4th country to land on Moon</span></div>
+              <div class="fact-row"><i class="bi bi-phone-fill"></i><span><strong>UPI digital payments:</strong> 14+ billion transactions/month; $2 trillion annual; most advanced real-time payment system in world</span></div>
+              <div class="fact-row"><i class="bi bi-globe-americas"></i><span><strong>Diaspora:</strong> 32 million Indian diaspora globally; largest in world; contributes $125 billion in remittances (2023)</span></div>
+              <div class="fact-row"><i class="bi bi-lightning-charge-fill"></i><span><strong>Renewables:</strong> 3rd largest renewable energy capacity; 500 GW target by 2030</span></div>
+            </div>
+            <div class="figures-row">
+              <div class="figure-chip"><strong>Manmohan Singh</strong><span>Architect of 1991 liberalisation; PM 2004–14</span></div>
+              <div class="figure-chip"><strong>APJ Abdul Kalam</strong><span>Missile Man; 11th President 2002–07</span></div>
+              <div class="figure-chip"><strong>Narendra Modi</strong><span>PM since 2014; Digital India, Make in India</span></div>
+              <div class="figure-chip"><strong>K. Sivan / S. Somanath</strong><span>ISRO chiefs; Chandrayaan 3</span></div>
+              <div class="figure-chip"><strong>Sundar Pichai</strong><span>CEO, Google/Alphabet</span></div>
+              <div class="figure-chip"><strong>Satya Nadella</strong><span>CEO, Microsoft</span></div>
+            </div>
+            <span class="impact-badge impact-pos"><i class="bi bi-rocket-takeoff"></i> 5th largest economy; first on Moon's south pole; world's largest democracy</span>
+          </div>
+        </div>
+      </div>
+      <div class="tl-image-panel">
+        <img class="main-img"
+          src="assets/img/history/chandrrayan.png"
+          alt="Chandrayaan-3 Moon landing" loading="lazy"
+          onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/India_gate.jpg/640px-India_gate.jpg'"/>
+        <p class="img-caption">Chandrayaan-3 Vikram lander touches down on Moon's south pole, 23 August 2023 — India becomes the first nation to achieve this</p>
+        <div class="tl-quote">
+          <p>India is not a developing country. India is a highly developed civilisation that had an unfortunate two centuries. We are returning to our natural place in the world.</p>
+          <cite>— Shashi Tharoor, author &amp; parliamentarian, <em>Inglorious Empire</em> (2017)</cite>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end .timeline -->
+</main>
+
+<footer id="footer">
+  <div>&copy; <span id="current-year"></span> <strong>Nidhi</strong>. All Rights Reserved — <em>भारत माता की जय</em></div>
+</footer>
+
+<a href="#" class="back-to-top" id="backTop"><i class="bi bi-arrow-up-short"></i></a>
+
+<script>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+
+  const btn = document.getElementById('backTop');
+  window.addEventListener('scroll', () => btn.classList.toggle('active', window.scrollY > 300));
+  btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({top:0,behavior:'smooth'}); });
+
+  // Scroll-reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:0.10});
+  document.querySelectorAll('.tl-item').forEach(i => observer.observe(i));
+
+  // Animated counters
+  function animateCounter(el, target, dur=2000){
+    let start=null;
+    const step=ts=>{
+      if(!start)start=ts;
+      const p=Math.min((ts-start)/dur,1);
+      el.textContent=Math.floor(p*target);
+      if(p<1)requestAnimationFrame(step); else el.textContent=target;
+    };
+    requestAnimationFrame(step);
+  }
+  window.addEventListener('load',()=>{
+    document.querySelectorAll('.counter-num').forEach(el=>animateCounter(el,parseInt(el.dataset.target)));
+  });
+
+  // Strip nav
+  const eraIds=['#era-indus','#era-vedic','#era-mahajanapadas','#era-maurya','#era-gupta',
+    '#era-medieval','#era-delhi','#era-mughal','#era-maratha','#era-british','#era-freedom',
+    '#era-republic','#era-modern'];
+  const stripEvents=document.querySelectorAll('.strip-event');
+  stripEvents.forEach(ev=>{
+    ev.addEventListener('click',()=>{
+      const t=document.querySelector(ev.dataset.target);
+      if(t)t.scrollIntoView({behavior:'smooth',block:'center'});
+      stripEvents.forEach(e=>e.classList.remove('active'));
+      ev.classList.add('active');
+    });
+  });
+  window.addEventListener('scroll',()=>{
+    let cur=0;
+    eraIds.forEach((id,i)=>{
+      const el=document.querySelector(id);
+      if(el&&el.getBoundingClientRect().top<window.innerHeight*.55)cur=i;
+    });
+    stripEvents.forEach((e,i)=>e.classList.toggle('active',i===cur));
+  });
+</script>
+</body>
+</html>
