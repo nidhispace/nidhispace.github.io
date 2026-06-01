@@ -1,135 +1,917 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Earth's Atmosphere | Nidhi</title>
 
-  <title>Earth atmoshphere</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;800;900&family=Open+Sans:wght@300;400;600&family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <!-- Keep original vendor CSS for nav/footer compatibility -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Kelly
-  * Updated: Jan 29 2024 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/kelly-free-bootstrap-cv-resume-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
+  <style>
+    /* ═══════════════════════════════════════════════
+       DESIGN TOKENS — matches your site's palette
+    ═══════════════════════════════════════════════ */
+    :root {
+      --teal:       #34b7a7;
+      --teal-light: #51cdbe;
+      --teal-pale:  #e7f8f6;
+      --dark:       #222222;
+      --mid:        #555555;
+      --light-bg:   #e9e8e6;
+      --white:      #ffffff;
+      --navy:       #0a3d62;
 
+      /* Layer colours */
+      --exo:   #000d1a;
+      --thermo:#0a1628;
+      --meso:  #0e2340;
+      --strato:#1a4a7a;
+      --tropo: #2e86c1;
+    }
+
+    /* ── Reset overlay (keep bootstrap intact) ── */
+    .atmo-page * { box-sizing: border-box; }
+    .atmo-page { font-family: "Open Sans", sans-serif; color: var(--dark); }
+    .atmo-page h1,.atmo-page h2,.atmo-page h3,.atmo-page h4 { font-family: "Raleway", sans-serif; }
+
+    /* ════════════════════════════════
+       HERO — animated sky cross-section
+    ════════════════════════════════ */
+    .atmo-hero {
+      position: relative;
+      width: 100%;
+      min-height: 520px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Layered gradient atmosphere behind everything */
+    .atmo-sky {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to bottom,
+        #000408  0%,
+        #000d1a  8%,
+        #0a1628  18%,
+        #0e2340  30%,
+        #1a4a7a  48%,
+        #2e86c1  65%,
+        #4facde  78%,
+        #74c3e8  88%,
+        #a8d8f0  100%
+      );
+    }
+
+    /* Twinkling stars */
+    .stars { position: absolute; inset: 0; }
+    .star {
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle var(--d, 3s) var(--delay, 0s) ease-in-out infinite alternate;
+    }
+    @keyframes twinkle { from { opacity: .1; } to { opacity: .9; } }
+
+    /* Horizontal layer bands */
+    .sky-layers {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+    }
+    .sky-layer {
+      flex: 1;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      position: relative;
+    }
+
+    /* Layer label ticks */
+    .layer-tick {
+      position: absolute;
+      right: 16px; top: 50%;
+      transform: translateY(-50%);
+      font-family: "Space Mono", monospace;
+      font-size: .62rem;
+      color: rgba(255,255,255,.55);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .layer-tick::before {
+      content: "";
+      display: block;
+      width: 22px; height: 1px;
+      background: rgba(255,255,255,.35);
+    }
+
+    /* Altitude numbers on the left */
+    .layer-alt {
+      position: absolute;
+      left: 16px; top: 50%;
+      transform: translateY(-50%);
+      font-family: "Space Mono", monospace;
+      font-size: .58rem;
+      color: rgba(255,255,255,.4);
+      white-space: nowrap;
+    }
+
+    /* Floating clouds in troposphere */
+    .cloud {
+      position: absolute;
+      background: rgba(255,255,255,.18);
+      border-radius: 50px;
+      filter: blur(8px);
+      animation: drift var(--cd, 30s) linear infinite;
+    }
+    @keyframes drift { from { transform: translateX(-120%); } to { transform: translateX(120vw); } }
+
+    /* Shooting meteor in mesosphere */
+    .meteor {
+      position: absolute;
+      width: 2px;
+      height: 60px;
+      background: linear-gradient(to bottom, rgba(255,200,100,0), rgba(255,200,100,.9));
+      transform-origin: top center;
+      animation: meteor-fall 4s ease-in var(--md, 0s) infinite;
+      opacity: 0;
+    }
+    @keyframes meteor-fall {
+      0%   { opacity: 0; transform: rotate(30deg) translateY(-30px); }
+      15%  { opacity: 1; }
+      60%  { opacity: 0; transform: rotate(30deg) translateY(120px); }
+      100% { opacity: 0; }
+    }
+
+    /* Aurora borealis shimmer in thermosphere */
+    .aurora {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(52,183,167,.06) 20%,
+        rgba(52,183,167,.14) 40%,
+        rgba(130,204,221,.10) 60%,
+        transparent 80%
+      );
+      animation: aurora-wave 8s ease-in-out infinite alternate;
+    }
+    @keyframes aurora-wave {
+      0%  { transform: scaleX(1)   translateY(0);    opacity: .6; }
+      50% { transform: scaleX(1.1) translateY(6px);  opacity: 1;  }
+      100%{ transform: scaleX(.95) translateY(-4px); opacity: .7; }
+    }
+
+    /* ISS dot */
+    .iss {
+      position: absolute;
+      width: 18px; height: 6px;
+      background: rgba(255,255,255,.9);
+      border-radius: 3px;
+      box-shadow: 0 0 8px rgba(255,255,255,.8);
+      animation: iss-orbit 18s linear infinite;
+    }
+    @keyframes iss-orbit {
+      from { transform: translateX(-60px); }
+      to   { transform: translateX(calc(100vw + 60px)); }
+    }
+
+    /* Ozone band in stratosphere */
+    .ozone-band {
+      position: absolute;
+      width: 100%;
+      height: 10px;
+      background: linear-gradient(90deg, transparent, rgba(80,200,120,.3), rgba(100,220,140,.4), rgba(80,200,120,.3), transparent);
+      bottom: 28%;
+      filter: blur(3px);
+      animation: ozone-pulse 5s ease-in-out infinite alternate;
+    }
+    @keyframes ozone-pulse { from { opacity: .5; } to { opacity: 1; } }
+
+    /* Hero text overlay */
+    .hero-text {
+      position: relative; z-index: 10;
+      text-align: center;
+      padding: 48px 24px;
+      animation: fadeUp .9s ease both;
+    }
+    .hero-eyebrow {
+      font-family: "Space Mono", monospace;
+      font-size: .72rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 14px;
+    }
+    .hero-text h1 {
+      font-size: clamp(1.8rem, 4.5vw, 3rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .hero-text h1 em {
+      font-style: normal;
+      color: var(--teal);
+    }
+    .hero-text p {
+      font-size: .98rem;
+      color: rgba(255,255,255,.72);
+      max-width: 520px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+    .hero-stats {
+      display: flex; gap: 36px; justify-content: center; flex-wrap: wrap;
+    }
+    .hero-stat .sn {
+      font-family: "Raleway", sans-serif;
+      font-size: 1.8rem; font-weight: 800;
+      color: var(--teal); line-height: 1;
+    }
+    .hero-stat .sl {
+      font-size: .68rem; color: rgba(255,255,255,.55);
+      text-transform: uppercase; letter-spacing: 1px; margin-top: 3px;
+    }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+
+    /* ════════════════════════════════
+       EXISTING IMAGE — preserved
+    ════════════════════════════════ */
+    .original-image-wrap {
+      text-align: center;
+      margin: 50px 0 20px;
+    }
+    .original-image-wrap img {
+      border-radius: 14px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.12);
+      max-width: 100%;
+    }
+    .original-image-wrap figcaption {
+      font-size: .78rem;
+      color: #999;
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* ════════════════════════════════
+       VISUAL ATMOSPHERE DIAGRAM
+    ════════════════════════════════ */
+    .diagram-section {
+      margin: 56px 0 16px;
+    }
+    .diagram-section .sec-eyebrow {
+      font-family: "Space Mono", monospace;
+      font-size: .68rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 10px;
+    }
+    .diagram-section h2 {
+      font-size: 1.6rem; font-weight: 800; color: var(--dark); margin-bottom: 8px;
+    }
+    .diagram-section h2::after {
+      content: ""; display: block; width: 44px; height: 3px;
+      background: var(--teal); margin-top: 10px;
+    }
+    .diagram-section .sec-sub {
+      color: var(--mid); font-size: .9rem; line-height: 1.7; margin-top: 12px;
+    }
+
+    /* SVG diagram container */
+    .atmo-diagram {
+      width: 100%;
+      max-width: 780px;
+      margin: 36px auto 0;
+      display: block;
+    }
+
+    /* ════════════════════════════════
+       LAYER CARDS
+    ════════════════════════════════ */
+    .layers-section { margin: 60px 0; }
+    .layers-section h2 {
+      font-size: 1.6rem; font-weight: 800; color: var(--dark); margin-bottom: 8px;
+    }
+    .layers-section h2::after {
+      content: ""; display: block; width: 44px; height: 3px;
+      background: var(--teal); margin-top: 10px;
+    }
+    .layers-intro { color: var(--mid); font-size: .9rem; line-height: 1.7; margin: 12px 0 36px; }
+
+    .layer-cards { display: flex; flex-direction: column; gap: 0; }
+
+    .layer-card {
+      display: grid;
+      grid-template-columns: 8px 1fr;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+      margin-bottom: 20px;
+      background: #fff;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .layer-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(0,0,0,.11);
+    }
+    .layer-card-accent { width: 8px; }
+    .layer-card-body {
+      padding: 22px 24px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: start;
+    }
+    .layer-card-text h4 {
+      font-size: 1.05rem; font-weight: 700; color: var(--dark); margin-bottom: 6px;
+    }
+    .layer-card-text p {
+      font-size: .875rem; color: var(--mid); line-height: 1.75; margin: 0;
+    }
+    .layer-card-meta {
+      text-align: right; flex-shrink: 0;
+      min-width: 110px;
+    }
+    .layer-alt-badge {
+      display: inline-block;
+      font-family: "Space Mono", monospace;
+      font-size: .68rem; letter-spacing: .5px;
+      padding: 4px 10px; border-radius: 20px;
+      font-weight: 600;
+    }
+    .layer-temp-badge {
+      display: block;
+      font-size: .72rem; color: #999;
+      margin-top: 6px;
+    }
+    .layer-icon-wrap {
+      display: flex; justify-content: flex-end; margin-top: 8px;
+    }
+    .layer-icon-wrap i { font-size: 1.5rem; }
+
+    /* Layer colour tokens */
+    .l-tropo  { --lc: #2e86c1; --lbg: #eaf4fc; }
+    .l-strato { --lc: #1a5276; --lbg: #eaf0f8; }
+    .l-meso   { --lc: #0e2340; --lbg: #e8ecf4; }
+    .l-thermo { --lc: #7d3c98; --lbg: #f4eafc; }
+    .l-exo    { --lc: #1e2a3a; --lbg: #e8eaf0; }
+
+    .layer-card-accent { background: var(--lc); }
+    .layer-alt-badge { background: var(--lbg); color: var(--lc); }
+    .layer-icon-wrap i { color: var(--lc); }
+
+    /* ════════════════════════════════
+       SIGNIFICANCE GRID
+    ════════════════════════════════ */
+    .sig-section { margin: 60px 0; }
+    .sig-section h2 {
+      font-size: 1.6rem; font-weight: 800; color: var(--dark); margin-bottom: 8px;
+    }
+    .sig-section h2::after {
+      content: ""; display: block; width: 44px; height: 3px;
+      background: var(--teal); margin-top: 10px;
+    }
+    .sig-intro { color: var(--mid); font-size: .9rem; line-height: 1.7; margin: 12px 0 36px; }
+
+    .sig-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+    .sig-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.07);
+      border-top: 4px solid var(--teal);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .sig-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 36px rgba(52,183,167,.14);
+    }
+    .sig-icon {
+      width: 44px; height: 44px;
+      background: var(--teal-pale);
+      color: var(--teal);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+    .sig-card h4 {
+      font-size: .98rem; font-weight: 700; color: var(--dark); margin-bottom: 8px;
+    }
+    .sig-card p {
+      font-size: .845rem; color: var(--mid); line-height: 1.72; margin: 0;
+    }
+
+    /* ════════════════════════════════
+       COMPOSITION CHART (pure CSS)
+    ════════════════════════════════ */
+    .comp-section { margin: 60px 0; }
+    .comp-section h2 {
+      font-size: 1.6rem; font-weight: 800; color: var(--dark); margin-bottom: 8px;
+    }
+    .comp-section h2::after {
+      content: ""; display: block; width: 44px; height: 3px;
+      background: var(--teal); margin-top: 10px; margin-bottom: 28px;
+    }
+    .comp-bars { display: flex; flex-direction: column; gap: 14px; max-width: 680px; }
+    .comp-row { display: flex; align-items: center; gap: 14px; }
+    .comp-label { font-size: .82rem; font-weight: 600; color: var(--dark); min-width: 140px; }
+    .comp-bar-wrap { flex: 1; background: #f0f0f0; border-radius: 8px; height: 22px; overflow: hidden; }
+    .comp-bar {
+      height: 100%; border-radius: 8px;
+      background: var(--teal);
+      animation: barGrow 1.4s cubic-bezier(.23,1,.32,1) both;
+      transform-origin: left;
+    }
+    @keyframes barGrow { from { width: 0; } }
+    .comp-pct { font-family: "Space Mono", monospace; font-size: .75rem; color: var(--mid); min-width: 52px; text-align: right; }
+
+    /* ════════════════════════════════
+       NAV BUTTONS
+    ════════════════════════════════ */
+    .nav-buttons {
+      display: flex; justify-content: space-between; gap: 16px;
+      margin: 56px 0 20px; flex-wrap: wrap;
+    }
+    .nav-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 26px;
+      border-radius: 50px;
+      font-family: "Raleway", sans-serif;
+      font-size: .9rem; font-weight: 700;
+      transition: all .25s; cursor: pointer; border: 2px solid var(--teal);
+    }
+    .nav-btn-outline { background: transparent; color: var(--teal); }
+    .nav-btn-outline:hover { background: var(--teal); color: #fff; }
+    .nav-btn-filled { background: var(--teal); color: #fff; }
+    .nav-btn-filled:hover { background: var(--teal-light); border-color: var(--teal-light); }
+
+    /* ════════════════════════════════
+       QUOTE PULL
+    ════════════════════════════════ */
+    .atmo-quote {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 32px 36px;
+      margin: 48px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .atmo-quote::before {
+      content: "\201C";
+      font-family: Georgia, serif;
+      font-size: 8rem;
+      color: var(--teal);
+      position: absolute; top: -20px; left: 20px;
+      opacity: .25; line-height: 1;
+    }
+    .atmo-quote p {
+      font-style: italic; font-size: 1.05rem; color: rgba(255,255,255,.85);
+      line-height: 1.7; margin: 0 0 12px; position: relative; z-index: 1;
+      padding-top: 16px;
+    }
+    .atmo-quote cite {
+      font-size: .78rem; color: var(--teal); font-weight: 700; font-style: normal;
+    }
+
+    /* ════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════ */
+    @media(max-width:640px){
+      .layer-card-body { grid-template-columns: 1fr; }
+      .layer-card-meta { text-align: left; }
+      .hero-stats { gap: 20px; }
+    }
+  </style>
+</head>
 <body>
 
-  <!-- ======= Header ======= -->
+  <!-- ── HEADER (original structure kept) ── -->
   <header id="header" class="fixed-top">
     <div class="container-fluid d-flex justify-content-between align-items-center">
-
       <h1 class="logo me-auto me-lg-0"><a href="index.html">Nidhi</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="resume.html">Resume</a></li>
           <li><a class="active" href="research.html">Research</a></li>
-          <!---<li><a href="portfolio.html">Portfolio</a></li>--->
           <li><a href="contact.html">Contact</a></li>
           <li><a href="history.html">History</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
+      </nav>
       <div class="header-social-links">
         <a href="https://twitter.com/nidhispace" target="_blank" class="twitter"><i class="bi bi-twitter"></i></a>
         <a href="https://www.linkedin.com/in/nidhispace/" target="_blank" class="linkedin"><i class="bi bi-linkedin"></i></a>
       </div>
     </div>
-  </header><!-- End Header -->
+  </header>
 
   <main id="main">
+    <section id="services" class="services" style="padding-top:70px;">
+      <div class="container atmo-page" data-aos="fade-up">
 
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
-      <div class="container" data-aos="fade-up">
+        <!-- ════════════ ANIMATED HERO ════════════ -->
+        <div class="atmo-hero" style="border-radius:18px;margin-bottom:0;overflow:hidden;">
+          <div class="atmo-sky"></div>
 
-        <div class="section-title">
-          <h2>The Earth's Atmosphere: Understanding its Layers and Significance</h2>
-            <img src="assets/img/portfolio/atmo-1.png" alt="Image 2" width="70%" height="auto">
+          <!-- Stars (generated inline) -->
+          <div class="stars" id="stars-container"></div>
+
+          <!-- Aurora in thermosphere zone -->
+          <div style="position:absolute;top:10%;left:0;right:0;height:16%;z-index:2;">
+            <div class="aurora"></div>
+          </div>
+
+          <!-- ISS in thermosphere -->
+          <div class="iss" style="top:12%;z-index:4;"></div>
+
+          <!-- Meteors in mesosphere -->
+          <div class="meteor" style="top:28%;left:30%;--md:0s;"></div>
+          <div class="meteor" style="top:26%;left:58%;--md:2.2s;"></div>
+          <div class="meteor" style="top:30%;left:75%;--md:5s;"></div>
+
+          <!-- Ozone band -->
+          <div class="ozone-band" style="top:44%;"></div>
+
+          <!-- Clouds in troposphere -->
+          <div class="cloud" style="width:160px;height:38px;top:82%;--cd:32s;"></div>
+          <div class="cloud" style="width:240px;height:54px;top:88%;--cd:46s;animation-delay:-12s;"></div>
+          <div class="cloud" style="width:120px;height:30px;top:76%;--cd:26s;animation-delay:-6s;"></div>
+
+          <!-- Layer tick labels -->
+          <div style="position:absolute;inset:0;z-index:3;pointer-events:none;">
+            <div class="layer-tick" style="top:6%;">Exosphere<br><span style="opacity:.5;font-size:.55rem;">500 – 10,000 km</span></div>
+            <div class="layer-tick" style="top:20%;">Thermosphere<br><span style="opacity:.5;font-size:.55rem;">80 – 600 km</span></div>
+            <div class="layer-tick" style="top:36%;">Mesosphere<br><span style="opacity:.5;font-size:.55rem;">50 – 80 km</span></div>
+            <div class="layer-tick" style="top:52%;">Stratosphere<br><span style="opacity:.5;font-size:.55rem;">12 – 50 km</span></div>
+            <div class="layer-tick" style="top:72%;">Troposphere<br><span style="opacity:.5;font-size:.55rem;">0 – 12 km</span></div>
+            <!-- Altitude on left -->
+            <div class="layer-alt" style="top:6%;">~10,000 km</div>
+            <div class="layer-alt" style="top:20%;">~600 km</div>
+            <div class="layer-alt" style="top:36%;">~80 km</div>
+            <div class="layer-alt" style="top:52%;">~50 km</div>
+            <div class="layer-alt" style="top:72%;">~12 km</div>
+          </div>
+
+          <!-- Hero text -->
+          <div class="hero-text">
+            <div class="hero-eyebrow">Earth Sciences · Atmospheric Physics</div>
+            <h1>The Earth's <em>Atmosphere</em><br>Understanding Its Layers &amp; Significance</h1>
+            <p>A thin, life-giving envelope of gases protecting our planet — from the clouds we see to the aurora we marvel at, spanning 10,000 km into space.</p>
+            <div class="hero-stats">
+              <div class="hero-stat"><div class="sn">5</div><div class="sl">Distinct Layers</div></div>
+              <div class="hero-stat"><div class="sn">78%</div><div class="sl">Nitrogen</div></div>
+              <div class="hero-stat"><div class="sn">10,000</div><div class="sl">km to Exosphere</div></div>
+              <div class="hero-stat"><div class="sn">–90°C</div><div class="sl">Mesosphere Min.</div></div>
+            </div>
+          </div>
+        </div><!-- end hero -->
+
+        <!-- ════════════ ORIGINAL IMAGE (preserved) ════════════ -->
+        <figure class="original-image-wrap">
+          <img src="assets/img/portfolio/atmo-1.png" alt="Earth's Atmosphere Diagram" style="width:70%;height:auto;">
+          <figcaption>Fig. 1 — Overview diagram of the Earth's atmospheric layers (original reference figure)</figcaption>
+        </figure>
+
+        <!-- ════════════ INTRO QUOTE ════════════ -->
+        <div class="atmo-quote">
+          <p>The atmosphere is a complex, dynamic system — a thin shell of gas that makes Earth uniquely habitable. It shields us from cosmic radiation, regulates our climate, and carries the very air we breathe.</p>
+          <cite>— Overview of Atmospheric Science</cite>
         </div>
-        <section>
-          The Earth's atmosphere is a vital component that envelopes our planet, providing the necessary conditions for life to thrive. It is composed of different layers, each with its unique characteristics and significance.<br><br>
 
-          <!--------------------->
-          <h4>Layers of the Atmosphere:</h4>
+        <!-- ════════════ SVG CROSS-SECTION DIAGRAM ════════════ -->
+        <div class="diagram-section">
+          <div class="sec-eyebrow">Visual Reference</div>
+          <h2>Vertical Cross-Section of the Atmosphere</h2>
+          <p class="sec-sub">Each layer is defined by its temperature gradient, composition, and the physical phenomena it hosts. The diagram below shows altitude vs. approximate temperature profile.</p>
 
-          <ol>
-            <li><strong>Troposphere:</strong> The troposphere is the lowest layer of the Earth's atmosphere, extending from the surface to about 8-15 kilometers above sea level. It is where weather phenomena occur, including clouds, precipitation, and winds. The troposphere plays a crucial role in regulating the Earth's climate and sustaining life by containing the oxygen we breathe.</li>
+          <svg class="atmo-diagram" viewBox="0 0 780 480" xmlns="http://www.w3.org/2000/svg" font-family="Open Sans, sans-serif">
+            <!-- Background -->
+            <defs>
+              <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%"   stop-color="#000408"/>
+                <stop offset="15%"  stop-color="#0a1628"/>
+                <stop offset="30%"  stop-color="#0e2340"/>
+                <stop offset="50%"  stop-color="#1a4a7a"/>
+                <stop offset="72%"  stop-color="#2e86c1"/>
+                <stop offset="100%" stop-color="#74c3e8"/>
+              </linearGradient>
+              <linearGradient id="groundGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#5d8a3c"/>
+                <stop offset="100%" stop-color="#3d5e28"/>
+              </linearGradient>
+            </defs>
 
-            <li><strong>Stratosphere:</strong> Above the troposphere lies the stratosphere, reaching up to about 50 kilometers above the Earth's surface. One of the most notable features of the stratosphere is the presence of the ozone layer, which absorbs harmful ultraviolet (UV) radiation from the sun, protecting life on Earth from its harmful effects.</li>
-            
-            <li><strong>Mesosphere:</strong> Beyond the stratosphere lies the mesosphere, extending from about 50 to 85 kilometers above the Earth's surface. The mesosphere is where most meteors burn up upon entering the Earth's atmosphere, creating the mesmerizing phenomenon known as shooting stars or meteors.</li>
-            
-            <li><strong>Thermosphere:</strong> The thermosphere is the layer above the mesosphere, extending up to approximately 600 kilometers above the Earth's surface. It is characterized by extremely high temperatures caused by the absorption of solar radiation. Despite its high temperatures, the thermosphere would feel very cold to humans due to the extremely low density of particles.</li>
-            
-            <li><strong>Exosphere:</strong> The exosphere is the outermost layer of the Earth's atmosphere, gradually fading into space. It is where the Earth's atmosphere merges with outer space, and the particles become so sparse that they can travel long distances without colliding with one another.</li>
-          </ol>
+            <!-- Sky background -->
+            <rect x="0" y="0" width="780" height="440" fill="url(#skyGrad)" rx="12"/>
+            <!-- Ground -->
+            <rect x="0" y="430" width="780" height="50" fill="url(#groundGrad)" rx="0"/>
+            <rect x="0" y="426" width="780" height="10" fill="#8BC34A" opacity=".6"/>
 
-          <h4>Significance of the Atmosphere:</h4>
-          <ul>
-            <li><strong>Life Support System:</strong> The Earth's atmosphere provides essential gases such as oxygen for respiration, carbon dioxide for photosynthesis, and nitrogen for various biological processes, making it a crucial life support system for all living organisms.</li>
+            <!-- Layer bands -->
+            <!-- Troposphere 350–430 -->
+            <rect x="0" y="350" width="780" height="80" fill="rgba(46,134,193,.25)" rx="0"/>
+            <!-- Stratosphere 240–350 -->
+            <rect x="0" y="240" width="780" height="110" fill="rgba(26,74,122,.2)" rx="0"/>
+            <!-- Ozone line in stratosphere -->
+            <line x1="0" y1="300" x2="780" y2="300" stroke="rgba(80,200,120,.5)" stroke-width="3" stroke-dasharray="8,6"/>
+            <!-- Mesosphere 140–240 -->
+            <rect x="0" y="140" width="780" height="100" fill="rgba(14,35,64,.2)" rx="0"/>
+            <!-- Thermosphere 50–140 -->
+            <rect x="0" y="50" width="780" height="90" fill="rgba(125,60,152,.15)" rx="0"/>
+            <!-- Exosphere 0–50 -->
+            <rect x="0" y="0" width="780" height="50" fill="rgba(0,10,26,.3)" rx="12 12 0 0"/>
 
-            <li><strong>Climate Regulation:</strong> The atmosphere plays a vital role in regulating the Earth's climate by trapping heat near the surface through the greenhouse effect. This helps maintain stable temperatures conducive to life on Earth.</li>
-            
-            <li><strong>Protection from Harmful Radiation:</strong> The ozone layer in the stratosphere shields the Earth from harmful ultraviolet (UV) radiation, which can cause skin cancer, cataracts, and other health issues in humans and damage ecosystems.</li>
-            
-            <li><strong>Weather Systems:</strong> The atmosphere is the stage for various weather phenomena, including clouds, precipitation, storms, and winds. Understanding the atmosphere's dynamics is crucial for predicting and managing weather-related events.</li>
-            
-            <li><strong>Communication and Navigation:</strong> The atmosphere facilitates communication and navigation systems by allowing the transmission of radio waves and providing a medium for air and sea travel.</li>
-          </ul>
-          
+            <!-- Layer divider lines -->
+            <line x1="100" y1="350" x2="780" y2="350" stroke="rgba(255,255,255,.18)" stroke-width="1.5" stroke-dasharray="5,4"/>
+            <line x1="100" y1="240" x2="780" y2="240" stroke="rgba(255,255,255,.18)" stroke-width="1.5" stroke-dasharray="5,4"/>
+            <line x1="100" y1="140" x2="780" y2="140" stroke="rgba(255,255,255,.18)" stroke-width="1.5" stroke-dasharray="5,4"/>
+            <line x1="100" y1="50"  x2="780" y2="50"  stroke="rgba(255,255,255,.18)" stroke-width="1.5" stroke-dasharray="5,4"/>
 
+            <!-- Left Y-axis labels -->
+            <text x="88" y="428" text-anchor="end" fill="rgba(255,255,255,.7)" font-size="11" font-family="Space Mono, monospace">0 km</text>
+            <text x="88" y="354" text-anchor="end" fill="rgba(255,255,255,.7)" font-size="11" font-family="Space Mono, monospace">12 km</text>
+            <text x="88" y="244" text-anchor="end" fill="rgba(255,255,255,.7)" font-size="11" font-family="Space Mono, monospace">50 km</text>
+            <text x="88" y="144" text-anchor="end" fill="rgba(255,255,255,.7)" font-size="11" font-family="Space Mono, monospace">80 km</text>
+            <text x="88" y="54"  text-anchor="end" fill="rgba(255,255,255,.7)" font-size="11" font-family="Space Mono, monospace">600 km</text>
 
+            <!-- Layer name labels -->
+            <text x="540" y="402" fill="rgba(255,255,255,.9)" font-size="14" font-weight="bold">TROPOSPHERE</text>
+            <text x="540" y="416" fill="rgba(255,255,255,.55)" font-size="10">Weather, clouds, life · 0–12 km</text>
 
+            <text x="540" y="282" fill="rgba(255,255,255,.9)" font-size="14" font-weight="bold">STRATOSPHERE</text>
+            <text x="540" y="296" fill="rgba(255,255,255,.55)" font-size="10">Ozone layer · 12–50 km</text>
 
+            <text x="540" y="186" fill="rgba(255,255,255,.9)" font-size="14" font-weight="bold">MESOSPHERE</text>
+            <text x="540" y="200" fill="rgba(255,255,255,.55)" font-size="10">Meteors burn up · 50–80 km</text>
 
+            <text x="540" y="92"  fill="rgba(255,255,255,.9)" font-size="14" font-weight="bold">THERMOSPHERE</text>
+            <text x="540" y="106" fill="rgba(255,255,255,.55)" font-size="10">Aurora, ISS · 80–600 km</text>
 
-        </section>
+            <text x="540" y="30"  fill="rgba(255,255,255,.9)" font-size="14" font-weight="bold">EXOSPHERE</text>
+            <text x="540" y="44"  fill="rgba(255,255,255,.55)" font-size="10">Fades to space · 600+ km</text>
 
-        <p class="left-align"></p>
-        <!-- Button container with two buttons -->
-        <div class="button-container">
-          <!-- Button to navigate to research.html -->
-          <button onclick="redirectToResearch()"> Go back </button>
-          <!-- Button to navigate to research-work-1.html -->
-          <button onclick="redirectToNextPage()">Go to Next page</button>
+            <!-- Temperature curve (schematic) -->
+            <polyline
+              points="350,430 310,350 360,240 280,140 340,90 300,50"
+              fill="none" stroke="#34b7a7" stroke-width="2.5" stroke-dasharray="6,3" opacity=".9"/>
+            <!-- Temperature axis label -->
+            <text x="400" y="450" fill="rgba(255,255,255,.5)" font-size="10" font-family="Space Mono, monospace">Temperature →</text>
+            <line x1="340" y1="440" x2="560" y2="440" stroke="rgba(255,255,255,.3)" stroke-width="1"/>
+
+            <!-- Ozone label -->
+            <text x="110" y="296" fill="rgba(80,220,120,.9)" font-size="10" font-family="Space Mono, monospace">— Ozone Layer</text>
+
+            <!-- Sun rays at top right -->
+            <g opacity=".5">
+              <line x1="730" y1="0" x2="710" y2="40" stroke="#FFD700" stroke-width="1.5"/>
+              <line x1="750" y1="0" x2="740" y2="38" stroke="#FFD700" stroke-width="1.5"/>
+              <line x1="760" y1="5" x2="756" y2="44" stroke="#FFD700" stroke-width="1.5"/>
+              <circle cx="745" cy="8" r="14" fill="rgba(255,215,0,.18)" stroke="#FFD700" stroke-width="1.5"/>
+            </g>
+
+            <!-- Shooting star in mesosphere -->
+            <line x1="200" y1="155" x2="260" y2="195" stroke="rgba(255,200,100,.7)" stroke-width="2"/>
+            <circle cx="200" cy="155" r="3" fill="rgba(255,200,100,.8)"/>
+
+            <!-- ISS in thermosphere -->
+            <rect x="480" y="75" width="20" height="5" fill="rgba(255,255,255,.8)" rx="2"/>
+            <rect x="465" y="76" width="10" height="3" fill="rgba(52,183,167,.8)" rx="1"/>
+            <rect x="490" y="76" width="10" height="3" fill="rgba(52,183,167,.8)" rx="1"/>
+
+            <!-- ISS label -->
+            <text x="508" y="80" fill="rgba(255,255,255,.65)" font-size="9" font-family="Space Mono, monospace">ISS ~408 km</text>
+
+            <!-- Cloud symbol in troposphere -->
+            <g opacity=".7">
+              <ellipse cx="170" cy="385" rx="35" ry="14" fill="rgba(255,255,255,.25)"/>
+              <ellipse cx="190" cy="378" rx="28" ry="12" fill="rgba(255,255,255,.3)"/>
+              <ellipse cx="150" cy="382" rx="22" ry="10" fill="rgba(255,255,255,.22)"/>
+            </g>
+
+            <!-- Aurora shimmer in thermosphere -->
+            <rect x="100" y="52" width="420" height="30" fill="rgba(52,183,167,.08)" rx="4"/>
+            <rect x="150" y="55" width="300" height="20" fill="rgba(52,183,167,.12)" rx="4"/>
+          </svg>
+        </div><!-- end diagram section -->
+
+        <!-- ════════════ ATMOSPHERIC COMPOSITION ════════════ -->
+        <div class="comp-section">
+          <h2>Atmospheric Composition</h2>
+          <p style="color:var(--mid);font-size:.9rem;line-height:1.7;margin-bottom:28px;">The dry atmosphere is primarily composed of nitrogen and oxygen, with trace gases that are disproportionately important for life and climate.</p>
+          <div class="comp-bars">
+            <div class="comp-row">
+              <span class="comp-label">Nitrogen (N₂)</span>
+              <div class="comp-bar-wrap">
+                <div class="comp-bar" style="width:78.09%;background:#2e86c1;animation-delay:.1s;"></div>
+              </div>
+              <span class="comp-pct">78.09 %</span>
+            </div>
+            <div class="comp-row">
+              <span class="comp-label">Oxygen (O₂)</span>
+              <div class="comp-bar-wrap">
+                <div class="comp-bar" style="width:20.95%;background:#34b7a7;animation-delay:.2s;"></div>
+              </div>
+              <span class="comp-pct">20.95 %</span>
+            </div>
+            <div class="comp-row">
+              <span class="comp-label">Argon (Ar)</span>
+              <div class="comp-bar-wrap">
+                <div class="comp-bar" style="width:0.93%;background:#1a5276;animation-delay:.3s;min-width:4px;"></div>
+              </div>
+              <span class="comp-pct">0.93 %</span>
+            </div>
+            <div class="comp-row">
+              <span class="comp-label">CO₂ &amp; trace gases</span>
+              <div class="comp-bar-wrap">
+                <div class="comp-bar" style="width:0.04%;background:#e67e22;animation-delay:.4s;min-width:4px;"></div>
+              </div>
+              <span class="comp-pct">~0.04 %</span>
+            </div>
+            <div class="comp-row">
+              <span class="comp-label">Water Vapour (variable)</span>
+              <div class="comp-bar-wrap">
+                <div class="comp-bar" style="width:4%;background:#7fb3d3;animation-delay:.5s;"></div>
+              </div>
+              <span class="comp-pct">0–4 %</span>
+            </div>
+          </div>
         </div>
 
-      </div>
-    </section><!-- End Services Section -->
+        <!-- ════════════ LAYER CARDS ════════════ -->
+        <div class="layers-section">
+          <h2>Layers of the Atmosphere</h2>
+          <p class="layers-intro">From the air we breathe to the edge of space — the atmosphere is divided into five distinct layers defined by how temperature changes with altitude.</p>
 
-  </main><!-- End #main -->
+          <div class="layer-cards">
 
-  <!-- ======= Footer ======= -->
+            <!-- Troposphere -->
+            <div class="layer-card l-tropo">
+              <div class="layer-card-accent"></div>
+              <div class="layer-card-body">
+                <div class="layer-card-text">
+                  <h4>1. Troposphere</h4>
+                  <p>The troposphere is the lowest layer of the Earth's atmosphere, extending from the surface to about 8–15 kilometres above sea level (thicker at the equator, thinner at the poles). It contains roughly <strong>75–80% of the atmosphere's total mass</strong> and almost all of its water vapour. Temperature decreases with altitude at a standard lapse rate of approximately 6.5°C per kilometre. This is where all of Earth's weather phenomena occur — clouds, precipitation, storms, and winds — making it the most dynamic and studied layer. The tropopause marks its upper boundary, where temperature temporarily stabilises before rising again in the stratosphere.</p>
+                </div>
+                <div class="layer-card-meta">
+                  <span class="layer-alt-badge">0 – 12 km</span>
+                  <span class="layer-temp-badge">+15°C to –56°C</span>
+                  <div class="layer-icon-wrap"><i class="bi bi-cloud-rain-fill"></i></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stratosphere -->
+            <div class="layer-card l-strato">
+              <div class="layer-card-accent"></div>
+              <div class="layer-card-body">
+                <div class="layer-card-text">
+                  <h4>2. Stratosphere</h4>
+                  <p>Above the troposphere lies the stratosphere, reaching up to about 50 kilometres above Earth's surface. Unlike the troposphere, temperature <strong>increases</strong> with altitude here — a temperature inversion caused by absorption of ultraviolet (UV) solar radiation by the <strong>ozone layer</strong> (O₃), concentrated between 20–30 km. The ozone layer is one of Earth's most critical protective shields, absorbing 95–99% of the sun's harmful UV-B and UV-C radiation. Without it, life on land would be impossible. The stratosphere is also where high-altitude aircraft (above 12 km) fly, and its stability (no turbulence from convection) makes it ideal for aviation. CFCs and other human-made chemicals have depleted this layer, creating the "ozone hole" above Antarctica.</p>
+                </div>
+                <div class="layer-card-meta">
+                  <span class="layer-alt-badge">12 – 50 km</span>
+                  <span class="layer-temp-badge">–56°C to +2°C</span>
+                  <div class="layer-icon-wrap"><i class="bi bi-shield-fill-check"></i></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mesosphere -->
+            <div class="layer-card l-meso">
+              <div class="layer-card-accent"></div>
+              <div class="layer-card-body">
+                <div class="layer-card-text">
+                  <h4>3. Mesosphere</h4>
+                  <p>Beyond the stratosphere lies the mesosphere, extending from about 50 to 85 kilometres above Earth's surface. Temperature drops steeply again here, reaching the <strong>coldest temperatures in Earth's atmosphere</strong> — around –90°C at the mesopause. The mesosphere is where most meteors and space debris burn up upon entering the atmosphere due to friction with gas molecules, creating the beautiful phenomenon known as <em>shooting stars</em>. Despite being above the stratosphere, it is too low for satellites and too high for conventional aircraft or weather balloons, making it the <strong>least-studied layer</strong> — sometimes called the "ignorosphere." Noctilucent clouds (the highest clouds in the atmosphere) form here at –120°C, composed of ice crystals around meteoric dust.</p>
+                </div>
+                <div class="layer-card-meta">
+                  <span class="layer-alt-badge">50 – 80 km</span>
+                  <span class="layer-temp-badge">+2°C to –90°C</span>
+                  <div class="layer-icon-wrap"><i class="bi bi-stars"></i></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Thermosphere -->
+            <div class="layer-card l-thermo">
+              <div class="layer-card-accent"></div>
+              <div class="layer-card-body">
+                <div class="layer-card-text">
+                  <h4>4. Thermosphere</h4>
+                  <p>The thermosphere is the layer above the mesosphere, extending up to approximately 600 kilometres above Earth's surface. It is characterised by <strong>extremely high temperatures</strong> — reaching 1,500–2,000°C during solar maximum — caused by intense absorption of high-energy solar X-rays and UV radiation. Despite these temperatures, it would feel bitterly cold in the thermosphere because gas molecules are so sparse that very little heat energy is transferred. This is where the <strong>International Space Station (ISS) orbits at ~408 km</strong>. The thermosphere also hosts the <strong>ionosphere</strong> — a region of ionised gas that reflects radio waves, enabling long-distance radio communication, and is responsible for the stunning <strong>Aurora Borealis and Aurora Australis</strong> (Northern and Southern Lights), produced when solar wind particles collide with atmospheric gases.</p>
+                </div>
+                <div class="layer-card-meta">
+                  <span class="layer-alt-badge">80 – 600 km</span>
+                  <span class="layer-temp-badge">–90°C to 1,500°C+</span>
+                  <div class="layer-icon-wrap"><i class="bi bi-lightning-fill"></i></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Exosphere -->
+            <div class="layer-card l-exo">
+              <div class="layer-card-accent"></div>
+              <div class="layer-card-body">
+                <div class="layer-card-text">
+                  <h4>5. Exosphere</h4>
+                  <p>The exosphere is the outermost layer of Earth's atmosphere, gradually fading into the vacuum of outer space from about 600 km up to roughly 10,000 km. The exobase (its lower boundary) transitions smoothly from the thermosphere. Molecules here are <strong>extremely sparse</strong> — mostly hydrogen and helium — and they can travel hundreds of kilometres without colliding. They move so fast that some actually escape Earth's gravity entirely, a process called <em>atmospheric escape</em>. Most weather and communication satellites orbit within the exosphere (GPS satellites at ~20,200 km, geostationary at ~35,786 km). The precise upper boundary of Earth's atmosphere is conventionally set at the <strong>Kármán line at 100 km</strong> (used by Fédération Aéronautique Internationale) for defining the boundary of space, though physically the exosphere extends much higher.</p>
+                </div>
+                <div class="layer-card-meta">
+                  <span class="layer-alt-badge">600 – 10,000 km</span>
+                  <span class="layer-temp-badge">Indeterminate</span>
+                  <div class="layer-icon-wrap"><i class="bi bi-globe-americas"></i></div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- end layer-cards -->
+        </div><!-- end layers-section -->
+
+        <!-- ════════════ SIGNIFICANCE GRID ════════════ -->
+        <div class="sig-section">
+          <h2>Significance of the Atmosphere</h2>
+          <p class="sig-intro">The atmosphere is far more than just "air" — it is Earth's primary life-support system, climate regulator, and shield against the hostile environment of space.</p>
+
+          <div class="sig-grid">
+
+            <div class="sig-card">
+              <div class="sig-icon"><i class="bi bi-heart-pulse-fill"></i></div>
+              <h4>Life Support System</h4>
+              <p>The atmosphere provides oxygen (O₂) for cellular respiration, carbon dioxide (CO₂) for photosynthesis, and nitrogen (N₂) for biological nitrogen fixation. Without this precise mix, complex life could not exist. Atmospheric pressure also keeps water liquid at Earth's surface — essential for biochemistry.</p>
+            </div>
+
+            <div class="sig-card">
+              <div class="sig-icon"><i class="bi bi-thermometer-half"></i></div>
+              <h4>Climate Regulation</h4>
+              <p>Greenhouse gases — CO₂, water vapour, methane, and nitrous oxide — absorb and re-emit outgoing infrared radiation, maintaining Earth's average surface temperature at ~15°C instead of the –18°C it would be without an atmosphere. The atmosphere also distributes heat globally through atmospheric circulation cells (Hadley, Ferrel, Polar).</p>
+            </div>
+
+            <div class="sig-card">
+              <div class="sig-icon"><i class="bi bi-shield-fill-check"></i></div>
+              <h4>Protection from Radiation</h4>
+              <p>The ozone layer in the stratosphere absorbs 95–99% of UV-B and UV-C solar radiation. Without it, these wavelengths would destroy DNA, cause widespread skin cancers and cataracts, and devastate terrestrial and marine ecosystems. The Montreal Protocol (1987) — the only universally ratified UN treaty — has successfully reduced ozone-depleting substances.</p>
+            </div>
+
+            <div class="sig-card">
+              <div class="sig-icon"><i class="bi bi-cloud-lightning-rain-fill"></i></div>
+              <h4>Weather Systems</h4>
+              <p>The atmosphere is the engine of weather. Differential solar heating drives atmospheric circulation, which moves moisture and energy around the planet. The water cycle — evaporation, condensation, precipitation — is entirely atmospheric. Understanding atmospheric dynamics underpins all weather forecasting and climate modelling.</p>
+            </div>
+
+            <div class="sig-card">
+              <div class="sig-icon"><i class="bi bi-reception-4"></i></div>
+              <h4>Communication &amp; Navigation</h4>
+              <p>The ionosphere in the thermosphere reflects AM radio waves, enabling long-distance HF radio communication. GPS signals pass through the atmosphere, requiring precise corrections for ionospheric and tropospheric delays. The troposphere also affects radar and satellite remote sensing — central to weather forecasting and Earth observation missions like EPS-SG.</p>
+            </div>
+
+            <div class="sig-card">
+              <div class="sig-icon"><i class="bi bi-meteor"></i></div>
+              <h4>Cosmic Shield</h4>
+              <p>The atmosphere destroys an estimated 100 tonnes of space debris daily through burn-up in the mesosphere. Without atmospheric protection, Earth would be pockmarked with craters like the Moon. The magnetosphere-atmosphere system also deflects most cosmic ray particles and the solar wind, further protecting life.</p>
+            </div>
+
+          </div>
+        </div><!-- end sig-section -->
+
+        <!-- ════════════ CLOSING QUOTE ════════════ -->
+        <div class="atmo-quote">
+          <p>The atmosphere is only about 12 kilometres thick in the part where we live — thinner relative to the Earth than the skin of an apple. Yet it is the entire reason our planet is alive.</p>
+          <cite>— Carl Sagan, Pale Blue Dot (paraphrased)</cite>
+        </div>
+
+        <!-- ════════════ NAV BUTTONS (original preserved) ════════════ -->
+        <div class="nav-buttons">
+          <button class="nav-btn nav-btn-outline" onclick="window.location.href='research-work.html'">
+            <i class="bi bi-arrow-left"></i> Go Back
+          </button>
+          <button class="nav-btn nav-btn-filled" onclick="window.location.href='research-work-2.html'">
+            Go to Next Page <i class="bi bi-arrow-right"></i>
+          </button>
+        </div>
+
+      </div><!-- end .container -->
+    </section>
+  </main>
+
+  <!-- ── FOOTER ── -->
   <footer id="footer">
     <div class="container">
       <div class="copyright">
@@ -138,36 +920,59 @@
       </div>
     </div>
   </footer>
-  <!-- End  Footer -->
 
   <div id="preloader"></div>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Vendor JS Files -->
+  <!-- Vendor JS -->
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script> document.getElementById("current-year").textContent = new Date().getFullYear(); </script>
-
-  <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  
+
   <script>
-    function redirectToResearch() {
-        window.location.href = "research-work.html";
-    }
+    document.getElementById("current-year").textContent = new Date().getFullYear();
 
-    function redirectToNextPage() {
-        window.location.href = "research-work-2.html";
-    }
-</script>
+    // ── Generate random stars ──
+    (function() {
+      const container = document.getElementById('stars-container');
+      if (!container) return;
+      for (let i = 0; i < 120; i++) {
+        const s = document.createElement('div');
+        s.className = 'star';
+        const size = Math.random() * 2.2 + .5;
+        s.style.cssText = [
+          `width:${size}px`, `height:${size}px`,
+          `top:${Math.random() * 60}%`,
+          `left:${Math.random() * 100}%`,
+          `--d:${(Math.random() * 3 + 2).toFixed(1)}s`,
+          `--delay:${(Math.random() * 4).toFixed(1)}s`
+        ].join(';');
+        container.appendChild(s);
+      }
+    })();
 
+    // ── Composition bars animate when in view ──
+    const barObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.comp-bar').forEach((b,i) => {
+            b.style.animationDelay = (i * .12) + 's';
+            b.style.animationPlayState = 'running';
+          });
+        }
+      });
+    }, { threshold: .3 });
+    document.querySelectorAll('.comp-section').forEach(el => {
+      el.querySelectorAll('.comp-bar').forEach(b => b.style.animationPlayState = 'paused');
+      barObserver.observe(el);
+    });
 
+    // ── AOS init ──
+    if (typeof AOS !== 'undefined') AOS.init({ once: true });
+  </script>
 </body>
-
 </html>
