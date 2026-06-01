@@ -128,7 +128,7 @@
 
     /* ════════ FEATURED INSTRUMENT — PTR-TOF-MS ════════ */
     .featured-instrument{
-      background:var(--navy);border-radius:18px;padding:36px 32px;margin:32px 0;
+      background:#291010;border-radius:18px;padding:36px 32px;margin:32px 0;
       display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;
     }
     @media(max-width:680px){.featured-instrument{grid-template-columns:1fr;}}
@@ -138,7 +138,7 @@
     }
     .fi-title{font-family:"Raleway",sans-serif;font-size:1.25rem;font-weight:800;color:#fff;margin-bottom:4px;}
     .fi-subtitle{font-size:.8rem;color:rgba(255,255,255,.5);font-style:italic;margin-bottom:18px;}
-    .fi-desc{font-size:.875rem;color:rgba(255,255,255,.78);line-height:1.75;margin-bottom:16px;}
+    .fi-desc{font-size:.875rem;color:#FFF8F8;line-height:1.75;margin-bottom:16px;}
     .fi-specs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px;}
     .fi-spec{background:rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;border-left:3px solid var(--teal);}
     .fi-spec .spec-label{font-size:.65rem;color:rgba(255,255,255,.45);font-family:"Space Mono",monospace;letter-spacing:1px;text-transform:uppercase;}
@@ -247,19 +247,20 @@
 
     /* ════════ MODEL COMPARISON DIAGRAM ════════ */
     .model-scale-wrap{
-      background:var(--navy);border-radius:16px;padding:30px 28px;margin-top:28px;
+      background:#0F0F0F;border-radius:16px;padding:32px 28px;margin-top:28px;
     }
-    .ms-title{color:rgba(255,255,255,.5);font-family:"Space Mono",monospace;font-size:.67rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:24px;}
-    .ms-scale{position:relative;height:80px;background:rgba(255,255,255,.04);border-radius:10px;margin-bottom:12px;}
+    .ms-title{color:#EBE802;font-family:"Space Mono",monospace;font-size:.67rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;}
+    .ms-row{margin-bottom:18px;}
+    .ms-row-label{font-size:.66rem;color:#FFFDB3;font-family:"Space Mono",monospace;letter-spacing:.5px;margin-bottom:5px;padding-left:2px;}
+    .ms-row-track{position:relative;height:22px;background:rgba(255,255,255,.05);border-radius:11px;overflow:visible;}
     .ms-bar{
-      position:absolute;top:50%;transform:translateY(-50%);
-      height:14px;border-radius:7px;
-      display:flex;align-items:center;padding:0 10px;
+      position:absolute;top:0;height:22px;border-radius:11px;
+      display:flex;align-items:center;padding:0 12px;
     }
     .ms-bar span{font-size:.7rem;font-weight:700;color:#fff;white-space:nowrap;}
-    .ms-label{font-size:.72rem;color:rgba(255,255,255,.45);margin-bottom:8px;}
-    .ms-axis{display:flex;justify-content:space-between;padding:0 4px;}
-    .ms-axis span{font-size:.65rem;color:rgba(255,255,255,.3);font-family:"Space Mono",monospace;}
+    .ms-direction{font-size:.65rem;color:rgba(255,255,255,.35);letter-spacing:1px;margin-bottom:14px;font-family:"Space Mono",monospace;}
+    .ms-axis{display:flex;justify-content:space-between;padding:4px 2px 0;border-top:1px solid rgba(255,255,255,.08);margin-top:8px;}
+    .ms-axis span{font-size:.63rem;color:#FFFFFF;font-family:"Space Mono",monospace;}
 
     /* ════════ DATA WORKFLOW ════════ */
     .workflow-wrap{
@@ -570,7 +571,9 @@
               <div class="fi-label">Featured Instrument</div>
               <div class="fi-title">PTR-TOF-MS Ionicon 8000</div>
               <div class="fi-subtitle">Analytik GmbH, Innsbruck, Austria</div>
-              <p class="fi-desc">The Ionicon 8000 operates as a high-sensitivity online mass spectrometer using soft proton-transfer chemical ionisation. Ambient air is continuously sampled into a drift tube where H₃O⁺ reagent ions react with VOC molecules. Because the proton affinity of most VOCs exceeds that of water, proton transfer is thermodynamically favourable, producing (M+H)⁺ ions with minimal fragmentation. The TOF analyser then separates ions by mass-to-charge ratio at mass resolving power of >4000 m/Δm, allowing isobaric separation — e.g. distinguishing C₅H₈ (isoprene, m/z 69.070) from C₄H₅O (methylbutenol fragment, m/z 69.034).</p>
+              <p class="fi-desc">
+              The Ionicon 8000 operates as a high-sensitivity online mass spectrometer using soft proton-transfer chemical ionisation. Ambient air is continuously sampled into a drift tube where H₃O⁺ reagent ions react with VOC molecules. Because the proton affinity of most VOCs exceeds that of water, proton transfer is thermodynamically favourable, producing (M+H)⁺ ions with minimal fragmentation. The TOF analyser then separates ions by mass-to-charge ratio at mass resolving power of >4000 m/Δm, allowing isobaric separation — e.g. distinguishing C₅H₈ (isoprene, m/z 69.070) from C₄H₅O (methylbutenol fragment, m/z 69.034).
+              </p>
               <p class="fi-desc">In my field campaigns — spanning urban environments in India, marine boundary layer transects in the Indian Ocean, and forest canopy measurements — the instrument operated in both continuous ambient monitoring mode and eddy covariance flux mode (10 Hz). Typical deployment involved a Teflon-lined inlet with a Nafion dryer to remove humidity, which would otherwise suppress ionisation efficiency.</p>
               <div class="fi-specs">
                 <div class="fi-spec"><div class="spec-label">Mass Resolution</div><div class="spec-val">&gt;4000 m/Δm</div></div>
@@ -1083,56 +1086,66 @@
 
           <div class="model-scale-wrap">
             <div class="ms-title">Spatial Scale of Models Used in VOC Research</div>
+            <div class="ms-direction">← Local / Process ·············································· Global →</div>
 
-            <!-- Scale labels -->
-            <div class="ms-label" style="color:rgba(255,255,255,.4);font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:1px;margin-bottom:6px;">← Local / Process ————————————————————————————— Global →</div>
-
-            <!-- Box model bar -->
-            <div style="position:relative;height:48px;margin-bottom:8px;">
-              <div class="ms-bar" style="left:0%;width:12%;background:linear-gradient(90deg,#8e44ad,#a05cc4);top:50%;transform:translateY(-50%);height:14px;border-radius:7px;">
-                <span style="font-size:.68rem;white-space:nowrap;position:absolute;left:4px;">CAABA/MECCA</span>
+            <!-- CAABA/MECCA -->
+            <div class="ms-row">
+              <div class="ms-row-label">0D Box Model — Point process simulation</div>
+              <div class="ms-row-track">
+                <div class="ms-bar" style="left:0%;width:13%;background:linear-gradient(90deg,#8e44ad,#a05cc4);">
+                  <span>CAABA / MECCA</span>
+                </div>
               </div>
-              <div style="position:absolute;left:0%;top:2px;font-size:.65rem;color:rgba(255,255,255,.35);font-family:monospace;">0D box model</div>
             </div>
 
-            <!-- MCM bar -->
-            <div style="position:relative;height:40px;margin-bottom:8px;">
-              <div class="ms-bar" style="left:0%;width:10%;background:linear-gradient(90deg,#c0392b,#e74c3c);top:50%;transform:translateY(-50%);height:14px;border-radius:7px;">
-                <span style="font-size:.68rem;white-space:nowrap;position:absolute;left:4px;">MCM v3.3</span>
+            <!-- MCM -->
+            <div class="ms-row">
+              <div class="ms-row-label">Chemical Mechanism — Reaction network (no spatial dimension)</div>
+              <div class="ms-row-track">
+                <div class="ms-bar" style="left:0%;width:11%;background:linear-gradient(90deg,#c0392b,#e74c3c);">
+                  <span>MCM v3.3</span>
+                </div>
               </div>
-              <div style="position:absolute;left:0%;top:2px;font-size:.65rem;color:rgba(255,255,255,.35);font-family:monospace;">Chemistry mechanism</div>
             </div>
 
-            <!-- FLEXPART bar -->
-            <div style="position:relative;height:40px;margin-bottom:8px;">
-              <div class="ms-bar" style="left:2%;width:30%;background:linear-gradient(90deg,#2980b9,#3498db);top:50%;transform:translateY(-50%);height:14px;border-radius:7px;">
-                <span style="font-size:.68rem;white-space:nowrap;position:absolute;left:4px;">FLEXPART / HYSPLIT (Lagrangian)</span>
+            <!-- FLEXPART -->
+            <div class="ms-row">
+              <div class="ms-row-label">Lagrangian Trajectory — Local to regional source attribution</div>
+              <div class="ms-row-track">
+                <div class="ms-bar" style="left:2%;width:32%;background:linear-gradient(90deg,#2980b9,#3498db);">
+                  <span>FLEXPART / HYSPLIT (Lagrangian)</span>
+                </div>
               </div>
-              <div style="position:absolute;left:2%;top:2px;font-size:.65rem;color:rgba(255,255,255,.35);font-family:monospace;">Local → Regional trajectory</div>
             </div>
 
-            <!-- WRF-Chem bar -->
-            <div style="position:relative;height:40px;margin-bottom:8px;">
-              <div class="ms-bar" style="left:15%;width:40%;background:linear-gradient(90deg,#e67e22,#f39c12);top:50%;transform:translateY(-50%);height:14px;border-radius:7px;">
-                <span style="font-size:.68rem;white-space:nowrap;position:absolute;left:4px;">WRF-Chem (1–50 km, regional)</span>
+            <!-- WRF-Chem -->
+            <div class="ms-row">
+              <div class="ms-row-label">Regional NWP + Chemistry — 1–50 km coupled simulation</div>
+              <div class="ms-row-track">
+                <div class="ms-bar" style="left:15%;width:42%;background:linear-gradient(90deg,#e67e22,#f39c12);">
+                  <span>WRF-Chem (1–50 km, regional)</span>
+                </div>
               </div>
-              <div style="position:absolute;left:15%;top:2px;font-size:.65rem;color:rgba(255,255,255,.35);font-family:monospace;">Regional NWP+Chem</div>
             </div>
 
-            <!-- MEGAN bar -->
-            <div style="position:relative;height:40px;margin-bottom:8px;">
-              <div class="ms-bar" style="left:20%;width:55%;background:linear-gradient(90deg,#27ae60,#2ecc71);top:50%;transform:translateY(-50%);height:14px;border-radius:7px;">
-                <span style="font-size:.68rem;white-space:nowrap;position:absolute;left:4px;">MEGAN (BVOC emission model — regional to global)</span>
+            <!-- MEGAN -->
+            <div class="ms-row">
+              <div class="ms-row-label">BVOC Emission Model — Regional to global flux algorithm</div>
+              <div class="ms-row-track">
+                <div class="ms-bar" style="left:20%;width:57%;background:linear-gradient(90deg,#27ae60,#2ecc71);">
+                  <span>MEGAN v2.1 / v3 (BVOC emission model)</span>
+                </div>
               </div>
-              <div style="position:absolute;left:20%;top:2px;font-size:.65rem;color:rgba(255,255,255,.35);font-family:monospace;">Emission flux model</div>
             </div>
 
-            <!-- EMAC bar -->
-            <div style="position:relative;height:40px;margin-bottom:14px;">
-              <div class="ms-bar" style="left:50%;width:50%;background:linear-gradient(90deg,#34b7a7,#51cdbe);top:50%;transform:translateY(-50%);height:14px;border-radius:7px;border-radius:7px 7px 7px 7px;">
-                <span style="font-size:.68rem;white-space:nowrap;position:absolute;left:4px;">EMAC (global CCM, T42–T106)</span>
+            <!-- EMAC -->
+            <div class="ms-row" style="margin-bottom:6px;">
+              <div class="ms-row-label">Global Chemistry-Climate Model — T42–T106 resolution, 31–90 layers</div>
+              <div class="ms-row-track">
+                <div class="ms-bar" style="left:50%;width:50%;background:linear-gradient(90deg,#34b7a7,#51cdbe);border-radius:11px 0 0 11px;">
+                  <span>EMAC (global CCM, T42–T106)</span>
+                </div>
               </div>
-              <div style="position:absolute;left:50%;top:2px;font-size:.65rem;color:rgba(255,255,255,.35);font-family:monospace;">Global chemistry-climate model</div>
             </div>
 
             <div class="ms-axis">
