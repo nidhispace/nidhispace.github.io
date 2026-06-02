@@ -1,20 +1,20 @@
-This is a complete, interactive HTML webpage designed for learning about VOCs and BVOCs. It's built to fit seamlessly into your "Nidhi" website template, making it suitable for both researchers and beginners.
-```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>VOCs & BVOCs · Interactive Guide</title>
-  <meta content="Interactive learning hub for Volatile Organic Compounds (VOCs) and Biogenic Volatile Organic Compounds (BVOCs). Explore sources, chemistry, and measurement techniques for trace gases." name="description">
-  <meta content="VOC, BVOC, trace gases, atmospheric chemistry, biogenic emissions, air quality, interactive learning" name="keywords">
+
+  <title>VOCs & BVOCs · Trace Gas Research Hub</title>
+  <meta content="Comprehensive interactive platform for Volatile Organic Compounds and Biogenic Volatile Organic Compounds research, featuring dynamic diagrams and data visualization." name="description">
+  <meta content="VOCs, BVOCs, trace gases, atmospheric chemistry, isoprene, monoterpenes, PTR-MS, GC-MS, SOA formation" name="keywords">
 
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Raleway:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&family=Raleway:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
@@ -24,187 +24,319 @@ This is a complete, interactive HTML webpage designed for learning about VOCs an
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Template Main CSS File (inline adaptation) -->
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- MathJax for chemical formulas and equations -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        ignoreHtmlClass: 'no-mathjax',
+        processHtmlClass: 'mathjax-process'
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Chart.js for interactive diagrams -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
   <style>
-    /* Inherit template style but add specific interactive elements */
+    :root {
+      --kelly-teal: #34b7a7;
+      --kelly-teal-dark: #2a9d8f;
+      --kelly-teal-light: #e8f8f5;
+      --bg-light: #f8f9fa;
+      --text-dark: #272829;
+      --text-muted: #6c757d;
+      --border-subtle: #e9ecef;
+      --card-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      --card-shadow-hover: 0 8px 30px rgba(0,0,0,0.10);
+      --mono-font: 'JetBrains Mono', 'Courier New', monospace;
+    }
+
     body {
       font-family: 'Open Sans', sans-serif;
-      background: #f8f9fc;
+      background: #fcfdfd;
+      color: var(--text-dark);
     }
-    :root {
-      --primary: #3498db;
-      --secondary: #2ecc71;
-      --accent: #e67e22;
-      --dark: #2c3e50;
+
+    /* Header overrides to match Kelly template */
+    #header {
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 1px 10px rgba(0,0,0,0.05);
     }
-    .fixed-top {
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+    #header .logo a {
+      color: #272829;
     }
     .navbar a, .navbar a:focus {
-      color: #2c3e50;
+      color: #272829;
     }
     .navbar a.active {
-      color: var(--primary);
-      border-bottom: 2px solid var(--primary);
+      color: var(--kelly-teal);
+      border-bottom: 2px solid var(--kelly-teal);
     }
+
+    /* Section styling */
     .section-title h2 {
+      font-size: 2rem;
       font-weight: 700;
-      color: #2c3e50;
+      color: #272829;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: var(--kelly-teal);
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
     }
     .section-title p {
-      color: #596777;
+      color: #6c757d;
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.05rem;
     }
-    #header .logo {
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-    .header-social-links a {
-      color: #2c3e50;
-      font-size: 18px;
-      margin-left: 12px;
-      transition: 0.3s;
-    }
-    .header-social-links a:hover {
-      color: var(--primary);
-    }
-    /* Interactive card styles */
-    .interactive-card {
-      background: white;
-      border-radius: 24px;
-      padding: 2rem 1.8rem;
-      margin-bottom: 2.5rem;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-      transition: all 0.3s ease;
-      border: 1px solid rgba(0,0,0,0.03);
-      height: 100%;
-    }
-    .interactive-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 25px 45px rgba(0,0,0,0.1);
-    }
-    .voc-icon {
-      font-size: 2.4rem;
-      color: var(--primary);
-      margin-bottom: 1.2rem;
-    }
-    .bvocs-icon {
-      color: #27ae60;
-    }
-    .btn-interactive {
-      background: transparent;
-      border: 2px solid var(--primary);
-      color: var(--primary);
-      border-radius: 40px;
-      padding: 0.5rem 1.8rem;
+
+    /* Tab Navigation Styling */
+    .nav-pills .nav-link {
+      color: #495057;
       font-weight: 600;
-      transition: 0.3s;
-      margin-top: 12px;
+      border-radius: 30px;
+      padding: 10px 28px;
+      transition: all 0.25s ease;
+      border: 2px solid transparent;
     }
-    .btn-interactive:hover {
-      background: var(--primary);
-      color: white;
+    .nav-pills .nav-link.active {
+      background-color: var(--kelly-teal) !important;
+      color: #fff;
+      border-color: var(--kelly-teal);
     }
-    .btn-bvoc {
-      border-color: #27ae60;
-      color: #27ae60;
+    .nav-pills .nav-link:hover:not(.active) {
+      background-color: var(--kelly-teal-light);
+      border-color: var(--kelly-teal);
     }
-    .btn-bvoc:hover {
-      background: #27ae60;
-      color: white;
-    }
-    .flip-card {
-      background: transparent;
-      height: 280px;
-      perspective: 1000px;
-      margin-bottom: 20px;
-    }
-    .flip-card-inner {
-      position: relative;
-      width: 100%;
+
+    /* Interactive Cards */
+    .research-card {
+      background: #fff;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 28px 24px;
+      box-shadow: var(--card-shadow);
+      transition: all 0.3s ease;
       height: 100%;
-      text-align: center;
-      transition: transform 0.8s;
-      transform-style: preserve-3d;
     }
-    .flip-card:hover .flip-card-inner {
-      transform: rotateY(180deg);
+    .research-card:hover {
+      box-shadow: var(--card-shadow-hover);
+      transform: translateY(-3px);
     }
-    .flip-card-front, .flip-card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 24px;
+    .research-card .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      padding: 1.5rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
     }
-    .flip-card-front {
-      background: linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%);
-      border: 1px solid #e0e7ff;
+    .card-icon.teal { background: var(--kelly-teal-light); color: var(--kelly-teal); }
+    .card-icon.blue { background: #e7f1ff; color: #0d6efd; }
+    .card-icon.amber { background: #fff8e6; color: #f59e0b; }
+    .card-icon.green { background: #e6f7ee; color: #10b981; }
+
+    /* Formula box styling */
+    .formula-display {
+      background: #1e293b;
+      color: #e2e8f0;
+      font-family: var(--mono-font);
+      padding: 16px 20px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      overflow-x: auto;
+      margin: 16px 0;
+      line-height: 1.8;
     }
-    .flip-card-back {
-      background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-      color: white;
-      transform: rotateY(180deg);
+    .formula-display .highlight {
+      color: #34b7a7;
+      font-weight: 600;
     }
-    .timeline-mini {
+
+    /* Diagram container */
+    .diagram-container {
+      background: #fff;
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 16px 0;
+    }
+    .diagram-container canvas {
+      max-height: 350px;
+    }
+
+    /* Process flow diagram (CSS-based) */
+    .process-flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 16px 0;
+    }
+    .process-node {
+      background: var(--kelly-teal-light);
+      border: 2px solid var(--kelly-teal);
+      border-radius: 8px;
+      padding: 12px 18px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-align: center;
+      min-width: 100px;
+    }
+    .process-arrow {
+      font-size: 1.5rem;
+      color: var(--kelly-teal);
+      font-weight: bold;
+    }
+
+    /* Metric cards */
+    .metric-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin: 20px 0;
+    }
+    .metric-card {
+      flex: 1;
+      min-width: 140px;
+      background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 18px;
+      text-align: center;
+    }
+    .metric-card .metric-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--kelly-teal);
+    }
+    .metric-card .metric-label {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Interactive table */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .data-table th {
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 600;
+      padding: 12px;
+      border-bottom: 2px solid #e2e8f0;
+      font-size: 0.9rem;
+    }
+    .data-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 0.9rem;
+    }
+    .data-table tbody tr {
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .data-table tbody tr:hover {
+      background: var(--kelly-teal-light);
+    }
+    .data-table tbody tr.selected {
+      background: #d4f0ec;
+      outline: 2px solid var(--kelly-teal);
+    }
+
+    /* Timeline for measurement evolution */
+    .research-timeline {
       position: relative;
       padding-left: 30px;
-      margin: 2rem 0;
+      border-left: 3px solid var(--kelly-teal);
+      margin: 20px 0;
     }
-    .timeline-mini::before {
-      content: '';
-      position: absolute;
-      left: 8px;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      background: #dce4ec;
-    }
-    .timeline-item {
-      margin-bottom: 1.8rem;
+    .research-timeline .tl-item {
+      margin-bottom: 24px;
       position: relative;
+      padding-left: 20px;
     }
-    .timeline-item::before {
+    .research-timeline .tl-item::before {
       content: '';
       position: absolute;
-      left: -26px;
-      top: 5px;
+      left: -39px;
+      top: 4px;
       width: 14px;
       height: 14px;
       border-radius: 50%;
-      background: var(--primary);
-      border: 3px solid white;
-      box-shadow: 0 0 0 2px var(--primary);
+      background: #fff;
+      border: 3px solid var(--kelly-teal);
     }
-    .accordion-button:not(.collapsed) {
-      background-color: #eef5ff;
-      color: #1e3a5f;
-      font-weight: 600;
+    .research-timeline .tl-year {
+      font-weight: 700;
+      color: var(--kelly-teal);
+      font-size: 0.9rem;
     }
-    .voc-table th {
-      background-color: #f0f4f8;
-      color: #1e3a5f;
-    }
-    .process-step {
-      padding: 12px 15px;
-      background: #f9fbfd;
-      border-radius: 16px;
-      margin: 8px 0;
+
+    /* Reaction scheme canvas */
+    .reaction-scheme {
       display: flex;
       align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
       gap: 12px;
+      padding: 20px;
+      background: #fafbfc;
+      border-radius: 10px;
+      border: 1px dashed #dde1e6;
+      margin: 16px 0;
     }
+    .reaction-box {
+      background: #fff;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-family: var(--mono-font);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    .reaction-arrow-symbol {
+      font-size: 1.4rem;
+      color: var(--kelly-teal);
+    }
+    .reaction-box.product {
+      border-color: #10b981;
+      background: #f0fdf6;
+    }
+
     @media (max-width: 768px) {
-      .flip-card {
-        height: 300px;
+      .process-flow {
+        flex-direction: column;
+      }
+      .process-arrow {
+        transform: rotate(90deg);
+      }
+      .reaction-scheme {
+        flex-direction: column;
       }
     }
   </style>
@@ -223,8 +355,7 @@ This is a complete, interactive HTML webpage designed for learning about VOCs an
           <li><a href="resume.html">Resume</a></li>
           <li><a href="research.html">Research</a></li>
           <li><a href="contact.html">Contact</a></li>
-          <li><a class="active" href="history.html">History</a></li>
-          <li><a href="voc-guide.html" style="color: #e67e22; font-weight:600;">VOCs·BVOCs</a></li>
+          <li><a class="active" href="learn_VOC.html">VOC/BVOC Hub</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
@@ -236,197 +367,262 @@ This is a complete, interactive HTML webpage designed for learning about VOCs an
   </header>
 
   <main id="main" style="margin-top: 90px;">
-    <!-- Interactive VOC/BVOC Section -->
-    <section id="voc-bvoc" class="contact">
+
+    <!-- ======= VOC/BVOC Research Hub ======= -->
+    <section id="voc-hub" class="contact">
       <div class="container" data-aos="fade-up">
+
         <div class="section-title">
-          <h2>🌿 VOCs & BVOCs · Interactive Explorer</h2>
-          <p style="max-width: 700px; margin: 0 auto;">From trace gases to climate impact — dive into volatile organic compounds with interactive tools, visual stories, and clear science for everyone.</p>
+          <h2>Trace Gas Dynamics: VOCs & BVOCs</h2>
+          <p>An interactive research platform bridging fundamental chemistry and advanced atmospheric science — designed for both newcomers and established researchers.</p>
         </div>
 
-        <!-- Quick Overview Cards with Flip -->
-        <div class="row mt-4">
-          <div class="col-lg-6 mb-4">
-            <div class="flip-card">
-              <div class="flip-card-inner">
-                <div class="flip-card-front">
-                  <i class="bi bi-cloud-sun voc-icon" style="font-size: 2.8rem;"></i>
-                  <h4 style="font-weight:700;">VOCs</h4>
-                  <p style="color:#4a5568;">Volatile Organic Compounds</p>
-                  <span style="font-size:0.9rem; color:#718096;">Hover to reveal key facts</span>
-                </div>
-                <div class="flip-card-back">
-                  <h5 style="font-weight:600;">Anthropogenic & Natural</h5>
-                  <p style="font-size:0.95rem;">Emitted from paints, vehicles, industry, and also vegetation. React with NOx to form ground-level ozone.</p>
-                  <span class="badge bg-light text-dark mt-2">Example: Benzene, Toluene, Formaldehyde</span>
-                </div>
-              </div>
-            </div>
+        <!-- Quick Stat Cards -->
+        <div class="metric-row" data-aos="fade-up" data-aos-delay="100">
+          <div class="metric-card">
+            <div class="metric-value">~1150</div>
+            <div class="metric-label">Tg(C) yr⁻¹ global VOC flux</div>
           </div>
-          <div class="col-lg-6 mb-4">
-            <div class="flip-card">
-              <div class="flip-card-inner">
-                <div class="flip-card-front" style="border-color:#c8e6c9;">
-                  <i class="bi bi-tree-fill voc-icon bvocs-icon" style="font-size:2.8rem;"></i>
-                  <h4 style="font-weight:700;">BVOCs</h4>
-                  <p style="color:#4a5568;">Biogenic Volatile Organic Compounds</p>
-                  <span style="font-size:0.9rem; color:#718096;">Hover to explore</span>
-                </div>
-                <div class="flip-card-back" style="background: linear-gradient(135deg, #1e4a2d, #2d6a4f);">
-                  <h5 style="font-weight:600;">Ecosystem's Breath</h5>
-                  <p style="font-size:0.95rem;">Released by plants, forests, and soil. Isoprene & monoterpenes dominate. Influence aerosol formation.</p>
-                  <span class="badge bg-light text-dark mt-2">~90% of global VOC emissions are biogenic</span>
-                </div>
-              </div>
-            </div>
+          <div class="metric-card">
+            <div class="metric-value">~90%</div>
+            <div class="metric-label">Biogenic contribution</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">500+</div>
+            <div class="metric-label">Identified BVOC species</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-value">C₅H₈</div>
+            <div class="metric-label">Dominant BVOC: Isoprene</div>
           </div>
         </div>
 
-        <!-- Interactive Accordion for Learning Modules -->
-        <div class="row mt-5 justify-content-center">
-          <div class="col-lg-10">
-            <div class="accordion" id="vocAccordion">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingOne">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true">
-                    <i class="bi bi-droplet me-3" style="color:#3498db;"></i> What are VOCs? Sources & Chemistry
-                  </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#vocAccordion">
-                  <div class="accordion-body">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <h5 class="fw-bold">Key Anthropogenic Sources</h5>
-                        <ul class="list-unstyled">
-                          <li class="process-step"><i class="bi bi-fuel-pump text-primary"></i> <span>Vehicle exhaust & fuel evaporation</span></li>
-                          <li class="process-step"><i class="bi bi-paint-bucket text-primary"></i> <span>Paints, solvents, adhesives</span></li>
-                          <li class="process-step"><i class="bi bi-building text-primary"></i> <span>Industrial processes & refineries</span></li>
-                        </ul>
-                      </div>
-                      <div class="col-md-6">
-                        <h5 class="fw-bold">Atmospheric Fate</h5>
-                        <p>VOCs + OH radicals / NOx → ozone & secondary organic aerosols (SOA). Lifetimes range from hours to months.</p>
-                        <span class="badge bg-info text-dark p-2">Interactive slider below</span>
+        <!-- Audience Mode Selector -->
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-8 text-center">
+            <ul class="nav nav-pills justify-content-center" id="audienceTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active px-4 me-2" id="beginner-tab" data-bs-toggle="pill" data-bs-target="#beginner-panel" type="button" role="tab">
+                  <i class="bi bi-mortarboard-fill me-2"></i>Foundations
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link px-4 ms-2" id="researcher-tab" data-bs-toggle="pill" data-bs-target="#researcher-panel" type="button" role="tab">
+                  <i class="bi bi-graph-up-arrow me-2"></i>Advanced Research
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="audienceTabContent">
+
+          <!-- ==================== FOUNDATIONS PANEL ==================== -->
+          <div class="tab-pane fade show active" id="beginner-panel" role="tabpanel">
+
+            <div class="row g-4">
+              <div class="col-lg-6">
+                <div class="research-card">
+                  <div class="card-icon teal"><i class="bi bi-flask"></i></div>
+                  <h4>What Are Volatile Organic Compounds?</h4>
+                  <p>VOCs are carbon-based molecules with high vapour pressure at ambient temperatures, enabling rapid partitioning into the gas phase. They span a wide range of functional groups including alkanes, alkenes, aromatics, and oxygenates.</p>
+                  
+                  <div class="process-flow">
+                    <div class="process-node">Liquid/Solid Phase</div>
+                    <span class="process-arrow">→</span>
+                    <div class="process-node">Evaporation</div>
+                    <span class="process-arrow">→</span>
+                    <div class="process-node">Gas Phase VOC</div>
+                    <span class="process-arrow">→</span>
+                    <div class="process-node">Atmospheric Reactions</div>
+                  </div>
+                  <p class="small text-muted mt-2">The volatility-driven phase transfer is fundamental to understanding emission inventories and exposure pathways.</p>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="research-card">
+                  <div class="card-icon green"><i class="bi bi-tree-fill"></i></div>
+                  <h4>BVOCs: The Plant-Atmosphere Interface</h4>
+                  <p>Biogenic VOCs are synthesized through metabolic pathways in vegetation, primarily via the methylerythritol phosphate (MEP) pathway for isoprene and monoterpenes. Emission rates are functions of temperature and photosynthetically active radiation (PAR).</p>
+                  
+                  <div class="formula-display">
+                    <span class="highlight">Isoprene</span> (C₅H₈):<br>
+                    CH₂=C(CH₃)–CH=CH₂<br><br>
+                    <span class="highlight">α-Pinene</span> (C₁₀H₁₆):<br>
+                    Bicyclic monoterpene — key SOA precursor
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="research-card">
+                  <div class="card-icon amber"><i class="bi bi-cloud-sun-fill"></i></div>
+                  <h4>Why They Matter: Atmospheric Impacts</h4>
+                  <ul class="list-unstyled">
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Tropospheric O₃ formation:</strong> VOCs + NOₓ + hν → O₃</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Secondary Organic Aerosol (SOA):</strong> Oxidation products partition to particle phase</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>OH radical budget:</strong> VOCs are the primary sink for atmospheric OH</li>
+                    <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i><strong>Climate feedback:</strong> SOA affects cloud condensation nuclei (CCN)</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="research-card">
+                  <div class="card-icon blue"><i class="bi bi-gear-wide-connected"></i></div>
+                  <h4>Measurement Principles</h4>
+                  <p>Modern trace gas analysis employs several complementary techniques:</p>
+                  <ul>
+                    <li><strong>GC-MS/FID:</strong> Gold standard for speciation; requires pre-concentration</li>
+                    <li><strong>PTR-MS:</strong> Real-time, soft chemical ionization with H₃O⁺ reagent ions</li>
+                    <li><strong>FTIR/DOAS:</strong> Open-path optical methods for column-integrated measurements</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interactive Diagram: VOC Fate -->
+            <div class="diagram-container mt-4" data-aos="fade-up">
+              <h5 class="fw-bold mb-3"><i class="bi bi-diagram-3 me-2"></i>Atmospheric Fate of VOCs (Interactive)</h5>
+              <canvas id="vocFateChart" height="200"></canvas>
+              <p class="small text-muted mt-2 text-center">Click legend items to toggle pathways. Hover for details.</p>
+            </div>
+          </div>
+
+          <!-- ==================== ADVANCED RESEARCH PANEL ==================== -->
+          <div class="tab-pane fade" id="researcher-panel" role="tabpanel">
+
+            <div class="row g-4">
+              <!-- Reaction Kinetics -->
+              <div class="col-lg-6">
+                <div class="research-card">
+                  <div class="card-icon blue"><i class="bi bi-lightning-charge-fill"></i></div>
+                  <h4>Oxidation Kinetics</h4>
+                  <p>The atmospheric lifetime of VOCs is governed by reactions with OH, NO₃, and O₃. The OH reaction dominates daytime removal:</p>
+                  
+                  <div class="formula-display">
+                    $$\tau_{\text{VOC}} = \frac{1}{k_{\text{OH}}[\text{OH}] + k_{\text{O}_3}[\text{O}_3] + k_{\text{NO}_3}[\text{NO}_3]}$$
+                  </div>
+                  
+                  <div class="table-responsive mt-3">
+                    <table class="data-table">
+                      <thead>
+                        <tr><th>Compound</th><th>k<sub>OH</sub> (cm³ molec⁻¹ s⁻¹)</th><th>Lifetime (τ<sub>OH</sub>)</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>Isoprene</td><td>1.0 × 10⁻¹⁰</td><td>~1.4 hours</td></tr>
+                        <tr><td>α-Pinene</td><td>5.3 × 10⁻¹¹</td><td>~2.6 hours</td></tr>
+                        <tr><td>Benzene</td><td>1.2 × 10⁻¹²</td><td>~9.4 days</td></tr>
+                        <tr><td>Methane</td><td>6.3 × 10⁻¹⁵</td><td>~8.6 years</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p class="small text-muted mt-2">Rate constants at 298 K. [OH] = 1×10⁶ molec cm⁻³ assumed for lifetime estimates.</p>
+                </div>
+              </div>
+
+              <!-- Isoprene Oxidation Schematic -->
+              <div class="col-lg-6">
+                <div class="research-card">
+                  <div class="card-icon teal"><i class="bi bi-diagram-3-fill"></i></div>
+                  <h4>Isoprene Oxidation Pathways</h4>
+                  <p>The fate of isoprene peroxy radicals (ISOPO₂) bifurcates under high vs. low NOₓ regimes, critically influencing ozone and SOA yields.</p>
+                  
+                  <div class="reaction-scheme">
+                    <div class="reaction-box">Isoprene<br>C₅H₈</div>
+                    <span class="reaction-arrow-symbol">+OH/O₂→</span>
+                    <div class="reaction-box">ISOPO₂<br>RO₂ radical</div>
+                  </div>
+                  
+                  <div class="row g-2 mt-2">
+                    <div class="col-6">
+                      <div class="p-2 rounded" style="background:#fff3cd; border:1px solid #ffc107;">
+                        <strong>High NOₓ:</strong><br>
+                        <small>RO₂ + NO → RO + NO₂<br>→ O₃ formation</small>
                       </div>
                     </div>
-                    <!-- Reactivity mini slider -->
-                    <div class="mt-3 p-3 bg-light rounded-3">
-                      <label class="fw-semibold">VOC Reactivity with OH (simulated): <span id="reactivityValue">Medium</span></label>
-                      <input type="range" class="form-range" min="1" max="3" id="reactivitySlider" value="2">
-                      <small>Move slider: 1 = low (methane-like), 3 = high (isoprene-like)</small>
-                      <p class="mt-2 mb-0" id="reactivityDesc">Medium reactivity: typical for many aromatic VOCs.</p>
+                    <div class="col-6">
+                      <div class="p-2 rounded" style="background:#d1ecf1; border:1px solid #0dcaf0;">
+                        <strong>Low NOₓ:</strong><br>
+                        <small>RO₂ + HO₂ → ROOH<br>→ SOA & peroxide formation</small>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingTwo">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                    <i class="bi bi-tree me-3" style="color:#27ae60;"></i> BVOCs: The Plant Connection
-                  </button>
-                </h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#vocAccordion">
-                  <div class="accordion-body">
-                    <div class="row">
-                      <div class="col-md-5">
-                        <h5>🌲 Major BVOCs</h5>
-                        <div class="d-flex flex-wrap gap-2 mb-3">
-                          <span class="badge bg-success p-2">Isoprene (C₅H₈)</span>
-                          <span class="badge bg-success p-2">α-pinene</span>
-                          <span class="badge bg-success p-2">Limonene</span>
-                          <span class="badge bg-success p-2">β-caryophyllene</span>
-                        </div>
-                        <p>Plants emit these as defense, communication, or heat stress response.</p>
-                      </div>
-                      <div class="col-md-7">
-                        <div class="timeline-mini">
-                          <div class="timeline-item"><strong>Temperature rise</strong> → isoprene emission increases exponentially</div>
-                          <div class="timeline-item"><strong>Light-dependent</strong> synthesis in chloroplasts</div>
-                          <div class="timeline-item"><strong>SOA formation</strong> from monoterpene oxidation</div>
-                        </div>
-                      </div>
-                    </div>
-                    <button class="btn btn-sm btn-outline-success mt-2" id="bvocFunFactBtn"><i class="bi bi-lightbulb"></i> Show a fun fact</button>
-                    <p id="bvocFactDisplay" class="mt-2 fst-italic text-muted"></p>
+              <!-- Interactive Chart: Emission Budget -->
+              <div class="col-lg-6">
+                <div class="research-card">
+                  <div class="card-icon amber"><i class="bi bi-pie-chart-fill"></i></div>
+                  <h4>Global VOC Emission Partitioning</h4>
+                  <div class="diagram-container p-0" style="box-shadow:none; border:none;">
+                    <canvas id="emissionPieChart" height="280"></canvas>
+                  </div>
+                  <div class="d-flex justify-content-center gap-3 mt-2 flex-wrap">
+                    <button class="btn btn-sm btn-outline-success" id="highlightBiogenic">Highlight Biogenic</button>
+                    <button class="btn btn-sm btn-outline-secondary" id="highlightAnthropogenic">Highlight Anthropogenic</button>
+                    <button class="btn btn-sm btn-outline-dark" id="resetPieChart">Reset</button>
                   </div>
                 </div>
               </div>
 
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="headingThree">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
-                    <i class="bi bi-gear-wide-connected me-3" style="color:#e67e22;"></i> Measurement Techniques
-                  </button>
-                </h2>
-                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#vocAccordion">
-                  <div class="accordion-body">
-                    <div class="table-responsive">
-                      <table class="table table-hover voc-table">
-                        <thead><tr><th>Technique</th><th>Principle</th><th>Example Instruments</th></tr></thead>
-                        <tbody>
-                          <tr><td>GC-MS/FID</td><td>Gas chromatography separation + detection</td><td>Agilent GC, Markes TD</td></tr>
-                          <tr><td>PTR-MS</td><td>Proton-transfer reaction mass spectrometry</td><td>PTR-TOF 4000</td></tr>
-                          <tr><td>DOAS</td><td>Differential optical absorption spectroscopy</td><td>Long-path DOAS</td></tr>
-                          <tr><td>Sensor networks</td><td>Low-cost MOS/PID sensors</td><td>Alphasense, Sensirion</td></tr>
-                        </tbody>
-                      </table>
+              <!-- Measurement Technique Evolution -->
+              <div class="col-lg-6">
+                <div class="research-card">
+                  <div class="card-icon green"><i class="bi bi-clock-history"></i></div>
+                  <h4>Evolution of Measurement Techniques</h4>
+                  <div class="research-timeline">
+                    <div class="tl-item">
+                      <div class="tl-year">1970s</div>
+                      <p class="mb-0"><strong>Canister sampling + GC-FID</strong><br>Offline, limited temporal resolution</p>
                     </div>
-                    <p class="small mt-2"><i class="bi bi-info-circle"></i> Click on rows to highlight — interactive table.</p>
+                    <div class="tl-item">
+                      <div class="tl-year">1990s</div>
+                      <p class="mb-0"><strong>PTR-MS development</strong><br>Real-time, soft ionization, no pre-concentration needed</p>
+                    </div>
+                    <div class="tl-item">
+                      <div class="tl-year">2010s</div>
+                      <p class="mb-0"><strong>PTR-TOF-MS & CIMS</strong><br>High mass resolution, isomer separation via I⁻/acetate reagent ions</p>
+                    </div>
+                    <div class="tl-item">
+                      <div class="tl-year">2020s</div>
+                      <p class="mb-0"><strong>Satellite retrievals (TROPOMI)</strong><br>HCHO columns as isoprene proxy; global coverage</p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
 
-        <!-- Interactive Comparison: VOC vs BVOC contribution -->
-        <div class="row mt-5">
-          <div class="col-12">
-            <div class="interactive-card">
-              <h4 class="fw-bold mb-3"><i class="bi bi-pie-chart-fill me-2" style="color:#8e44ad;"></i>Global VOC Emission Budget (simulated interactive)</h4>
-              <p>Click the buttons to see which sector dominates. Based on typical literature values.</p>
-              <div class="d-flex flex-wrap gap-3 mb-3">
-                <button class="btn btn-interactive" id="showAnthro">Anthropogenic VOCs</button>
-                <button class="btn btn-interactive btn-bvoc" id="showBio">Biogenic VOCs</button>
-                <button class="btn btn-outline-secondary" id="showBoth">Both</button>
+              <!-- Interactive: NOx dependency of SOA yield -->
+              <div class="col-12">
+                <div class="research-card">
+                  <h4 class="fw-bold"><i class="bi bi-graph-up me-2"></i>Interactive: NOₓ-Dependent SOA Yield</h4>
+                  <p>Move the slider to explore how NOₓ concentration affects secondary organic aerosol mass yield from isoprene oxidation.</p>
+                  <div class="row align-items-center">
+                    <div class="col-md-4">
+                      <label class="fw-semibold">NOₓ Level: <span id="noxValueDisplay">Medium</span></label>
+                      <input type="range" class="form-range" min="0" max="2" step="0.1" value="1" id="noxSlider">
+                      <small class="text-muted">0 = pristine (low NOₓ), 2 = urban (high NOₓ)</small>
+                    </div>
+                    <div class="col-md-8">
+                      <canvas id="soaYieldChart" height="200"></canvas>
+                    </div>
+                  </div>
+                  <p class="mt-2 small" id="soaDescription">At moderate NOₓ levels, SOA yields reach a maximum due to balanced RO₂ chemistry.</p>
+                </div>
               </div>
-              <div class="progress" style="height: 40px; border-radius: 30px;">
-                <div id="vocProgressBar" class="progress-bar bg-primary" role="progressbar" style="width: 45%;" aria-valuenow="45">45% Anthropogenic</div>
-                <div id="bvocProgressBar" class="progress-bar bg-success" role="progressbar" style="width: 55%;">55% Biogenic</div>
-              </div>
-              <p class="mt-2 text-muted" id="budgetDescription">Global total ~ 1150 Tg(C) yr⁻¹. Biogenic emissions dominate globally.</p>
             </div>
-          </div>
-        </div>
-
-        <!-- Interactive mini quiz for beginners -->
-        <div class="row mt-4">
-          <div class="col-lg-8 mx-auto">
-            <div class="interactive-card text-center">
-              <h5 class="fw-bold"><i class="bi bi-question-circle"></i> Quick Check: Is it a VOC or BVOC?</h5>
-              <p id="quizQuestion" class="fs-5">"Isoprene emitted from an oak forest"</p>
-              <div class="d-flex justify-content-center gap-3 mt-3">
-                <button class="btn btn-primary px-4" id="quizVocBtn">VOC</button>
-                <button class="btn btn-success px-4" id="quizBvocBtn">BVOC</button>
-              </div>
-              <p id="quizFeedback" class="mt-3 fw-semibold"></p>
-              <button id="nextQuizBtn" class="btn btn-sm btn-outline-dark mt-2">Next question <i class="bi bi-arrow-right"></i></button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Additional resource: interactive definition hover -->
-        <div class="row mt-3">
-          <div class="col-12 text-center">
-            <p style="font-size:0.95rem;">💡 <span class="fw-semibold" data-bs-toggle="tooltip" data-bs-placement="top" title="Secondary Organic Aerosol: particles formed from VOC oxidation">Hover over underlined terms</span> for definitions. Built for researchers & newcomers.</p>
           </div>
         </div>
 
       </div>
     </section>
+
   </main>
 
+  <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">
       <div class="copyright">
@@ -447,130 +643,223 @@ This is a complete, interactive HTML webpage designed for learning about VOCs an
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/js/main.js"></script>
   <script>
     document.getElementById("current-year").textContent = new Date().getFullYear();
   </script>
-  <script src="assets/js/main.js"></script>
 
-  <!-- Interactive Scripts -->
+  <!-- Interactive Diagrams & Charts -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      
       // Initialize AOS
       AOS.init({ duration: 800, once: true });
 
-      // Tooltips
-      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-      tooltipTriggerList.map(function (el) { return new bootstrap.Tooltip(el); });
-
-      // Reactivity slider
-      const slider = document.getElementById('reactivitySlider');
-      const reactivityValue = document.getElementById('reactivityValue');
-      const reactivityDesc = document.getElementById('reactivityDesc');
-      const descriptions = {
-        1: 'Low reactivity: long atmospheric lifetime (e.g., methane, some halocarbons).',
-        2: 'Medium reactivity: typical for many aromatic VOCs like toluene.',
-        3: 'High reactivity: reacts quickly with OH, forms ozone rapidly (e.g., isoprene, terpenes).'
-      };
-      const labels = {1:'Low',2:'Medium',3:'High'};
-      if(slider){
-        slider.addEventListener('input', function(){
-          let val = parseInt(this.value);
-          reactivityValue.textContent = labels[val];
-          reactivityDesc.textContent = descriptions[val];
+      // ============ VOC Fate Chart (Pie/Bar) ============
+      const vocFateCtx = document.getElementById('vocFateChart');
+      if (vocFateCtx) {
+        new Chart(vocFateCtx, {
+          type: 'bar',
+          data: {
+            labels: ['OH Oxidation', 'O₃ Oxidation', 'NO₃ Oxidation', 'Photolysis', 'Dry Deposition'],
+            datasets: [{
+              label: 'Relative Contribution to VOC Removal',
+              data: [65, 15, 10, 5, 5],
+              backgroundColor: [
+                'rgba(52, 183, 167, 0.75)',
+                'rgba(255, 193, 7, 0.7)',
+                'rgba(108, 117, 125, 0.6)',
+                'rgba(13, 202, 240, 0.5)',
+                'rgba(16, 185, 129, 0.5)'
+              ],
+              borderColor: '#fff',
+              borderWidth: 2,
+              borderRadius: 6
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { 
+                position: 'bottom',
+                labels: { usePointStyle: true, padding: 20 }
+              },
+              tooltip: {
+                callbacks: {
+                  label: (ctx) => `${ctx.dataset.label}: ${ctx.raw}%`
+                }
+              }
+            },
+            scales: {
+              y: { 
+                beginAtZero: true, 
+                max: 80,
+                title: { display: true, text: 'Contribution (%)' }
+              }
+            }
+          }
         });
       }
 
-      // BVOC fun fact
-      const factBtn = document.getElementById('bvocFunFactBtn');
-      const factDisplay = document.getElementById('bvocFactDisplay');
-      const facts = [
-        "Isoprene emission from forests can be seen from space using satellite formaldehyde (HCHO) columns.",
-        "A single oak tree can emit several milligrams of isoprene per hour on a hot day.",
-        "BVOCs help form the blue haze over forested mountains (e.g., Blue Ridge Mountains).",
-        "Some plants use BVOCs to attract predators of herbivores attacking them.",
-        "Marine phytoplankton also emit BVOCs like dimethyl sulfide (DMS)."
-      ];
-      if(factBtn){
-        factBtn.addEventListener('click', function(){
-          const randomFact = facts[Math.floor(Math.random() * facts.length)];
-          factDisplay.textContent = randomFact;
+      // ============ Global Emission Pie Chart ============
+      const pieCtx = document.getElementById('emissionPieChart');
+      let emissionPieChart;
+      if (pieCtx) {
+        emissionPieChart = new Chart(pieCtx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Isoprene (Biogenic)', 'Monoterpenes (Biogenic)', 'Other BVOCs', 'Anthropogenic VOCs', 'Biomass Burning'],
+            datasets: [{
+              data: [500, 150, 200, 150, 150],
+              backgroundColor: [
+                'rgba(52, 183, 167, 0.85)',
+                'rgba(45, 157, 143, 0.7)',
+                'rgba(34, 139, 126, 0.55)',
+                'rgba(255, 152, 0, 0.8)',
+                'rgba(244, 67, 54, 0.65)'
+              ],
+              borderColor: '#fff',
+              borderWidth: 2,
+              hoverBorderWidth: 3
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+              legend: {
+                position: 'bottom',
+                labels: { usePointStyle: true, padding: 15, font: { size: 11 } }
+              },
+              tooltip: {
+                callbacks: {
+                  label: (ctx) => `${ctx.label}: ${ctx.raw} Tg(C) yr⁻¹`
+                }
+              }
+            }
+          }
+        });
+
+        // Interactive buttons for pie chart
+        document.getElementById('highlightBiogenic')?.addEventListener('click', () => {
+          emissionPieChart.setActiveElements([
+            { datasetIndex: 0, index: 0 },
+            { datasetIndex: 0, index: 1 },
+            { datasetIndex: 0, index: 2 }
+          ]);
+          emissionPieChart.update();
+        });
+        document.getElementById('highlightAnthropogenic')?.addEventListener('click', () => {
+          emissionPieChart.setActiveElements([
+            { datasetIndex: 0, index: 3 },
+            { datasetIndex: 0, index: 4 }
+          ]);
+          emissionPieChart.update();
+        });
+        document.getElementById('resetPieChart')?.addEventListener('click', () => {
+          emissionPieChart.setActiveElements([]);
+          emissionPieChart.update();
         });
       }
 
-      // Budget progress bar interactive
-      const anthroBtn = document.getElementById('showAnthro');
-      const bioBtn = document.getElementById('showBio');
-      const bothBtn = document.getElementById('showBoth');
-      const progAnthro = document.getElementById('vocProgressBar');
-      const progBio = document.getElementById('bvocProgressBar');
-      const budgetDesc = document.getElementById('budgetDescription');
+      // ============ NOx-dependent SOA Yield Chart ============
+      const soaYieldCtx = document.getElementById('soaYieldChart');
+      let soaYieldChart;
+      
+      // Simulated data for SOA yield as function of NOx
+      const noxLevels = [0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0];
+      const soaYields = [15, 22, 30, 38, 45, 48, 42, 35, 28, 22, 18];
 
-      function setBudget(anthroPercent, bioPercent, desc){
-        if(progAnthro) progAnthro.style.width = anthroPercent + '%';
-        if(progBio) progBio.style.width = bioPercent + '%';
-        if(progAnthro) progAnthro.textContent = anthroPercent + '% Anthropogenic';
-        if(progBio) progBio.textContent = bioPercent + '% Biogenic';
-        if(budgetDesc) budgetDesc.textContent = desc;
-      }
-
-      if(anthroBtn){
-        anthroBtn.addEventListener('click', ()=> setBudget(85, 15, 'Focus on anthropogenic: transport, industry, solvents (~15% of global total).'));
-        bioBtn.addEventListener('click', ()=> setBudget(10, 90, 'Biogenic dominance: forests, vegetation emit ~90% of global VOCs.'));
-        bothBtn.addEventListener('click', ()=> setBudget(45, 55, 'Global total ~ 1150 Tg(C) yr⁻¹. Biogenic emissions dominate globally.'));
-      }
-
-      // Mini quiz
-      const quizQuestion = document.getElementById('quizQuestion');
-      const quizVocBtn = document.getElementById('quizVocBtn');
-      const quizBvocBtn = document.getElementById('quizBvocBtn');
-      const quizFeedback = document.getElementById('quizFeedback');
-      const nextBtn = document.getElementById('nextQuizBtn');
-
-      const quizData = [
-        { question: "Isoprene emitted from an oak forest", answer: "BVOC" },
-        { question: "Benzene from gasoline exhaust", answer: "VOC" },
-        { question: "α-pinene from pine trees", answer: "BVOC" },
-        { question: "Formaldehyde from plywood adhesive", answer: "VOC" },
-        { question: "Limonene from citrus peel (natural source)", answer: "BVOC" }
-      ];
-      let currentQuizIndex = 0;
-
-      function loadQuiz(index){
-        if(quizQuestion) quizQuestion.textContent = `"${quizData[index].question}"`;
-        if(quizFeedback) quizFeedback.textContent = '';
-      }
-
-      function checkAnswer(selected){
-        const correct = quizData[currentQuizIndex].answer;
-        if(selected === correct){
-          quizFeedback.textContent = '✅ Correct!';
-          quizFeedback.className = 'mt-3 fw-semibold text-success';
-        } else {
-          quizFeedback.textContent = `❌ Actually, it's primarily a ${correct}.`;
-          quizFeedback.className = 'mt-3 fw-semibold text-danger';
-        }
-      }
-
-      if(quizVocBtn){
-        quizVocBtn.addEventListener('click', ()=> checkAnswer('VOC'));
-        quizBvocBtn.addEventListener('click', ()=> checkAnswer('BVOC'));
-        nextBtn.addEventListener('click', ()=>{
-          currentQuizIndex = (currentQuizIndex + 1) % quizData.length;
-          loadQuiz(currentQuizIndex);
+      if (soaYieldCtx) {
+        soaYieldChart = new Chart(soaYieldCtx, {
+          type: 'line',
+          data: {
+            labels: noxLevels.map(n => n.toFixed(1)),
+            datasets: [{
+              label: 'SOA Mass Yield (%)',
+              data: soaYields,
+              borderColor: '#34b7a7',
+              backgroundColor: 'rgba(52, 183, 167, 0.1)',
+              fill: true,
+              tension: 0.4,
+              pointRadius: 5,
+              pointHoverRadius: 8,
+              pointBackgroundColor: '#34b7a7',
+              borderWidth: 2.5
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: (ctx) => `SOA Yield: ${ctx.raw}% at NOₓ = ${ctx.label}`
+                }
+              }
+            },
+            scales: {
+              x: { 
+                title: { display: true, text: 'NOₓ Level (relative)' },
+                grid: { color: '#f0f0f0' }
+              },
+              y: { 
+                title: { display: true, text: 'SOA Mass Yield (%)' },
+                min: 10, max: 55,
+                grid: { color: '#f0f0f0' }
+              }
+            }
+          }
         });
-        loadQuiz(0);
       }
 
-      // Table row highlight
-      const tableRows = document.querySelectorAll('.voc-table tbody tr');
-      tableRows.forEach(row => {
-        row.addEventListener('click', function(){
-          tableRows.forEach(r => r.style.background = '');
-          this.style.background = '#e2eafc';
+      // Slider interaction for NOx and SOA
+      const noxSlider = document.getElementById('noxSlider');
+      const noxDisplay = document.getElementById('noxValueDisplay');
+      const soaDesc = document.getElementById('soaDescription');
+      
+      if (noxSlider) {
+        noxSlider.addEventListener('input', function() {
+          const val = parseFloat(this.value);
+          const labels = {0:'Pristine (Low)', 1:'Medium', 2:'Urban (High)'};
+          const closest = [0, 1, 2].reduce((prev, curr) => 
+            Math.abs(curr - val) < Math.abs(prev - val) ? curr : prev
+          );
+          noxDisplay.textContent = labels[closest];
+          
+          const descriptions = {
+            0: 'Low NOₓ: RO₂ + HO₂ dominates → higher peroxide formation, moderate SOA.',
+            1: 'Medium NOₓ: Balanced RO₂ chemistry → peak SOA mass yields (~48%).',
+            2: 'High NOₓ: RO₂ + NO dominates → fragmentation dominates, lower SOA.'
+          };
+          soaDesc.textContent = descriptions[closest];
+
+          // Update chart active point
+          if (soaYieldChart) {
+            const index = noxLevels.findIndex(n => Math.abs(n - val) < 0.15);
+            soaYieldChart.setActiveElements([{ datasetIndex: 0, index: index >= 0 ? index : 5 }]);
+            soaYieldChart.update();
+          }
+        });
+      }
+
+      // Table row selection highlight
+      document.querySelectorAll('.data-table tbody tr').forEach(row => {
+        row.addEventListener('click', function() {
+          this.parentElement.querySelectorAll('tr').forEach(r => r.classList.remove('selected'));
+          this.classList.add('selected');
         });
       });
+
+      // Re-trigger MathJax for dynamic content
+      if (window.MathJax) {
+        setTimeout(() => {
+          MathJax.typesetPromise?.();
+        }, 300);
+      }
+
     });
   </script>
+
 </body>
 </html>
-```
