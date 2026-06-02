@@ -838,6 +838,488 @@
 
     });
   </script>
+  <!-- ============ INTERACTIVE CHARTS (CORRECTED & EXPANDED) ============ -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    
+    AOS.init({ duration: 800, once: true });
+
+    // ---- VOC Fate Bar Chart (Foundations tab) ----
+    const fateCtx = document.getElementById('vocFateChart');
+    if (fateCtx) {
+      new Chart(fateCtx, {
+        type: 'bar',
+        data: {
+          labels: ['OH Oxidation', 'O₃ Oxidation', 'NO₃ Oxidation', 'Photolysis', 'Dry Deposition'],
+          datasets: [{
+            label: 'Relative Contribution (%)',
+            data: [65, 15, 10, 5, 5],
+            backgroundColor: [
+              'rgba(52, 183, 167, 0.8)',
+              'rgba(255, 193, 7, 0.7)',
+              'rgba(108, 117, 125, 0.6)',
+              'rgba(13, 202, 240, 0.5)',
+              'rgba(16, 185, 129, 0.5)'
+            ],
+            borderColor: '#fff',
+            borderWidth: 2,
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: { position: 'bottom', labels: { usePointStyle: true, padding: 18 } }
+          },
+          scales: {
+            y: { 
+              beginAtZero: true, 
+              max: 80, 
+              title: { display: true, text: 'Contribution (%)' },
+              grid: { color: '#f0f0f0' }
+            },
+            x: {
+              grid: { display: false }
+            }
+          }
+        }
+      });
+    }
+
+    // ---- Global Emission Pie Chart (CORRECTED VALUES) ----
+    // Sources: Guenther et al. (2012), Sindelarova et al. (2014)
+    // Total ~1150 Tg(C)/yr
+    const pieCtx = document.getElementById('emissionPieChart');
+    let emissionChart;
+    if (pieCtx) {
+      emissionChart = new Chart(pieCtx, {
+        type: 'doughnut',
+        data: {
+          labels: [
+            'Isoprene (550)', 
+            'Monoterpenes (130)', 
+            'Other BVOCs (270)', 
+            'Anthropogenic (140)', 
+            'Biomass Burning (60)'
+          ],
+          datasets: [{
+            data: [550, 130, 270, 140, 60],
+            backgroundColor: [
+              'rgba(39, 174, 96, 0.85)',    // green - isoprene
+              'rgba(34, 139, 126, 0.75)',   // teal - monoterpenes
+              'rgba(82, 190, 160, 0.65)',   // light teal - other BVOCs
+              'rgba(243, 156, 18, 0.8)',    // orange - anthropogenic
+              'rgba(231, 76, 60, 0.7)'      // red - biomass burning
+            ],
+            borderColor: '#fff',
+            borderWidth: 2,
+            hoverBorderWidth: 3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: { 
+              position: 'bottom', 
+              labels: { 
+                usePointStyle: true, 
+                padding: 14, 
+                font: { size: 11 },
+                generateLabels: function(chart) {
+                  const data = chart.data;
+                  return data.labels.map((label, i) => ({
+                    text: label,
+                    fillStyle: data.datasets[0].backgroundColor[i],
+                    strokeStyle: data.datasets[0].backgroundColor[i],
+                    lineWidth: 1,
+                    hidden: false,
+                    index: i
+                  }));
+                }
+              } 
+            },
+            tooltip: { 
+              callbacks: { 
+                label: (ctx) => `${ctx.label.split('(')[0]}: ${ctx.raw} Tg(C) yr⁻¹ (${((ctx.raw/1150)*100).toFixed(1)}%)` 
+              } 
+            }
+          }
+        }
+      });
+
+      document.getElementById('highlightBiogenic')?.addEventListener('click', () => {
+        emissionChart.setActiveElements([
+          {datasetIndex:0, index:0},
+          {datasetIndex:0, index:1},
+          {datasetIndex:0, index:2}
+        ]);
+        emissionChart.update();
+      });
+      document.getElementById('highlightAnthropogenic')?.addEventListener('click', () => {
+        emissionChart.setActiveElements([
+          {datasetIndex:0, index:3},
+          {datasetIndex:0, index:4}
+        ]);
+        emissionChart.update();
+      });
+      document.getElementById('resetPieChart')?.addEventListener('click', () => {
+        emissionChart.setActiveElements([]);
+        emissionChart.update();
+      });
+    }
+
+    // ---- SOA Yield vs NOx Chart (FIXED INTERACTIVE) ----
+    const soaCtx = document.getElementById('soaYieldChart');
+    let soaChart;
+    
+    // Scientifically accurate NOx-dependent SOA yield data
+    // Based on chamber studies: Kroll et al. (2006), Xu et al. (2015)
+    const noxLevels = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100];
+    const soaYields = [2.8, 3.2, 3.8, 4.3, 4.8, 5.2, 5.5, 5.7, 5.8, 5.9, 6.0, 5.8, 5.5, 5.0, 4.3, 3.6, 2.9, 2.3, 1.8, 1.4, 1.1];
+
+    if (soaCtx) {
+      soaChart = new Chart(soaCtx, {
+        type: 'line',
+        data: {
+          labels: noxLevels,
+          datasets: [{
+            label: 'SOA Mass Yield (%)',
+            data: soaYields,
+            borderColor: '#34b7a7',
+            backgroundColor: 'rgba(52, 183, 167, 0.1)',
+            fill: true,
+            tension: 0.4,
+            pointRadius: 3,
+            pointHoverRadius: 7,
+            pointBackgroundColor: '#34b7a7',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            borderWidth: 2.5
+          }, {
+            label: 'Current NOₓ level',
+            data: Array(21).fill(null),
+            borderColor: 'rgba(231, 76, 60, 0.8)',
+            backgroundColor: 'rgba(231, 76, 60, 0.3)',
+            pointRadius: 0,
+            borderWidth: 2,
+            borderDash: [6, 4],
+            fill: false,
+            showLine: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          interaction: {
+            intersect: false,
+            mode: 'index'
+          },
+          plugins: {
+            legend: { 
+              display: true,
+              position: 'top',
+              labels: { 
+                usePointStyle: true, 
+                padding: 15,
+                font: { size: 11 },
+                filter: function(item) {
+                  return item.text !== 'Current NOₓ level'; // hide from legend
+                }
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => {
+                  if (ctx.datasetIndex === 0) {
+                    return `SOA Yield: ${ctx.raw}% at NOₓ index ${ctx.label}`;
+                  }
+                  return '';
+                }
+              }
+            }
+          },
+          scales: {
+            x: { 
+              title: { display: true, text: 'NOₓ Level (arbitrary units)' },
+              grid: { color: '#f5f5f5' },
+              ticks: { 
+                callback: function(val, index) {
+                  return index % 5 === 0 ? this.getLabelForValue(val) : '';
+                }
+              }
+            },
+            y: { 
+              title: { display: true, text: 'SOA Mass Yield (%)' },
+              min: 0, 
+              max: 7,
+              grid: { color: '#f5f5f5' },
+              ticks: { stepSize: 1 }
+            }
+          }
+        }
+      });
+    }
+
+    // ---- NOx Slider Logic (FIXED) ----
+    const noxSlider = document.getElementById('noxSlider');
+    const noxDisplay = document.getElementById('noxDisplay');
+    const soaDesc = document.getElementById('soaDescription');
+    
+    function updateNOxState(sliderValue) {
+      const pct = parseInt(sliderValue);
+      
+      // Map slider value to one of 21 data points
+      const dataIndex = Math.round((pct / 100) * (noxLevels.length - 1));
+      const actualNOx = noxLevels[dataIndex];
+      const actualYield = soaYields[dataIndex];
+      
+      // Determine regime
+      let regime, descHTML;
+      if (pct < 25) {
+        regime = 'Low NOₓ (pristine)';
+        descHTML = `<strong>🌲 Low NOₓ regime:</strong> RO₂ + HO₂ pathway dominates → peroxide formation. SOA yield: <strong>${actualYield}%</strong>. Low ozone production efficiency. Typical of remote forests and marine boundary layer.`;
+      } else if (pct < 50) {
+        regime = 'Moderate-Low NOₓ';
+        descHTML = `<strong>🌿 Moderate-Low NOₓ:</strong> Transition regime. Both RO₂+HO₂ and RO₂+NO pathways active. SOA yield rising: <strong>${actualYield}%</strong>. Increasing ozone formation.`;
+      } else if (pct < 60) {
+        regime = 'Moderate (peak SOA)';
+        descHTML = `<strong>⚡ Peak SOA regime:</strong> Optimal NOₓ for SOA formation. Maximum mass yield: <strong>${actualYield}%</strong>. IEPOX and organonitrate formation balanced. This is the "sweet spot" for aerosol production.`;
+      } else if (pct < 80) {
+        regime = 'Moderate-High NOₓ';
+        descHTML = `<strong>🏭 Moderate-High NOₓ:</strong> RO₂+NO dominates. SOA yield declining: <strong>${actualYield}%</strong>. Fragmentation increases. High ozone production. Typical of suburban/rural-influenced areas.`;
+      } else {
+        regime = 'High NOₓ (urban)';
+        descHTML = `<strong>🏙️ High NOₓ regime:</strong> RO₂+NO nearly exclusive. Low SOA yield: <strong>${actualYield}%</strong>. Products dominated by smaller, more volatile fragments. Strong ozone formation. Typical urban environment.`;
+      }
+      
+      noxDisplay.textContent = regime;
+      soaDesc.innerHTML = descHTML;
+      
+      // Update chart: draw vertical line at current NOx position
+      if (soaChart) {
+        // Update the vertical line dataset
+        const lineData = new Array(noxLevels.length).fill(null);
+        lineData[dataIndex] = 0;  // start of line
+        lineData[dataIndex] = 7;  // we'll set this differently
+        
+        // Create array with only the current point marked
+        const indicatorData = new Array(noxLevels.length).fill(NaN);
+        indicatorData[dataIndex] = actualYield;
+        
+        soaChart.data.datasets[1].data = indicatorData;
+        soaChart.data.datasets[1].pointRadius = new Array(noxLevels.length).fill(0);
+        soaChart.data.datasets[1].pointRadius[dataIndex] = 10;
+        soaChart.data.datasets[1].pointBackgroundColor = 'rgba(231, 76, 60, 0.9)';
+        soaChart.data.datasets[1].pointBorderColor = '#fff';
+        soaChart.data.datasets[1].pointBorderWidth = 3;
+        
+        soaChart.update();
+      }
+    }
+
+    if (noxSlider) {
+      // Initial state
+      updateNOxState(50);
+      
+      // Listen for changes
+      noxSlider.addEventListener('input', function() {
+        updateNOxState(this.value);
+      });
+    }
+
+    // ---- OH Reactivity Budget Chart ----
+    const ohCtx = document.getElementById('ohReactivityChart');
+    if (ohCtx) {
+      new Chart(ohCtx, {
+        type: 'bar',
+        data: {
+          labels: ['Isoprene', 'Monoterpenes', 'Other BVOCs', 'CO', 'CH₄', 'Anthropogenic VOCs', 'Unidentified'],
+          datasets: [{
+            label: 'OH Reactivity (s⁻¹)',
+            data: [8.5, 3.2, 2.1, 1.8, 0.8, 0.9, 3.7],
+            backgroundColor: [
+              'rgba(39, 174, 96, 0.8)',
+              'rgba(34, 139, 126, 0.75)',
+              'rgba(82, 190, 160, 0.7)',
+              'rgba(52, 152, 219, 0.65)',
+              'rgba(155, 89, 182, 0.6)',
+              'rgba(243, 156, 18, 0.75)',
+              'rgba(189, 195, 199, 0.7)'
+            ],
+            borderColor: '#fff',
+            borderWidth: 1.5,
+            borderRadius: 5
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          indexAxis: 'y',
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => `${ctx.raw} s⁻¹ (${((ctx.raw/21)*100).toFixed(1)}% of total)`
+              }
+            }
+          },
+          scales: {
+            x: { 
+              title: { display: true, text: 'OH Reactivity (s⁻¹)' },
+              beginAtZero: true,
+              grid: { color: '#f0f0f0' }
+            },
+            y: {
+              grid: { display: false }
+            }
+          }
+        }
+      });
+    }
+
+    // ---- Isoprene Temperature Response Chart ----
+    const isoTempCtx = document.getElementById('isopreneTempChart');
+    if (isoTempCtx) {
+      // Guenther G93 algorithm: emission factor vs temperature
+      const temps = [15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45];
+      // Normalized emission factor (I/Is)
+      const emissionFactors = [0.12, 0.20, 0.32, 0.50, 0.75, 1.00, 1.25, 1.40, 1.30, 0.85, 0.35];
+      
+      new Chart(isoTempCtx, {
+        type: 'line',
+        data: {
+          labels: temps,
+          datasets: [{
+            label: 'Normalized Emission (I/Iₛ)',
+            data: emissionFactors,
+            borderColor: '#e74c3c',
+            backgroundColor: 'rgba(231, 76, 60, 0.1)',
+            fill: true,
+            tension: 0.4,
+            pointRadius: 5,
+            pointHoverRadius: 8,
+            pointBackgroundColor: '#e74c3c',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            borderWidth: 2.5
+          }, {
+            label: 'Reference (30°C)',
+            data: temps.map(t => t === 30 ? 1.0 : null),
+            borderColor: 'rgba(52, 183, 167, 0.6)',
+            backgroundColor: 'transparent',
+            pointRadius: 8,
+            pointBackgroundColor: '#34b7a7',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 3,
+            borderWidth: 0,
+            showLine: false
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: { 
+              position: 'top', 
+              labels: { usePointStyle: true, padding: 15, font: { size: 11 } } 
+            },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => {
+                  if (ctx.datasetIndex === 0) {
+                    return `Emission factor: ${ctx.raw.toFixed(2)}× baseline`;
+                  }
+                  return 'Baseline: 30°C (standard condition)';
+                }
+              }
+            }
+          },
+          scales: {
+            x: { 
+              title: { display: true, text: 'Leaf Temperature (°C)' },
+              grid: { color: '#f5f5f5' }
+            },
+            y: { 
+              title: { display: true, text: 'Normalized Emission (I/Iₛ)' },
+              min: 0,
+              max: 1.6,
+              grid: { color: '#f5f5f5' },
+              ticks: {
+                callback: (val) => val.toFixed(1)
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // ---- Urban vs Rural VOC Composition Chart ----
+    const urbanRuralCtx = document.getElementById('urbanRuralChart');
+    if (urbanRuralCtx) {
+      new Chart(urbanRuralCtx, {
+        type: 'radar',
+        data: {
+          labels: ['Isoprene', 'α-Pinene', 'Benzene', 'Toluene', 'Ethylbenzene', 'Xylenes', 'Formaldehyde', 'Acetaldehyde'],
+          datasets: [{
+            label: 'Forest (Manaus)',
+            data: [85, 60, 5, 8, 3, 5, 40, 25],
+            borderColor: 'rgba(52, 183, 167, 0.9)',
+            backgroundColor: 'rgba(52, 183, 167, 0.15)',
+            borderWidth: 2,
+            pointRadius: 4,
+            pointBackgroundColor: '#34b7a7'
+          }, {
+            label: 'Urban (Beijing)',
+            data: [10, 5, 75, 85, 45, 65, 55, 70],
+            borderColor: 'rgba(243, 156, 18, 0.9)',
+            backgroundColor: 'rgba(243, 156, 18, 0.1)',
+            borderWidth: 2,
+            pointRadius: 4,
+            pointBackgroundColor: '#f39c12'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: { 
+              position: 'bottom', 
+              labels: { usePointStyle: true, padding: 15 } 
+            }
+          },
+          scales: {
+            r: {
+              beginAtZero: true,
+              max: 100,
+              ticks: { 
+                stepSize: 20,
+                backdropColor: 'transparent'
+              },
+              grid: { color: '#e0e0e0' },
+              pointLabels: { font: { size: 11 } }
+            }
+          }
+        }
+      });
+    }
+
+    // ---- Table row selection ----
+    document.querySelectorAll('.voc-hub-table tbody tr').forEach(row => {
+      row.addEventListener('click', function () {
+        this.parentElement.querySelectorAll('tr').forEach(r => r.classList.remove('selected'));
+        this.classList.add('selected');
+      });
+    });
+
+    // ---- Re-render MathJax for dynamically loaded content ----
+    if (window.MathJax) {
+      setTimeout(() => MathJax.typesetPromise?.(), 500);
+    }
+
+  });
+</script>
 
 </body>
 </html>
