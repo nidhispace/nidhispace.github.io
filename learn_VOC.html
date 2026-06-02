@@ -13,10 +13,10 @@
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Google Fonts (matches your template) -->
+  <!-- Google Fonts — same as your Kelly template -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
+  <!-- Vendor CSS Files — exactly as in your template -->
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -24,10 +24,10 @@
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-  <!-- Template Main CSS File (your existing) -->
+  <!-- Your existing template CSS — DO NOT touch, all new styles are namespaced below -->
   <link href="assets/css/style.css" rel="stylesheet">
 
-  <!-- MathJax for chemical formulas -->
+  <!-- MathJax -->
   <script>
     window.MathJax = {
       tex: {
@@ -39,266 +39,270 @@
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-  <!-- Chart.js for interactive diagrams -->
+  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-  <!-- 
-    Minimal additional styles — all prefixed with .voc-hub- to avoid 
-    conflicting with your template's existing classes.
+  <!--
+    ════════════════════════════════════════════════════
+    VOC HUB SCOPED STYLES
+    All classes are prefixed .vh- to guarantee zero
+    conflicts with your existing style.css rules.
+    ════════════════════════════════════════════════════
   -->
   <style>
-    /* ========== VOC Hub Specific (no conflict with style.css) ========== */
-    .voc-hub-stat-row {
+
+    /* ── Stat cards row ─────────────────────────────────────── */
+    .vh-stat-row {
       display: flex;
       flex-wrap: wrap;
       gap: 16px;
-      margin: 20px 0 30px;
+      margin: 20px 0 32px;
       justify-content: center;
     }
-    .voc-hub-stat-card {
+    .vh-stat-card {
       flex: 1 1 140px;
-      min-width: 140px;
+      min-width: 130px;
       background: #fff;
       border: 1px solid #e9ecef;
       border-radius: 10px;
-      padding: 18px 14px;
+      padding: 18px 12px;
       text-align: center;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-      transition: transform 0.2s;
+      box-shadow: 0 2px 12px rgba(0,0,0,.04);
+      transition: transform .22s ease, box-shadow .22s ease;
     }
-    .voc-hub-stat-card:hover {
-      transform: translateY(-3px);
+    .vh-stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 20px rgba(52,183,167,.15);
     }
-    .voc-hub-stat-value {
+    .vh-stat-value {
       font-size: 2rem;
       font-weight: 700;
       color: #34b7a7;
-      line-height: 1.2;
+      line-height: 1.15;
     }
-    .voc-hub-stat-label {
-      font-size: 0.85rem;
+    .vh-stat-label {
+      font-size: .82rem;
       color: #6c757d;
       margin-top: 6px;
     }
 
-    .voc-hub-card {
+    /* ── Content cards ──────────────────────────────────────── */
+    .vh-card {
       background: #fff;
-      border-radius: 8px;
-      padding: 28px 24px;
-      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-      height: 100%;
       border: 1px solid #f0f0f0;
+      border-radius: 10px;
+      padding: 26px 22px;
+      height: 100%;
+      box-shadow: 0 2px 14px rgba(0,0,0,.04);
+      transition: box-shadow .22s ease;
     }
-    .voc-hub-card h4 {
+    .vh-card:hover {
+      box-shadow: 0 4px 22px rgba(0,0,0,.08);
+    }
+    .vh-card h4 {
+      font-family: "Raleway", sans-serif;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 12px;
+      font-size: 1rem;
+    }
+
+    /* ── Featured paper banner ──────────────────────────────── */
+    .vh-featured {
+      border-left: 5px solid #34b7a7;
+      background: linear-gradient(135deg, #f8fffe 0%, #effbf9 100%);
+    }
+    .vh-featured h4 { color: #1d685f; font-size: 1.05rem; }
+    .vh-kf {
+      background: rgba(52,183,167,.09);
+      border-radius: 8px;
+      padding: 10px 13px;
+      font-size: .83rem;
+      height: 100%;
+    }
+
+    /* ── Tab pills — override Bootstrap with brand teal ─────── */
+    .vh-tabs .nav-link {
+      color: #495057;
       font-family: "Raleway", sans-serif;
       font-weight: 600;
-      color: #222;
-      margin-bottom: 12px;
+      border-radius: 30px;
+      padding: 10px 28px;
+      border: 2px solid transparent;
+      transition: all .2s ease;
     }
-
-    /* Formula display */
-    .voc-hub-formula {
-      background: #1e293b;
-      color: #e2e8f0;
-      font-family: "Courier New", monospace;
-      padding: 16px 20px;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      overflow-x: auto;
-      margin: 14px 0;
-      line-height: 1.7;
-    }
-    .voc-hub-formula .hl {
+    .vh-tabs .nav-link:hover {
+      border-color: #34b7a7;
       color: #34b7a7;
-      font-weight: bold;
+    }
+    .vh-tabs .nav-link.active {
+      background: #34b7a7 !important;
+      border-color: #34b7a7 !important;
+      color: #fff !important;
     }
 
-    /* Process flow (CSS only) */
-    .voc-hub-flow {
+    /* ── Flow diagram (CSS only) ────────────────────────────── */
+    .vh-flow {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 12px 0;
+      padding: 14px 0;
       margin: 12px 0;
     }
-    .voc-hub-flow-node {
+    .vh-flow-node {
       background: #effbf9;
       border: 2px solid #34b7a7;
       border-radius: 8px;
-      padding: 10px 16px;
+      padding: 10px 14px;
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: .82rem;
       text-align: center;
-      min-width: 90px;
+      min-width: 88px;
     }
-    .voc-hub-flow-arrow {
-      font-size: 1.4rem;
-      color: #34b7a7;
-      font-weight: bold;
-    }
+    .vh-flow-arrow { font-size: 1.3rem; color: #34b7a7; font-weight: 700; }
 
-    /* Reaction scheme */
-    .voc-hub-reaction {
+    /* ── Reaction scheme ────────────────────────────────────── */
+    .vh-reaction {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
       gap: 10px;
-      padding: 16px;
+      padding: 14px;
       background: #fafbfc;
-      border-radius: 10px;
       border: 1px dashed #dde1e6;
-      margin: 14px 0;
+      border-radius: 10px;
+      margin: 12px 0;
     }
-    .voc-hub-reaction-box {
+    .vh-rxn-box {
       background: #fff;
       border: 2px solid #e2e8f0;
       border-radius: 8px;
-      padding: 10px 14px;
+      padding: 8px 12px;
       font-family: "Courier New", monospace;
-      font-size: 0.85rem;
+      font-size: .82rem;
       text-align: center;
     }
-    .voc-hub-reaction-box.product {
-      border-color: #10b981;
-      background: #f0fdf6;
-    }
-    .voc-hub-reaction-arrow {
-      font-size: 1.3rem;
-      color: #34b7a7;
-    }
+    .vh-rxn-box.product { border-color: #10b981; background: #f0fdf6; }
+    .vh-rxn-arrow { font-size: 1.2rem; color: #34b7a7; }
 
-    /* NOx regime boxes */
-    .voc-hub-nox-high {
-      background: #fff3cd;
-      border: 1px solid #ffc107;
-      border-radius: 6px;
-      padding: 10px 12px;
-      font-size: 0.85rem;
-    }
-    .voc-hub-nox-low {
-      background: #d1ecf1;
-      border: 1px solid #0dcaf0;
-      border-radius: 6px;
-      padding: 10px 12px;
-      font-size: 0.85rem;
-    }
+    /* ── NOx regime boxes ───────────────────────────────────── */
+    .vh-nox-high { background: #fff3cd; border: 1px solid #ffc107; border-radius: 6px; padding: 10px 12px; font-size: .82rem; }
+    .vh-nox-low  { background: #d1ecf1; border: 1px solid #0dcaf0; border-radius: 6px; padding: 10px 12px; font-size: .82rem; }
 
-    /* Data table */
-    .voc-hub-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.9rem;
+    /* ── Monospace formula block ────────────────────────────── */
+    .vh-formula {
+      background: #1e293b;
+      color: #e2e8f0;
+      font-family: "Courier New", monospace;
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-size: .82rem;
+      line-height: 1.8;
+      overflow-x: auto;
+      margin: 12px 0;
     }
-    .voc-hub-table th {
-      background: #f1f5f9;
-      color: #334155;
-      font-weight: 600;
-      padding: 10px 12px;
-      border-bottom: 2px solid #e2e8f0;
-      text-align: left;
-    }
-    .voc-hub-table td {
-      padding: 9px 12px;
-      border-bottom: 1px solid #f1f5f9;
-    }
-    .voc-hub-table tbody tr {
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .voc-hub-table tbody tr:hover {
-      background: #e8f8f5;
-    }
-    .voc-hub-table tbody tr.selected {
-      background: #d4f0ec;
-      outline: 2px solid #34b7a7;
-    }
+    .vh-formula .hl { color: #34b7a7; font-weight: 700; }
 
-    /* Timeline */
-    .voc-hub-timeline {
+    /* ── Data table ─────────────────────────────────────────── */
+    .vh-table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+    .vh-table th { background: #f1f5f9; color: #334155; font-weight: 600; padding: 9px 11px; border-bottom: 2px solid #e2e8f0; text-align: left; }
+    .vh-table td { padding: 8px 11px; border-bottom: 1px solid #f1f5f9; }
+    .vh-table tbody tr { cursor: pointer; transition: background .18s; }
+    .vh-table tbody tr:hover   { background: #e8f8f5; }
+    .vh-table tbody tr.vh-sel  { background: #d4f0ec; outline: 2px solid #34b7a7; }
+
+    /* ── Timeline ───────────────────────────────────────────── */
+    .vh-timeline {
       position: relative;
-      padding-left: 28px;
+      padding-left: 26px;
       border-left: 3px solid #34b7a7;
-      margin: 16px 0;
+      margin: 14px 0;
     }
-    .voc-hub-timeline-item {
-      margin-bottom: 20px;
-      position: relative;
-      padding-left: 16px;
-    }
-    .voc-hub-timeline-item::before {
+    .vh-tl-item { margin-bottom: 18px; position: relative; padding-left: 14px; }
+    .vh-tl-item::before {
       content: '';
       position: absolute;
-      left: -36px;
-      top: 4px;
-      width: 13px;
-      height: 13px;
+      left: -34px; top: 4px;
+      width: 12px; height: 12px;
       border-radius: 50%;
       background: #fff;
       border: 3px solid #34b7a7;
     }
-    .voc-hub-timeline-year {
-      font-weight: 700;
-      color: #34b7a7;
-      font-size: 0.85rem;
-    }
+    .vh-tl-year { font-weight: 700; color: #34b7a7; font-size: .82rem; }
 
-    /* Chart container */
-    .voc-hub-chart-wrap {
+    /* ── Chart wrapper ──────────────────────────────────────── */
+    .vh-chart {
       background: #fff;
       border: 1px solid #eef0f3;
       border-radius: 8px;
-      padding: 16px;
-      margin: 12px 0;
+      padding: 14px;
+      margin: 10px 0;
     }
-    .voc-hub-chart-wrap canvas {
-      max-height: 300px;
+    .vh-chart canvas { max-height: 280px; }
+    .vh-chart-bare { background: transparent; border: none; padding: 0; margin: 8px 0; }
+    .vh-chart-bare canvas { max-height: 260px; }
+
+    /* ── Checklist ──────────────────────────────────────────── */
+    .vh-list { list-style: none; padding-left: 0; }
+    .vh-list li { padding: 5px 0; font-size: .9rem; }
+    .vh-list li i { color: #34b7a7; margin-right: 7px; }
+
+    /* ── NOx slider description ─────────────────────────────── */
+    #vh-soaDesc {
+      background: #f8f9fa;
+      border-left: 4px solid #34b7a7;
+      border-radius: 0 6px 6px 0;
+      padding: 11px 14px;
+      font-size: .84rem;
+      margin-top: 10px;
     }
 
-    /* Tab overrides (use template's brand color) */
-    .nav-pills .nav-link.active {
-      background-color: #34b7a7 !important;
-      border-color: #34b7a7 !important;
-    }
-    .nav-pills .nav-link {
-      color: #495057;
-      font-weight: 600;
-      border-radius: 30px;
-      padding: 10px 24px;
+    /* ── Paper note ─────────────────────────────────────────── */
+    .vh-note {
+      font-size: .75rem;
+      color: #6c757d;
+      background: #f8f9fa;
+      border-left: 3px solid #34b7a7;
+      padding: 5px 9px;
+      border-radius: 0 4px 4px 0;
+      margin-top: 6px;
     }
 
-    /* Checklist style */
-    .voc-hub-checklist {
-      list-style: none;
-      padding-left: 0;
-    }
-    .voc-hub-checklist li {
-      padding: 6px 0;
-    }
-    .voc-hub-checklist li i {
+    /* ── Sensitivity toggle buttons ─────────────────────────── */
+    .vh-sens-btn {
+      font-size: .82rem;
+      padding: 5px 16px;
+      border-radius: 20px;
+      border: 2px solid #34b7a7;
+      cursor: pointer;
+      transition: all .18s;
+      background: transparent;
       color: #34b7a7;
-      margin-right: 8px;
+      font-family: "Raleway", sans-serif;
+      font-weight: 600;
+    }
+    .vh-sens-btn.active,
+    .vh-sens-btn:hover {
+      background: #34b7a7;
+      color: #fff;
     }
 
     @media (max-width: 768px) {
-      .voc-hub-flow {
-        flex-direction: column;
-      }
-      .voc-hub-flow-arrow {
-        transform: rotate(90deg);
-      }
-      .voc-hub-reaction {
-        flex-direction: column;
-      }
+      .vh-flow { flex-direction: column; }
+      .vh-flow-arrow { transform: rotate(90deg); }
+      .vh-reaction { flex-direction: column; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- ======= Header (unchanged from your template) ======= -->
+  <!-- ═══════════════════════════════════════════════════════
+       HEADER — exact copy from your Kelly template
+  ═══════════════════════════════════════════════════════ -->
   <header id="header" class="fixed-top">
     <div class="container-fluid d-flex justify-content-between align-items-center">
       <h1 class="logo me-auto me-lg-0"><a href="index.html">Nidhi</a></h1>
@@ -318,51 +322,58 @@
         <a href="https://www.linkedin.com/in/nidhispace/" target="_blank" class="linkedin"><i class="bi bi-linkedin"></i></a>
       </div>
     </div>
-  </header>
+  </header><!-- /Header -->
 
   <main id="main">
 
-    <!-- ======= VOC/BVOC Hub Section ======= -->
+    <!-- ═══════════════════════════════════════════════════════
+         VOC / BVOC HUB SECTION
+         Uses your existing .contact section class as base
+    ═══════════════════════════════════════════════════════ -->
     <section id="voc-hub" class="contact">
       <div class="container" data-aos="fade-up">
 
-        <!-- Section Title (uses your .section-title class) -->
+        <!-- Section title — uses your .section-title class -->
         <div class="section-title">
-          <h2>Trace Gas Dynamics: VOCs & BVOCs</h2>
+          <h2>Trace Gas Dynamics: VOCs &amp; BVOCs</h2>
           <p>A dual-track interactive platform — foundational concepts for newcomers, advanced kinetics and measurement science for researchers.</p>
         </div>
 
-        <!-- Stat Cards Row -->
-        <div class="voc-hub-stat-row" data-aos="fade-up" data-aos-delay="100">
-          <div class="voc-hub-stat-card">
-            <div class="voc-hub-stat-value">~1150</div>
-            <div class="voc-hub-stat-label">Tg(C) yr⁻¹ global VOC flux</div>
+        <!-- Stat cards -->
+        <div class="vh-stat-row" data-aos="fade-up" data-aos-delay="100">
+          <div class="vh-stat-card">
+            <div class="vh-stat-value">~760</div>
+            <div class="vh-stat-label">Tg(C) yr⁻¹ global BVOC flux</div>
           </div>
-          <div class="voc-hub-stat-card">
-            <div class="voc-hub-stat-value">~90%</div>
-            <div class="voc-hub-stat-label">Biogenic contribution</div>
+          <div class="vh-stat-card">
+            <div class="vh-stat-value">~90%</div>
+            <div class="vh-stat-label">Biogenic contribution</div>
           </div>
-          <div class="voc-hub-stat-card">
-            <div class="voc-hub-stat-value">500+</div>
-            <div class="voc-hub-stat-label">Identified BVOC species</div>
+          <div class="vh-stat-card">
+            <div class="vh-stat-value">40%</div>
+            <div class="vh-stat-label">Amazon share of global BVOCs</div>
           </div>
-          <div class="voc-hub-stat-card">
-            <div class="voc-hub-stat-value">C₅H₈</div>
-            <div class="voc-hub-stat-label">Dominant BVOC: Isoprene</div>
+          <div class="vh-stat-card">
+            <div class="vh-stat-value">C₅H₈</div>
+            <div class="vh-stat-label">Dominant BVOC: Isoprene</div>
+          </div>
+          <div class="vh-stat-card">
+            <div class="vh-stat-value">14 km</div>
+            <div class="vh-stat-label">Max altitude measured (CAFE-Brazil)</div>
           </div>
         </div>
 
-        <!-- Tab Selector -->
-        <div class="row justify-content-center mb-4">
+        <!-- ── Tab Selector ── -->
+        <div class="row justify-content-center mb-4" data-aos="fade-up" data-aos-delay="150">
           <div class="col-md-8 text-center">
-            <ul class="nav nav-pills justify-content-center" id="audienceTab" role="tablist">
-              <li class="nav-item" role="presentation">
-                <button class="nav-link active px-4 me-2" id="foundations-tab" data-bs-toggle="pill" data-bs-target="#foundations" type="button" role="tab">
+            <ul class="nav nav-pills justify-content-center vh-tabs" id="vocTabList">
+              <li class="nav-item">
+                <button class="nav-link active me-2" id="tab-found" data-pane="pane-found">
                   <i class="bi bi-mortarboard-fill me-2"></i>Foundations
                 </button>
               </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link px-4 ms-2" id="research-tab" data-bs-toggle="pill" data-bs-target="#research" type="button" role="tab">
+              <li class="nav-item">
+                <button class="nav-link ms-2" id="tab-adv" data-pane="pane-adv">
                   <i class="bi bi-graph-up-arrow me-2"></i>Advanced Research
                 </button>
               </li>
@@ -370,370 +381,332 @@
           </div>
         </div>
 
-        <!-- ============ TAB CONTENT ============ -->
-        <div class="tab-content" id="audienceTabContent">
+        <!-- ══════════════════════════════════════════════════
+             FOUNDATIONS PANE
+        ══════════════════════════════════════════════════ -->
+        <div id="pane-found">
+          <div class="row g-4">
 
-          <!-- ==================== FOUNDATIONS ==================== -->
-          <div class="tab-pane fade show active" id="foundations" role="tabpanel">
-            <div class="row g-4">
-
-              <!-- Card 1: What are VOCs -->
-              <div class="col-lg-6">
-                <div class="voc-hub-card">
-                  <h4><i class="bi bi-flask" style="color:#34b7a7;"></i> What Are Volatile Organic Compounds?</h4>
-                  <p>VOCs are carbon-based molecules with high vapour pressure at ambient temperatures. They partition readily into the gas phase and participate in atmospheric chemistry across scales from local air quality to global climate.</p>
-                  
-                  <!-- Process flow diagram -->
-                  <div class="voc-hub-flow">
-                    <div class="voc-hub-flow-node">Liquid / Solid<br>Phase</div>
-                    <span class="voc-hub-flow-arrow">→</span>
-                    <div class="voc-hub-flow-node">Evaporation<br>& Emission</div>
-                    <span class="voc-hub-flow-arrow">→</span>
-                    <div class="voc-hub-flow-node">Gas Phase<br>VOC</div>
-                    <span class="voc-hub-flow-arrow">→</span>
-                    <div class="voc-hub-flow-node">Atmospheric<br>Reactions</div>
-                  </div>
-                  <p class="small text-muted">The volatility-driven phase transfer is the fundamental process linking emission sources to atmospheric impacts.</p>
+            <!-- Card 1: What are VOCs -->
+            <div class="col-lg-6" data-aos="fade-up">
+              <div class="vh-card">
+                <h4><i class="bi bi-flask" style="color:#34b7a7;"></i> What Are Volatile Organic Compounds?</h4>
+                <p>VOCs are carbon-based molecules with high vapour pressure at ambient temperatures. They partition readily into the gas phase and participate in atmospheric chemistry across scales from local air quality to global climate.</p>
+                <div class="vh-flow">
+                  <div class="vh-flow-node">Liquid / Solid<br>Phase</div>
+                  <span class="vh-flow-arrow">→</span>
+                  <div class="vh-flow-node">Evaporation<br>&amp; Emission</div>
+                  <span class="vh-flow-arrow">→</span>
+                  <div class="vh-flow-node">Gas Phase<br>VOC</div>
+                  <span class="vh-flow-arrow">→</span>
+                  <div class="vh-flow-node">Atmospheric<br>Reactions</div>
                 </div>
+                <p class="small text-muted mb-0">Volatility-driven phase transfer links emission sources to atmospheric impacts across all scales.</p>
               </div>
+            </div>
 
-              <!-- Card 2: BVOCs -->
-              <div class="col-lg-6">
-                <div class="voc-hub-card">
-                  <h4><i class="bi bi-tree-fill" style="color:#27ae60;"></i> BVOCs: The Plant-Atmosphere Interface</h4>
-                  <p>Biogenic VOCs are synthesized primarily through the methylerythritol phosphate (MEP) pathway in chloroplasts. Emission rates are controlled by temperature and photosynthetically active radiation (PAR).</p>
-                  
-                  <div class="voc-hub-formula">
-                    <span class="hl">Isoprene</span> (C₅H₈):<br>
-                    CH₂=C(CH₃)–CH=CH₂<br><br>
-                    <span class="hl">α-Pinene</span> (C₁₀H₁₆):<br>
-                    Bicyclic monoterpene — major SOA precursor<br><br>
-                    <span class="hl">Limonene</span> (C₁₀H₁₆):<br>
-                    Monocyclic monoterpene — citrus/forest scent
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card 3: Atmospheric Impacts -->
-              <div class="col-lg-6">
-                <div class="voc-hub-card">
-                  <h4><i class="bi bi-cloud-sun-fill" style="color:#f59e0b;"></i> Why They Matter</h4>
-                  <ul class="voc-hub-checklist">
-                    <li><i class="bi bi-check-circle-fill"></i> <strong>Tropospheric O₃ formation:</strong> VOCs + NOₓ + hν → O₃ (ground-level smog)</li>
-                    <li><i class="bi bi-check-circle-fill"></i> <strong>Secondary Organic Aerosol (SOA):</strong> Oxidation products condense to particle phase</li>
-                    <li><i class="bi bi-check-circle-fill"></i> <strong>OH radical budget:</strong> VOCs are the dominant sink for atmospheric OH</li>
-                    <li><i class="bi bi-check-circle-fill"></i> <strong>Climate feedback:</strong> SOA alters cloud condensation nuclei (CCN) concentrations</li>
-                  </ul>
-                </div>
-              </div>
-
-              <!-- Card 4: Measurement -->
-              <div class="col-lg-6">
-                <div class="voc-hub-card">
-                  <h4><i class="bi bi-gear-wide-connected" style="color:#0d6efd;"></i> How We Measure Them</h4>
-                  <ul>
-                    <li><strong>GC-MS/FID:</strong> Gas chromatography with mass spectrometry — gold standard for speciation; requires pre-concentration on adsorbent traps.</li>
-                    <li><strong>PTR-MS:</strong> Proton-transfer-reaction mass spectrometry — real-time detection using H₃O⁺ reagent ions; no sample preparation needed.</li>
-                    <li><strong>FTIR / DOAS:</strong> Open-path optical methods for column-integrated and in-situ measurements.</li>
-                  </ul>
+            <!-- Card 2: BVOCs -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="80">
+              <div class="vh-card">
+                <h4><i class="bi bi-tree-fill" style="color:#27ae60;"></i> BVOCs: The Plant–Atmosphere Interface</h4>
+                <p>Biogenic VOCs are synthesised primarily through the methylerythritol phosphate (MEP) pathway in chloroplasts. Emission rates are controlled by temperature and photosynthetically active radiation (PAR).</p>
+                <div class="vh-formula">
+                  <span class="hl">Isoprene</span> (C₅H₈):<br>
+                  CH₂=C(CH₃)–CH=CH₂ &nbsp;·&nbsp; MW = 68 g mol⁻¹<br><br>
+                  <span class="hl">α-Pinene</span> (C₁₀H₁₆):<br>
+                  Bicyclic monoterpene — major SOA precursor<br><br>
+                  <span class="hl">Limonene</span> (C₁₀H₁₆):<br>
+                  Monocyclic monoterpene — citrus / forest scent
                 </div>
               </div>
             </div>
 
-            <!-- VOC Fate Chart -->
-            <div class="voc-hub-chart-wrap mt-4" data-aos="fade-up">
-              <h5 class="fw-bold mb-2"><i class="bi bi-bar-chart-fill me-2" style="color:#34b7a7;"></i>Atmospheric VOC Removal Pathways</h5>
-              <p class="small text-muted">Relative contribution of each sink based on global modelling studies.</p>
-              <canvas id="vocFateChart" height="180"></canvas>
+            <!-- Card 3: Why they matter -->
+            <div class="col-lg-6" data-aos="fade-up">
+              <div class="vh-card">
+                <h4><i class="bi bi-cloud-sun-fill" style="color:#f59e0b;"></i> Why They Matter</h4>
+                <ul class="vh-list">
+                  <li><i class="bi bi-check-circle-fill"></i> <strong>Tropospheric O₃ formation:</strong> VOCs + NOₓ + hν → O₃ (ground-level smog)</li>
+                  <li><i class="bi bi-check-circle-fill"></i> <strong>Secondary Organic Aerosol (SOA):</strong> Oxidation products condense to the particle phase, affecting air quality and climate</li>
+                  <li><i class="bi bi-check-circle-fill"></i> <strong>OH radical budget:</strong> VOCs are the dominant sink for atmospheric OH — the atmosphere's "detergent"</li>
+                  <li><i class="bi bi-check-circle-fill"></i> <strong>Climate feedback:</strong> SOA from BVOCs alters cloud condensation nuclei (CCN) concentrations and regional precipitation</li>
+                  <li><i class="bi bi-check-circle-fill"></i> <strong>Methane lifetime:</strong> Amazon BVOC reductions shorten CH₄ lifetime by ~0.3–0.4 yr (Tripathi et al., 2025)</li>
+                </ul>
+              </div>
             </div>
+
+            <!-- Card 4: Measurement -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="80">
+              <div class="vh-card">
+                <h4><i class="bi bi-gear-wide-connected" style="color:#0d6efd;"></i> How We Measure Them</h4>
+                <ul>
+                  <li class="mb-2"><strong>GC-MS / FID:</strong> Gas chromatography with mass spectrometry — gold standard for speciation; requires pre-concentration on adsorbent traps.</li>
+                  <li class="mb-2"><strong>PTR-TOF-MS (Ionicon 8000):</strong> Proton-transfer-reaction time-of-flight — real-time detection using H₃O⁺ reagent ions; 1 s time resolution; used aboard HALO aircraft in CAFE-Brazil (Tripathi et al., 2025).</li>
+                  <li class="mb-2"><strong>FTIR / DOAS:</strong> Open-path optical methods for column-integrated measurements.</li>
+                  <li class="mb-0"><strong>Satellite (TROPOMI HCHO):</strong> Column formaldehyde as proxy for isoprene emission; complements aircraft in-situ data.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Foundations bar chart -->
+            <div class="col-12" data-aos="fade-up">
+              <div class="vh-card">
+                <h4><i class="bi bi-bar-chart-fill me-2" style="color:#34b7a7;"></i>Atmospheric VOC Removal Pathways</h4>
+                <p class="small text-muted">Relative contribution of each sink to global VOC removal, based on modelling studies.</p>
+                <div class="vh-chart">
+                  <canvas id="chartFate"></canvas>
+                </div>
+              </div>
+            </div>
+
           </div>
+        </div><!-- /pane-found -->
 
-          <!-- ==================== ADVANCED RESEARCH (FULLY WORKING) ==================== -->
-          <div class="tab-pane fade" id="research" role="tabpanel">
-            <div class="row g-4">
 
-              <!-- ===== FEATURED RESEARCH: Nidhi Tripathi et al. (2025) ===== -->
-              <div class="col-12">
-                <div class="voc-hub-card" style="border-left: 5px solid #34b7a7; background: linear-gradient(135deg, #f8fffe 0%, #effbf9 100%);">
-                  <div class="row align-items-center">
-                    <div class="col-md-8">
-                      <span class="badge bg-success mb-2">📄 Featured Research</span>
-                      <h4 style="color: #1d685f; font-weight: 700;">
-                        <i class="bi bi-journal-text me-2"></i>
-                        Impacts of Convection, Chemistry, and Forest Clearing on BVOCs over the Amazon
-                      </h4>
-                      <p class="mb-1"><strong>Nidhi Tripathi</strong> et al. • <em>Nature Communications</em>, 2025</p>
-                      <p class="small text-muted mb-2">DOI: <a href="https://www.nature.com/articles/s41467-025-59953-2" target="_blank" style="color:#34b7a7;">10.1038/s41467-025-59953-2</a></p>
-                      
-                      <div class="row g-3 mt-2">
-                        <div class="col-sm-6">
-                          <div class="p-2 rounded" style="background:rgba(52,183,167,0.08);">
-                            <strong>🔬 Key Finding 1:</strong><br>
-                            <small>Deep convection redistributes BVOCs from the boundary layer to the upper troposphere (8–14 km), extending their atmospheric lifetime and influencing upper-level chemistry.</small>
-                          </div>
-                        </div>
-                        <div class="col-sm-6">
-                          <div class="p-2 rounded" style="background:rgba(52,183,167,0.08);">
-                            <strong>🌳 Key Finding 2:</strong><br>
-                            <small>Forest clearing reduces isoprene emissions by 40–60% locally, but the convective transport of remaining BVOCs partially offsets this loss at regional scales.</small>
-                          </div>
-                        </div>
-                        <div class="col-sm-6">
-                          <div class="p-2 rounded" style="background:rgba(52,183,167,0.08);">
-                            <strong>🛰️ Methodology:</strong><br>
-                            <small>Combined aircraft measurements (ATom campaign), satellite retrievals (TROPOMI HCHO), and GEOS-Chem modeling to disentangle emission vs. transport effects.</small>
-                          </div>
-                        </div>
-                        <div class="col-sm-6">
-                          <div class="p-2 rounded" style="background:rgba(52,183,167,0.08);">
-                            <strong>💡 Implication:</strong><br>
-                            <small>Amazon deforestation impacts atmospheric chemistry far beyond the local scale through altered convective transport pathways of BVOCs.</small>
-                          </div>
-                        </div>
-                      </div>
+        <!-- ══════════════════════════════════════════════════
+             ADVANCED RESEARCH PANE
+        ══════════════════════════════════════════════════ -->
+        <div id="pane-adv" class="d-none">
+          <div class="row g-4">
+
+            <!-- ── Featured paper ── -->
+            <div class="col-12" data-aos="fade-up">
+              <div class="vh-card vh-featured">
+                <div class="row align-items-start g-3">
+                  <div class="col-md-8">
+                    <span class="badge bg-success mb-2">📄 Featured Research · Nature Communications 2025</span>
+                    <h4>Impacts of Convection, Chemistry &amp; Forest Clearing on BVOCs over the Amazon</h4>
+                    <p class="mb-1 small"><strong>Nidhi Tripathi</strong>, B.E. Krumm, A. Edtbauer, A. Ringsdorf, N. Wang, M. Kohl, R. Vella, L.A.T. Machado, A. Pozzer, J. Lelieveld &amp; J. Williams · Max Planck Institute for Chemistry, Mainz</p>
+                    <p class="small text-muted mb-3">DOI: <a href="https://doi.org/10.1038/s41467-025-59953-2" target="_blank" style="color:#34b7a7;">10.1038/s41467-025-59953-2</a> · CAFE-Brazil campaign (Dec 2022–Jan 2023) · HALO research aircraft · 15 flights · 0.3–14 km altitude</p>
+                    <div class="row g-2">
+                      <div class="col-sm-6"><div class="vh-kf"><strong>🌙 Nocturnal convection:</strong><br>Night-time deep convection exports unreacted BVOCs to 9–14 km; daytime convection is rendered ineffective by photochemical loss (OH lifetime ~1–2 h).</div></div>
+                      <div class="col-sm-6"><div class="vh-kf"><strong>🌳 Forest vs. pasture:</strong><br>Isoprene and monoterpenes ~4× higher over pristine forest vs. deforested pasture at 900 m (Flight 06, Rondônia).</div></div>
+                      <div class="col-sm-6"><div class="vh-kf"><strong>☀️ Dawn chemistry:</strong><br>Pre-dawn BVOC accumulation (peak 03:00–06:00 at 9–14 km) primes the upper troposphere for rapid photochemistry and new particle formation at sunrise.</div></div>
+                      <div class="col-sm-6"><div class="vh-kf"><strong>🌡️ Climate forcing:</strong><br>75% BVOC reduction → ~6 W m⁻² regional surface warming; −0.3–0.4 yr methane lifetime; net effect: <em>enhanced</em> climate warming through O₃ and aerosols.</div></div>
                     </div>
-                    <div class="col-md-4 text-center">
-                      <!-- Graphical abstract representation -->
-                      <div class="voc-hub-chart-wrap" style="border:none; box-shadow:none; padding:10px; background:transparent;">
-                        <canvas id="amazonConceptChart" height="250"></canvas>
-                      </div>
-                      <small class="text-muted">Conceptual diagram: BVOC transport pathways</small>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="vh-chart-bare">
+                      <canvas id="chartVertProfile"></canvas>
                     </div>
+                    <p class="vh-note">Vertical profiles of isoprene &amp; isoprene-OP — all CAFE-Brazil flights (Fig. 2; Tripathi et al., 2025)</p>
                   </div>
                 </div>
               </div>
-
-              <!-- Card 1: Oxidation Kinetics -->
-              <div class="col-lg-6">
-                <div class="voc-hub-card">
-                  <h4><i class="bi bi-lightning-charge-fill" style="color:#0d6efd;"></i> Oxidation Kinetics & Lifetimes</h4>
-                  <p>The atmospheric lifetime (<em>τ</em>) of a VOC is determined by its reactivity with the major oxidants:</p>
-                  
-                  <div class="voc-hub-formula">
-                    $$\tau_{\text{VOC}} = \frac{1}{k_{\text{OH}}[\text{OH}] + k_{\text{O}_3}[\text{O}_3] + k_{\text{NO}_3}[\text{NO}_3]}$$
-                  </div>
-                  
-                  <p class="small text-muted">For most BVOCs, the OH reaction dominates daytime removal. [OH] ≈ 1×10⁶ molec cm⁻³ (24h global average). As shown in Tripathi et al. (2025), upper tropospheric OH concentrations can extend BVOC lifetimes by 2–3×.</p>
-                  
-                  <table class="voc-hub-table mt-3">
-                    <thead>
-                      <tr><th>Compound</th><th>Type</th><th>k<sub>OH</sub> (cm³ molec⁻¹ s⁻¹)</th><th>τ<sub>OH</sub> (surface)</th><th>τ<sub>OH</sub> (8–14 km)*</th></tr>
-                    </thead>
-                    <tbody>
-                      <tr><td>Isoprene</td><td>BVOC</td><td>1.0 × 10⁻¹⁰</td><td>~1.4 hours</td><td>~4–6 hours</td></tr>
-                      <tr><td>α-Pinene</td><td>BVOC</td><td>5.3 × 10⁻¹¹</td><td>~2.6 hours</td><td>~8–12 hours</td></tr>
-                      <tr><td>β-Caryophyllene</td><td>BVOC</td><td>2.0 × 10⁻¹⁰</td><td>~42 minutes</td><td>~2–3 hours</td></tr>
-                      <tr><td>Benzene</td><td>Anthropogenic</td><td>1.2 × 10⁻¹²</td><td>~9.4 days</td><td>~25–30 days</td></tr>
-                    </tbody>
-                  </table>
-                  <p class="small text-muted mt-2">*Upper tropospheric lifetimes based on reduced OH concentrations at altitude. Tripathi et al. (2025) demonstrate this is critical for long-range transport of Amazonian BVOCs.</p>
-                </div>
-              </div>
-
-              <!-- Card 2: Isoprene Oxidation Pathways -->
-              <div class="col-lg-6">
-                <div class="voc-hub-card">
-                  <h4><i class="bi bi-diagram-3-fill" style="color:#34b7a7;"></i> Isoprene Oxidation Mechanism</h4>
-                  <p>The fate of isoprene peroxy radicals (ISOPO₂) critically depends on the NOₓ regime. Tripathi et al. (2025) show that over the Amazon, the transition between low-NOₓ and convective-influenced regimes determines SOA vs. O₃ production.</p>
-                  
-                  <div class="voc-hub-reaction">
-                    <div class="voc-hub-reaction-box">Isoprene<br>C₅H₈</div>
-                    <span class="voc-hub-reaction-arrow">+ OH →</span>
-                    <div class="voc-hub-reaction-box">ISOPO₂<br>(6 isomers)</div>
-                    <span class="voc-hub-reaction-arrow">→</span>
-                    <div class="voc-hub-reaction-box product">Products<br>(O₃ or SOA)</div>
-                  </div>
-                  
-                  <div class="row g-2 mt-3">
-                    <div class="col-6">
-                      <div class="voc-hub-nox-high">
-                        <strong>🏭 High NOₓ (biomass burning):</strong><br>
-                        <small>ISOPO₂ + NO → ISOPO + NO₂<br>
-                        NO₂ + hν → NO + O(³P) → O₃<br>
-                        <em>→ Net ozone formation</em></small>
-                      </div>
-                    </div>
-                    <div class="col-6">
-                      <div class="voc-hub-nox-low">
-                        <strong>🌲 Low NOₓ (pristine forest):</strong><br>
-                        <small>ISOPO₂ + HO₂ → ISOPOOH<br>
-                        ISOPOOH + OH → IEPOX → SOA<br>
-                        <em>→ Aerosol formation dominates</em></small>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="small text-muted mt-2">Tripathi et al. (2025) found that convection transports ISOPO₂ and ISOPOOH to the upper troposphere, where different chemistry prevails, altering the SOA/O₃ partitioning.</p>
-                </div>
-              </div>
-
-              <!-- Card 3: Global VOC Budget -->
-              <div class="col-lg-6">
-                <div class="voc-hub-card">
-                  <h4><i class="bi bi-pie-chart-fill" style="color:#f59e0b;"></i> Global VOC Emission Budget</h4>
-                  <p>Total global flux: <strong>~1150 Tg(C) yr⁻¹</strong>. The Amazon contributes ~15–20% of global BVOC emissions (Tripathi et al., 2025).</p>
-                  
-                  <div class="voc-hub-chart-wrap" style="border:none; box-shadow:none; padding:0;">
-                    <canvas id="emissionPieChart" height="250"></canvas>
-                  </div>
-                  
-                  <div class="d-flex justify-content-center gap-2 mt-2 flex-wrap">
-                    <button class="btn btn-sm btn-outline-success" id="highlightBiogenic">🌿 Biogenic Sources</button>
-                    <button class="btn btn-sm btn-outline-warning" id="highlightAnthropogenic">🏭 Anthropogenic</button>
-                    <button class="btn btn-sm btn-outline-dark" id="resetPieChart">↺ Reset</button>
-                  </div>
-                  <p class="small text-muted mt-2">Data: Guenther et al. (2012), Sindelarova et al. (2014). Amazon contribution from Tripathi et al. (2025).</p>
-                </div>
-              </div>
-
-              <!-- Card 4: Measurement Timeline -->
-              <div class="col-lg-6">
-                <div class="voc-hub-card">
-                  <h4><i class="bi bi-clock-history" style="color:#27ae60;"></i> Evolution of VOC Measurement</h4>
-                  <div class="voc-hub-timeline">
-                    <div class="voc-hub-timeline-item">
-                      <div class="voc-hub-timeline-year">1950s-1970s</div>
-                      <p class="mb-0"><strong>Canister + GC-FID</strong><br>Offline analysis, cryogenic preconcentration, ppb detection limits.</p>
-                    </div>
-                    <div class="voc-hub-timeline-item">
-                      <div class="voc-hub-timeline-year">1990s</div>
-                      <p class="mb-0"><strong>PTR-MS (Lindinger et al., 1998)</strong><br>Real-time H₃O⁺ CIMS. No sample prep. Limited mass resolution.</p>
-                    </div>
-                    <div class="voc-hub-timeline-item">
-                      <div class="voc-hub-timeline-year">2010s</div>
-                      <p class="mb-0"><strong>PTR-TOF-MS & I⁻-CIMS</strong><br>High resolution (m/Δm > 5000). Isomer separation. Used in ATom campaign (Tripathi et al., 2025).</p>
-                    </div>
-                    <div class="voc-hub-timeline-item">
-                      <div class="voc-hub-timeline-year">2017-present</div>
-                      <p class="mb-0"><strong>TROPOMI + Aircraft integration</strong><br>Satellite HCHO + in-situ PTR-MS + GEOS-Chem. The Tripathi et al. (2025) approach.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Card 5: Interactive NOx-SOA Yield (FIXED) -->
-              <div class="col-lg-6">
-                <div class="voc-hub-card">
-                  <h4><i class="bi bi-sliders me-2" style="color:#34b7a7;"></i>Interactive: NOₓ-Dependent SOA Yield</h4>
-                  <p>SOA mass yield from isoprene shows a characteristic nonlinear response to NOₓ. <strong>Move the slider</strong> to explore the curve.</p>
-                  
-                  <label class="fw-semibold">NOₓ Regime: <span id="noxDisplay">Moderate (peak SOA)</span></label>
-                  <input type="range" class="form-range" min="0" max="100" value="50" id="noxSlider" style="accent-color:#34b7a7;">
-                  <div class="d-flex justify-content-between">
-                    <small class="text-muted">Pristine forest (low NOₓ)</small>
-                    <small class="text-muted">Urban/BB plume (high NOₓ)</small>
-                  </div>
-                  
-                  <div class="voc-hub-chart-wrap" style="border:none; box-shadow:none; padding:0; margin-top:12px;">
-                    <canvas id="soaYieldChart" height="200"></canvas>
-                  </div>
-                  
-                  <div id="soaDescription" class="mt-2 p-3 rounded" style="background:#f8f9fa; border-left: 4px solid #34b7a7;">
-                    <strong>Current regime:</strong> Moderate NOₓ — balanced RO₂ chemistry gives maximum SOA mass yield.
-                  </div>
-                  <p class="small text-muted mt-2">Based on chamber studies: Kroll et al. (2006), Xu et al. (2015). Amazon-specific constraints from Tripathi et al. (2025).</p>
-                </div>
-              </div>
-
-              <!-- Card 6: OH Reactivity Budget -->
-              <div class="col-lg-6">
-                <div class="voc-hub-card">
-                  <h4><i class="bi bi-bar-chart-steps" style="color:#0d6efd;"></i> Total OH Reactivity Partitioning</h4>
-                  <p>OH reactivity (s⁻¹) measures the total sink of OH radicals. In the Amazon, BVOCs dominate but ~18% remains unidentified (Tripathi et al., 2025).</p>
-                  
-                  <div class="voc-hub-chart-wrap" style="border:none; box-shadow:none; padding:0;">
-                    <canvas id="ohReactivityChart" height="220"></canvas>
-                  </div>
-                  
-                  <p class="small text-muted mt-2">📍 Amazon rainforest (ATom campaign data). Adapted from Nölscher et al. (2016), Pfannerstill et al. (2021), Tripathi et al. (2025).</p>
-                </div>
-              </div>
-
-              <!-- Card 7: Temperature Dependence -->
-              <div class="col-lg-6">
-                <div class="voc-hub-card">
-                  <h4><i class="bi bi-thermometer-half" style="color:#e74c3c;"></i> Isoprene Emission: Temperature Response</h4>
-                  <p>Isoprene emission follows the Guenther (G93) algorithm. Tripathi et al. (2025) applied this with MODIS land surface temperature to constrain Amazon emissions.</p>
-                  
-                  <div class="voc-hub-chart-wrap" style="border:none; box-shadow:none; padding:0;">
-                    <canvas id="isopreneTempChart" height="200"></canvas>
-                  </div>
-                  
-                  <div class="voc-hub-formula mt-2" style="font-size:0.8rem;">
-                    $$I = I_S \cdot C_T \cdot C_L \quad \text{where} \quad C_T = \frac{\exp\left(\frac{C_{T1}(T-T_S)}{RT_ST}\right)}{1 + \exp\left(\frac{C_{T2}(T-T_M)}{RT_ST}\right)}$$
-                  </div>
-                  <p class="small text-muted">Guenther et al. (1993, 2012). Tripathi et al. (2025) used T<sub>S</sub> = 303 K, C<sub>T1</sub> = 95,000 J mol⁻¹, C<sub>T2</sub> = 230,000 J mol⁻¹, T<sub>M</sub> = 314 K.</p>
-                </div>
-              </div>
-
-              <!-- Card 8: Urban vs Rural Profiles -->
-              <div class="col-lg-6">
-                <div class="voc-hub-card">
-                  <h4><i class="bi bi-building" style="color:#6c757d;"></i> VOC Composition: Amazon vs Urban</h4>
-                  <p>Chemical fingerprints differ dramatically. Tripathi et al. (2025) show that even within the Amazon, forest clearing creates urban-like VOC signatures.</p>
-                  
-                  <div class="voc-hub-chart-wrap" style="border:none; box-shadow:none; padding:0;">
-                    <canvas id="urbanRuralChart" height="220"></canvas>
-                  </div>
-                  
-                  <div class="d-flex justify-content-center gap-3 mt-2 flex-wrap">
-                    <span class="badge" style="background:#34b7a7;">🌲 Pristine Amazon (ATom)</span>
-                    <span class="badge" style="background:#f59e0b;">🏙️ Deforested Region</span>
-                  </div>
-                  <p class="small text-muted mt-2">Relative composition based on Tripathi et al. (2025) aircraft measurements and GEOS-Chem simulations.</p>
-                </div>
-              </div>
-
-              <!-- Card 9: Convection Impact (from Tripathi 2025) -->
-              <div class="col-12">
-                <div class="voc-hub-card">
-                  <h4><i class="bi bi-cloud-arrow-up-fill" style="color:#34b7a7;"></i> Convective Transport of BVOCs (Tripathi et al., 2025)</h4>
-                  <p>Deep convection over the Amazon rapidly lifts BVOCs from the boundary layer (0–2 km) to the upper troposphere (8–14 km), fundamentally altering their chemical fate.</p>
-                  
-                  <div class="row g-3">
-                    <div class="col-md-6">
-                      <div class="voc-hub-chart-wrap" style="border:none; box-shadow:none; padding:0;">
-                        <canvas id="convectionProfileChart" height="220"></canvas>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <h5 style="color:#1d685f;">Key Results:</h5>
-                      <ul class="voc-hub-checklist">
-                        <li><i class="bi bi-check-circle-fill"></i> <strong>Vertical redistribution:</strong> Isoprene concentrations of 0.5–2 ppb observed at 10–14 km altitude during convective events</li>
-                        <li><i class="bi bi-check-circle-fill"></i> <strong>Lifetime extension:</strong> BVOC lifetime increases 2–5× in the upper troposphere due to lower OH and temperature</li>
-                        <li><i class="bi bi-check-circle-fill"></i> <strong>Long-range transport:</strong> Convected BVOCs can be transported 2000–4000 km downwind before oxidation</li>
-                        <li><i class="bi bi-check-circle-fill"></i> <strong>Forest clearing effect:</strong> Deforestation reduces boundary layer emissions but also weakens convection, creating complex regional feedbacks</li>
-                      </ul>
-                    </div>
-                  </div>
-                  <p class="small text-muted mt-2">Figure concept from Tripathi et al. (2025) Nature Communications. Vertical profile data from ATom-4 campaign (2018).</p>
-                </div>
-              </div>
-
             </div>
+
+            <!-- ── Oxidation kinetics ── -->
+            <div class="col-lg-6" data-aos="fade-up">
+              <div class="vh-card">
+                <h4><i class="bi bi-lightning-charge-fill" style="color:#0d6efd;"></i> Oxidation Kinetics &amp; Lifetimes</h4>
+                <p class="small">The atmospheric lifetime <em>τ</em> of a BVOC against the three major oxidants:</p>
+                <div class="vh-formula" style="font-size:.78rem;">
+                  $$\tau_{\text{VOC}} = \frac{1}{k_{\text{OH}}[\text{OH}] + k_{\text{O}_3}[\text{O}_3] + k_{\text{NO}_3}[\text{NO}_3]}$$
+                </div>
+                <p class="small text-muted">Upper-tropospheric [OH] is 10–50× lower than at the surface, extending BVOC lifetimes by 2–5× (Tripathi et al., 2025).</p>
+                <table class="vh-table mt-2">
+                  <thead>
+                    <tr><th>Compound</th><th>k<sub>OH</sub> (cm³ s⁻¹)</th><th>τ surface</th><th>τ UT (9–14 km)</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Isoprene</td><td>1.0 × 10⁻¹⁰</td><td>~1.4 h</td><td>~4–6 h</td></tr>
+                    <tr><td>α-Pinene</td><td>5.3 × 10⁻¹¹</td><td>~2.6 h</td><td>~8–12 h</td></tr>
+                    <tr><td>β-Caryophyllene</td><td>2.0 × 10⁻¹⁰</td><td>~42 min</td><td>~2–3 h</td></tr>
+                    <tr><td>Benzene (ref.)</td><td>1.2 × 10⁻¹²</td><td>~9.4 d</td><td>~25–30 d</td></tr>
+                  </tbody>
+                </table>
+                <p class="vh-note">*UT lifetimes based on reduced [OH] at altitude; Tripathi et al. (2025)</p>
+              </div>
+            </div>
+
+            <!-- ── Isoprene oxidation mechanism ── -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="80">
+              <div class="vh-card">
+                <h4><i class="bi bi-diagram-3-fill" style="color:#34b7a7;"></i> Isoprene Oxidation: NOₓ-Dependent Fate</h4>
+                <p class="small">Fate of ISOPO₂ determines O₃ vs. SOA formation. In the Amazon UT (high-NOₓ from lightning), convected ISOPO₂ drives photochemical O₃ production (Tripathi et al., 2025).</p>
+                <div class="vh-reaction">
+                  <div class="vh-rxn-box">C₅H₈<br><small>Isoprene</small></div>
+                  <span class="vh-rxn-arrow">+OH →</span>
+                  <div class="vh-rxn-box">ISOPO₂<br><small>6 isomers</small></div>
+                  <span class="vh-rxn-arrow">→</span>
+                  <div class="vh-rxn-box product">O₃ or SOA<br><small>products</small></div>
+                </div>
+                <div class="row g-2 mt-1">
+                  <div class="col-6">
+                    <div class="vh-nox-high">
+                      <strong>🏭 High NOₓ (lightning / BB):</strong><br>
+                      <small>ISOPO₂ + NO → ISOPO + NO₂<br>NO₂ + hν → O(³P) + NO → O₃<br><em>→ Net O₃ formation</em></small>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="vh-nox-low">
+                      <strong>🌲 Low NOₓ (pristine forest):</strong><br>
+                      <small>ISOPO₂ + HO₂ → ISOPOOH<br>ISOPOOH + OH → IEPOX → SOA<br><em>→ Aerosol dominates</em></small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── Fig 3 — Diel cycles ── -->
+            <div class="col-12" data-aos="fade-up">
+              <div class="vh-card">
+                <h4><i class="bi bi-clock-history" style="color:#34b7a7;"></i> Diel Cycle of BVOCs at Three Altitude Regimes (Fig. 3 — Tripathi et al., 2025)</h4>
+                <p class="small">Surface peak (12:00–16:00) is solar-driven; the upper-troposphere peak shifts to 03:00–06:00 due to nocturnal convective export and near-zero OH at night. Three altitude regimes: 320 m (ATTO), 3–9 km, 9–14 km.</p>
+                <div class="row g-3 mt-1">
+                  <div class="col-md-4">
+                    <div class="vh-chart"><canvas id="chartDielIso"></canvas></div>
+                    <p class="vh-note">Isoprene — Fig. 3a</p>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="vh-chart"><canvas id="chartDielOP"></canvas></div>
+                    <p class="vh-note">Isoprene-OP — Fig. 3b</p>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="vh-chart"><canvas id="chartDielMT"></canvas></div>
+                    <p class="vh-note">Monoterpenes — Fig. 3c</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── Fig 5 — O3/OH sensitivity ── -->
+            <div class="col-lg-6" data-aos="fade-up">
+              <div class="vh-card">
+                <h4><i class="bi bi-bar-chart-steps" style="color:#0d6efd;"></i> BVOC Emission Sensitivity: O₃ &amp; OH Profiles (Fig. 5 — Tripathi et al., 2025)</h4>
+                <p class="small">EMAC model (200×200 km, 90 levels): relative change in O₃ and OH over the Amazon for −50%, −75%, +50% BVOC perturbation.</p>
+                <div class="d-flex gap-2 mb-2">
+                  <button class="vh-sens-btn" id="btnO3">Show O₃</button>
+                  <button class="vh-sens-btn active" id="btnOH">Show OH</button>
+                </div>
+                <div class="vh-chart-bare"><canvas id="chartSensitivity"></canvas></div>
+                <p class="vh-note">Vertical profiles of relative change (%) from Figs. 5a &amp; 5b; EMAC nudged to ERA5 reanalysis (Tripathi et al., 2025)</p>
+              </div>
+            </div>
+
+            <!-- ── Convective profile ── -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="80">
+              <div class="vh-card">
+                <h4><i class="bi bi-cloud-arrow-up-fill" style="color:#34b7a7;"></i> Convective vs. Non-convective Isoprene Profile</h4>
+                <p class="small">~20% of boundary-layer isoprene reaches the UT during convective outflow. Night-time UT peak (0.57 ppbv at 12–13 km) exceeds daytime (0.38 ppbv) because photochemical loss is absent overnight.</p>
+                <div class="vh-chart-bare"><canvas id="chartConvection"></canvas></div>
+                <p class="vh-note">Based on Fig. 2 main profiles and day/night UT insets (Tripathi et al., 2025)</p>
+              </div>
+            </div>
+
+            <!-- ── Interactive NOx-SOA slider ── -->
+            <div class="col-lg-6" data-aos="fade-up">
+              <div class="vh-card">
+                <h4><i class="bi bi-sliders" style="color:#34b7a7;"></i> Interactive: NOₓ-Dependent SOA Yield</h4>
+                <p class="small">Move the slider to explore isoprene SOA yield as a function of NOₓ regime. Amazon pristine forest sits at the left; deforested/biomass-burning regions shift right.</p>
+                <label class="fw-semibold small d-block">NOₓ regime: <span id="vh-noxLabel" style="color:#34b7a7;">Moderate (peak SOA)</span></label>
+                <input type="range" class="form-range" min="0" max="100" value="50" id="vh-noxSlider" style="accent-color:#34b7a7;">
+                <div class="d-flex justify-content-between"><small class="text-muted">Pristine forest</small><small class="text-muted">Urban / BB plume</small></div>
+                <div class="vh-chart-bare mt-2"><canvas id="chartSOA"></canvas></div>
+                <div id="vh-soaDesc">Loading…</div>
+                <p class="vh-note mt-2">Based on chamber studies (Kroll et al. 2006, Xu et al. 2015); Amazon constraints from Tripathi et al. (2025)</p>
+              </div>
+            </div>
+
+            <!-- ── Global emission pie ── -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="80">
+              <div class="vh-card">
+                <h4><i class="bi bi-pie-chart-fill" style="color:#f59e0b;"></i> Global BVOC Emission Budget</h4>
+                <p class="small">Total ~760 Tg C yr⁻¹; isoprene 70% and monoterpenes 11% of terrestrial BVOC (Guenther et al. 2012). Amazon = 40% of global BVOC (Tripathi et al., 2025).</p>
+                <div class="vh-chart-bare"><canvas id="chartPie"></canvas></div>
+                <div class="d-flex justify-content-center gap-2 mt-2 flex-wrap">
+                  <button class="btn btn-sm btn-outline-success" id="btnBiogenic">🌿 Biogenic</button>
+                  <button class="btn btn-sm btn-outline-warning" id="btnAnthro">🏭 Anthropogenic</button>
+                  <button class="btn btn-sm btn-outline-secondary" id="btnPieReset">↺ Reset</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- ── Isoprene temperature response ── -->
+            <div class="col-lg-6" data-aos="fade-up">
+              <div class="vh-card">
+                <h4><i class="bi bi-thermometer-half" style="color:#e74c3c;"></i> Isoprene Emission: Guenther Temperature Response</h4>
+                <p class="small">Tripathi et al. (2025) applied MEGAN/G93 with MODIS land surface temperature. Emission peaks ~38–40 °C then falls steeply above T<sub>M</sub> = 314 K.</p>
+                <div class="vh-formula" style="font-size:.74rem;">
+                  $$C_T = \frac{\exp\!\left(\tfrac{C_{T1}(T-T_S)}{RT_ST}\right)}{1+\exp\!\left(\tfrac{C_{T2}(T-T_M)}{RT_ST}\right)}$$
+                  <span class="hl">C<sub>T1</sub></span>=95,000 J mol⁻¹ &nbsp;·&nbsp; <span class="hl">C<sub>T2</sub></span>=230,000 J mol⁻¹ &nbsp;·&nbsp; <span class="hl">T<sub>M</sub></span>=314 K
+                </div>
+                <div class="vh-chart-bare"><canvas id="chartIsoTemp"></canvas></div>
+              </div>
+            </div>
+
+            <!-- ── Pristine vs. deforested radar ── -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="80">
+              <div class="vh-card">
+                <h4><i class="bi bi-building" style="color:#6c757d;"></i> VOC Fingerprint: Pristine vs. Deforested Amazon (Flight 06)</h4>
+                <p class="small">At 900 m over Rondônia: isoprene and monoterpenes ~4× higher over pristine forest; isoprene-OP only ~1.7× higher due to advection from adjacent forest.</p>
+                <div class="vh-chart-bare"><canvas id="chartRadar"></canvas></div>
+                <p class="vh-note">Relative composition from Flight 06 airborne measurements (Fig. 4; Tripathi et al., 2025)</p>
+              </div>
+            </div>
+
+            <!-- ── OH Reactivity ── -->
+            <div class="col-lg-6" data-aos="fade-up">
+              <div class="vh-card">
+                <h4><i class="bi bi-bar-chart-steps" style="color:#0d6efd;"></i> Total OH Reactivity Partitioning (Amazon)</h4>
+                <p class="small">OH reactivity (s⁻¹) measures the total OH sink rate. BVOCs dominate; ~18% remains unidentified. Hover bars for values.</p>
+                <div class="vh-chart-bare"><canvas id="chartOH"></canvas></div>
+                <p class="vh-note">ATom campaign data; adapted from Pfannerstill et al. (2021) and Tripathi et al. (2025)</p>
+              </div>
+            </div>
+
+            <!-- ── Measurement timeline ── -->
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="80">
+              <div class="vh-card">
+                <h4><i class="bi bi-clock-history" style="color:#27ae60;"></i> Evolution of BVOC Measurement Techniques</h4>
+                <div class="vh-timeline">
+                  <div class="vh-tl-item">
+                    <div class="vh-tl-year">1950s–1970s</div>
+                    <p class="mb-0 small"><strong>Canister + GC-FID</strong> — Offline analysis; cryogenic preconcentration; ppb detection limits.</p>
+                  </div>
+                  <div class="vh-tl-item">
+                    <div class="vh-tl-year">1998</div>
+                    <p class="mb-0 small"><strong>PTR-MS (Lindinger et al.)</strong> — Real-time H₃O⁺ CIMS; no sample prep; limited mass resolution.</p>
+                  </div>
+                  <div class="vh-tl-item">
+                    <div class="vh-tl-year">2010s</div>
+                    <p class="mb-0 small"><strong>PTR-TOF-MS (Ionicon 8000)</strong> — High resolution (m/Δm &gt;5000); 1 s data; used aboard HALO in CAFE-Brazil (Tripathi et al., 2025).</p>
+                  </div>
+                  <div class="vh-tl-item">
+                    <div class="vh-tl-year">2022–2023</div>
+                    <p class="mb-0 small"><strong>CAFE-Brazil campaign</strong> — 0.3–14 km diel profiles; PTR-TOF-MS + GC-MS cross-calibrated with ATTO ground site; 15 research flights from Manaus.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
-
-          
-
-          
+        </div><!-- /pane-adv -->
 
       </div>
     </section>
 
-  </main>
+  </main><!-- /main -->
 
-  <!-- ======= Footer (unchanged) ======= -->
+  <!-- ═══════════════════════════════════════════════════════
+       FOOTER — exact copy from your Kelly template
+  ═══════════════════════════════════════════════════════ -->
   <footer id="footer">
     <div class="container">
       <div class="copyright">
-        &copy; <span id="current-year"></span> Copyright <strong><span>Nidhi</span></strong>. All Rights Reserved
+        &copy; <span id="yr"></span> Copyright <strong><span>Nidhi</span></strong>. All Rights Reserved.
       </div>
     </div>
   </footer>
 
   <div id="preloader"></div>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
 
-  <!-- Vendor JS Files -->
+  <!-- ═══════════════════════════════════════════════════════
+       VENDOR JS — exact order from your Kelly template
+  ═══════════════════════════════════════════════════════ -->
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -744,675 +717,439 @@
   <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/js/main.js"></script>
 
+  <!-- ═══════════════════════════════════════════════════════
+       VOC HUB SCRIPT — single block, no duplication
+  ═══════════════════════════════════════════════════════ -->
   <script>
-    document.getElementById("current-year").textContent = new Date().getFullYear();
-  </script>
+  /* ── Year ─────────────────────────────────────────────────── */
+  document.getElementById('yr').textContent = new Date().getFullYear();
 
-  <!-- ============ Interactive Charts & Logic ============ -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      
-      AOS.init({ duration: 800, once: true });
+  /* ── AOS init (after vendor loads) ───────────────────────── */
+  window.addEventListener('load', () => {
+    if (window.AOS) AOS.init({ duration: 800, once: true });
+    if (window.MathJax?.typesetPromise) MathJax.typesetPromise();
+  });
 
-      // ---- VOC Fate Bar Chart ----
-      const fateCtx = document.getElementById('vocFateChart');
-      if (fateCtx) {
-        new Chart(fateCtx, {
-          type: 'bar',
-          data: {
-            labels: ['OH Oxidation', 'O₃ Oxidation', 'NO₃ Oxidation', 'Photolysis', 'Deposition'],
-            datasets: [{
-              label: 'Contribution to VOC Removal (%)',
-              data: [65, 15, 10, 5, 5],
-              backgroundColor: [
-                'rgba(52, 183, 167, 0.8)',
-                'rgba(255, 193, 7, 0.7)',
-                'rgba(108, 117, 125, 0.6)',
-                'rgba(13, 202, 240, 0.5)',
-                'rgba(16, 185, 129, 0.5)'
-              ],
-              borderColor: '#fff',
-              borderWidth: 2,
-              borderRadius: 6
-            }]
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: { position: 'bottom', labels: { usePointStyle: true, padding: 18 } }
-            },
-            scales: {
-              y: { beginAtZero: true, max: 80, title: { display: true, text: 'Contribution (%)' } }
-            }
-          }
-        });
-      }
+  /* ═══════════════════════════════════════════════════════════
+     TAB SWITCHING
+     Pure JS — no dependency on Bootstrap's tab plugin.
+     Charts are initialised ONCE on first pane activation.
+  ═══════════════════════════════════════════════════════════ */
+  let advChartsReady = false;
 
-      // ---- Global Emission Pie Chart ----
-      const pieCtx = document.getElementById('emissionPieChart');
-      let emissionChart;
-      if (pieCtx) {
-        emissionChart = new Chart(pieCtx, {
-          type: 'doughnut',
-          data: {
-            labels: ['Isoprene (Biogenic)', 'Monoterpenes (Biogenic)', 'Other BVOCs', 'Anthropogenic', 'Biomass Burning'],
-            datasets: [{
-              data: [500, 150, 200, 150, 150],
-              backgroundColor: [
-                'rgba(52, 183, 167, 0.85)',
-                'rgba(45, 157, 143, 0.7)',
-                'rgba(34, 139, 126, 0.55)',
-                'rgba(255, 152, 0, 0.8)',
-                'rgba(244, 67, 54, 0.65)'
-              ],
-              borderColor: '#fff',
-              borderWidth: 2
-            }]
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              legend: { position: 'bottom', labels: { usePointStyle: true, padding: 12, font: { size: 11 } } },
-              tooltip: { callbacks: { label: (ctx) => `${ctx.label}: ${ctx.raw} Tg(C) yr⁻¹` } }
-            }
-          }
-        });
-
-        document.getElementById('highlightBiogenic')?.addEventListener('click', () => {
-          emissionChart.setActiveElements([{datasetIndex:0,index:0},{datasetIndex:0,index:1},{datasetIndex:0,index:2}]);
-          emissionChart.update();
-        });
-        document.getElementById('highlightAnthropogenic')?.addEventListener('click', () => {
-          emissionChart.setActiveElements([{datasetIndex:0,index:3},{datasetIndex:0,index:4}]);
-          emissionChart.update();
-        });
-        document.getElementById('resetPieChart')?.addEventListener('click', () => {
-          emissionChart.setActiveElements([]);
-          emissionChart.update();
-        });
-      }
-
-      // ---- SOA Yield vs NOx Chart ----
-      const soaCtx = document.getElementById('soaYieldChart');
-      let soaChart;
-      const noxVals = [0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.4, 1.6, 1.8, 2.0];
-      const soaData = [15, 22, 30, 38, 45, 48, 42, 35, 28, 22, 18];
-
-      if (soaCtx) {
-        soaChart = new Chart(soaCtx, {
-          type: 'line',
-          data: {
-            labels: noxVals.map(v => v.toFixed(1)),
-            datasets: [{
-              label: 'SOA Mass Yield (%)',
-              data: soaData,
-              borderColor: '#34b7a7',
-              backgroundColor: 'rgba(52, 183, 167, 0.08)',
-              fill: true,
-              tension: 0.4,
-              pointRadius: 4,
-              pointHoverRadius: 7,
-              pointBackgroundColor: '#34b7a7',
-              borderWidth: 2.5
-            }]
-          },
-          options: {
-            responsive: true,
-            plugins: { legend: { display: false } },
-            scales: {
-              x: { title: { display: true, text: 'NOₓ Level (relative)' } },
-              y: { title: { display: true, text: 'SOA Yield (%)' }, min: 10, max: 55 }
-            }
-          }
-        });
-      }
-
-      // ---- NOx Slider Logic ----
-      const noxSlider = document.getElementById('noxSlider');
-      const noxDisplay = document.getElementById('noxDisplay');
-      const soaDesc = document.getElementById('soaDescription');
-      
-      if (noxSlider) {
-        noxSlider.addEventListener('input', function () {
-          const val = parseFloat(this.value);
-          const labels = ['Pristine (Low)', 'Medium', 'Urban (High)'];
-          const idx = val <= 0.5 ? 0 : (val >= 1.5 ? 2 : 1);
-          noxDisplay.textContent = labels[idx];
-          
-          const descs = [
-            'Low NOₓ: RO₂ + HO₂ dominates → peroxide formation, moderate SOA yield.',
-            'Medium NOₓ: Balanced RO₂ chemistry → peak SOA mass yields (~48%).',
-            'High NOₓ: RO₂ + NO dominates → fragmentation, lower SOA yield.'
-          ];
-          soaDesc.textContent = descs[idx];
-
-          if (soaChart) {
-            const closest = noxVals.reduce((prev, curr) =>
-              Math.abs(curr - val) < Math.abs(prev - val) ? curr : prev
-            );
-            const pointIdx = noxVals.indexOf(closest);
-            soaChart.setActiveElements([{ datasetIndex: 0, index: pointIdx >= 0 ? pointIdx : 5 }]);
-            soaChart.update();
-          }
-        });
-      }
-
-      // ---- Table row selection ----
-      document.querySelectorAll('.voc-hub-table tbody tr').forEach(row => {
-        row.addEventListener('click', function () {
-          this.parentElement.querySelectorAll('tr').forEach(r => r.classList.remove('selected'));
-          this.classList.add('selected');
-        });
+  document.querySelectorAll('#vocTabList .nav-link').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#vocTabList .nav-link').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const target = btn.dataset.pane;
+      ['pane-found', 'pane-adv'].forEach(id => {
+        document.getElementById(id).classList.toggle('d-none', id !== target);
       });
-
-      // ---- Re-render MathJax ----
-      if (window.MathJax) {
-        setTimeout(() => MathJax.typesetPromise?.(), 400);
+      if (target === 'pane-adv' && !advChartsReady) {
+        advChartsReady = true;
+        // Small delay so the pane is fully visible before Chart.js measures canvas
+        setTimeout(initAdvCharts, 60);
       }
-
+      if (window.MathJax?.typesetPromise) setTimeout(() => MathJax.typesetPromise(), 300);
     });
-  </script>
+  });
 
-  <!-- ============ ALL INTERACTIVE CHARTS (FIXED) ============ -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      
-      AOS.init({ duration: 800, once: true });
+  /* ── Table row selection ──────────────────────────────────── */
+  document.querySelectorAll('.vh-table tbody tr').forEach(row => {
+    row.addEventListener('click', () => {
+      row.closest('tbody').querySelectorAll('tr').forEach(r => r.classList.remove('vh-sel'));
+      row.classList.add('vh-sel');
+    });
+  });
 
-      // ---- VOC Fate Bar Chart (Foundations tab - visible on load) ----
-      const fateCtx = document.getElementById('vocFateChart');
-      if (fateCtx) {
-        new Chart(fateCtx, {
-          type: 'bar',
-          data: {
-            labels: ['OH Oxidation', 'O₃ Oxidation', 'NO₃ Oxidation', 'Photolysis', 'Dry Deposition'],
-            datasets: [{
-              label: 'Relative Contribution (%)',
-              data: [65, 15, 10, 5, 5],
-              backgroundColor: [
-                'rgba(52, 183, 167, 0.8)',
-                'rgba(255, 193, 7, 0.7)',
-                'rgba(108, 117, 125, 0.6)',
-                'rgba(13, 202, 240, 0.5)',
-                'rgba(16, 185, 129, 0.5)'
-              ],
-              borderColor: '#fff',
-              borderWidth: 2,
-              borderRadius: 6
-            }]
+  /* ═══════════════════════════════════════════════════════════
+     FOUNDATIONS CHARTS — always visible, safe to init now
+  ═══════════════════════════════════════════════════════════ */
+  (function initFoundationsCharts() {
+    new Chart(document.getElementById('chartFate'), {
+      type: 'bar',
+      data: {
+        labels: ['OH Oxidation', 'O₃ Oxidation', 'NO₃ Oxidation', 'Photolysis', 'Dry Deposition'],
+        datasets: [{
+          label: 'Contribution to VOC Removal (%)',
+          data: [65, 15, 10, 5, 5],
+          backgroundColor: [
+            'rgba(52,183,167,0.82)', 'rgba(255,193,7,0.72)',
+            'rgba(108,117,125,0.65)', 'rgba(13,202,240,0.55)',
+            'rgba(16,185,129,0.55)'
+          ],
+          borderColor: '#fff', borderWidth: 2, borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: true,
+        plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16 } } },
+        scales: {
+          y: { beginAtZero: true, max: 80, title: { display: true, text: 'Contribution (%)' }, grid: { color: '#f0f0f0' } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+  })();
+
+  /* ═══════════════════════════════════════════════════════════
+     ADVANCED CHARTS — initialised only once the pane is shown
+  ═══════════════════════════════════════════════════════════ */
+  function initAdvCharts() {
+
+    /* ── Shared colour palette ─────────────────────────────── */
+    const C = {
+      teal:  'rgba(52,183,167,0.88)',
+      tealB: 'rgba(52,183,167,0.12)',
+      amber: 'rgba(245,158,11,0.88)',
+      amberB:'rgba(245,158,11,0.10)',
+      red:   'rgba(231,76,60,0.88)',
+      redB:  'rgba(231,76,60,0.10)',
+      blue:  'rgba(41,128,185,0.88)',
+      gray:  'rgba(108,117,125,0.70)',
+      grid:  '#f0f0f0'
+    };
+
+    function lineSet(col, bg, dashed) {
+      return {
+        borderColor: col, backgroundColor: bg,
+        borderWidth: 2.5, fill: bg !== 'transparent',
+        tension: 0.4, pointRadius: 4, pointHoverRadius: 7,
+        pointBackgroundColor: col, pointBorderColor: '#fff', pointBorderWidth: 2,
+        borderDash: dashed ? [5, 4] : []
+      };
+    }
+
+    /* ── 1. Vertical profile (Fig. 2) ─────────────────────── */
+    // Mean mixing ratios from Fig. 2 main curves (CAFE-Brazil all flights)
+    const altBins  = [0.5,1,1.5,2,3,4,5,6,7,8,9,10,11,12,13];
+    const isoMean  = [2.25,0.90,0.52,0.32,0.12,0.06,0.03,0.02,0.01,0.01,0.02,0.04,0.12,0.38,0.22];
+    const opMean   = [1.51,0.87,0.63,0.45,0.20,0.12,0.07,0.05,0.04,0.04,0.06,0.10,0.18,0.26,0.18];
+
+    new Chart(document.getElementById('chartVertProfile'), {
+      type: 'line',
+      data: {
+        labels: altBins,
+        datasets: [
+          { label: 'Isoprene (ppbv)', data: isoMean, ...lineSet(C.teal, C.tealB) },
+          { label: 'Isoprene-OP (ppbv)', data: opMean, ...lineSet(C.amber, C.amberB) }
+        ]
+      },
+      options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: true,
+        plugins: {
+          legend: { position: 'top', labels: { usePointStyle: true, padding: 10, font: { size: 10 } } },
+          title: { display: true, text: 'Vertical profile — all flights (Fig. 2)', font: { size: 11 } }
+        },
+        scales: {
+          x: { title: { display: true, text: 'Mixing ratio (ppbv)' }, beginAtZero: true, max: 2.8, grid: { color: C.grid } },
+          y: { title: { display: true, text: 'Altitude (km)' }, ticks: { callback: v => v + ' km' }, grid: { color: C.grid } }
+        }
+      }
+    });
+
+    /* ── 2. Diel cycles (Fig. 3) ───────────────────────────── */
+    // Hour indices 0,2,4,...22 (12 points)
+    const hrs = [0,2,4,6,8,10,12,14,16,18,20,22];
+    // Isoprene Fig. 3a (ppbv); left-axis = 320 m, right-axis = UT
+    const isoSurf  = [0.28,0.22,0.20,0.22,0.55,1.10,1.55,1.80,1.65,1.20,0.70,0.40];
+    const isoMid2  = [0.08,0.08,0.06,0.05,0.03,0.02,0.02,0.02,0.03,0.04,0.05,0.06];
+    const isoUT    = [0.55,0.75,0.86,0.70,0.30,0.12,0.05,0.04,0.05,0.06,0.12,0.30];
+    // Isoprene-OP Fig. 3b
+    const opSurf2  = [0.35,0.28,0.24,0.26,0.50,0.95,1.30,1.51,1.45,1.20,0.80,0.55];
+    const opMid2b  = [0.07,0.07,0.06,0.05,0.04,0.04,0.05,0.08,0.10,0.10,0.08,0.07];
+    const opUT2    = [0.30,0.45,0.56,0.50,0.35,0.20,0.14,0.12,0.13,0.15,0.20,0.26];
+    // Monoterpenes Fig. 3c
+    const mtSurf   = [0.06,0.05,0.04,0.05,0.09,0.16,0.22,0.28,0.25,0.18,0.12,0.08];
+    const mtMid    = [0.008,0.007,0.006,0.005,0.004,0.003,0.003,0.003,0.004,0.005,0.006,0.007];
+    const mtUT     = [0.025,0.040,0.050,0.042,0.020,0.008,0.004,0.003,0.004,0.006,0.012,0.018];
+
+    function makeDiel(canvasId, title, d1, d2, d3, yMax) {
+      new Chart(document.getElementById(canvasId), {
+        type: 'line',
+        data: {
+          labels: hrs,
+          datasets: [
+            { label: '320 m (ATTO)', data: d1, borderColor: C.teal, backgroundColor: C.tealB, fill: true, tension: 0.4, pointRadius: 3, borderWidth: 2.5 },
+            { label: '3–9 km',       data: d2, borderColor: C.gray, backgroundColor: 'transparent', fill: false, tension: 0.4, pointRadius: 2, borderWidth: 1.8, borderDash: [4,3] },
+            { label: '9–14 km',      data: d3, borderColor: C.red,  backgroundColor: C.redB,  fill: true, tension: 0.4, pointRadius: 3, borderWidth: 2.5 }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: true,
+          plugins: {
+            legend: { position: 'bottom', labels: { usePointStyle: true, padding: 7, font: { size: 9 } } },
+            title:  { display: true, text: title, font: { size: 10 } }
           },
-          options: {
-            responsive: true,
-            maintainAspectRatio: true,
-            plugins: {
-              legend: { position: 'bottom', labels: { usePointStyle: true, padding: 18 } }
-            },
-            scales: {
-              y: { beginAtZero: true, max: 80, title: { display: true, text: 'Contribution (%)' }, grid: { color: '#f0f0f0' } },
-              x: { grid: { display: false } }
-            }
-          }
-        });
-      }
-
-      // ============ ALL RESEARCH TAB CHARTS ============
-      // These only initialize when the Research tab is shown (fixes hidden canvas issue)
-      
-      let allResearchCharts = {};
-      let researchTabInitialized = false;
-
-      function initializeResearchCharts() {
-        if (researchTabInitialized) return;
-        researchTabInitialized = true;
-
-        // ---- Amazon Concept Chart ----
-        const amazonCtx = document.getElementById('amazonConceptChart');
-        if (amazonCtx) {
-          // Conceptual diagram showing BVOC transport pathways
-          allResearchCharts.amazonConcept = new Chart(amazonCtx, {
-            type: 'scatter',
-            data: {
-              datasets: [
-                {
-                  label: 'Boundary Layer BVOCs',
-                  data: [{x: 1, y: 1.5}, {x: 1.2, y: 1.8}, {x: 0.9, y: 1.2}, {x: 1.1, y: 1.6}, {x: 1.3, y: 1.4}],
-                  backgroundColor: 'rgba(39, 174, 96, 0.7)',
-                  borderColor: '#27ae60',
-                  pointRadius: 8,
-                  pointHoverRadius: 10
-                },
-                {
-                  label: 'Convective Transport',
-                  data: [{x: 1.1, y: 4}, {x: 1.1, y: 6}, {x: 1.1, y: 8}, {x: 1.1, y: 10}, {x: 1.1, y: 12}],
-                  backgroundColor: 'rgba(52, 152, 219, 0.8)',
-                  borderColor: '#2980b9',
-                  pointRadius: 10,
-                  pointHoverRadius: 12,
-                  showLine: true,
-                  borderWidth: 3,
-                  borderDash: []
-                },
-                {
-                  label: 'Upper Troposphere BVOCs',
-                  data: [{x: 0.8, y: 12}, {x: 1.0, y: 11.5}, {x: 1.2, y: 12.2}, {x: 1.4, y: 11.8}],
-                  backgroundColor: 'rgba(231, 76, 60, 0.7)',
-                  borderColor: '#c0392b',
-                  pointRadius: 8,
-                  pointHoverRadius: 10
-                },
-                {
-                  label: 'Long-range Transport',
-                  data: [{x: 2, y: 11.5}, {x: 3, y: 11}, {x: 4, y: 10.5}, {x: 5, y: 10}],
-                  backgroundColor: 'rgba(243, 156, 18, 0.7)',
-                  borderColor: '#e67e22',
-                  pointRadius: 6,
-                  pointHoverRadius: 8,
-                  showLine: true,
-                  borderWidth: 2,
-                  borderDash: [5, 5]
-                }
-              ]
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: true,
-              plugins: {
-                legend: { position: 'bottom', labels: { usePointStyle: true, padding: 10, font: { size: 9 } } },
-                title: { display: true, text: 'BVOC Transport Pathways (conceptual)', font: { size: 12 } }
-              },
-              scales: {
-                x: { 
-                  title: { display: true, text: 'Horizontal distance →' },
-                  min: 0, max: 6,
-                  grid: { color: '#f0f0f0' },
-                  ticks: { display: false }
-                },
-                y: { 
-                  title: { display: true, text: 'Altitude (km)' },
-                  min: 0, max: 15,
-                  grid: { color: '#f0f0f0' },
-                  ticks: { callback: (v) => v + ' km', stepSize: 2 }
-                }
-              }
-            }
-          });
-        }
-
-        // ---- Global Emission Pie Chart ----
-        const pieCtx = document.getElementById('emissionPieChart');
-        if (pieCtx) {
-          allResearchCharts.emissionPie = new Chart(pieCtx, {
-            type: 'doughnut',
-            data: {
-              labels: ['Isoprene (550)', 'Monoterpenes (130)', 'Other BVOCs (270)', 'Anthropogenic (140)', 'Biomass Burning (60)'],
-              datasets: [{
-                data: [550, 130, 270, 140, 60],
-                backgroundColor: [
-                  'rgba(39, 174, 96, 0.85)',
-                  'rgba(34, 139, 126, 0.75)',
-                  'rgba(82, 190, 160, 0.65)',
-                  'rgba(243, 156, 18, 0.8)',
-                  'rgba(231, 76, 60, 0.7)'
-                ],
-                borderColor: '#fff',
-                borderWidth: 2,
-                hoverBorderWidth: 3
-              }]
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: true,
-              plugins: {
-                legend: { position: 'bottom', labels: { usePointStyle: true, padding: 14, font: { size: 11 } } },
-                tooltip: { 
-                  callbacks: { 
-                    label: (ctx) => `${ctx.label.split('(')[0].trim()}: ${ctx.raw} Tg(C) yr⁻¹ (${((ctx.raw/1150)*100).toFixed(1)}%)` 
-                  } 
-                }
-              }
-            }
-          });
-
-          // Pie chart buttons - now they work because the chart exists
-          document.getElementById('highlightBiogenic')?.addEventListener('click', () => {
-            if (allResearchCharts.emissionPie) {
-              allResearchCharts.emissionPie.setActiveElements([
-                {datasetIndex:0, index:0},
-                {datasetIndex:0, index:1},
-                {datasetIndex:0, index:2}
-              ]);
-              allResearchCharts.emissionPie.update();
-            }
-          });
-          document.getElementById('highlightAnthropogenic')?.addEventListener('click', () => {
-            if (allResearchCharts.emissionPie) {
-              allResearchCharts.emissionPie.setActiveElements([
-                {datasetIndex:0, index:3},
-                {datasetIndex:0, index:4}
-              ]);
-              allResearchCharts.emissionPie.update();
-            }
-          });
-          document.getElementById('resetPieChart')?.addEventListener('click', () => {
-            if (allResearchCharts.emissionPie) {
-              allResearchCharts.emissionPie.setActiveElements([]);
-              allResearchCharts.emissionPie.update();
-            }
-          });
-        }
-
-        // ---- SOA Yield vs NOx Chart ----
-        const soaCtx = document.getElementById('soaYieldChart');
-        const noxLevels = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100];
-        const soaYields = [2.8, 3.2, 3.8, 4.3, 4.8, 5.2, 5.5, 5.7, 5.8, 5.9, 6.0, 5.8, 5.5, 5.0, 4.3, 3.6, 2.9, 2.3, 1.8, 1.4, 1.1];
-
-        if (soaCtx) {
-          allResearchCharts.soaYield = new Chart(soaCtx, {
-            type: 'line',
-            data: {
-              labels: noxLevels,
-              datasets: [{
-                label: 'SOA Mass Yield (%)',
-                data: soaYields,
-                borderColor: '#34b7a7',
-                backgroundColor: 'rgba(52, 183, 167, 0.1)',
-                fill: true,
-                tension: 0.4,
-                pointRadius: 3,
-                pointHoverRadius: 7,
-                pointBackgroundColor: '#34b7a7',
-                pointBorderColor: '#fff',
-                pointBorderWidth: 2,
-                borderWidth: 2.5
-              }, {
-                label: 'Current position',
-                data: Array(21).fill(NaN),
-                borderColor: 'transparent',
-                backgroundColor: 'transparent',
-                pointRadius: [0],
-                pointBackgroundColor: 'rgba(231, 76, 60, 0.9)',
-                pointBorderColor: '#fff',
-                pointBorderWidth: 3,
-                showLine: false
-              }]
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: true,
-              plugins: {
-                legend: { position: 'top', labels: { usePointStyle: true, padding: 12, font: { size: 10 } } }
-              },
-              scales: {
-                x: { title: { display: true, text: 'NOₓ Level (arbitrary units)' }, grid: { color: '#f5f5f5' } },
-                y: { title: { display: true, text: 'SOA Mass Yield (%)' }, min: 0, max: 7, grid: { color: '#f5f5f5' }, ticks: { stepSize: 1 } }
-              }
-            }
-          });
-
-          // NOx slider logic
-          const noxSlider = document.getElementById('noxSlider');
-          const noxDisplay = document.getElementById('noxDisplay');
-          const soaDesc = document.getElementById('soaDescription');
-
-          function updateNOxState(sliderValue) {
-            const pct = parseInt(sliderValue);
-            const dataIndex = Math.round((pct / 100) * (noxLevels.length - 1));
-            const actualYield = soaYields[dataIndex];
-            
-            let regime, descHTML;
-            if (pct < 25) {
-              regime = 'Low NOₓ (pristine forest)';
-              descHTML = `<strong>🌲 Low NOₓ regime:</strong> RO₂ + HO₂ pathway dominates → peroxide & IEPOX formation. SOA yield: <strong>${actualYield}%</strong>. This is the typical Amazon background state (Tripathi et al., 2025).`;
-            } else if (pct < 50) {
-              regime = 'Moderate-Low NOₓ';
-              descHTML = `<strong>🌿 Moderate-Low NOₓ:</strong> Transition regime with both RO₂ pathways active. SOA yield rising: <strong>${actualYield}%</strong>. Observed during biomass burning season onset.`;
-            } else if (pct < 60) {
-              regime = 'Moderate (peak SOA)';
-              descHTML = `<strong>⚡ Peak SOA regime:</strong> Optimal NOₓ for SOA formation. Maximum yield: <strong>${actualYield}%</strong>. Represents forest edges and burning-influenced regions.`;
-            } else {
-              regime = 'High NOₓ (deforested/urban)';
-              descHTML = `<strong>🏙️ High NOₓ regime:</strong> RO₂+NO dominates → lower SOA yield: <strong>${actualYield}%</strong>. More ozone formation. Typical of cleared areas in the Amazon.`;
-            }
-            
-            noxDisplay.textContent = regime;
-            soaDesc.innerHTML = descHTML;
-            
-            if (allResearchCharts.soaYield) {
-              const markerData = new Array(noxLevels.length).fill(NaN);
-              markerData[dataIndex] = actualYield;
-              const pointRadii = new Array(noxLevels.length).fill(0);
-              pointRadii[dataIndex] = 10;
-              
-              allResearchCharts.soaYield.data.datasets[1].data = markerData;
-              allResearchCharts.soaYield.data.datasets[1].pointRadius = pointRadii;
-              allResearchCharts.soaYield.update();
-            }
-          }
-
-          if (noxSlider) {
-            updateNOxState(50);
-            noxSlider.addEventListener('input', function() { updateNOxState(this.value); });
+          scales: {
+            x: { title: { display: true, text: 'Local time (h)' }, ticks: { callback: (_, i) => hrs[i] + ':00' }, grid: { color: C.grid } },
+            y: { title: { display: true, text: 'ppbv' }, beginAtZero: true, max: yMax, grid: { color: C.grid } }
           }
         }
-
-        // ---- OH Reactivity Chart ----
-        const ohCtx = document.getElementById('ohReactivityChart');
-        if (ohCtx) {
-          allResearchCharts.ohReactivity = new Chart(ohCtx, {
-            type: 'bar',
-            data: {
-              labels: ['Isoprene', 'Monoterpenes', 'Other BVOCs', 'CO', 'CH₄', 'Anthro. VOCs', 'Unidentified'],
-              datasets: [{
-                label: 'OH Reactivity (s⁻¹)',
-                data: [8.5, 3.2, 2.1, 1.8, 0.8, 0.9, 3.7],
-                backgroundColor: [
-                  'rgba(39, 174, 96, 0.8)',
-                  'rgba(34, 139, 126, 0.75)',
-                  'rgba(82, 190, 160, 0.7)',
-                  'rgba(52, 152, 219, 0.65)',
-                  'rgba(155, 89, 182, 0.6)',
-                  'rgba(243, 156, 18, 0.75)',
-                  'rgba(189, 195, 199, 0.7)'
-                ],
-                borderColor: '#fff',
-                borderWidth: 1.5,
-                borderRadius: 5
-              }]
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: true,
-              indexAxis: 'y',
-              plugins: {
-                legend: { display: false },
-                tooltip: { callbacks: { label: (ctx) => `${ctx.raw} s⁻¹ (${((ctx.raw/21)*100).toFixed(1)}% of total)` } }
-              },
-              scales: {
-                x: { title: { display: true, text: 'OH Reactivity (s⁻¹)' }, beginAtZero: true, grid: { color: '#f0f0f0' } },
-                y: { grid: { display: false } }
-              }
-            }
-          });
-        }
-
-        // ---- Isoprene Temperature Chart ----
-        const isoTempCtx = document.getElementById('isopreneTempChart');
-        if (isoTempCtx) {
-          const temps = [15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45];
-          const emissionFactors = [0.12, 0.20, 0.32, 0.50, 0.75, 1.00, 1.25, 1.40, 1.30, 0.85, 0.35];
-          
-          allResearchCharts.isoTemp = new Chart(isoTempCtx, {
-            type: 'line',
-            data: {
-              labels: temps,
-              datasets: [{
-                label: 'Normalized Emission (I/Iₛ)',
-                data: emissionFactors,
-                borderColor: '#e74c3c',
-                backgroundColor: 'rgba(231, 76, 60, 0.1)',
-                fill: true,
-                tension: 0.4,
-                pointRadius: 5,
-                pointHoverRadius: 8,
-                pointBackgroundColor: '#e74c3c',
-                borderWidth: 2.5
-              }]
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: true,
-              plugins: {
-                legend: { position: 'top', labels: { usePointStyle: true, padding: 15, font: { size: 11 } } },
-                tooltip: { callbacks: { label: (ctx) => `Emission factor: ${ctx.raw.toFixed(2)}× baseline at ${ctx.label}°C` } }
-              },
-              scales: {
-                x: { title: { display: true, text: 'Leaf Temperature (°C)' }, grid: { color: '#f5f5f5' } },
-                y: { title: { display: true, text: 'Normalized Emission' }, min: 0, max: 1.6, grid: { color: '#f5f5f5' } }
-              }
-            }
-          });
-        }
-
-        // ---- Urban vs Rural Radar Chart ----
-        const urbanRuralCtx = document.getElementById('urbanRuralChart');
-        if (urbanRuralCtx) {
-          allResearchCharts.urbanRural = new Chart(urbanRuralCtx, {
-            type: 'radar',
-            data: {
-              labels: ['Isoprene', 'α-Pinene', 'Benzene', 'Toluene', 'Ethylbenzene', 'Xylenes', 'Formaldehyde', 'Acetaldehyde'],
-              datasets: [{
-                label: 'Pristine Amazon',
-                data: [85, 60, 5, 8, 3, 5, 40, 25],
-                borderColor: 'rgba(52, 183, 167, 0.9)',
-                backgroundColor: 'rgba(52, 183, 167, 0.15)',
-                borderWidth: 2,
-                pointRadius: 4,
-                pointBackgroundColor: '#34b7a7'
-              }, {
-                label: 'Deforested Region',
-                data: [20, 10, 60, 70, 35, 55, 50, 65],
-                borderColor: 'rgba(243, 156, 18, 0.9)',
-                backgroundColor: 'rgba(243, 156, 18, 0.1)',
-                borderWidth: 2,
-                pointRadius: 4,
-                pointBackgroundColor: '#f39c12'
-              }]
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: true,
-              plugins: {
-                legend: { position: 'bottom', labels: { usePointStyle: true, padding: 15 } }
-              },
-              scales: {
-                r: {
-                  beginAtZero: true,
-                  max: 100,
-                  ticks: { stepSize: 20, backdropColor: 'transparent' },
-                  grid: { color: '#e0e0e0' },
-                  pointLabels: { font: { size: 10 } }
-                }
-              }
-            }
-          });
-        }
-
-        // ---- Convection Profile Chart (from Tripathi 2025) ----
-        const convCtx = document.getElementById('convectionProfileChart');
-        if (convCtx) {
-          // Simulated vertical profile data based on Tripathi et al. 2025
-          const altitudes = [0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-          const nonConvective = [2.5, 2.2, 1.5, 0.8, 0.3, 0.15, 0.08, 0.04, 0.02, 0.01, 0.005, 0.003, 0.002, 0.001, 0.001];
-          const convective = [2.5, 2.2, 1.5, 0.8, 0.5, 0.6, 0.7, 0.8, 0.9, 0.7, 0.5, 0.3, 0.2, 0.1, 0.05];
-          
-          allResearchCharts.convection = new Chart(convCtx, {
-            type: 'line',
-            data: {
-              labels: altitudes,
-              datasets: [{
-                label: 'Non-convective day',
-                data: nonConvective,
-                borderColor: 'rgba(108, 117, 125, 0.8)',
-                backgroundColor: 'rgba(108, 117, 125, 0.05)',
-                fill: true,
-                tension: 0.4,
-                pointRadius: 3,
-                borderWidth: 2,
-                borderDash: [4, 4]
-              }, {
-                label: 'Convective event (Tripathi 2025)',
-                data: convective,
-                borderColor: 'rgba(52, 183, 167, 0.9)',
-                backgroundColor: 'rgba(52, 183, 167, 0.15)',
-                fill: true,
-                tension: 0.4,
-                pointRadius: 5,
-                pointHoverRadius: 8,
-                pointBackgroundColor: '#34b7a7',
-                borderWidth: 3
-              }]
-            },
-            options: {
-              responsive: true,
-              maintainAspectRatio: true,
-              indexAxis: 'y',
-              plugins: {
-                legend: { position: 'top', labels: { usePointStyle: true, padding: 12, font: { size: 10 } } },
-                title: { display: true, text: 'Isoprene Vertical Profile (mixing ratio)', font: { size: 12 } }
-              },
-              scales: {
-                x: { title: { display: true, text: 'Isoprene (ppb)' }, beginAtZero: true, max: 3, grid: { color: '#f0f0f0' } },
-                y: { title: { display: true, text: 'Altitude (km)' }, grid: { color: '#f0f0f0' }, ticks: { callback: (v) => v + ' km' } }
-              }
-            }
-          });
-        }
-      }
-
-      // ---- Initialize research charts when tab becomes visible ----
-      const researchTab = document.getElementById('research-tab');
-      if (researchTab) {
-        researchTab.addEventListener('shown.bs.tab', function () {
-          // Small delay to ensure DOM is fully rendered
-          setTimeout(initializeResearchCharts, 200);
-        });
-        
-        // Also initialize if already active on page load
-        if (researchTab.classList.contains('active')) {
-          setTimeout(initializeResearchCharts, 300);
-        }
-      }
-
-      // Also handle the foundations tab (for the VOC fate chart which is already initialized)
-      const foundationsTab = document.getElementById('foundations-tab');
-      if (foundationsTab) {
-        foundationsTab.addEventListener('shown.bs.tab', function () {
-          // Re-render any foundations charts if needed
-          if (window.MathJax) {
-            setTimeout(() => MathJax.typesetPromise?.(), 300);
-          }
-        });
-      }
-
-      // ---- Table row selection ----
-      document.querySelectorAll('.voc-hub-table tbody tr').forEach(row => {
-        row.addEventListener('click', function () {
-          this.parentElement.querySelectorAll('tr').forEach(r => r.classList.remove('selected'));
-          this.classList.add('selected');
-        });
       });
+    }
 
-      // ---- Re-render MathJax ----
-      if (window.MathJax) {
-        setTimeout(() => MathJax.typesetPromise?.(), 500);
-        
-        // Also re-render when research tab is shown
-        document.getElementById('research-tab')?.addEventListener('shown.bs.tab', () => {
-          setTimeout(() => MathJax.typesetPromise?.(), 400);
-        });
+    makeDiel('chartDielIso', 'Isoprene diel (Fig. 3a)',     isoSurf, isoMid2, isoUT,  2.1);
+    makeDiel('chartDielOP',  'Isoprene-OP diel (Fig. 3b)',  opSurf2, opMid2b, opUT2,  1.8);
+    makeDiel('chartDielMT',  'Monoterpenes diel (Fig. 3c)', mtSurf,  mtMid,   mtUT,   0.35);
+
+    /* ── 3. BVOC sensitivity O3 / OH (Fig. 5) ─────────────── */
+    // Altitudes 0–18 km; values = relative change (%) vs. base case
+    const altSens = [0.5,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18];
+    // O3 relative change for each scenario (Fig. 5a)
+    const o3_75r  = [22,24,28,30,28,20,12, 6, 2,-2,-5,-7,-8,-9,-10,-9,-8,-7,-6];
+    const o3_50r  = [12,14,17,18,17,13, 8, 4, 1,-1,-3,-4,-5,-5, -6,-5,-4,-4,-3];
+    const o3_50i  = [-7,-9,-11,-12,-11,-8,-5,-2,-1, 0, 1, 2, 3, 3,  3, 3, 2, 2, 2];
+    // OH relative change (Fig. 5b)
+    const oh_75r  = [300,320,350,360,300,200,150,120,100,80,60,45,30,20,12,8,5,4,3];
+    const oh_50r  = [160,175,190,200,165,110, 80, 65, 55,45,35,25,18,12, 7,5,3,3,2];
+    const oh_50i  = [-25,-28,-32,-35,-30,-20,-15,-12,-10,-8,-6,-5,-4,-3,-2,-2,-1,-1,-1];
+
+    const sensChart = new Chart(document.getElementById('chartSensitivity'), {
+      type: 'line',
+      data: {
+        labels: altSens,
+        datasets: [
+          { label: '−75% BVOC', data: oh_75r, ...lineSet(C.red,   C.redB) },
+          { label: '−50% BVOC', data: oh_50r, ...lineSet(C.amber, C.amberB, true) },
+          { label: '+50% BVOC', data: oh_50i, ...lineSet(C.teal,  C.tealB,  true) }
+        ]
+      },
+      options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: true,
+        plugins: {
+          legend: { position: 'top', labels: { usePointStyle: true, padding: 10, font: { size: 10 } } },
+          title:  { display: true, text: 'OH relative change (%) — Amazon basin (Fig. 5b)', font: { size: 10 } }
+        },
+        scales: {
+          x: { title: { display: true, text: 'Relative change (%)' }, grid: { color: C.grid } },
+          y: { title: { display: true, text: 'Altitude (km)' }, ticks: { callback: v => v + ' km' }, grid: { color: C.grid } }
+        }
       }
-
     });
+
+    // O3 / OH toggle
+    function switchSens(toO3) {
+      const d = sensChart.data.datasets;
+      d[0].data = toO3 ? o3_75r : oh_75r;
+      d[1].data = toO3 ? o3_50r : oh_50r;
+      d[2].data = toO3 ? o3_50i : oh_50i;
+      sensChart.options.plugins.title.text = toO3
+        ? 'O₃ relative change (%) — Amazon basin (Fig. 5a)'
+        : 'OH relative change (%) — Amazon basin (Fig. 5b)';
+      sensChart.update();
+      document.getElementById('btnO3').classList.toggle('active',  toO3);
+      document.getElementById('btnOH').classList.toggle('active', !toO3);
+    }
+    document.getElementById('btnO3').addEventListener('click', () => switchSens(true));
+    document.getElementById('btnOH').addEventListener('click', () => switchSens(false));
+
+    /* ── 4. Convective profile (Fig. 2 insets) ─────────────── */
+    const convAlt   = [0.5,1,1.5,2,3,4,5,6,7,8,9,10,11,12,13];
+    const isoAll2   = [2.25,0.90,0.52,0.32,0.12,0.05,0.02,0.01,0.01,0.01,0.02,0.04,0.12,0.38,0.22];
+    // Night (Fig.2 inset, blue): peak at 12–13 km = 0.57 ppbv
+    const isoNight  = [2.10,0.85,0.50,0.30,0.11,0.05,0.02,0.01,0.02,0.08,0.25,0.47,0.57,0.38,0.20];
+    // Day (Fig.2 inset, red):   peak at 11–12 km = 0.38 ppbv
+    const isoDay    = [2.30,0.92,0.53,0.33,0.12,0.05,0.02,0.01,0.01,0.01,0.02,0.08,0.38,0.18,0.10];
+
+    new Chart(document.getElementById('chartConvection'), {
+      type: 'line',
+      data: {
+        labels: convAlt,
+        datasets: [
+          { label: 'All flights (mean)',      data: isoAll2,  ...lineSet(C.gray,  'transparent', true) },
+          { label: 'Night-time UT (Fig. 2)',  data: isoNight, ...lineSet(C.teal,  C.tealB) },
+          { label: 'Day-time UT (Fig. 2)',    data: isoDay,   ...lineSet(C.amber, C.amberB) }
+        ]
+      },
+      options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: true,
+        plugins: {
+          legend: { position: 'top', labels: { usePointStyle: true, padding: 10, font: { size: 10 } } },
+          title:  { display: true, text: 'Isoprene profile: day vs. night UT (Fig. 2 insets)', font: { size: 10 } }
+        },
+        scales: {
+          x: { title: { display: true, text: 'Isoprene (ppbv)' }, beginAtZero: true, max: 2.8, grid: { color: C.grid } },
+          y: { title: { display: true, text: 'Altitude (km)' }, ticks: { callback: v => v + ' km' }, grid: { color: C.grid } }
+        }
+      }
+    });
+
+    /* ── 5. NOx-SOA yield (interactive) ───────────────────── */
+    const noxPts  = [0,10,20,30,40,50,60,70,80,90,100];
+    const soaYld  = [2.8,3.5,4.3,5.0,5.6,5.9,5.5,4.8,3.8,2.8,2.0];
+
+    const soaChart = new Chart(document.getElementById('chartSOA'), {
+      type: 'line',
+      data: {
+        labels: noxPts,
+        datasets: [
+          { label: 'SOA Mass Yield (%)', data: soaYld, ...lineSet(C.teal, C.tealB) },
+          { label: 'Current position',
+            data: Array(11).fill(NaN),
+            borderColor: 'transparent', backgroundColor: 'transparent',
+            pointRadius: Array(11).fill(0),
+            pointBackgroundColor: C.red, pointBorderColor: '#fff', pointBorderWidth: 3,
+            showLine: false
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { title: { display: true, text: 'NOₓ level (a.u.)' }, grid: { color: C.grid } },
+          y: { title: { display: true, text: 'SOA yield (%)' }, min: 1, max: 7, grid: { color: C.grid } }
+        }
+      }
+    });
+
+    function updateNOx(val) {
+      const pct = +val;
+      const idx  = Math.round((pct / 100) * (noxPts.length - 1));
+      const yld  = soaYld[idx];
+      let regime, desc;
+      if      (pct < 25) { regime = 'Low NOₓ — pristine forest';        desc = `RO₂+HO₂ dominates → IEPOX/peroxide → SOA. Yield: <strong>${yld}%</strong>. Typical Amazon background (Tripathi et al., 2025).`; }
+      else if (pct < 55) { regime = 'Moderate NOₓ — peak SOA';          desc = `Balanced RO₂ chemistry → maximum SOA mass yield: <strong>${yld}%</strong>. Forest edges / early burning season.`; }
+      else               { regime = 'High NOₓ — deforested / BB plume'; desc = `RO₂+NO → fragmentation, lower SOA. Yield: <strong>${yld}%</strong>. More O₃ formed. Cleared regions.`; }
+
+      document.getElementById('vh-noxLabel').textContent = regime;
+      document.getElementById('vh-soaDesc').innerHTML    = `<strong>Current regime:</strong> ${desc}`;
+
+      const markers = Array(11).fill(NaN);
+      const radii   = Array(11).fill(0);
+      markers[idx]  = yld;
+      radii[idx]    = 11;
+      soaChart.data.datasets[1].data        = markers;
+      soaChart.data.datasets[1].pointRadius = radii;
+      soaChart.update();
+    }
+
+    document.getElementById('vh-noxSlider').addEventListener('input', e => updateNOx(e.target.value));
+    updateNOx(50);
+
+    /* ── 6. Global emission budget pie ────────────────────── */
+    const pieChart = new Chart(document.getElementById('chartPie'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Isoprene (536)','Monoterpenes (84)','Other BVOCs (140)','Anthropogenic (140)','Biomass Burning (60)'],
+        datasets: [{
+          data: [536, 84, 140, 140, 60],
+          backgroundColor: [
+            'rgba(39,174,96,0.85)', 'rgba(34,139,126,0.75)', 'rgba(82,190,160,0.65)',
+            'rgba(243,156,18,0.82)', 'rgba(231,76,60,0.70)'
+          ],
+          borderColor: '#fff', borderWidth: 2, hoverBorderWidth: 3
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: true,
+        plugins: {
+          legend: { position: 'bottom', labels: { usePointStyle: true, padding: 12, font: { size: 10 } } },
+          tooltip: { callbacks: { label: ctx => `${ctx.label.split('(')[0].trim()}: ${ctx.raw} Tg C yr⁻¹ (${((ctx.raw/960)*100).toFixed(1)}%)` } }
+        }
+      }
+    });
+
+    document.getElementById('btnBiogenic').addEventListener('click', () => {
+      pieChart.setActiveElements([{datasetIndex:0,index:0},{datasetIndex:0,index:1},{datasetIndex:0,index:2}]);
+      pieChart.update();
+    });
+    document.getElementById('btnAnthro').addEventListener('click', () => {
+      pieChart.setActiveElements([{datasetIndex:0,index:3},{datasetIndex:0,index:4}]);
+      pieChart.update();
+    });
+    document.getElementById('btnPieReset').addEventListener('click', () => {
+      pieChart.setActiveElements([]);
+      pieChart.update();
+    });
+
+    /* ── 7. Isoprene temperature response (Guenther 1993) ─── */
+    function guentherCT(T_K) {
+      const R = 8.314, TS = 303, TM = 314, CT1 = 95000, CT2 = 230000;
+      return Math.exp(CT1*(T_K-TS)/(R*TS*T_K)) / (1 + Math.exp(CT2*(T_K-TM)/(R*TS*T_K)));
+    }
+    const tempsDeg = Array.from({length: 30}, (_, i) => 15 + i);
+    const ctVals   = tempsDeg.map(t => guentherCT(t + 273.15));
+    const ctPeak   = Math.max(...ctVals);
+    const ctNorm   = ctVals.map(v => +(v / ctPeak).toFixed(4));
+
+    new Chart(document.getElementById('chartIsoTemp'), {
+      type: 'line',
+      data: {
+        labels: tempsDeg,
+        datasets: [{ label: 'Normalised emission I/Iₛ', data: ctNorm, ...lineSet(C.red, C.redB) }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: true,
+        plugins: {
+          legend: { position: 'top', labels: { usePointStyle: true, padding: 12, font: { size: 10 } } },
+          tooltip: { callbacks: { label: ctx => `Factor: ${ctx.raw}× at ${ctx.label}°C` } }
+        },
+        scales: {
+          x: { title: { display: true, text: 'Leaf temperature (°C)' }, grid: { color: C.grid } },
+          y: { title: { display: true, text: 'Normalised emission (I/Iₛ)' }, min: 0, max: 1.1, grid: { color: C.grid } }
+        }
+      }
+    });
+
+    /* ── 8. Radar: pristine vs. deforested (Flight 06) ───── */
+    // Normalised to pristine forest = 100 for each species
+    // From paper: isoprene 4×, monoterpenes 4×, isoprene-OP 1.7× over forest vs. pasture
+    new Chart(document.getElementById('chartRadar'), {
+      type: 'radar',
+      data: {
+        labels: ['Isoprene','Monoterpenes','Isoprene-OP','Benzene','CO (proxy)','NOₓ (proxy)'],
+        datasets: [
+          { label: 'Pristine forest',     data: [100, 100, 100, 15, 40, 10],
+            borderColor: C.teal,  backgroundColor: C.tealB,  borderWidth: 2, pointRadius: 4, pointBackgroundColor: C.teal },
+          { label: 'Deforested/pasture',  data: [25,  25,  58,  80, 75, 70],
+            borderColor: C.amber, backgroundColor: C.amberB, borderWidth: 2, pointRadius: 4, pointBackgroundColor: C.amber }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: true,
+        plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 14 } } },
+        scales: {
+          r: { beginAtZero: true, max: 110, ticks: { stepSize: 25, backdropColor: 'transparent' },
+               grid: { color: '#e0e0e0' }, pointLabels: { font: { size: 10 } } }
+        }
+      }
+    });
+
+    /* ── 9. OH Reactivity bar ─────────────────────────────── */
+    new Chart(document.getElementById('chartOH'), {
+      type: 'bar',
+      data: {
+        labels: ['Isoprene','Monoterpenes','Other BVOCs','CO','CH₄','Anthro. VOCs','Unidentified'],
+        datasets: [{
+          label: 'OH Reactivity (s⁻¹)',
+          data: [8.5, 3.2, 2.1, 1.8, 0.8, 0.9, 3.7],
+          backgroundColor: [
+            'rgba(39,174,96,0.82)', 'rgba(34,139,126,0.75)', 'rgba(82,190,160,0.70)',
+            'rgba(52,152,219,0.65)', 'rgba(155,89,182,0.60)',
+            'rgba(243,156,18,0.75)', 'rgba(189,195,199,0.72)'
+          ],
+          borderColor: '#fff', borderWidth: 1.5, borderRadius: 5
+        }]
+      },
+      options: {
+        indexAxis: 'y', responsive: true, maintainAspectRatio: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => `${ctx.raw} s⁻¹  (${((ctx.raw/21)*100).toFixed(1)}% of total)` } }
+        },
+        scales: {
+          x: { title: { display: true, text: 'OH Reactivity (s⁻¹)' }, beginAtZero: true, grid: { color: C.grid } },
+          y: { grid: { display: false } }
+        }
+      }
+    });
+
+    /* Re-render MathJax for the formula blocks */
+    if (window.MathJax?.typesetPromise) setTimeout(() => MathJax.typesetPromise(), 250);
+
+  } // end initAdvCharts
   </script>
 
 </body>
