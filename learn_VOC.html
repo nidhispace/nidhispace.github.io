@@ -452,123 +452,195 @@
           <div class="tab-pane fade" id="research" role="tabpanel">
             <div class="row g-4">
 
-              <!-- Kinetics Card -->
+              <!-- Card 1: Oxidation Kinetics -->
               <div class="col-lg-6">
                 <div class="voc-hub-card">
                   <h4><i class="bi bi-lightning-charge-fill" style="color:#0d6efd;"></i> Oxidation Kinetics & Lifetimes</h4>
-                  <p>The atmospheric lifetime ($\tau$) of a VOC is determined by its reactivity with OH, O₃, and NO₃:</p>
+                  <p>The atmospheric lifetime (<em>τ</em>) of a VOC is determined by its reactivity with the major oxidants:</p>
                   
                   <div class="voc-hub-formula">
                     $$\tau_{\text{VOC}} = \frac{1}{k_{\text{OH}}[\text{OH}] + k_{\text{O}_3}[\text{O}_3] + k_{\text{NO}_3}[\text{NO}_3]}$$
                   </div>
                   
+                  <p class="small text-muted">For most VOCs, the OH reaction dominates daytime removal. [OH] ≈ 1×10⁶ molec cm⁻³ (global average).</p>
+                  
                   <table class="voc-hub-table mt-3">
                     <thead>
-                      <tr><th>Compound</th><th>k<sub>OH</sub> (cm³ molec⁻¹ s⁻¹)</th><th>τ<sub>OH</sub></th></tr>
+                      <tr><th>Compound</th><th>Type</th><th>k<sub>OH</sub> (cm³ molec⁻¹ s⁻¹)</th><th>τ<sub>OH</sub></th></tr>
                     </thead>
                     <tbody>
-                      <tr><td>Isoprene</td><td>1.0 × 10⁻¹⁰</td><td>~1.4 hours</td></tr>
-                      <tr><td>α-Pinene</td><td>5.3 × 10⁻¹¹</td><td>~2.6 hours</td></tr>
-                      <tr><td>Benzene</td><td>1.2 × 10⁻¹²</td><td>~9.4 days</td></tr>
-                      <tr><td>Methane</td><td>6.3 × 10⁻¹⁵</td><td>~8.6 years</td></tr>
+                      <tr><td>Isoprene</td><td>BVOC</td><td>1.0 × 10⁻¹⁰</td><td>~1.4 hours</td></tr>
+                      <tr><td>α-Pinene</td><td>BVOC</td><td>5.3 × 10⁻¹¹</td><td>~2.6 hours</td></tr>
+                      <tr><td>β-Caryophyllene</td><td>BVOC</td><td>2.0 × 10⁻¹⁰</td><td>~42 minutes</td></tr>
+                      <tr><td>Benzene</td><td>Anthropogenic</td><td>1.2 × 10⁻¹²</td><td>~9.4 days</td></tr>
+                      <tr><td>Toluene</td><td>Anthropogenic</td><td>5.6 × 10⁻¹²</td><td>~2.0 days</td></tr>
+                      <tr><td>Methane</td><td>Mixed</td><td>6.3 × 10⁻¹⁵</td><td>~8.6 years</td></tr>
                     </tbody>
                   </table>
-                  <p class="small text-muted mt-2">Rate constants at 298 K. [OH] = 1×10⁶ molec cm⁻³ assumed.</p>
+                  <p class="small text-muted mt-2">Rate constants at 298 K. References: Atkinson & Arey (2003), IUPAC kinetics database.</p>
                 </div>
               </div>
 
-              <!-- Isoprene Oxidation Pathways -->
+              <!-- Card 2: Isoprene Oxidation Pathways -->
               <div class="col-lg-6">
                 <div class="voc-hub-card">
-                  <h4><i class="bi bi-diagram-3-fill" style="color:#34b7a7;"></i> Isoprene Oxidation Schematic</h4>
-                  <p>The fate of isoprene peroxy radicals (ISOPO₂) diverges critically under high vs. low NOₓ conditions:</p>
+                  <h4><i class="bi bi-diagram-3-fill" style="color:#34b7a7;"></i> Isoprene Oxidation Mechanism</h4>
+                  <p>The fate of isoprene peroxy radicals (ISOPO₂) critically depends on the NOₓ regime, determining whether the carbon flows toward ozone production or SOA formation.</p>
                   
                   <div class="voc-hub-reaction">
                     <div class="voc-hub-reaction-box">Isoprene<br>C₅H₈</div>
-                    <span class="voc-hub-reaction-arrow">+ OH / O₂ →</span>
-                    <div class="voc-hub-reaction-box">ISOPO₂<br>(RO₂ radical)</div>
+                    <span class="voc-hub-reaction-arrow">+ OH →</span>
+                    <div class="voc-hub-reaction-box">ISOPO₂<br>(6 isomers)</div>
+                    <span class="voc-hub-reaction-arrow">→</span>
+                    <div class="voc-hub-reaction-box product">Products<br>(O₃ or SOA)</div>
                   </div>
                   
-                  <div class="row g-2 mt-2">
+                  <div class="row g-2 mt-3">
                     <div class="col-6">
                       <div class="voc-hub-nox-high">
-                        <strong>High NOₓ pathway:</strong><br>
-                        <small>RO₂ + NO → RO + NO₂<br>→ O₃ formation chain</small>
+                        <strong>🏭 High NOₓ (urban):</strong><br>
+                        <small>ISOPO₂ + NO → ISOPO + NO₂<br>
+                        NO₂ + hν → NO + O(³P)<br>
+                        O(³P) + O₂ → O₃<br>
+                        <em>→ Net ozone formation</em></small>
                       </div>
                     </div>
                     <div class="col-6">
                       <div class="voc-hub-nox-low">
-                        <strong>Low NOₓ pathway:</strong><br>
-                        <small>RO₂ + HO₂ → ROOH<br>→ SOA & peroxide buildup</small>
+                        <strong>🌲 Low NOₓ (remote):</strong><br>
+                        <small>ISOPO₂ + HO₂ → ISOPOOH<br>
+                        ISOPOOH + OH → IEPOX<br>
+                        IEPOX → SOA (particle phase)<br>
+                        <em>→ SOA & peroxide formation</em></small>
                       </div>
                     </div>
                   </div>
+                  <p class="small text-muted mt-2">IEPOX = isoprene epoxydiols, a key SOA precursor. Reference: Paulot et al. (2009), Surratt et al. (2010).</p>
                 </div>
               </div>
 
-              <!-- Global Emission Budget (Interactive Pie) -->
+              <!-- Card 3: Global VOC Budget (corrected values) -->
               <div class="col-lg-6">
                 <div class="voc-hub-card">
-                  <h4><i class="bi bi-pie-chart-fill" style="color:#f59e0b;"></i> Global VOC Emission Partitioning</h4>
+                  <h4><i class="bi bi-pie-chart-fill" style="color:#f59e0b;"></i> Global VOC Emission Budget</h4>
+                  <p>Total global flux: <strong>~1150 Tg(C) yr⁻¹</strong>. Biogenic sources dominate, with isoprene alone contributing nearly half.</p>
+                  
                   <div class="voc-hub-chart-wrap" style="border:none; box-shadow:none; padding:0;">
                     <canvas id="emissionPieChart" height="250"></canvas>
                   </div>
+                  
                   <div class="d-flex justify-content-center gap-2 mt-2 flex-wrap">
-                    <button class="btn btn-sm btn-outline-success" id="highlightBiogenic">Biogenic</button>
-                    <button class="btn btn-sm btn-outline-secondary" id="highlightAnthropogenic">Anthropogenic</button>
-                    <button class="btn btn-sm btn-outline-dark" id="resetPieChart">Reset</button>
+                    <button class="btn btn-sm btn-outline-success" id="highlightBiogenic">🌿 Biogenic Sources</button>
+                    <button class="btn btn-sm btn-outline-warning" id="highlightAnthropogenic">🏭 Anthropogenic</button>
+                    <button class="btn btn-sm btn-outline-dark" id="resetPieChart">↺ Reset</button>
                   </div>
+                  <p class="small text-muted mt-2">Data from Guenther et al. (2012), Sindelarova et al. (2014), Hoesly et al. (2018).</p>
                 </div>
               </div>
 
-              <!-- Measurement Evolution -->
+              <!-- Card 4: Measurement Timeline -->
               <div class="col-lg-6">
                 <div class="voc-hub-card">
-                  <h4><i class="bi bi-clock-history" style="color:#27ae60;"></i> Measurement Technique Evolution</h4>
+                  <h4><i class="bi bi-clock-history" style="color:#27ae60;"></i> Evolution of VOC Measurement</h4>
                   <div class="voc-hub-timeline">
                     <div class="voc-hub-timeline-item">
-                      <div class="voc-hub-timeline-year">1970s</div>
-                      <p class="mb-0"><strong>Canister sampling + GC-FID</strong><br>Offline analysis, limited temporal resolution, labor-intensive.</p>
+                      <div class="voc-hub-timeline-year">1950s-1970s</div>
+                      <p class="mb-0"><strong>Canister + GC-FID</strong><br>Stainless steel canisters, cryogenic preconcentration, offline lab analysis. Detection limits ~ppb.</p>
                     </div>
                     <div class="voc-hub-timeline-item">
-                      <div class="voc-hub-timeline-year">1990s</div>
-                      <p class="mb-0"><strong>PTR-MS development</strong><br>Real-time, soft chemical ionization (H₃O⁺), no pre-concentration needed.</p>
+                      <div class="voc-hub-timeline-year">1980s-1990s</div>
+                      <p class="mb-0"><strong>PTR-MS (Lindinger et al., 1998)</strong><br>Real-time H₃O⁺ chemical ionization. No sample preparation. Mass resolution limited to nominal mass.</p>
                     </div>
                     <div class="voc-hub-timeline-item">
-                      <div class="voc-hub-timeline-year">2010s</div>
-                      <p class="mb-0"><strong>PTR-TOF-MS & CIMS</strong><br>High mass resolution; iodide/acetate reagent ions for isomer separation.</p>
+                      <div class="voc-hub-timeline-year">2000s-2010s</div>
+                      <p class="mb-0"><strong>PTR-TOF-MS & CIMS</strong><br>High mass resolution (m/Δm > 5000). Iodide/acetate reagent ions for isomer separation.</p>
                     </div>
                     <div class="voc-hub-timeline-item">
-                      <div class="voc-hub-timeline-year">2020s</div>
-                      <p class="mb-0"><strong>Satellite retrievals (TROPOMI)</strong><br>HCHO columns as isoprene emission proxy; near-global daily coverage.</p>
+                      <div class="voc-hub-timeline-year">2017-present</div>
+                      <p class="mb-0"><strong>TROPOMI (Sentinel-5P)</strong><br>Space-based HCHO retrieval as isoprene proxy. 7×3.5 km² resolution, daily global coverage.</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <!-- Interactive NOx-SOA Yield -->
-              <div class="col-12">
+              <!-- Card 5: Interactive NOx-SOA Yield (FIXED) -->
+              <div class="col-lg-6">
                 <div class="voc-hub-card">
-                  <h4><i class="bi bi-sliders me-2" style="color:#34b7a7;"></i>Interactive: NOₓ-Dependent SOA Yield from Isoprene</h4>
-                  <p>Adjust the slider to see how SOA mass yield varies with NOₓ concentration — a classic nonlinear relationship in atmospheric chemistry.</p>
-                  <div class="row align-items-center">
-                    <div class="col-md-4">
-                      <label class="fw-semibold">NOₓ Level: <span id="noxDisplay">Medium</span></label>
-                      <input type="range" class="form-range" min="0" max="2" step="0.1" value="1.0" id="noxSlider">
-                      <small class="text-muted">0 = pristine, 1 = moderate, 2 = urban</small>
-                      <p class="mt-2 small fst-italic" id="soaDescription">At moderate NOₓ, SOA yields peak (~48%) due to balanced RO₂ chemistry.</p>
-                    </div>
-                    <div class="col-md-8">
-                      <div class="voc-hub-chart-wrap" style="border:none; box-shadow:none;">
-                        <canvas id="soaYieldChart" height="180"></canvas>
-                      </div>
-                    </div>
+                  <h4><i class="bi bi-sliders me-2" style="color:#34b7a7;"></i>Interactive: NOₓ-Dependent SOA Yield</h4>
+                  <p>Secondary organic aerosol mass yield from isoprene shows a characteristic nonlinear response to NOₓ. <strong>Move the slider</strong> to see how the yield curve responds.</p>
+                  
+                  <label class="fw-semibold">NOₓ Regime: <span id="noxDisplay">Moderate (peak SOA)</span></label>
+                  <input type="range" class="form-range" min="0" max="100" value="50" id="noxSlider" style="accent-color:#34b7a7;">
+                  <div class="d-flex justify-content-between">
+                    <small class="text-muted">Low NOₓ (pristine forest)</small>
+                    <small class="text-muted">High NOₓ (urban/industrial)</small>
                   </div>
+                  
+                  <div class="voc-hub-chart-wrap" style="border:none; box-shadow:none; padding:0; margin-top:12px;">
+                    <canvas id="soaYieldChart" height="200"></canvas>
+                  </div>
+                  
+                  <div id="soaDescription" class="mt-2 p-3 rounded" style="background:#f8f9fa; border-left: 4px solid #34b7a7;">
+                    <strong>Current regime:</strong> Moderate NOₓ — balanced RO₂ chemistry gives maximum SOA mass yield (~5-6% for isoprene).
+                  </div>
+                  <p class="small text-muted mt-2">Based on chamber studies: Kroll et al. (2006), Xu et al. (2015), Liu et al. (2021).</p>
                 </div>
               </div>
+
+              <!-- Card 6: OH Reactivity Budget -->
+              <div class="col-lg-6">
+                <div class="voc-hub-card">
+                  <h4><i class="bi bi-bar-chart-steps" style="color:#0d6efd;"></i> Total OH Reactivity Partitioning</h4>
+                  <p>OH reactivity (s⁻¹) measures the total sink of OH radicals. In forested environments, BVOCs dominate the budget.</p>
+                  
+                  <div class="voc-hub-chart-wrap" style="border:none; box-shadow:none; padding:0;">
+                    <canvas id="ohReactivityChart" height="220"></canvas>
+                  </div>
+                  
+                  <div class="d-flex justify-content-center gap-2 mt-2">
+                    <small class="text-muted">📍 Amazon rainforest (typical daytime conditions)</small>
+                  </div>
+                  <p class="small text-muted mt-1">Adapted from Nölscher et al. (2016), Pfannerstill et al. (2021).</p>
+                </div>
+              </div>
+
+              <!-- Card 7: Temperature Dependence of Isoprene Emission -->
+              <div class="col-lg-6">
+                <div class="voc-hub-card">
+                  <h4><i class="bi bi-thermometer-half" style="color:#e74c3c;"></i> Isoprene Emission: Temperature Response</h4>
+                  <p>Isoprene emission follows the Guenther algorithm (G93): emission increases exponentially with temperature up to ~40°C, then declines due to enzyme denaturation.</p>
+                  
+                  <div class="voc-hub-chart-wrap" style="border:none; box-shadow:none; padding:0;">
+                    <canvas id="isopreneTempChart" height="200"></canvas>
+                  </div>
+                  
+                  <div class="voc-hub-formula mt-2" style="font-size:0.8rem;">
+                    $$I = I_S \cdot C_T \cdot C_L \quad \text{where} \quad C_T = \frac{\exp\left(\frac{C_{T1}(T-T_S)}{RT_ST}\right)}{1 + \exp\left(\frac{C_{T2}(T-T_M)}{RT_ST}\right)}$$
+                  </div>
+                  <p class="small text-muted">Guenther et al. (1993, 2012). I<sub>S</sub> = basal emission factor, C<sub>T</sub> = temperature activity factor.</p>
+                </div>
+              </div>
+
+              <!-- Card 8: Urban vs Rural VOC Profiles -->
+              <div class="col-lg-6">
+                <div class="voc-hub-card">
+                  <h4><i class="bi bi-building" style="color:#6c757d;"></i> VOC Composition: Urban vs Biogenic</h4>
+                  <p>Chemical fingerprints differ dramatically between urban and forest environments, enabling source apportionment via positive matrix factorization (PMF).</p>
+                  
+                  <div class="voc-hub-chart-wrap" style="border:none; box-shadow:none; padding:0;">
+                    <canvas id="urbanRuralChart" height="220"></canvas>
+                  </div>
+                  
+                  <div class="d-flex justify-content-center gap-3 mt-2 flex-wrap">
+                    <span class="badge" style="background:#34b7a7;">🌲 Forest (Manaus, Brazil)</span>
+                    <span class="badge" style="background:#f59e0b;">🏙️ Urban (Beijing, China)</span>
+                  </div>
+                  <p class="small text-muted mt-2">Relative composition based on field campaigns: Martin et al. (2010), Wang et al. (2022).</p>
+                </div>
+              </div>
+
             </div>
           </div>
-        </div>
 
       </div>
     </section>
