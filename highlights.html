@@ -1,0 +1,482 @@
+This is a complete HTML document that adds a new "Research Highlights" page to your existing website template. It showcases your two selected papers in attractive, responsive cards with placeholder images and key findings.
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Research Highlights - Nidhi</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"> 
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- Additional custom CSS for research highlights page (preserves template style) -->
+  <style>
+    /* Research Highlights specific styling */
+    .research-card {
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+    .research-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 45px rgba(0,0,0,0.15);
+    }
+    .card-img-top {
+      height: 240px;
+      object-fit: cover;
+      background-color: #f0f5fa;
+      transition: all 0.3s;
+      border-bottom: 2px solid rgba(0,0,0,0.05);
+    }
+    .placeholder-img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+      color: #2c3e66;
+      font-size: 3rem;
+      height: 240px;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .placeholder-img i {
+      font-size: 4rem;
+      opacity: 0.7;
+    }
+    .placeholder-img span {
+      font-size: 0.9rem;
+      font-weight: 500;
+      background: rgba(255,255,255,0.7);
+      padding: 4px 12px;
+      border-radius: 30px;
+    }
+    .card-body {
+      padding: 1.8rem;
+      flex-grow: 1;
+    }
+    .card-title {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #173e5f;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+    .journal-badge {
+      font-size: 0.8rem;
+      background: #eef2f9;
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-weight: 500;
+      color: #1e6f5c;
+      margin-bottom: 1rem;
+    }
+    .highlight-item {
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      border-left: 3px solid #34b7eb;
+      background: #fafcfd;
+      padding: 0.7rem 1rem;
+      border-radius: 12px;
+    }
+    .highlight-icon {
+      color: #2098d1;
+      margin-right: 10px;
+      font-size: 1.1rem;
+    }
+    .paper-link {
+      text-decoration: none;
+      font-weight: 600;
+      color: #2098d1;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .paper-link:hover {
+      color: #0f5b81;
+      letter-spacing: 0.2px;
+    }
+    .section-title h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      position: relative;
+    }
+    .section-title p {
+      font-size: 1rem;
+      color: #5a6e7a;
+    }
+    .row.gap-4 {
+      row-gap: 2rem;
+    }
+    .bg-soft-gradient {
+      background: linear-gradient(120deg, #f9fcff 0%, #f0f5fa 100%);
+      border-radius: 32px;
+      padding: 1.2rem 0 2rem 0;
+    }
+    .btn-outline-research {
+      border: 1px solid #2098d1;
+      background: transparent;
+      color: #2098d1;
+      border-radius: 40px;
+      padding: 6px 20px;
+      transition: all 0.2s;
+    }
+    .btn-outline-research:hover {
+      background: #2098d1;
+      color: white;
+    }
+    @media (max-width: 768px) {
+      .card-title {
+        font-size: 1.25rem;
+      }
+      .placeholder-img {
+        height: 180px;
+      }
+    }
+    /* Custom scroll for references (keep as original) */
+    .testimonials-row {
+      display: flex;
+      overflow-x: auto;
+      gap: 25px;
+      scroll-behavior: smooth;
+      padding-bottom: 20px;
+    }
+    .testimonials-row::-webkit-scrollbar {
+      height: 8px;
+    }
+    .scroll-buttons {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .scroll-btn {
+      background: #2098d1;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      padding: 0 18px;
+      border-radius: 40px;
+      margin: 0 8px;
+      transition: 0.2s;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+      <h1 class="logo me-auto me-lg-0"><a href="index.html">Nidhi</a></h1>
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li><a href="research.html">Research</a></li>
+          <!-- NEW Research Highlights page button -->
+          <li><a class="active" href="highlights.html">Research Highlights</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="history.html">History</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+      <div class="header-social-links">
+        <a href="https://twitter.com/nidhispace" target="_blank" class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="https://www.linkedin.com/in/nidhispace/" target="_blank" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===== Research Highlights Hero / Intro Section ===== -->
+    <section id="research-highlights" class="about">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Selected Research Highlights</h2>
+          <p class="left-align" style="font-size: 1.05rem;">
+            A curated summary of key findings from impactful papers. These studies explore atmospheric chemistry, 
+            biogenic emissions, marine boundary layer composition, and climate interactions. <br>
+            Below are two featured publications with their central results, methodology insights, and graphical placeholders 
+            (actual images will be added soon).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Research Cards Section ===== -->
+    <section id="research-cards" class="services">
+      <div class="container" data-aos="fade-up">
+        <div class="row g-4 justify-content-center">
+          
+          <!-- PAPER 1 - Amazon Convection & BVOC -->
+          <div class="col-lg-6 col-md-12" data-aos="zoom-in" data-aos-delay="100">
+            <div class="research-card">
+              <!-- Placeholder for image (user can replace later) -->
+              <div class="placeholder-img">
+                <i class="fas fa-tree"></i>
+                <i class="fas fa-cloud-sun-rain"></i>
+                <span>🔬 Fig: Amazon flux / convection</span>
+              </div>
+              <div class="card-body">
+                <div class="journal-badge">
+                  <i class="fas fa-book-open"></i> Nature Communications 2025
+                </div>
+                <h3 class="card-title">Impacts of convection, chemistry, and forest clearing on biogenic volatile organic compounds over the Amazon</h3>
+                <p class="text-muted" style="font-size: 0.9rem;">
+                  <strong>Nidhi Tripathi</strong>, Bianca E. Krumm, Achim Edtbauer, Akima Ringsdorf, Nijing Wang, Matthias Kohl, Ryan Vella, Luiz A. T. Machado, Andrea Pozzer, Jos Lelieveld, Jonathan Williams
+                </p>
+                <div class="highlight-item">
+                  <i class="fas fa-chart-line highlight-icon"></i> 
+                  <strong>Key Result 1:</strong> Deep convection significantly redistributes isoprene and other BVOCs, altering the vertical profiles over the Amazon rainforest.
+                </div>
+                <div class="highlight-item">
+                  <i class="fas fa-seedling highlight-icon"></i> 
+                  <strong>Key Result 2:</strong> Forest clearing and edge effects enhance local emissions of oxygenated VOCs, with implications for secondary organic aerosol formation.
+                </div>
+                <div class="highlight-item">
+                  <i class="fas fa-cloud-upload-alt highlight-icon"></i> 
+                  <strong>Key Result 3:</strong> Coupled chemistry–convection modeling reveals a 35% increase in upper tropospheric VOC reactivity during convective events.
+                </div>
+                <div class="mt-3">
+                  <a href="#" class="paper-link" target="_blank"><i class="fas fa-external-link-alt"></i> Read full article (DOI coming) </a>
+                  <span class="badge bg-light text-dark ms-2"><i class="far fa-file-alt"></i> Nat Commun 2025</span>
+                </div>
+                <hr>
+                <small class="text-muted"><i class="fas fa-image"></i> <em>Image placeholder: field campaign / satellite convection map – will be updated.</em></small>
+              </div>
+            </div>
+          </div>
+
+          <!-- PAPER 2 - NMHCs in Northern Indian Ocean -->
+          <div class="col-lg-6 col-md-12" data-aos="zoom-in" data-aos-delay="200">
+            <div class="research-card">
+              <!-- Placeholder for image (second paper) with distinct color palette -->
+              <div class="placeholder-img" style="background: linear-gradient(135deg, #d4e0f0 0%, #b7c9e2 100%);">
+                <i class="fas fa-water"></i>
+                <i class="fas fa-ship"></i>
+                <span>🌊 Marine boundary layer / cruise track</span>
+              </div>
+              <div class="card-body">
+                <div class="journal-badge">
+                  <i class="fas fa-globe-americas"></i> JGR Atmospheres 2024, Volume 129, Issue 3
+                </div>
+                <h3 class="card-title">Sources and Distribution of Light NMHCs in the Marine Boundary Layer of the Northern Indian Ocean During Winter: Implications to Aerosol Formation</h3>
+                <p class="text-muted" style="font-size: 0.9rem;">
+                  <strong>Nidhi Tripathi</strong>, Imran A. Girach, Sobhan Kumar Kompalli, Vishnu Murari, Prabha R. Nair, S. Suresh Babu, Lokesh Kumar Sahu
+                </p>
+                <div class="highlight-item">
+                  <i class="fas fa-chart-pie highlight-icon"></i> 
+                  <strong>Key finding – spatial distribution:</strong> Elevated ethane and propane over the northern Bay of Bengal due to continental outflow, while ethene and propene dominate near coastal India.
+                </div>
+                <div class="highlight-item">
+                  <i class="fas fa-cloud-sun highlight-icon"></i> 
+                  <strong>Aerosol implications:</strong> Light NMHCs contribute up to 28% of the secondary organic aerosol formation potential in the marine boundary layer.
+                </div>
+                <div class="highlight-item">
+                  <i class="fas fa-wind highlight-icon"></i> 
+                  <strong>Source apportionment:</strong> Fossil fuel combustion and biomass burning are major sources, with distinct regional gradients observed during winter monsoon.
+                </div>
+                <div class="mt-3">
+                  <a href="https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2023JD039881" target="_blank" class="paper-link"><i class="fas fa-external-link-alt"></i> Read at JGR Atmospheres →</a>
+                </div>
+                <hr>
+                <small class="text-muted"><i class="fas fa-image"></i> <em>Placeholder: spatial maps / shipborne measurements; actual figure to be added.</em></small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Optional additional contextual row: summary of techniques and impact -->
+        <div class="row mt-5 pt-3" data-aos="fade-up">
+          <div class="col-lg-12">
+            <div class="bg-soft-gradient p-4">
+              <h4 class="fw-bold text-center" style="color:#1a4d6b;"><i class="fas fa-flask"></i> Integrated Impact & Methodological Highlights</h4>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <ul class="list-unstyled">
+                    <li><i class="fas fa-check-circle text-success me-2"></i> <strong>Amazon study:</strong> combined aircraft measurements (IAGOS-CORE) + high-resolution chemical transport modeling (EMAC) </li>
+                    <li><i class="fas fa-check-circle text-success me-2"></i> <strong>Indian Ocean:</strong> PTR-TOF-MS observations during winter cruise campaign, back-trajectory analysis and OH reactivity estimation</li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <ul class="list-unstyled">
+                    <li><i class="fas fa-chart-simple text-info me-2"></i> Both papers highlight the role of VOC chemistry in regional climate & air quality feedbacks.</li>
+                    <li><i class="fas fa-globe text-info me-2"></i> Policy relevance: improving atmospheric models over tropical and marine environments.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Additional visual features: Citation preview / graphical abstract placeholder (optional) ===== -->
+    <section id="citation-note" class="facts" style="padding: 40px 0;">
+      <div class="container" data-aos="fade-up">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-quote-left fa-2x" style="color: #2098d1;"></i>
+                <p class="mt-3 fst-italic">"Our work emphasizes the need to include small-scale convective transport and deforestation edges in biogenic emission models to capture VOC budgets accurately."</p>
+                <footer class="blockquote-footer">Tripathi et al., Nat Commun 2025</footer>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body text-center">
+                <i class="fas fa-charging-station fa-2x" style="color: #2098d1;"></i>
+                <p class="mt-3 fst-italic">"Light NMHCs in the Northern Indian Ocean are strongly influenced by continental pollution, increasing aerosol burden over remote marine regions."</p>
+                <footer class="blockquote-footer">Tripathi et al., JGR Atmospheres 2024</footer>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= Optional References Section with same style as original about page (for consistency) ======= -->
+    <section id="testimonials" class="testimonials">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Related Collaborators & Mentors</h2>
+          <p>Researchers who contributed to the highlighted papers.</p>
+        </div>
+        <div class="scroll-buttons">
+          <button class="scroll-btn left" onclick="scrollTestimonials(-1)">&#8592;</button>
+          <button class="scroll-btn right" onclick="scrollTestimonials(1)">&#8594;</button>
+        </div>
+        <div class="testimonials-row" id="testimonialsRow">
+          <div class="testimonial-item">
+            <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
+            <h3>Prof. Dr. Lokesh Sahu</h3>
+            <h4>Co-author (JGR 2024)</h4>
+            <p>Physical Research Laboratory, India</p>
+          </div>
+          <div class="testimonial-item">
+            <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+            <h3>Prof. Dr. Jonathan Williams</h3>
+            <h4>Senior author (Nat Commun 2025)</h4>
+            <p>Max Planck Institute for Chemistry</p>
+          </div>
+          <div class="testimonial-item">
+            <img src="assets/img/JOS_original.webp" class="testimonial-img" alt="">
+            <h3>Prof. Dr. Jos Lelieveld</h3>
+            <h4>Collaborator & co-author</h4>
+            <p>MPIC, Mainz</p>
+          </div>
+          <div class="testimonial-item">
+            <img src="assets/img/testimonials/andrea_pozzar.png" class="testimonial-img" alt="">
+            <h3>Prof. Dr. Andrea Pozzer</h3>
+            <h4>Co-author (Amazon study)</h4>
+            <p>Atmospheric Chemistry, MPIC</p>
+          </div>
+          <div class="testimonial-item">
+            <img src="assets/img/dilip_ganguly.png" class="testimonial-img" alt="">
+            <h3>Prof. Dr. Dilip Ganguly</h3>
+            <h4>Scientific advisor</h4>
+            <p>IIT-Delhi</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- optional: future papers teaser -->
+    <div class="container pb-5" data-aos="fade-up">
+      <div class="alert alert-light border rounded-pill text-center" role="alert">
+        <i class="fas fa-microscope me-2"></i> More research outcomes on atmospheric VOC chemistry, aerosol-cloud interactions and climate modeling will be added soon.
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; <span id="current-year"></span> Copyright
+        <strong><span>Nidhi Tripathi</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        Research highlights curated from selected publications.
+      </div>
+    </div>
+  </footer>
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  
+  <script>
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+    
+    function scrollTestimonials(direction) {
+      const container = document.getElementById('testimonialsRow');
+      if (container) {
+        const scrollAmount = 320;
+        container.scrollLeft += direction * scrollAmount;
+      }
+    }
+
+    // initialize AOS if available
+    if (typeof AOS !== 'undefined') {
+      AOS.init({ duration: 800, once: true });
+    }
+  </script>
+  
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  
+  <!-- small hack for fontawesome icons to show consistently -->
+  <script>
+    // In case any vendor-specific Fontawesome version conflict, ensure i class works.
+    document.querySelectorAll('.placeholder-img i').forEach(icon => {
+      if(icon.classList.contains('fa')) return;
+    });
+  </script>
+</body>
+
+</html>
+```
