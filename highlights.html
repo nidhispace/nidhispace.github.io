@@ -520,6 +520,14 @@
       if(icon.classList.contains('fa')) return;
     });
   </script>
+  <script>
+    function scrollGallery(galleryId, direction) {
+      const container = document.getElementById(galleryId);
+      if (!container) return;
+      const scrollAmount = container.clientWidth * 0.9;
+      container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+    }
+  </script>
 </body>
 
 </html>
