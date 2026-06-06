@@ -1925,16 +1925,18 @@ strong {
 /* Horizontal research buttons bar */
 .research-buttons-bar {
   display: flex;
-  justify-content: center;
+  justify-content: center;  /* Horizontal centering */
+  align-items: center;      /* Vertical alignment */
   gap: 1rem;
   flex-wrap: wrap;
-  margin: 2rem 0 2.5rem 0;
+  margin: 2rem auto;        /* auto margins for centering */
   padding: 0.5rem 0;
+  text-align: center;       /* fallback for inline elements */
+  width: 100%;              /* full width container */
 }
 
-/* Extend your existing btn-publications style */
 .btn-publications {
-  display: inline-flex;
+  display: inline-flex;      /* or inline-flex */
   align-items: center;
   gap: 0.5rem;
   background: #34b7a7;
@@ -1945,12 +1947,16 @@ strong {
   transition: 0.3s;
   text-decoration: none;
   font-size: 0.9rem;
+  white-space: nowrap;       /* prevents text wrapping inside button */
 }
 
-.btn-publications:hover {
-  background: #3dc8b7;
-  transform: translateY(-2px);
-  color: white;
+/* Optional: allow text wrap on very small screens */
+@media (max-width: 480px) {
+  .btn-publications {
+    white-space: normal;
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
 }
 
 /* Active button style (for current page) */
