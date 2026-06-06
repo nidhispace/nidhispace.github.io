@@ -1905,3 +1905,19 @@ strong {
 }
 
 
+.btn-publications {
+  display: inline-block;
+  background: #34b7a7;
+  color: white;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.btn-publications:hover {
+  background: #3dc8b7;
+  transform: translateY(-2px);
+  color: white;
+}
