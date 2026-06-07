@@ -1979,3 +1979,15 @@ strong {
 .btn-publications.secondary:hover {
   background: #5a6268;
 }
+
+.services .iconbox-green i {
+  color: #2ecc71;
+}
+
+.services .iconbox-green:hover .icon i {
+  color: #fff;
+}
+
+.services .iconbox-green:hover .icon path {
+  fill: #2ecc71;
+}
