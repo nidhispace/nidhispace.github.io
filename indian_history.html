@@ -373,41 +373,57 @@
       line-height: 1.7;
     }
 
-    /* PROGRESS STRIP */
+    /* PROGRESS STRIP (sticky era navigator) */
     .progress-strip {
-      background: var(--white);
+      position: sticky;
+      top: 72px;
+      z-index: 50;
+      background: rgba(255, 255, 255, .96);
+      backdrop-filter: blur(8px);
       border-radius: 16px;
-      padding: 24px 32px;
+      padding: 14px 24px 12px;
       box-shadow: var(--card-shadow);
       margin-bottom: 60px;
       overflow-x: auto;
+      scrollbar-width: thin;
     }
 
     .strip-title {
-      font-size: .72rem;
+      font-size: .7rem;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--text-muted);
       font-weight: 600;
-      margin-bottom: 16px;
+      margin-bottom: 10px;
     }
 
     .strip-track {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       position: relative;
-      min-width: 900px;
+      min-width: 960px;
+    }
+
+    /* line runs through dot centres only (dot = 16px, so centre = 8px) */
+    .strip-line,
+    .strip-fill {
+      position: absolute;
+      top: 7px;
+      height: 3px;
+      border-radius: 2px;
+      z-index: 0;
+      left: calc(100% / 26);
     }
 
     .strip-line {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #FF9933 0%, #138808 100%);
-      transform: translateY(-50%);
-      z-index: 0;
+      right: calc(100% / 26);
+      background: #e4e4df;
+    }
+
+    .strip-fill {
+      width: 0;
+      background: linear-gradient(90deg, #FF9933, #138808);
+      transition: width .35s ease;
     }
 
     .strip-event {
@@ -416,34 +432,63 @@
       flex: 1;
       text-align: center;
       cursor: pointer;
+      padding: 0 2px 4px;
+      border-radius: 8px;
+      outline: none;
     }
 
     .strip-dot {
-      width: 13px;
-      height: 13px;
+      box-sizing: border-box;
+      width: 16px;
+      height: 16px;
       background: var(--white);
       border: 3px solid var(--saffron);
       border-radius: 50%;
-      margin: 0 auto 7px;
+      margin: 0 auto 8px;
       transition: all .25s;
     }
 
+    .strip-event.passed .strip-dot {
+      background: var(--saffron);
+    }
+
     .strip-event:hover .strip-dot,
+    .strip-event:focus-visible .strip-dot,
     .strip-event.active .strip-dot {
       background: var(--saffron);
-      transform: scale(1.4);
+      transform: scale(1.35);
+      box-shadow: 0 0 0 4px rgba(255, 153, 51, .25);
+    }
+
+    .strip-event:focus-visible {
+      box-shadow: 0 0 0 2px var(--saffron);
     }
 
     .strip-label {
-      font-size: .66rem;
+      font-size: .68rem;
       color: var(--text-muted);
       font-weight: 600;
-      line-height: 1.3;
+      line-height: 1.35;
     }
 
     .strip-event:hover .strip-label,
     .strip-event.active .strip-label {
       color: var(--saffron);
+    }
+
+    .tl-item {
+      scroll-margin-top: 190px;
+    }
+
+    @media(max-width:860px) {
+      .progress-strip {
+        top: 64px;
+        padding: 12px 14px 10px;
+      }
+
+      .tl-item {
+        scroll-margin-top: 170px;
+      }
     }
 
     /* EPOCH GROUP HEADERS */
@@ -1053,55 +1098,56 @@
       <div class="strip-title">Navigate Timeline</div>
       <div class="strip-track">
         <div class="strip-line"></div>
-        <div class="strip-event active" data-target="#era-indus">
+        <div class="strip-fill"></div>
+        <div class="strip-event active" data-target="#era-indus" role="link" tabindex="0">
           <div class="strip-dot"></div>
           <div class="strip-label">3300 BCE<br>Indus</div>
         </div>
-        <div class="strip-event" data-target="#era-vedic">
+        <div class="strip-event" data-target="#era-vedic" role="link" tabindex="0">
           <div class="strip-dot"></div>
           <div class="strip-label">1500 BCE<br>Vedic</div>
         </div>
-        <div class="strip-event" data-target="#era-mahajanapadas">
+        <div class="strip-event" data-target="#era-mahajanapadas" role="link" tabindex="0">
           <div class="strip-dot"></div>
           <div class="strip-label">600 BCE<br>Kingdoms</div>
         </div>
-        <div class="strip-event" data-target="#era-maurya">
+        <div class="strip-event" data-target="#era-maurya" role="link" tabindex="0">
           <div class="strip-dot"></div>
           <div class="strip-label">321 BCE<br>Maurya</div>
         </div>
-        <div class="strip-event" data-target="#era-gupta">
+        <div class="strip-event" data-target="#era-gupta" role="link" tabindex="0">
           <div class="strip-dot"></div>
           <div class="strip-label">320 CE<br>Gupta</div>
         </div>
-        <div class="strip-event" data-target="#era-medieval">
+        <div class="strip-event" data-target="#era-medieval" role="link" tabindex="0">
           <div class="strip-dot"></div>
           <div class="strip-label">600–1200<br>Medieval</div>
         </div>
-        <div class="strip-event" data-target="#era-delhi">
+        <div class="strip-event" data-target="#era-delhi" role="link" tabindex="0">
           <div class="strip-dot"></div>
           <div class="strip-label">1206<br>Delhi</div>
         </div>
-        <div class="strip-event" data-target="#era-mughal">
+        <div class="strip-event" data-target="#era-mughal" role="link" tabindex="0">
           <div class="strip-dot"></div>
           <div class="strip-label">1526<br>Mughal</div>
         </div>
-        <div class="strip-event" data-target="#era-maratha">
+        <div class="strip-event" data-target="#era-maratha" role="link" tabindex="0">
           <div class="strip-dot"></div>
           <div class="strip-label">1674<br>Maratha</div>
         </div>
-        <div class="strip-event" data-target="#era-british">
+        <div class="strip-event" data-target="#era-british" role="link" tabindex="0">
           <div class="strip-dot"></div>
           <div class="strip-label">1757<br>British</div>
         </div>
-        <div class="strip-event" data-target="#era-freedom">
+        <div class="strip-event" data-target="#era-freedom" role="link" tabindex="0">
           <div class="strip-dot"></div>
           <div class="strip-label">1857–1947<br>Freedom</div>
         </div>
-        <div class="strip-event" data-target="#era-republic">
+        <div class="strip-event" data-target="#era-republic" role="link" tabindex="0">
           <div class="strip-dot"></div>
           <div class="strip-label">1947+<br>Republic</div>
         </div>
-        <div class="strip-event" data-target="#era-modern">
+        <div class="strip-event" data-target="#era-modern" role="link" tabindex="0">
           <div class="strip-dot"></div>
           <div class="strip-label">2000+<br>Modern</div>
         </div>
@@ -2154,27 +2200,63 @@
       document.querySelectorAll('.counter-num').forEach(el => animateCounter(el, parseInt(el.dataset.target)));
     });
 
-    // Strip nav
+    // Strip nav: click/keyboard jumps to era, scroll-spy highlights current era
     const eraIds = ['#era-indus', '#era-vedic', '#era-mahajanapadas', '#era-maurya', '#era-gupta',
       '#era-medieval', '#era-delhi', '#era-mughal', '#era-maratha', '#era-british', '#era-freedom',
       '#era-republic', '#era-modern'];
     const stripEvents = document.querySelectorAll('.strip-event');
-    stripEvents.forEach(ev => {
-      ev.addEventListener('click', () => {
-        const t = document.querySelector(ev.dataset.target);
-        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        stripEvents.forEach(e => e.classList.remove('active'));
-        ev.classList.add('active');
+    const strip = document.querySelector('.progress-strip');
+    const stripFill = document.querySelector('.strip-fill');
+    const stripTrack = document.querySelector('.strip-track');
+    let manualJump = false, jumpTimer;
+
+    function setActive(cur) {
+      stripEvents.forEach((e, i) => {
+        e.classList.toggle('active', i === cur);
+        e.classList.toggle('passed', i < cur);
+      });
+      // fill the line from first to current dot
+      const span = 100 - 100 / 13; // % of track between first and last dot centres
+      stripFill.style.width = (cur / (stripEvents.length - 1)) * span + '%';
+      // keep the active dot visible when the strip scrolls horizontally (small screens)
+      const ev = stripEvents[cur];
+      if (strip.scrollWidth > strip.clientWidth) {
+        strip.scrollTo({ left: ev.offsetLeft - strip.clientWidth / 2 + ev.offsetWidth / 2, behavior: 'smooth' });
+      }
+    }
+
+    function goTo(ev, i) {
+      const t = document.querySelector(ev.dataset.target);
+      if (!t) return;
+      manualJump = true;
+      clearTimeout(jumpTimer);
+      jumpTimer = setTimeout(() => { manualJump = false; }, 900);
+      setActive(i);
+      t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.replaceState(null, '', ev.dataset.target);
+    }
+
+    stripEvents.forEach((ev, i) => {
+      ev.addEventListener('click', () => goTo(ev, i));
+      ev.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goTo(ev, i); }
       });
     });
-    window.addEventListener('scroll', () => {
+
+    function spy() {
+      if (manualJump) return;
+      const line = strip.getBoundingClientRect().bottom + 60;
       let cur = 0;
       eraIds.forEach((id, i) => {
         const el = document.querySelector(id);
-        if (el && el.getBoundingClientRect().top < window.
-          innerHeight * .55) cur = i;
+        if (el && el.getBoundingClientRect().top <= line) cur = i;
       });
-      stripEvents.forEach((e, i) => e.classList.toggle('active', i === cur));
+      setActive(cur);
+    }
+    window.addEventListener('scroll', spy, { passive: true });
+    window.addEventListener('load', () => {
+      const i = eraIds.indexOf(location.hash);
+      if (i >= 0) goTo(stripEvents[i], i); else spy();
     });
   </script>
   <script data-goatcounter="https://nidhi4358.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
