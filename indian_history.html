@@ -477,7 +477,7 @@
     }
 
     .tl-item {
-      scroll-margin-top: 190px;
+      scroll-margin-top: var(--nav-offset, 190px);
     }
 
     @media(max-width:860px) {
@@ -486,9 +486,6 @@
         padding: 12px 14px 10px;
       }
 
-      .tl-item {
-        scroll-margin-top: 170px;
-      }
     }
 
     /* EPOCH GROUP HEADERS */
@@ -555,14 +552,6 @@
     .tl-item.visible {
       opacity: 1;
       transform: translateY(0);
-    }
-
-    .tl-item:nth-child(odd) {
-      flex-direction: row;
-    }
-
-    .tl-item:nth-child(even) {
-      flex-direction: row-reverse;
     }
 
     .tl-dot {
@@ -645,7 +634,7 @@
       box-shadow: 0 16px 40px rgba(255, 153, 51, .15), 0 4px 12px rgba(0, 0, 0, .08);
     }
 
-    .tl-item:nth-child(odd) .tl-card::after {
+    .tl-item:not(.flip) .tl-card::after {
       content: "";
       position: absolute;
       top: 30px;
@@ -655,7 +644,7 @@
       border-right: 0;
     }
 
-    .tl-item:nth-child(even) .tl-card::after {
+    .tl-item.flip .tl-card::after {
       content: "";
       position: absolute;
       top: 30px;
@@ -916,7 +905,7 @@
       }
 
       .tl-item,
-      .tl-item:nth-child(even) {
+      .tl-item.flip {
         flex-direction: column;
         padding-left: 48px;
       }
@@ -949,8 +938,8 @@
         height: 190px;
       }
 
-      .tl-card::after,
-      .tl-item:nth-child(even) .tl-card::after {
+      .timeline .tl-item:not(.flip) .tl-card::after,
+      .timeline .tl-item.flip .tl-card::after {
         display: none;
       }
     }
@@ -991,10 +980,548 @@
     .back-to-top:hover {
       background: var(--saffron-deep);
     }
+
+    /* ═════════ TIMELINE ENHANCEMENTS ═════════ */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
+    /* strip toolbar */
+    .strip-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      min-width: 0;
+    }
+
+    .strip-bar .strip-title {
+      margin: 0;
+      flex: 1;
+      white-space: nowrap;
+    }
+
+    .strip-search {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .strip-search>i.bi-search {
+      position: absolute;
+      left: 10px;
+      color: var(--text-muted);
+      font-size: .8rem;
+      pointer-events: none;
+    }
+
+    .strip-search input {
+      font: inherit;
+      font-size: .8rem;
+      width: 230px;
+      max-width: 40vw;
+      padding: 6px 30px 6px 30px;
+      border: 1px solid #dcdcd6;
+      border-radius: 20px;
+      background: #fafaf8;
+      color: var(--dark);
+      transition: border-color .2s, box-shadow .2s, width .2s;
+    }
+
+    .strip-search input:focus {
+      outline: none;
+      border-color: var(--saffron);
+      box-shadow: 0 0 0 3px rgba(255, 153, 51, .2);
+      background: #fff;
+    }
+
+    .strip-clear {
+      position: absolute;
+      right: 4px;
+      border: 0;
+      background: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 2px 6px;
+      display: none;
+    }
+
+    .strip-search.has-text .strip-clear {
+      display: block;
+    }
+
+    .strip-count {
+      font-size: .72rem;
+      color: var(--text-muted);
+      min-width: 70px;
+      white-space: nowrap;
+    }
+
+    .strip-count b {
+      color: var(--saffron-deep);
+    }
+
+    .strip-btn {
+      font: inherit;
+      font-size: .72rem;
+      font-weight: 600;
+      color: var(--mid);
+      background: #fff;
+      border: 1px solid #dcdcd6;
+      border-radius: 20px;
+      padding: 5px 12px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all .2s;
+    }
+
+    .strip-btn:hover,
+    .strip-btn:focus-visible {
+      border-color: var(--saffron);
+      color: var(--saffron-deep);
+      outline: none;
+    }
+
+    .strip-event.dim {
+      opacity: .3;
+    }
+
+    .strip-event.match .strip-dot {
+      box-shadow: 0 0 0 4px rgba(19, 136, 8, .28);
+      border-color: var(--india-green);
+    }
+
+    /* flip-based alternation (replaces nth-child, which dividers threw off) */
+    @media(min-width:861px) {
+      .tl-item {
+        justify-content: space-between;
+      }
+
+      .tl-item.flip {
+        flex-direction: row-reverse;
+      }
+
+      .tl-item:not(.flip) {
+        flex-direction: row;
+      }
+    }
+
+    .tl-item.nomatch {
+      opacity: .35 !important;
+    }
+
+    mark.hit {
+      background: #ffe08a;
+      color: inherit;
+      padding: 0 1px;
+      border-radius: 3px;
+    }
+
+    /* at a glance */
+    .glance {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: #f0efea;
+      border-bottom: 1px solid #f0efea;
+    }
+
+    .glance>div {
+      background: #fff;
+      padding: 9px 22px 9px 22px;
+      min-width: 0;
+    }
+
+    .glance span {
+      display: block;
+      font-size: .62rem;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--saffron-deep);
+      font-weight: 700;
+      margin-bottom: 1px;
+    }
+
+    .glance b {
+      display: block;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--dark);
+      line-height: 1.35;
+    }
+
+    /* collapsible body */
+    .card-more[hidden] {
+      display: none;
+    }
+
+    .card-more {
+      animation: moreIn .35s ease;
+    }
+
+    @keyframes moreIn {
+      from {
+        opacity: 0;
+        transform: translateY(-6px);
+      }
+    }
+
+    .more-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      font: inherit;
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--saffron-deep);
+      background: var(--saffron-pale);
+      border: 0;
+      border-radius: 20px;
+      padding: 7px 16px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .more-toggle:hover,
+    .more-toggle:focus-visible {
+      background: #ffe6c7;
+      outline: none;
+    }
+
+    .more-toggle i {
+      transition: transform .25s;
+    }
+
+    .more-toggle[aria-expanded="true"] i {
+      transform: rotate(180deg);
+    }
+
+    /* cross-era echoes */
+    .echoes {
+      margin-top: 16px;
+      border-left: 3px solid var(--india-green);
+      background: var(--india-green-pale);
+      border-radius: 0 10px 10px 0;
+      padding: 11px 14px;
+    }
+
+    .echoes-title {
+      font-size: .68rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--india-green);
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    .echo {
+      display: block;
+      font-size: .8rem;
+      line-height: 1.45;
+      color: var(--mid);
+      padding: 5px 0;
+      border-top: 1px dashed rgba(19, 136, 8, .25);
+    }
+
+    .echo:first-of-type {
+      border-top: 0;
+    }
+
+    .echo b {
+      color: var(--india-green);
+      margin-right: 4px;
+    }
+
+    .echo:hover {
+      color: var(--dark);
+    }
+
+    .echo:hover b {
+      text-decoration: underline;
+    }
+
+    /* map */
+    .era-map {
+      margin: 16px 0 0;
+      border: 1px solid #ebebeb;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .era-map-panel {
+      width: 100%;
+      max-width: 340px;
+      margin: 0;
+    }
+
+    .era-map-head {
+      padding: 7px 12px;
+      font-size: .66rem;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--navy-mid);
+      background: #f3f7fa;
+    }
+
+    .era-map svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .era-map .sea {
+      fill: #e6f1f6;
+    }
+
+    .era-map .land {
+      fill: #f7ead4;
+      stroke: #d9b983;
+      stroke-width: .8;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .era-map .pin {
+      fill: var(--saffron);
+      stroke: #fff;
+    }
+
+    .era-map .lbl {
+      font-family: "Open Sans", sans-serif;
+      font-weight: 600;
+      fill: #28323a;
+      paint-order: stroke;
+      stroke: #fdf6e8;
+      stroke-linejoin: round;
+    }
+
+    .era-map figcaption {
+      font-size: .66rem;
+      color: var(--text-muted);
+      padding: 6px 12px 8px;
+      line-height: 1.4;
+      font-style: italic;
+    }
+
+    /* did-you-know box (used where a card has no quote) */
+    .tl-quote.fact::before {
+      content: "\2736";
+      font-family: inherit;
+      font-size: 1rem;
+      top: 10px;
+    }
+
+    /* further reading */
+    .sources {
+      margin-top: 14px;
+      font-size: .78rem;
+      color: var(--mid);
+    }
+
+    .sources summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--navy-mid);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 0;
+      list-style: none;
+    }
+
+    .sources summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .sources summary:hover {
+      color: var(--saffron-deep);
+    }
+
+    .sources ul {
+      margin: 6px 0 0 4px;
+      padding-left: 18px;
+    }
+
+    .sources li {
+      margin-bottom: 4px;
+      line-height: 1.45;
+    }
+
+    /* prev / next */
+    .card-foot {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 10px 14px;
+      border-top: 1px solid #f4f4f4;
+      background: #fcfcfa;
+    }
+
+    .card-foot button {
+      flex: 1;
+      min-width: 0;
+      font: inherit;
+      font-size: .74rem;
+      font-weight: 600;
+      color: var(--mid);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      padding: 7px 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all .2s;
+    }
+
+    .card-foot button span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .card-foot button:hover,
+    .card-foot button:focus-visible {
+      color: var(--saffron-deep);
+      background: var(--saffron-pale);
+      outline: none;
+    }
+
+    .card-foot .next {
+      justify-content: flex-end;
+      text-align: right;
+    }
+
+    .card-foot button:disabled {
+      visibility: hidden;
+    }
+
+    @media(max-width:860px) {
+      .strip-bar .strip-title {
+        display: none;
+      }
+
+      .strip-bar {
+        justify-content: space-between;
+        gap: 8px;
+      }
+
+      .strip-search {
+        flex: 1;
+      }
+
+      .strip-search input {
+        width: 100%;
+        max-width: none;
+      }
+
+      .strip-count {
+        display: none;
+      }
+
+      .glance>div {
+        padding: 8px 14px;
+      }
+
+      .era-map-panel {
+        max-width: 100%;
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+      html {
+        scroll-behavior: auto;
+      }
+
+      .card-more,
+      .tl-item {
+        animation: none;
+        transition: none;
+      }
+    }
+
+    @media print {
+
+      #header,
+      .progress-strip,
+      .back-to-top,
+      .more-toggle,
+      .card-foot,
+      .timeline::before,
+      .tl-dot {
+        display: none !important;
+      }
+
+      body {
+        background: #fff;
+      }
+
+      .card-more[hidden] {
+        display: block !important;
+      }
+
+      .tl-item,
+      .tl-item.flip {
+        display: block;
+        opacity: 1 !important;
+        transform: none !important;
+        padding: 0 !important;
+        margin-bottom: 24px;
+        break-inside: avoid-page;
+      }
+
+      .tl-left,
+      .tl-right,
+      .tl-image-panel {
+        width: 100%;
+      }
+
+      .tl-card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+      }
+
+      .tl-card::after {
+        display: none !important;
+      }
+
+      .tl-year,
+      .tl-step-num {
+        position: static;
+        transform: none;
+        display: inline-block;
+        margin-bottom: 6px;
+      }
+
+      .tl-image-panel .main-img {
+        display: none;
+      }
+
+      .era-map,
+      .tl-quote {
+        break-inside: avoid;
+      }
+
+      .sources>ul {
+        display: block;
+      }
+    }
   </style>
 </head>
 
 <body>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><symbol id="sa-land" viewBox="0 0 400 330"><path d="M218.9 309.8L216.8 315.4L213.6 317.7L207.1 320.4L203.4 320.3L200.9 318.6L198.6 311.9L198.6 309.9L198.1 308.2L198.2 307.9L198.5 308.8L198.6 308.3L197.0 297.8L197.8 296.5L197.3 299.9L198.1 300.1L198.1 297.6L199.4 293.6L199.2 290.6L200.5 289.7L201.1 288.1L200.5 286.1L202.0 285.3L200.5 284.0L202.3 284.7L202.9 285.5L204.3 285.0L206.1 285.5L201.9 283.5L201.9 284.2L199.6 283.1L199.1 282.3L199.7 281.8L201.2 281.8L201.3 282.2L204.4 284.2L201.4 282.0L202.5 281.7L204.1 283.8L207.4 286.4L209.6 289.8L208.8 289.6L209.1 290.6L209.8 290.2L212.3 293.5L212.5 294.5L212.1 294.3L212.1 294.9L211.6 294.7L211.3 295.0L213.7 295.2L214.5 298.7L214.0 298.1L214.0 298.6L215.6 300.0L215.9 301.4L217.1 302.9L216.3 302.4L216.0 302.7L217.5 303.8L217.7 305.4L218.1 305.9L218.3 305.3L218.8 306.7L218.9 309.8ZM330.0 249.6L329.4 249.3L329.5 250.3L328.8 250.8L329.6 251.4L329.9 254.8L329.4 255.8L328.5 255.7L329.2 256.6L328.9 257.9L327.6 259.2L327.4 261.2L327.6 260.6L328.0 261.0L327.6 262.9L326.8 263.5L327.0 263.9L327.6 263.4L327.2 265.1L325.2 261.4L325.7 260.7L326.2 261.3L326.8 257.8L327.3 258.3L327.9 257.9L327.2 256.4L327.2 254.0L327.8 253.4L327.4 251.9L328.3 250.0L328.5 246.6L330.1 244.2L330.8 246.0L329.8 246.7L330.8 247.4L330.0 249.6ZM400.0 0.0L400.0 258.3L395.7 266.7L395.9 268.0L395.0 268.7L395.1 271.3L394.4 271.3L392.4 274.6L392.9 276.4L391.5 276.4L392.5 277.7L391.5 279.0L391.4 282.1L393.2 286.1L392.4 286.6L392.6 287.7L394.7 288.0L395.4 287.2L398.0 286.8L398.9 287.7L400.0 294.3L400.0 314.3L398.7 312.4L396.9 311.2L396.8 309.7L397.5 308.7L395.6 308.0L396.0 306.2L395.5 307.0L395.1 306.2L394.7 307.2L393.8 306.8L392.9 303.8L391.3 302.3L390.9 303.1L390.3 302.8L390.7 300.8L390.3 301.0L389.2 299.5L387.7 299.8L387.0 297.0L386.2 297.2L386.6 296.2L384.3 296.8L384.2 298.5L382.9 297.8L382.0 294.7L382.1 294.2L382.5 294.9L382.5 294.7L382.6 291.5L383.9 289.6L383.3 289.7L383.8 289.3L383.2 287.9L384.6 284.5L385.3 284.3L384.6 284.0L385.8 281.6L385.1 281.6L386.3 280.5L387.5 276.7L385.4 280.1L384.6 272.8L385.3 273.1L386.3 271.5L385.8 271.2L387.1 270.8L387.2 269.6L386.6 268.7L387.6 267.3L387.0 266.1L387.7 265.5L387.4 263.6L388.9 263.1L387.8 262.4L388.3 261.7L388.1 261.5L386.7 263.1L386.0 262.0L387.1 261.2L385.5 261.2L386.6 260.8L387.2 260.0L386.3 258.7L387.0 257.6L386.0 258.1L385.4 257.6L387.1 256.5L386.1 255.7L387.1 254.9L386.2 254.4L386.9 252.7L386.2 252.3L385.8 248.1L384.8 247.2L384.7 245.9L383.0 243.0L382.4 242.9L381.9 239.4L381.9 244.6L381.4 244.6L381.7 243.2L381.0 243.0L380.6 239.9L381.1 238.3L379.9 236.7L380.0 235.3L378.9 233.2L379.4 232.8L380.3 233.5L379.5 232.0L378.5 232.8L377.9 231.2L378.2 227.9L377.3 226.6L377.9 225.9L377.3 221.6L375.7 219.4L376.5 217.3L376.4 215.2L377.4 214.4L373.7 215.2L371.8 210.8L371.6 209.1L372.6 208.9L371.6 208.7L371.3 209.2L371.1 208.1L368.8 205.4L368.2 206.1L369.1 206.8L368.5 207.9L369.1 209.8L366.8 214.3L364.4 215.2L362.7 214.0L362.3 212.4L362.9 211.9L361.7 212.3L363.2 215.8L361.2 216.8L360.1 216.1L360.7 216.9L358.0 218.6L357.2 217.8L356.6 220.5L354.2 222.8L352.9 222.6L353.6 220.2L353.6 218.5L353.4 220.2L352.5 221.3L352.7 220.0L352.1 222.1L351.3 221.8L351.0 219.7L352.3 218.8L351.4 218.5L350.7 219.3L350.3 221.9L348.5 222.1L349.0 221.5L348.5 221.6L348.3 220.5L349.2 219.6L348.9 219.8L348.6 218.7L349.0 218.2L349.6 218.0L349.9 217.5L348.5 218.4L348.7 219.6L347.2 221.4L346.0 220.8L347.3 219.8L347.9 218.4L345.7 220.6L346.8 218.8L347.3 214.8L346.8 214.7L346.3 217.4L345.8 217.6L346.3 216.6L345.8 217.3L345.2 217.0L344.3 219.3L342.4 220.2L342.7 214.7L343.4 214.5L343.8 211.0L344.6 210.5L344.5 208.2L345.4 208.1L345.5 206.8L345.9 207.1L345.6 204.2L346.2 204.5L344.5 200.3L344.9 199.5L344.6 198.4L344.2 197.6L343.3 197.4L344.2 196.9L341.5 192.7L342.1 192.7L342.8 192.6L342.1 192.6L341.5 191.3L341.2 191.8L340.4 191.4L340.9 189.1L340.3 189.0L340.7 186.1L340.3 188.0L339.7 188.5L339.1 188.1L339.8 190.3L339.3 191.4L336.8 189.8L334.8 186.5L335.5 185.7L338.0 187.6L339.3 187.0L339.8 186.3L339.9 185.4L337.3 183.7L338.0 183.4L338.1 182.5L337.6 183.3L337.1 182.9L337.5 182.3L336.0 182.8L337.4 180.7L335.8 181.2L335.3 180.0L334.2 180.3L333.8 179.1L333.6 179.7L333.4 179.0L332.7 179.5L331.3 179.1L332.4 181.8L331.3 179.9L331.7 181.9L331.3 181.7L329.7 178.7L330.9 178.5L331.2 177.9L329.9 178.5L330.9 176.2L331.0 175.7L330.6 176.4L330.3 175.9L330.9 174.7L330.7 174.5L329.0 178.6L327.7 178.0L329.4 176.8L328.5 176.2L328.3 175.0L327.7 175.4L327.2 174.1L326.4 173.0L327.1 174.2L327.3 177.4L325.1 173.9L323.8 173.0L322.7 169.4L323.3 172.6L320.5 168.3L320.5 167.0L319.5 165.4L320.2 165.1L320.3 163.0L319.8 163.5L319.9 162.1L319.0 162.1L319.5 161.2L319.2 161.4L318.1 158.2L318.4 157.5L318.1 156.9L318.7 156.6L319.1 155.8L317.9 157.0L317.9 157.6L316.8 154.7L314.6 152.4L314.9 151.0L314.1 152.5L312.9 152.6L313.2 153.0L311.8 152.7L312.6 153.6L312.0 154.6L310.9 154.6L310.2 153.2L310.4 154.1L309.4 154.1L306.3 149.4L306.7 147.3L306.0 145.5L307.2 145.0L307.1 144.5L306.1 145.1L306.3 144.0L304.8 144.2L305.8 144.6L305.5 146.2L302.5 145.4L306.1 147.5L305.7 149.2L305.6 148.9L304.5 149.3L304.5 149.4L304.7 150.0L305.1 150.8L305.4 151.0L304.8 151.2L303.7 152.4L304.9 152.8L305.1 153.9L304.6 154.2L304.4 155.1L304.7 154.2L305.6 154.4L306.1 156.9L304.4 159.2L303.9 159.0L304.2 158.0L303.9 157.1L304.1 158.2L302.2 161.9L300.9 161.7L301.3 160.7L300.2 161.4L300.4 160.3L302.2 158.8L302.4 158.0L300.5 160.1L300.0 160.0L300.8 158.4L299.7 160.3L299.2 159.5L298.8 157.3L300.1 155.1L299.2 156.1L298.7 155.8L298.7 159.1L298.0 159.2L298.8 161.2L297.1 161.7L296.5 160.7L296.2 161.3L297.0 162.2L296.0 162.4L295.9 163.0L295.3 161.9L296.3 156.6L295.5 157.9L295.3 160.2L295.4 159.1L294.8 157.0L295.2 160.4L294.1 162.8L293.5 160.3L293.0 163.2L292.1 163.5L291.9 161.9L291.0 161.8L290.9 160.0L290.4 158.6L290.6 160.6L290.1 161.0L289.1 160.3L290.2 161.5L290.8 163.8L288.9 163.5L288.6 162.3L288.6 163.6L288.1 163.8L288.1 163.1L287.9 164.3L287.3 164.4L286.8 163.0L287.6 159.8L287.1 159.3L287.6 158.7L286.9 159.2L286.9 160.5L286.3 160.5L286.8 158.2L286.6 157.9L285.7 161.5L285.6 162.3L286.3 162.5L285.7 164.4L284.9 164.4L285.3 162.0L285.0 160.5L284.6 163.8L283.9 164.0L283.9 163.0L283.3 162.8L283.1 163.9L283.0 162.4L282.6 162.0L283.1 164.3L282.5 164.5L281.8 163.3L282.1 162.1L281.5 160.4L282.2 159.2L282.0 158.3L280.1 157.6L279.4 155.9L279.1 155.8L279.7 157.6L281.3 158.2L281.6 159.1L280.4 159.8L279.8 161.5L278.3 162.7L272.0 164.5L269.2 166.7L268.4 169.2L269.7 171.9L268.8 172.2L269.9 172.5L269.4 173.0L270.4 173.0L267.5 175.1L267.2 176.3L268.1 175.8L266.9 177.1L267.5 176.9L265.0 178.2L264.3 180.0L262.1 179.3L261.5 178.6L261.7 179.3L263.7 180.4L254.8 183.3L254.3 183.0L255.8 182.5L255.7 181.2L254.4 181.0L252.7 182.2L251.0 184.7L251.2 185.2L252.3 184.5L251.9 184.2L252.5 183.4L253.9 183.1L253.8 183.9L252.9 184.0L253.3 184.2L255.8 183.1L251.8 185.2L247.9 188.8L247.4 188.5L247.4 189.3L247.8 189.0L247.4 189.7L244.2 193.6L242.5 194.7L243.5 194.5L241.1 197.0L234.5 200.8L233.4 202.8L232.5 202.8L233.0 203.4L232.1 203.7L232.4 204.1L223.9 208.7L222.5 210.7L223.1 211.5L223.6 211.4L223.5 210.4L223.7 210.9L223.7 211.9L223.4 213.2L222.8 213.8L223.1 214.2L217.6 216.8L214.2 216.6L214.1 216.2L212.6 216.7L211.5 220.3L210.0 221.5L210.1 222.2L209.1 221.5L209.0 219.7L208.1 222.8L207.8 221.2L206.7 220.9L202.8 223.0L200.5 229.1L201.1 232.9L201.8 233.9L201.4 234.3L202.0 234.3L201.7 236.6L200.5 237.9L201.4 237.7L203.1 245.6L201.4 242.7L201.4 243.8L200.9 243.1L200.5 243.8L201.2 245.0L203.3 245.7L203.3 248.0L201.8 254.7L199.4 257.8L200.1 257.6L197.9 262.3L197.5 264.2L198.2 266.2L197.5 266.3L196.8 267.0L198.3 266.6L198.6 277.1L195.6 277.0L195.9 276.6L192.9 277.5L192.4 278.3L192.8 279.6L189.8 283.3L189.1 285.3L190.7 287.0L193.4 286.8L194.5 288.4L192.9 287.5L189.9 287.2L184.1 289.0L181.8 291.2L181.6 292.5L182.2 292.3L181.1 293.4L181.3 295.1L180.6 296.4L175.7 299.2L173.1 298.7L170.0 296.3L165.4 290.9L166.7 289.9L165.3 290.5L164.8 288.3L164.1 287.5L164.4 288.5L163.6 286.7L163.1 285.1L162.4 280.5L162.5 280.4L163.4 283.0L163.3 281.3L163.9 283.2L163.6 284.8L165.0 284.7L164.1 284.3L163.9 281.6L162.5 279.0L162.2 278.6L162.4 280.1L161.8 278.9L162.4 277.6L161.5 277.8L157.4 266.3L153.1 260.7L154.0 260.8L153.9 260.3L153.0 260.3L153.0 259.6L152.8 260.3L151.9 259.8L151.4 257.5L151.1 257.8L148.3 251.8L149.4 251.2L148.2 251.4L146.9 246.2L146.7 243.7L147.4 243.5L146.9 242.9L146.6 243.4L145.0 239.7L144.3 237.6L145.1 237.5L144.2 237.0L143.5 234.7L144.3 235.2L143.6 234.3L143.0 234.7L143.4 233.9L142.8 233.9L142.5 232.8L141.0 232.1L142.4 231.2L141.1 231.5L139.1 229.2L139.6 228.5L138.9 226.6L137.8 225.9L139.7 226.3L138.0 225.5L138.7 224.6L137.5 224.9L137.4 224.0L138.4 223.4L137.3 223.8L136.5 222.6L134.5 219.4L134.9 218.1L134.5 218.9L133.1 214.8L133.1 214.4L133.4 214.8L133.8 214.8L133.1 214.0L133.7 213.9L133.1 213.6L132.8 209.2L131.9 206.9L132.5 207.2L131.3 204.4L132.0 204.1L131.2 203.7L130.1 199.9L130.4 199.3L129.9 199.3L129.3 197.8L129.4 197.1L130.6 198.1L130.7 197.3L129.1 196.4L129.1 194.8L130.1 195.3L128.6 193.2L128.7 192.0L129.3 191.7L130.0 192.7L130.2 191.9L129.0 191.1L130.6 189.8L129.9 190.0L129.7 188.4L128.2 191.0L127.7 190.5L128.2 189.5L127.9 186.9L129.7 187.1L130.3 187.9L130.5 187.8L129.9 187.0L127.6 186.2L127.5 185.2L128.8 184.7L127.4 184.2L127.2 184.6L126.9 182.8L127.3 182.9L127.3 182.2L126.8 182.5L126.5 181.5L129.5 172.4L129.0 171.3L128.4 171.6L128.9 170.2L127.7 169.8L128.5 169.5L128.1 168.7L127.0 169.3L127.1 168.4L126.2 168.9L127.3 168.0L126.2 167.5L125.9 166.6L126.5 166.4L125.6 166.1L127.5 165.5L125.8 165.8L128.2 163.6L128.9 163.6L131.3 162.4L129.3 163.2L125.5 163.3L125.7 161.5L127.3 160.1L125.4 160.9L125.0 160.2L125.8 158.1L127.5 158.4L128.1 157.7L129.2 157.8L129.2 157.3L125.7 157.1L124.7 157.7L123.9 157.5L124.0 156.3L123.3 157.4L122.4 157.0L121.5 157.2L123.1 157.7L123.1 159.2L121.7 160.2L121.0 159.9L121.0 160.5L120.3 160.6L121.6 160.7L121.7 161.6L120.6 161.0L121.0 161.6L120.0 161.4L120.0 162.0L121.7 162.1L123.0 163.7L121.0 166.8L121.0 167.9L111.4 172.3L107.4 172.8L100.5 168.5L98.1 165.3L94.3 162.2L93.9 161.2L92.0 160.2L89.4 157.0L90.7 155.2L90.7 156.0L92.0 155.9L92.1 157.3L94.8 156.6L95.2 155.5L96.2 156.4L97.3 155.2L97.9 155.8L99.7 154.6L101.8 154.4L103.8 151.0L105.0 150.2L105.0 149.0L104.0 149.3L103.9 150.6L101.3 150.1L101.4 150.7L98.3 151.4L97.2 152.5L92.0 151.5L88.7 149.8L86.5 148.4L86.2 147.3L85.5 147.4L86.0 146.7L84.2 145.5L84.8 144.7L84.1 144.9L84.1 143.8L84.9 143.8L84.7 143.4L88.2 141.2L84.3 142.9L83.2 144.1L81.4 143.9L82.8 143.1L81.7 142.5L81.8 141.6L81.6 140.9L81.5 143.1L80.6 142.8L81.0 141.8L80.1 140.6L80.5 141.7L80.1 142.3L78.6 140.9L78.3 141.9L77.2 141.6L77.2 142.1L76.3 142.0L76.5 140.7L76.1 141.5L74.8 141.1L75.4 140.6L74.5 140.1L75.3 139.3L73.4 139.1L72.8 137.2L73.6 136.6L72.7 136.3L71.8 134.1L72.5 134.1L71.5 133.8L72.6 132.5L69.7 131.6L66.5 131.6L67.4 128.2L65.5 126.3L65.9 126.0L65.3 124.8L63.8 123.7L62.0 124.1L60.9 125.3L63.4 124.5L64.9 125.2L65.0 126.0L62.5 125.3L56.5 126.6L54.0 126.1L52.3 126.3L51.6 127.0L47.4 126.8L46.7 127.4L47.1 128.2L46.6 128.3L45.7 127.3L44.4 127.7L40.9 126.6L40.8 125.7L41.6 125.5L40.5 125.5L39.8 125.9L40.5 125.8L40.6 126.6L35.7 126.4L34.7 127.1L35.0 128.1L31.4 127.4L30.3 127.8L24.8 127.4L24.9 127.9L23.4 128.4L23.8 129.1L22.6 129.0L23.0 128.1L21.5 127.8L20.6 128.4L21.0 128.9L18.8 129.0L17.5 129.9L17.8 128.1L15.9 128.0L15.5 127.5L14.1 129.4L10.3 127.9L6.3 127.3L5.5 125.5L4.0 126.2L4.7 127.1L2.9 126.2L2.0 126.3L2.1 126.8L0.0 126.4L0.0 0.0L400.0 0.0ZM353.6 330.0L352.0 327.1L352.5 325.9L352.0 324.5L354.3 323.5L357.6 324.2L360.5 326.9L363.6 327.7L369.7 327.3L372.3 328.5L375.0 327.5L377.5 330.0L353.6 330.0Z"/></symbol></svg>
 
   <header id="header">
     <div class="header-inner">
@@ -1095,62 +1622,20 @@
 
     <!-- PROGRESS STRIP -->
     <div class="progress-strip">
-      <div class="strip-title">Navigate Timeline</div>
+      <div class="strip-bar">
+        <div class="strip-title">Navigate Timeline</div>
+        <div class="strip-count" id="eraSearchCount" aria-live="polite"></div>
+        <label class="strip-search">
+          <span class="sr-only">Search the timeline</span>
+          <i class="bi bi-search"></i>
+          <input id="eraSearch" type="search" placeholder="Search eras…  ( / )" autocomplete="off">
+          <button class="strip-clear" id="eraSearchClear" type="button" aria-label="Clear search">&times;</button>
+        </label>
+        <button class="strip-btn" id="expandAll" type="button" aria-pressed="false"><span>Expand all</span></button>
+      </div>
       <div class="strip-track">
         <div class="strip-line"></div>
         <div class="strip-fill"></div>
-        <div class="strip-event active" data-target="#era-indus" role="link" tabindex="0">
-          <div class="strip-dot"></div>
-          <div class="strip-label">3300 BCE<br>Indus</div>
-        </div>
-        <div class="strip-event" data-target="#era-vedic" role="link" tabindex="0">
-          <div class="strip-dot"></div>
-          <div class="strip-label">1500 BCE<br>Vedic</div>
-        </div>
-        <div class="strip-event" data-target="#era-mahajanapadas" role="link" tabindex="0">
-          <div class="strip-dot"></div>
-          <div class="strip-label">600 BCE<br>Kingdoms</div>
-        </div>
-        <div class="strip-event" data-target="#era-maurya" role="link" tabindex="0">
-          <div class="strip-dot"></div>
-          <div class="strip-label">321 BCE<br>Maurya</div>
-        </div>
-        <div class="strip-event" data-target="#era-gupta" role="link" tabindex="0">
-          <div class="strip-dot"></div>
-          <div class="strip-label">320 CE<br>Gupta</div>
-        </div>
-        <div class="strip-event" data-target="#era-medieval" role="link" tabindex="0">
-          <div class="strip-dot"></div>
-          <div class="strip-label">600–1200<br>Medieval</div>
-        </div>
-        <div class="strip-event" data-target="#era-delhi" role="link" tabindex="0">
-          <div class="strip-dot"></div>
-          <div class="strip-label">1206<br>Delhi</div>
-        </div>
-        <div class="strip-event" data-target="#era-mughal" role="link" tabindex="0">
-          <div class="strip-dot"></div>
-          <div class="strip-label">1526<br>Mughal</div>
-        </div>
-        <div class="strip-event" data-target="#era-maratha" role="link" tabindex="0">
-          <div class="strip-dot"></div>
-          <div class="strip-label">1674<br>Maratha</div>
-        </div>
-        <div class="strip-event" data-target="#era-british" role="link" tabindex="0">
-          <div class="strip-dot"></div>
-          <div class="strip-label">1757<br>British</div>
-        </div>
-        <div class="strip-event" data-target="#era-freedom" role="link" tabindex="0">
-          <div class="strip-dot"></div>
-          <div class="strip-label">1857–1947<br>Freedom</div>
-        </div>
-        <div class="strip-event" data-target="#era-republic" role="link" tabindex="0">
-          <div class="strip-dot"></div>
-          <div class="strip-label">1947+<br>Republic</div>
-        </div>
-        <div class="strip-event" data-target="#era-modern" role="link" tabindex="0">
-          <div class="strip-dot"></div>
-          <div class="strip-label">2000+<br>Modern</div>
-        </div>
       </div>
     </div>
 
@@ -1159,10 +1644,67 @@
 
       <div class="epoch-divider"><span class="epoch-label">⚱ Ancient India · 3300 BCE – 600 CE</span></div>
 
+      <!-- 0. NEOLITHIC -->
+      <div class="tl-item" id="era-neolithic">
+        <span class="tl-year">7000 – 3300 BCE</span>
+        <div class="tl-step-num">1</div>
+        <div class="tl-left">
+          <div class="tl-card">
+            <div class="card-header-band">
+              <div class="card-icon"><i class="bi bi-tree"></i></div>
+              <div>
+                <div class="tl-era">Neolithic · Dawn of Settled Life</div>
+                <h3>Before the Cities — Bhimbetka, Mehrgarh &amp; the First Farmers</h3>
+              </div>
+            </div>
+            <div class="card-body">
+              <p>Long before Harappa's streets were laid out, people across the subcontinent were hunting, gathering and
+                painting. The rock shelters of <strong>Bhimbetka</strong> in Madhya Pradesh, a UNESCO World Heritage Site
+                since 2003, hold paintings of hunts, dances, animals and daily life made over many thousands of years
+                by Stone Age communities.</p>
+              <p>The key site for the story of farming is <strong>Mehrgarh</strong>, on the Kachi Plain of Balochistan
+                (now in Pakistan), excavated from 1974 by a French archaeological mission led by Jean-François and
+                Catherine Jarrige. From about 7000 BCE its people grew wheat and barley, kept sheep, goats and cattle,
+                and lived in mud-brick houses with granaries. Pottery appears by about 5500 BCE, followed by copper
+                working, bead making and trade in distant materials such as lapis lazuli.</p>
+              <p>Mehrgarh also gives some of the oldest evidence of dentistry: researchers reported in 2006 that
+                molars in its early burials had been drilled with flint-tipped tools, some 7,000 to 9,000 years ago.
+                The settlement lasted into the period when the first Harappan towns appeared, which is why many
+                scholars see it as a forerunner of the Indus Civilisation.</p>
+              <div class="key-facts">
+                <div class="key-facts-title"><i class="bi bi-info-circle"></i> Key Facts</div>
+                <div class="fact-row"><i class="bi bi-calendar3"></i><span><strong>Mehrgarh:</strong> occupied from c.
+                    7000 BCE; among the earliest farming settlements in South Asia</span></div>
+                <div class="fact-row"><i class="bi bi-flower1"></i><span><strong>Crops &amp; herds:</strong> wheat,
+                    barley; sheep, goats, cattle</span></div>
+                <div class="fact-row"><i class="bi bi-palette"></i><span><strong>Bhimbetka:</strong> hundreds of painted
+                    rock shelters; UNESCO World Heritage Site (2003)</span></div>
+                <div class="fact-row"><i class="bi bi-gem"></i><span><strong>Crafts:</strong> pottery, copper, beads
+                    of imported stone</span></div>
+              </div>
+              <div class="figures-row">
+                <div class="figure-chip"><strong>Mehrgarh</strong><span>Early farming village, Balochistan</span></div>
+                <div class="figure-chip"><strong>Bhimbetka</strong><span>Rock-art shelters, Madhya Pradesh</span></div>
+                <div class="figure-chip"><strong>J.-F. &amp; C. Jarrige</strong><span>Led the Mehrgarh excavations</span></div>
+              </div>
+              <span class="impact-badge impact-gold"><i class="bi bi-seedling"></i> Roots of South Asian farming and
+                urban life</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-image-panel">
+          <div class="tl-quote fact">
+            <p>Drilled molars from Mehrgarh burials, reported in <em>Nature</em> in 2006, are among the earliest known
+              evidence of dentistry anywhere in the world.</p>
+            <cite>— Coppa et al., Nature, 2006</cite>
+          </div>
+        </div>
+      </div>
+
       <!-- 1. INDUS VALLEY -->
       <div class="tl-item" id="era-indus">
         <span class="tl-year">3300 – 1300 BCE</span>
-        <div class="tl-step-num">1</div>
+        <div class="tl-step-num">2</div>
         <div class="tl-left">
           <div class="tl-card">
             <div class="card-header-band">
@@ -1231,7 +1773,7 @@
       <!-- 2. VEDIC AGE -->
       <div class="tl-item" id="era-vedic">
         <span class="tl-year">1500 – 500 BCE</span>
-        <div class="tl-step-num">2</div>
+        <div class="tl-step-num">3</div>
         <div class="tl-right">
           <div class="tl-card">
             <div class="card-header-band">
@@ -1310,7 +1852,7 @@
       <!-- 3. MAHAJANAPADAS / BUDDHA / MAHAVIRA -->
       <div class="tl-item" id="era-mahajanapadas">
         <span class="tl-year">600 – 321 BCE</span>
-        <div class="tl-step-num">3</div>
+        <div class="tl-step-num">4</div>
         <div class="tl-left">
           <div class="tl-card">
             <div class="card-header-band">
@@ -1381,7 +1923,7 @@
       <!-- 4. MAURYA EMPIRE -->
       <div class="tl-item" id="era-maurya">
         <span class="tl-year">321 – 185 BCE</span>
-        <div class="tl-step-num">4</div>
+        <div class="tl-step-num">5</div>
         <div class="tl-right">
           <div class="tl-card">
             <div class="card-header-band">
@@ -1449,7 +1991,7 @@
       <!-- 5. GUPTA GOLDEN AGE -->
       <div class="tl-item" id="era-gupta">
         <span class="tl-year">320 – 550 CE</span>
-        <div class="tl-step-num">5</div>
+        <div class="tl-step-num">6</div>
         <div class="tl-left">
           <div class="tl-card">
             <div class="card-header-band">
@@ -1527,7 +2069,7 @@
       <!-- 6. MEDIEVAL KINGDOMS -->
       <div class="tl-item" id="era-medieval">
         <span class="tl-year">600 – 1200 CE</span>
-        <div class="tl-step-num">6</div>
+        <div class="tl-step-num">7</div>
         <div class="tl-right">
           <div class="tl-card">
             <div class="card-header-band">
@@ -1602,7 +2144,7 @@
       <!-- 7. DELHI SULTANATE -->
       <div class="tl-item" id="era-delhi">
         <span class="tl-year">1206 – 1526 CE</span>
-        <div class="tl-step-num">7</div>
+        <div class="tl-step-num">8</div>
         <div class="tl-left">
           <div class="tl-card">
             <div class="card-header-band">
@@ -1669,12 +2211,82 @@
         </div>
       </div>
 
+      <!-- SOUTH INDIA -->
+      <div class="tl-item" id="era-south">
+        <span class="tl-year">300 BCE – 1565 CE</span>
+        <div class="tl-step-num">9</div>
+        <div class="tl-left">
+          <div class="tl-card">
+            <div class="card-header-band">
+              <div class="card-icon"><i class="bi bi-compass"></i></div>
+              <div>
+                <div class="tl-era">Parallel Story · The Deccan &amp; the Far South</div>
+                <h3>South India's Long Arc — Sangam, Cholas &amp; Vijayanagara</h3>
+              </div>
+            </div>
+            <div class="card-body">
+              <p>Alongside the northern empires, the south built its own literary and commercial civilisation.
+                <strong>Sangam literature</strong> (c. 300 BCE – 300 CE), anthologies of classical Tamil poetry, speaks
+                of three crowned dynasties — <strong>Chera, Chola and Pandya</strong> — and of ports such as Muziris,
+                Poompuhar and Korkai that exported pepper, pearls, ivory and cotton cloth to Rome; hoards of Roman gold
+                coins have been found across the south. In the Deccan, the <strong>Satavahanas</strong> (c. 1st century
+                BCE – 3rd century CE) ruled between the Godavari–Krishna valleys and the western coast under kings such
+                as <strong>Gautamiputra Satakarni</strong>, and patronised Buddhist sites like Amaravati and Karla.</p>
+              <p>The Imperial Cholas (c. 850–1279 CE) are best remembered for conquest, covered in the Medieval card, but
+                their governance was just as remarkable. Inscriptions at <strong>Uttaramerur</strong> (early 10th
+                century) describe village assemblies chosen by lot from eligible candidates, one of the earliest
+                documented rule-sets for local self-government. Chola artisans perfected lost-wax bronze casting, and the
+                <strong>Nataraja</strong> bronze became an icon of Indian art. Rajaraja I completed the
+                <strong>Brihadisvara Temple</strong> at Thanjavur in 1010 CE, and Rajendra I's naval expedition against
+                the Srivijaya kingdom (1025 CE) reached Southeast Asia.</p>
+              <p>After the Cholas, the south's great power was <strong>Vijayanagara</strong>, founded in 1336 by the
+                brothers <strong>Harihara I and Bukka I</strong> on the Tungabhadra river. Its capital at
+                <strong>Hampi</strong> grew into one of the largest cities of its age. Under
+                <strong>Krishnadevaraya</strong> (r. 1509–1529) the empire peaked: he was a patron of Telugu, Kannada
+                and Sanskrit scholars and himself wrote the Telugu poem <em>Amuktamalyada</em>. In 1565 a coalition of
+                Deccan sultanates defeated Vijayanagara at <strong>Talikota</strong> and sacked Hampi; remnants of the
+                kingdom lasted to about 1646, and its Nayaka governors went on to rule Madurai, Thanjavur and Gingee.
+              </p>
+              <div class="key-facts">
+                <div class="key-facts-title"><i class="bi bi-info-circle"></i> Key Facts</div>
+                <div class="fact-row"><i class="bi bi-book"></i><span><strong>Sangam literature:</strong> Tamil poetry
+                    anthologies (<em>Ettuthokai</em>, <em>Pattuppattu</em>); <em>Tirukkural</em> by Thiruvalluvar is
+                    traditionally dated to the early centuries CE</span></div>
+                <div class="fact-row"><i class="bi bi-people"></i><span><strong>Uttaramerur:</strong> inscriptions on
+                    village assemblies chosen by lot (10th century CE)</span></div>
+                <div class="fact-row"><i class="bi bi-building"></i><span><strong>Brihadisvara Temple:</strong>
+                    completed 1010 CE; UNESCO World Heritage Site</span></div>
+                <div class="fact-row"><i class="bi bi-geo-alt"></i><span><strong>Hampi:</strong> Vijayanagara capital;
+                    UNESCO World Heritage Site (1986)</span></div>
+                <div class="fact-row"><i class="bi bi-flag"></i><span><strong>Talikota:</strong> 1565 defeat of
+                    Vijayanagara by the Deccan sultanates</span></div>
+              </div>
+              <div class="figures-row">
+                <div class="figure-chip"><strong>Gautamiputra Satakarni</strong><span>Satavahana king</span></div>
+                <div class="figure-chip"><strong>Rajaraja I</strong><span>Chola emperor, built Thanjavur temple</span></div>
+                <div class="figure-chip"><strong>Rajendra I</strong><span>Chola naval expedition, 1025 CE</span></div>
+                <div class="figure-chip"><strong>Harihara I &amp; Bukka I</strong><span>Founders of Vijayanagara</span></div>
+                <div class="figure-chip"><strong>Krishnadevaraya</strong><span>Vijayanagara's greatest ruler</span></div>
+              </div>
+              <span class="impact-badge impact-blue"><i class="bi bi-water"></i> Maritime trade, temple towns and
+                village self-government</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-image-panel">
+          <div class="tl-quote">
+            <p>The city of Bisnaga is as large as Rome, and very beautiful to the sight.</p>
+            <cite>— Domingo Paes, Portuguese traveller at Vijayanagara, c. 1520</cite>
+          </div>
+        </div>
+      </div>
+
       <div class="epoch-divider"><span class="epoch-label">🕌 Mughal India · 1526 – 1857 CE</span></div>
 
       <!-- 8. MUGHAL EMPIRE -->
       <div class="tl-item" id="era-mughal">
         <span class="tl-year">1526 – 1857 CE</span>
-        <div class="tl-step-num">8</div>
+        <div class="tl-step-num">10</div>
         <div class="tl-right">
           <div class="tl-card">
             <div class="card-header-band">
@@ -1756,7 +2368,7 @@
       <!-- 9. MARATHA EMPIRE -->
       <div class="tl-item" id="era-maratha">
         <span class="tl-year">1674 – 1818 CE</span>
-        <div class="tl-step-num">9</div>
+        <div class="tl-step-num">11</div>
         <div class="tl-left">
           <div class="tl-card">
             <div class="card-header-band">
@@ -1833,7 +2445,7 @@
       <!-- 10. BRITISH RULE -->
       <div class="tl-item" id="era-british">
         <span class="tl-year">1757 – 1857 CE</span>
-        <div class="tl-step-num">10</div>
+        <div class="tl-step-num">12</div>
         <div class="tl-right">
           <div class="tl-card">
             <div class="card-header-band">
@@ -1909,7 +2521,7 @@
       <!-- 11. FREEDOM STRUGGLE -->
       <div class="tl-item" id="era-freedom">
         <span class="tl-year">1857 – 1947 CE</span>
-        <div class="tl-step-num">11</div>
+        <div class="tl-step-num">13</div>
         <div class="tl-left">
           <div class="tl-card">
             <div class="card-header-band">
@@ -1997,7 +2609,7 @@
       <!-- 12. REPUBLIC OF INDIA -->
       <div class="tl-item" id="era-republic">
         <span class="tl-year">1947 – 2000 CE</span>
-        <div class="tl-step-num">12</div>
+        <div class="tl-step-num">14</div>
         <div class="tl-right">
           <div class="tl-card">
             <div class="card-header-band">
@@ -2076,7 +2688,7 @@
       <!-- 13. MODERN INDIA -->
       <div class="tl-item" id="era-modern">
         <span class="tl-year">1991 – Present</span>
-        <div class="tl-step-num">13</div>
+        <div class="tl-step-num">15</div>
         <div class="tl-left">
           <div class="tl-card">
             <div class="card-header-band">
@@ -2200,63 +2812,412 @@
       document.querySelectorAll('.counter-num').forEach(el => animateCounter(el, parseInt(el.dataset.target)));
     });
 
-    // Strip nav: click/keyboard jumps to era, scroll-spy highlights current era
-    const eraIds = ['#era-indus', '#era-vedic', '#era-mahajanapadas', '#era-maurya', '#era-gupta',
-      '#era-medieval', '#era-delhi', '#era-mughal', '#era-maratha', '#era-british', '#era-freedom',
-      '#era-republic', '#era-modern'];
-    const stripEvents = document.querySelectorAll('.strip-event');
-    const strip = document.querySelector('.progress-strip');
-    const stripFill = document.querySelector('.strip-fill');
-    const stripTrack = document.querySelector('.strip-track');
-    let manualJump = false, jumpTimer;
+    // ═════════ ERA DATA (single source of truth for strip, at-a-glance, echoes, maps, reading) ═════════
+    // nav: [label above, label below]; glance: 4 [label, value]; echoes: [targetId, text];
+    // pins: [name, lat, lon]; read: further-reading list
+    const ERA = {
+      neolithic: {
+        nav: ['7000 BCE', 'Neolithic'],
+        glance: [['Region', 'Balochistan & central India'], ['Key sites', 'Mehrgarh, Bhimbetka'], ['Way of life', 'Hunting → farming & herding'], ['Legacy', 'Roots of Indus cities']],
+        echoes: [['indus', 'Mehrgarh\'s farming villages are the precursors of the Harappan cities that rise ~3,000 years later.']],
+        pins: [['Mehrgarh', 29.4, 67.6], ['Bhimbetka', 22.94, 77.61]],
+        read: ['Bridget & Raymond Allchin, <em>The Rise of Civilization in India and Pakistan</em> (1982)', 'Upinder Singh, <em>A History of Ancient and Early Medieval India</em> (2008)']
+      },
+      indus: {
+        nav: ['3300 BCE', 'Indus'],
+        glance: [['Region', 'Indus–Ghaggar-Hakra basin'], ['Major cities', 'Harappa, Mohenjo-daro, Dholavira'], ['Known for', 'Grid planning, drainage, weights'], ['Legacy', 'Seals, urban planning, trade']],
+        echoes: [['mahajanapadas', 'After a long gap, cities rise again on the Gangetic plain around 600 BCE — India\'s "second urbanisation".']],
+        pins: [['Harappa', 30.63, 72.86], ['Mohenjo-daro', 27.33, 68.14], ['Dholavira', 23.89, 70.21], ['Lothal', 22.52, 72.25], ['Rakhigarhi', 29.28, 76.11]],
+        read: ['Gregory L. Possehl, <em>The Indus Civilization: A Contemporary Perspective</em> (2002)', 'Jonathan Mark Kenoyer, <em>Ancient Cities of the Indus Valley Civilization</em> (1998)']
+      },
+      vedic: {
+        nav: ['1500 BCE', 'Vedic'],
+        glance: [['Region', 'Punjab → Gangetic plain'], ['Texts', 'Four Vedas, Upanishads, epics'], ['Society', 'Tribes → early kingdoms'], ['Legacy', 'Foundations of Hindu thought']],
+        echoes: [['mahajanapadas', 'Upanishadic questioning about self and karma feeds the Buddhist and Jain reform movements.'], ['maurya', '"Satyameva Jayate" on India\'s national emblem is a line from the Mundaka Upanishad.']],
+        pins: [['Kurukshetra', 29.97, 76.84], ['Hastinapur', 29.17, 78.02], ['Indraprastha (Delhi)', 28.61, 77.21], ['Ayodhya', 26.8, 82.2]],
+        read: ['Romila Thapar, <em>Early India: From the Origins to AD 1300</em> (2002)', 'Upinder Singh, <em>A History of Ancient and Early Medieval India</em> (2008)']
+      },
+      mahajanapadas: {
+        nav: ['600 BCE', 'Kingdoms'],
+        glance: [['Region', 'Northern India, Gangetic plain'], ['Powers', 'Magadha, Kosala, Kashi, Vajji, Avanti'], ['Teachers', 'Buddha & Mahavira'], ['Legacy', 'Buddhism, Jainism, coinage']],
+        echoes: [['maurya', 'Magadha\'s steady rise among the sixteen kingdoms leads directly to India\'s first pan-Indian empire.']],
+        pins: [['Rajgir', 25.03, 85.42], ['Lumbini', 27.48, 83.28], ['Sarnath', 25.38, 83.02], ['Shravasti', 27.51, 82.0], ['Ujjain', 23.18, 75.78], ['Taxila', 33.75, 72.79]],
+        read: ['Romila Thapar, <em>From Lineage to State</em> (1984)', 'Romila Thapar, <em>Early India</em> (2002)']
+      },
+      maurya: {
+        nav: ['321 BCE', 'Maurya'],
+        glance: [['Capital', 'Pataliputra'], ['Founder', 'Chandragupta Maurya (321 BCE)'], ['Peak', 'Ashoka — most of the subcontinent'], ['Legacy', 'Edicts, Dhamma, Arthashastra tradition']],
+        echoes: [['republic', 'The Lion Capital of Ashoka at Sarnath is India\'s national emblem, and the Ashoka Chakra sits at the centre of the flag.'], ['mughal', 'The great trunk road that Sher Shah rebuilt and the Mughals maintained traces the old Mauryan-era northern highway.']],
+        pins: [['Pataliputra', 25.61, 85.14], ['Ujjain', 23.18, 75.78], ['Taxila', 33.75, 72.79], ['Dhauli (Kalinga)', 20.19, 85.84], ['Sarnath', 25.38, 83.02], ['Girnar', 21.5, 70.5]],
+        read: ['Romila Thapar, <em>Asoka and the Decline of the Mauryas</em> (1961)', 'Upinder Singh, <em>A History of Ancient and Early Medieval India</em> (2008)']
+      },
+      gupta: {
+        nav: ['320 CE', 'Gupta'],
+        glance: [['Capital', 'Pataliputra'], ['Greatest rulers', 'Samudragupta, Chandragupta II'], ['Golden age', 'Kalidasa, Aryabhata, Nalanda'], ['Legacy', 'Decimal place-value numerals']],
+        echoes: [['modern', 'The place-value numerals refined in Gupta-era India travelled via the Arab world to Europe — they are the digits used worldwide today.']],
+        pins: [['Pataliputra', 25.61, 85.14], ['Nalanda', 25.14, 85.44], ['Prayagraj', 25.43, 81.84], ['Mathura', 27.49, 77.67], ['Ujjain', 23.18, 75.78], ['Ajanta', 20.55, 75.7]],
+        read: ['Upinder Singh, <em>A History of Ancient and Early Medieval India</em> (2008)', 'R. C. Majumdar (ed.), <em>The Classical Age</em> (History and Culture of the Indian People, vol. 3)']
+      },
+      medieval: {
+        nav: ['600–1200', 'Medieval'],
+        glance: [['Region', 'Peninsular & northern India'], ['Dynasties', 'Pallava, Chalukya, Chola, Rajput'], ['Art', 'Rock-cut & structural temples'], ['Legacy', 'Dravidian & Nagara styles']],
+        echoes: [['south', 'The Chola story continues in the "South India" card — governance, bronzes, and the later Vijayanagara empire.'], ['delhi', 'The defeat of Prithviraj Chauhan at Tarain (1192) opens the door to the Delhi Sultanate.']],
+        pins: [['Mahabalipuram', 12.62, 80.19], ['Thanjavur', 10.79, 79.14], ['Badami', 15.92, 75.68], ['Ellora', 20.03, 75.18], ['Khajuraho', 24.85, 79.92], ['Konark', 19.89, 86.09]],
+        read: ['K. A. Nilakanta Sastri, <em>The Cōḷas</em> (1935)', 'Upinder Singh, <em>A History of Ancient and Early Medieval India</em> (2008)']
+      },
+      delhi: {
+        nav: ['1206', 'Delhi'],
+        glance: [['Capital', 'Delhi'], ['Dynasties', 'Mamluk, Khalji, Tughlaq, Sayyid, Lodi'], ['Founded', 'Qutb ud-Din Aibak, 1206'], ['Legacy', 'Indo-Islamic architecture']],
+        echoes: [['mughal', 'Sultanate land-revenue and army systems were refined by Sher Shah Suri (who introduced the silver rupee) and then by Akbar.']],
+        pins: [['Delhi (Qutub)', 28.52, 77.18], ['Lahore', 31.55, 74.34], ['Multan', 30.2, 71.47], ['Panipat', 29.39, 76.97], ['Daulatabad', 19.94, 75.21], ['Gaur (Lakhnauti)', 24.87, 88.13]],
+        read: ['Peter Jackson, <em>The Delhi Sultanate: A Political and Military History</em> (1999)', 'Satish Chandra, <em>Medieval India</em> (Part I)']
+      },
+      south: {
+        nav: ['300 BCE+', 'South India'],
+        glance: [['Region', 'Tamilakam, Deccan & Karnataka'], ['Eras', 'Sangam → Chola → Vijayanagara'], ['Capitals', 'Thanjavur, Hampi'], ['Legacy', 'Temples, Tamil & Telugu literature']],
+        echoes: [['mughal', 'Vijayanagara fell at Talikota in 1565 — nine years after Akbar took the Mughal throne — leaving the Deccan to the sultanates and, later, the Mughals.']],
+        pins: [['Poompuhar', 11.15, 79.85], ['Madurai', 9.92, 78.12], ['Thanjavur', 10.79, 79.14], ['Amaravati', 16.57, 80.36], ['Hampi', 15.34, 76.46], ['Talikota', 16.48, 76.31]],
+        panelMap: true,
+        read: ['K. A. Nilakanta Sastri, <em>A History of South India</em>', 'Burton Stein, <em>Vijayanagara</em> (New Cambridge History of India, 1989)']
+      },
+      mughal: {
+        nav: ['1526', 'Mughal'],
+        glance: [['Capitals', 'Agra, Delhi, Fatehpur Sikri, Lahore'], ['Founder', 'Babur, after Panipat (1526)'], ['Great emperors', 'Akbar, Shah Jahan, Aurangzeb'], ['Legacy', 'Taj Mahal, miniature painting']],
+        echoes: [['maratha', 'Aurangzeb\'s long Deccan campaigns stretched the empire thin while the Marathas grew.'], ['british', 'In 1765 the weakened Mughal emperor granted the East India Company the diwani (revenue rights) of Bengal.']],
+        pins: [['Agra', 27.18, 78.02], ['Delhi', 28.61, 77.21], ['Fatehpur Sikri', 27.09, 77.67], ['Lahore', 31.55, 74.34], ['Kabul', 34.53, 69.17], ['Aurangabad', 19.88, 75.34]],
+        read: ['Richard M. Eaton, <em>India in the Persianate Age, 1000–1765</em> (2019)', 'Satish Chandra, <em>Medieval India</em> (Part II)']
+      },
+      maratha: {
+        nav: ['1674', 'Maratha'],
+        glance: [['Capital', 'Raigad (Shivaji); later Pune'], ['Founder', 'Shivaji, crowned 1674'], ['Turning point', 'Third Battle of Panipat, 1761'], ['Legacy', 'Swarajya, naval power, forts']],
+        echoes: [['british', 'The three Anglo-Maratha Wars (1775–1818) ended the last major Indian rival to Company power.']],
+        pins: [['Raigad', 18.23, 73.44], ['Pune', 18.52, 73.86], ['Satara', 17.69, 74.0], ['Panipat', 29.39, 76.97], ['Aurangabad', 19.88, 75.34]],
+        read: ['Stewart Gordon, <em>The Marathas 1600–1818</em> (1993)', 'Jadunath Sarkar, <em>Shivaji and His Times</em>']
+      },
+      british: {
+        nav: ['1757', 'British'],
+        glance: [['Bases', 'Calcutta, Bombay, Madras'], ['Turning point', 'Battle of Plassey, 1757'], ['Crown rule', 'From 1858'], ['Legacy', 'Railways, civil service, economic drain']],
+        echoes: [['freedom', 'Economic hardship and the 1857 uprising set the stage for the organised national movement.'], ['republic', 'The railways, civil services, English-language education and legal codes were inherited — and reshaped — by independent India.']],
+        pins: [['Plassey', 23.8, 88.25], ['Calcutta', 22.57, 88.36], ['Bombay', 18.94, 72.84], ['Madras', 13.08, 80.27], ['Buxar', 25.57, 83.98], ['Seringapatam', 12.42, 76.69]],
+        read: ['William Dalrymple, <em>The Anarchy</em> (2019)', 'Sugata Bose & Ayesha Jalal, <em>Modern South Asia</em>']
+      },
+      freedom: {
+        nav: ['1857–1947', 'Freedom'],
+        glance: [['Span', '1857 revolt → 15 Aug 1947'], ['Leaders', 'Gandhi, Nehru, Patel, Bose, Ambedkar'], ['Methods', 'Satyagraha, Quit India, INA'], ['Outcome', 'Independence & Partition']],
+        echoes: [['republic', 'The Constituent Assembly, led in drafting by B. R. Ambedkar, turned the freedom movement\'s ideals into the Constitution of 1950.']],
+        pins: [['Meerut', 28.98, 77.71], ['Lucknow', 26.85, 80.95], ['Jhansi', 25.45, 78.57], ['Amritsar', 31.62, 74.88], ['Champaran', 26.65, 84.92], ['Sabarmati', 23.06, 72.58], ['Dandi', 20.89, 72.81]],
+        read: ['Bipan Chandra et al., <em>India\'s Struggle for Independence</em> (1988)', 'Sumit Sarkar, <em>Modern India 1885–1947</em> (1983)']
+      },
+      republic: {
+        nav: ['1947+', 'Republic'],
+        glance: [['Independence', '15 August 1947'], ['Republic', '26 January 1950'], ['Builders', 'Nehru, Patel, Ambedkar, Shastri'], ['Milestones', 'Green Revolution, space, wars']],
+        echoes: [['modern', 'The balance-of-payments crisis of 1991 triggered the economic liberalisation covered in the next era.']],
+        pins: [['New Delhi', 28.61, 77.21], ['Pokhran', 27.09, 71.75], ['Thumba', 8.53, 76.88], ['Kargil', 34.56, 76.13], ['Mumbai', 18.94, 72.84]],
+        read: ['Ramachandra Guha, <em>India After Gandhi</em> (2007)', 'Granville Austin, <em>The Indian Constitution: Cornerstone of a Nation</em> (1966)']
+      },
+      modern: {
+        nav: ['1991+', 'Modern'],
+        glance: [['Turning point', '1991 liberalisation'], ['Space', 'Mangalyaan 2014, Chandrayaan-3 2023'], ['Growth engines', 'IT services, digital public goods'], ['Today', 'Large, young, fast-changing economy']],
+        echoes: [['neolithic', 'From Mehrgarh\'s first wheat fields to a lunar landing near the Moon\'s south pole — the same subcontinent, ~9,000 years apart.']],
+        pins: [['Sriharikota', 13.72, 80.23], ['Bengaluru', 12.97, 77.59], ['Hyderabad', 17.39, 78.49], ['Mumbai', 18.94, 72.84], ['Delhi', 28.61, 77.21]],
+        read: ['Ramachandra Guha, <em>India After Gandhi</em> (2007)', 'Jagdish Bhagwati & Arvind Panagariya, <em>Why Growth Matters</em> (2013)']
+      }
+    };
 
+    // ═════════ BUILD ═════════
+    const timeline = document.querySelector('.timeline');
+    const items = [...document.querySelectorAll('.tl-item')];
+    const eraKey = it => it.id.replace('era-', '');
+    const eraTitle = it => (ERA[eraKey(it)]?.nav[1]) || it.querySelector('h3').textContent;
+    const strip = document.querySelector('.progress-strip');
+    const stripTrack = strip.querySelector('.strip-track');
+    const stripLine = strip.querySelector('.strip-line');
+    const stripFill = strip.querySelector('.strip-fill');
+    const NS = 'http://www.w3.org/2000/svg';
+    const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+
+    // alternate sides, renumber
+    items.forEach((it, i) => {
+      it.classList.toggle('flip', i % 2 === 1);
+      const n = it.querySelector('.tl-step-num'); if (n) n.textContent = i + 1;
+    });
+
+    // strip dots
+    const stripEvents = items.map((it, i) => {
+      const nav = ERA[eraKey(it)]?.nav || [it.querySelector('.tl-year').textContent, it.querySelector('h3').textContent];
+      const ev = el('div', 'strip-event', '<div class="strip-dot"></div><div class="strip-label"></div>');
+      ev.querySelector('.strip-label').innerHTML = nav[0].replace(/&/g, '&amp;') + '<br>' + nav[1];
+      ev.dataset.target = '#' + it.id; ev.setAttribute('role', 'link'); ev.tabIndex = 0;
+      ev.setAttribute('aria-label', nav.join(' ') + ' — jump to section');
+      stripTrack.appendChild(ev);
+      return ev;
+    });
+    stripTrack.style.minWidth = (items.length * 68) + 'px';
+    const edge = (50 / items.length) + '%';
+    stripLine.style.left = stripLine.style.right = edge;
+    stripFill.style.left = edge;
+
+    // base map (coastline only: avoids drawing borders for periods when none matched today's)
+    function buildMap(pins, cls) {
+      // base coords: 10 px per degree, x = (lon-60)*10, y = (38-lat)*10 (matches the #sa-land symbol)
+      const BW = 400, BH = 330, R = BH / BW;
+      const pts = pins.map(([n, lat, lon]) => [n, (lon - 60) * 10, (38 - lat) * 10]);
+      const xs = pts.map(p => p[1]), ys = pts.map(p => p[2]);
+      const pad = 45;
+      let w = Math.max(Math.max(...xs) - Math.min(...xs) + 2 * pad, 230), h = w * R;
+      const needH = Math.max(...ys) - Math.min(...ys) + 2 * pad;
+      if (needH > h) { h = needH; w = h / R; }
+      w = Math.min(w, BW); h = Math.min(w * R, BH);
+      let x0 = (Math.min(...xs) + Math.max(...xs)) / 2 - w / 2, y0 = (Math.min(...ys) + Math.max(...ys)) / 2 - h / 2;
+      x0 = Math.max(0, Math.min(x0, BW - w)); y0 = Math.max(0, Math.min(y0, BH - h));
+      const k = w / BW; // scale so labels keep a constant on-screen size
+
+      const fig = el('figure', 'era-map ' + (cls || ''));
+      fig.appendChild(el('div', 'era-map-head', '<i class="bi bi-geo-alt-fill"></i> Key sites'));
+      const svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('viewBox', `${x0} ${y0} ${w} ${h}`); svg.setAttribute('role', 'img');
+      svg.setAttribute('aria-label', 'Map of key sites: ' + pins.map(p => p[0]).join(', '));
+      svg.innerHTML = `<rect class="sea" x="${x0}" y="${y0}" width="${w}" height="${h}"/><use href="#sa-land" class="land" x="0" y="0" width="400" height="330"/>`;
+      const placed = [];
+      const hit = (a, b) => !(a.x2 < b.x1 || a.x1 > b.x2 || a.y2 < b.y1 || a.y1 > b.y2);
+      pts.forEach(([name, x, y]) => {
+        const cw = (name.length * 5.6 + 4) * k, ch = 12 * k, g = 7 * k;
+        const spots = [
+          [x + g, y + 3.5 * k, 'start', { x1: x + g - 1, y1: y - ch + 3, x2: x + g + cw, y2: y + 4 * k }],
+          [x - g, y + 3.5 * k, 'end', { x1: x - g - cw, y1: y - ch + 3, x2: x - g + 1, y2: y + 4 * k }],
+          [x, y - 9 * k, 'middle', { x1: x - cw / 2, y1: y - 9 * k - ch, x2: x + cw / 2, y2: y - 7 * k }],
+          [x, y + 16 * k, 'middle', { x1: x - cw / 2, y1: y + 6 * k, x2: x + cw / 2, y2: y + 18 * k }]
+        ];
+        const inside = r => r.x1 >= x0 + 1 && r.x2 <= x0 + w - 1 && r.y1 >= y0 + 1 && r.y2 <= y0 + h - 1;
+        const s = spots.find(sp => inside(sp[3]) && !placed.some(p => hit(p, sp[3]))) || spots.find(sp => inside(sp[3])) || spots[0];
+        placed.push(s[3]);
+        const c = document.createElementNS(NS, 'circle');
+        c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 4.5 * k); c.setAttribute('class', 'pin');
+        c.setAttribute('stroke-width', 1.6 * k);
+        const t = document.createElementNS(NS, 'text');
+        t.setAttribute('x', s[0]); t.setAttribute('y', s[1]); t.setAttribute('text-anchor', s[2]); t.setAttribute('class', 'lbl');
+        t.setAttribute('font-size', 10.5 * k); t.setAttribute('stroke-width', 3 * k);
+        t.textContent = name;
+        svg.append(c, t);
+      });
+      fig.appendChild(svg);
+      fig.appendChild(el('figcaption', null, 'Modern coastline shown for orientation only; ancient coastlines and political boundaries differed.'));
+      return fig;
+    }
+
+    // per-card enhancements
+    items.forEach((it, i) => {
+      const d = ERA[eraKey(it)];
+      const card = it.querySelector('.tl-card');
+      const body = card.querySelector('.card-body');
+      const head = card.querySelector('.card-header-band');
+
+      // at a glance
+      if (d) head.after(el('div', 'glance', d.glance.map(g => `<div><span>${g[0]}</span><b>${g[1]}</b></div>`).join('')));
+
+      // collapse everything after the first paragraph
+      const first = body.querySelector(':scope > p');
+      const more = el('div', 'card-more');
+      more.id = 'more-' + it.id;
+      more.hidden = true;
+      let n = first.nextSibling;
+      while (n) { const nx = n.nextSibling; more.appendChild(n); n = nx; }
+
+      if (d) {
+        if (d.echoes?.length) {
+          const ech = el('div', 'echoes', '<div class="echoes-title"><i class="bi bi-link-45deg"></i> Threads through time</div>');
+          d.echoes.forEach(([id, text]) => {
+            const t = items.find(x => x.id === 'era-' + id); if (!t) return;
+            const a = el('a', 'echo', `<b>→ ${eraTitle(t)}:</b>${text}`);
+            a.href = '#' + t.id; a.dataset.go = t.id;
+            ech.appendChild(a);
+          });
+          more.appendChild(ech);
+        }
+        if (d.pins?.length && !d.panelMap) more.appendChild(buildMap(d.pins));
+        if (d.read?.length) more.appendChild(el('details', 'sources',
+          '<summary><i class="bi bi-journal-text"></i> Further reading</summary><ul>' + d.read.map(r => `<li>${r}</li>`).join('') + '</ul>'));
+        if (d.panelMap) it.querySelector('.tl-image-panel').prepend(buildMap(d.pins, 'era-map-panel'));
+      }
+
+      const tog = el('button', 'more-toggle', '<span>Read more</span> <i class="bi bi-chevron-down"></i>');
+      tog.type = 'button'; tog.setAttribute('aria-expanded', 'false'); tog.setAttribute('aria-controls', more.id);
+      tog.addEventListener('click', () => setOpen(it, more.hidden));
+      body.append(more, tog);
+
+      // prev / next
+      const prev = items[i - 1], next = items[i + 1];
+      const foot = el('div', 'card-foot');
+      const mk = (cls, target, html) => {
+        const b = el('button', cls, html); b.type = 'button';
+        if (target) { b.addEventListener('click', () => goTo(items.indexOf(target))); b.setAttribute('aria-label', (cls === 'prev' ? 'Previous era: ' : 'Next era: ') + eraTitle(target)); }
+        else b.disabled = true;
+        return b;
+      };
+      foot.append(
+        mk('prev', prev, prev ? `<i class="bi bi-arrow-left"></i><span>${eraTitle(prev)}</span>` : ''),
+        mk('next', next, next ? `<span>${eraTitle(next)}</span><i class="bi bi-arrow-right"></i>` : ''));
+      card.appendChild(foot);
+    });
+
+    function setOpen(it, open, auto) {
+      const more = it.querySelector('.card-more'), tog = it.querySelector('.more-toggle');
+      more.hidden = !open;
+      tog.setAttribute('aria-expanded', open);
+      tog.firstElementChild.textContent = open ? 'Show less' : 'Read more';
+      if (auto) it.dataset.auto = open ? '1' : ''; else delete it.dataset.auto;
+      if (!open && !auto && it.getBoundingClientRect().top < 0) it.scrollIntoView({ block: 'start' });
+    }
+
+    // ═════════ NAVIGATION ═════════
+    const header = document.getElementById('header');
+    function setOffsets() {
+      const top = header.offsetHeight + 8;
+      strip.style.top = top + 'px';
+      document.documentElement.style.setProperty('--nav-offset', (top + strip.offsetHeight + 16) + 'px');
+    }
+    window.addEventListener('resize', setOffsets);
+    window.addEventListener('load', setOffsets);
+    setOffsets();
+
+    let manualJump = false, jumpTimer, current = -1;
     function setActive(cur) {
+      if (cur === current) return;
+      current = cur;
       stripEvents.forEach((e, i) => {
         e.classList.toggle('active', i === cur);
         e.classList.toggle('passed', i < cur);
+        if (i === cur) e.setAttribute('aria-current', 'location'); else e.removeAttribute('aria-current');
       });
-      // fill the line from first to current dot
-      const span = 100 - 100 / 13; // % of track between first and last dot centres
-      stripFill.style.width = (cur / (stripEvents.length - 1)) * span + '%';
-      // keep the active dot visible when the strip scrolls horizontally (small screens)
+      stripFill.style.width = (cur / items.length * 100) + '%';
       const ev = stripEvents[cur];
       if (strip.scrollWidth > strip.clientWidth) {
         strip.scrollTo({ left: ev.offsetLeft - strip.clientWidth / 2 + ev.offsetWidth / 2, behavior: 'smooth' });
       }
     }
 
-    function goTo(ev, i) {
-      const t = document.querySelector(ev.dataset.target);
-      if (!t) return;
-      manualJump = true;
-      clearTimeout(jumpTimer);
-      jumpTimer = setTimeout(() => { manualJump = false; }, 900);
+    function goTo(i, opts = {}) {
+      const it = items[i]; if (!it) return;
+      manualJump = true; clearTimeout(jumpTimer);
+      jumpTimer = setTimeout(() => { manualJump = false; spy(); }, 900);
       setActive(i);
-      t.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      history.replaceState(null, '', ev.dataset.target);
+      it.classList.add('visible');
+      it.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (!opts.noHash) history.replaceState(null, '', '#' + it.id);
     }
 
     stripEvents.forEach((ev, i) => {
-      ev.addEventListener('click', () => goTo(ev, i));
-      ev.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goTo(ev, i); }
-      });
+      ev.addEventListener('click', () => goTo(i));
+      ev.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goTo(i); } });
+    });
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a[data-go]'); if (!a) return;
+      e.preventDefault(); goTo(items.findIndex(x => x.id === a.dataset.go));
     });
 
     function spy() {
       if (manualJump) return;
       const line = strip.getBoundingClientRect().bottom + 60;
       let cur = 0;
-      eraIds.forEach((id, i) => {
-        const el = document.querySelector(id);
-        if (el && el.getBoundingClientRect().top <= line) cur = i;
-      });
+      items.forEach((it, i) => { if (it.getBoundingClientRect().top <= line) cur = i; });
       setActive(cur);
     }
     window.addEventListener('scroll', spy, { passive: true });
+
+    // ═════════ SEARCH ═════════
+    const input = document.getElementById('eraSearch');
+    const clearBtn = document.getElementById('eraSearchClear');
+    const countEl = document.getElementById('eraSearchCount');
+    const expandBtn = document.getElementById('expandAll');
+    let matches = [], mIdx = -1;
+
+    function clearMarks() {
+      document.querySelectorAll('mark.hit').forEach(m => m.replaceWith(document.createTextNode(m.textContent)));
+      timeline.normalize();
+    }
+    function markText(root, re) {
+      const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode: n => (n.nodeValue.trim() && !n.parentElement.closest('svg,button,script,style,summary')) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT
+      });
+      const nodes = []; while (w.nextNode()) nodes.push(w.currentNode);
+      let count = 0;
+      nodes.forEach(node => {
+        const txt = node.nodeValue; re.lastIndex = 0;
+        if (!re.test(txt)) return;
+        re.lastIndex = 0;
+        const frag = document.createDocumentFragment(); let last = 0, m;
+        while ((m = re.exec(txt))) {
+          frag.append(txt.slice(last, m.index));
+          const mk = document.createElement('mark'); mk.className = 'hit'; mk.textContent = m[0]; frag.append(mk);
+          last = m.index + m[0].length; count++;
+          if (m[0].length === 0) re.lastIndex++;
+        }
+        frag.append(txt.slice(last)); node.replaceWith(frag);
+      });
+      return count;
+    }
+    function runSearch() {
+      const q = input.value.trim();
+      clearMarks();
+      items.forEach(it => { it.classList.remove('nomatch'); if (it.dataset.auto) setOpen(it, false, true); });
+      stripEvents.forEach(e => e.classList.remove('dim', 'match'));
+      matches = []; mIdx = -1;
+      document.querySelector('.strip-search').classList.toggle('has-text', !!input.value);
+      if (q.length < 2) { countEl.textContent = ''; return; }
+      const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+      items.forEach((it, i) => {
+        const hits = markText(it, re);
+        if (hits) {
+          matches.push(i); stripEvents[i].classList.add('match');
+          if (it.querySelector('.card-more mark.hit') && it.querySelector('.card-more').hidden) setOpen(it, true, true);
+          it.querySelectorAll('details.sources').forEach(d => { if (d.querySelector('mark.hit')) d.open = true; });
+          it.classList.add('visible');
+        } else { it.classList.add('nomatch'); stripEvents[i].classList.add('dim'); }
+      });
+      countEl.innerHTML = matches.length ? `<b>${matches.length}</b> of ${items.length} eras` : 'No matches';
+      if (matches.length) stepMatch(1);
+    }
+    function stepMatch(dir) {
+      if (!matches.length) return;
+      mIdx = (mIdx + dir + matches.length) % matches.length;
+      goTo(matches[mIdx], { noHash: true });
+    }
+    function clearSearch() { input.value = ''; runSearch(); }
+    let st; input.addEventListener('input', () => { clearTimeout(st); st = setTimeout(runSearch, 150); });
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); stepMatch(e.shiftKey ? -1 : 1); }
+      if (e.key === 'Escape') { clearSearch(); input.blur(); }
+    });
+    clearBtn.addEventListener('click', () => { clearSearch(); input.focus(); });
+    document.addEventListener('keydown', e => {
+      if (e.key === '/' && !/INPUT|TEXTAREA/.test(document.activeElement.tagName)) { e.preventDefault(); input.focus(); }
+    });
+
+    // expand / collapse all
+    let allOpen = false;
+    expandBtn.addEventListener('click', () => {
+      allOpen = !allOpen;
+      items.forEach(it => setOpen(it, allOpen, false));
+      expandBtn.querySelector('span').textContent = allOpen ? 'Collapse all' : 'Expand all';
+      expandBtn.setAttribute('aria-pressed', allOpen);
+    });
+
+    // print: open everything, then restore
+    let printState = [];
+    window.addEventListener('beforeprint', () => {
+      printState = items.map(it => it.querySelector('.card-more').hidden);
+      items.forEach(it => { it.querySelector('.card-more').hidden = false; it.classList.add('visible'); });
+      document.querySelectorAll('details.sources').forEach(d => { d.dataset.was = d.open ? '1' : ''; d.open = true; });
+    });
+    window.addEventListener('afterprint', () => {
+      items.forEach((it, i) => { it.querySelector('.card-more').hidden = printState[i]; });
+      document.querySelectorAll('details.sources').forEach(d => { d.open = !!d.dataset.was; });
+    });
+
+    // deep link
     window.addEventListener('load', () => {
-      const i = eraIds.indexOf(location.hash);
-      if (i >= 0) goTo(stripEvents[i], i); else spy();
+      const i = items.findIndex(x => '#' + x.id === location.hash);
+      if (i >= 0) { setOpen(items[i], true); goTo(i, { noHash: true }); } else spy();
     });
   </script>
   <script data-goatcounter="https://nidhi4358.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
