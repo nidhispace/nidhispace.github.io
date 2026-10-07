@@ -37,6 +37,34 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <style>
+    /* Hero: text sits bottom-left so it no longer covers the VOC graphic or the portrait */
+    #hero { position: relative; align-items: center !important; justify-content: center; }
+    #hero::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 22% 24% at 50% 56%, rgba(5, 12, 30, .7), rgba(5, 12, 30, 0) 100%),
+                  linear-gradient(0deg, rgba(5, 12, 30, .35) 0%, rgba(5, 12, 30, 0) 30%); }
+    #hero .container.hero-box { position: relative; z-index: 2; align-items: center !important; text-align: center; max-width: none; width: 100%; margin: 0;
+      padding: 70px 37% 0; background: none !important; box-shadow: none !important; border: 0 !important; }
+    #hero .hero-box h1 { font-size: clamp(1.15rem, 1.9vw, 2rem); margin: 0 0 6px; text-shadow: 0 2px 12px rgba(0,0,0,.6); }
+    #hero .hero-box h2 { font-size: clamp(.85rem, 1.15vw, 1.15rem); margin: 0 0 16px; text-shadow: 0 2px 10px rgba(0,0,0,.6); }
+    #hero .hero-row { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    #hero .hero-row .social-links { margin: 0 !important; }
+    #hero .hero-btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    #hero .hero-btns a { margin: 0 !important; padding: 9px clamp(12px, 1.3vw, 22px); font-size: clamp(10px, .85vw, 12px); }
+    #hero .hero-box h1, #hero .hero-box h2 { text-wrap: balance; }
+    #hero .hero-btns a.alt { background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.55); color: #fff; backdrop-filter: blur(4px); }
+    #hero .hero-btns a.alt:hover { background: rgba(255,255,255,.28); }
+    @media (max-width: 768px) {
+      #hero::after { background: linear-gradient(0deg, rgba(5,12,30,.85) 0%, rgba(5,12,30,.35) 55%, rgba(5,12,30,0) 100%); }
+      #hero .container.hero-box { padding: 70px 20px 0; align-items: center !important; text-align: center; }
+      #hero .hero-row { justify-content: center; }
+      #hero .hero-btns { justify-content: center; }
+    }
+
+    /* Hero image: size by width so the VOC graphic and portrait are not cropped */
+    #hero { height: min(100vh, 58.3vw); min-height: 560px; background-size: cover; background-position: center 18%; background-attachment: scroll !important; }
+
+  </style>
 </head>
 
 <body>
@@ -77,27 +105,28 @@
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
-    <div class="container d-flex flex-column align-items-center bordered" data-aos="zoom-in" data-aos-delay="100">
+    <div class="container d-flex flex-column align-items-center bordered hero-box" data-aos="fade-up" data-aos-delay="100">
       <h1 style="color: white;">Dr. Nidhi Tripathi (Ph.D.)</h1>
       <h2 style="color: rgb(162, 238, 175);">Atmospheric physicist, Passionate about climate change.</h2>
-      <div class="social-links mt-3 text-center">
-        <a href="https://scholar.google.com/citations?user=5x7vWOQAAAAJ&hl=en" target="_blank" class="google-scholar">
-          <i class="fa-brands fa-google-scholar"></i>
-        </a>
-
-        <a href="https://github.com/nidhispace/" target="_blank" class="github">
-          <i class="bx bxl-github"></i>
-        </a>
-
-        <a href="https://www.researchgate.net/profile/Nidhi-Tripathi/" target="_blank" class="researchgate">
-          <i class="fa-brands fa-researchgate"></i>
-        </a>
-
+      <div class="hero-row">
+        <div class="social-links text-center">
+          <a href="https://scholar.google.com/citations?user=5x7vWOQAAAAJ&hl=en" target="_blank" rel="noopener" class="google-scholar" aria-label="Google Scholar">
+            <i class="fa-brands fa-google-scholar"></i>
+          </a>
+          <a href="https://github.com/nidhispace/" target="_blank" rel="noopener" class="github" aria-label="GitHub">
+            <i class="bx bxl-github"></i>
+          </a>
+          <a href="https://www.researchgate.net/profile/Nidhi-Tripathi/" target="_blank" rel="noopener" class="researchgate" aria-label="ResearchGate">
+            <i class="fa-brands fa-researchgate"></i>
+          </a>
+        </div>
+        <div class="hero-btns">
+          <a href="about.html" class="btn-about" style="color: white;">About Me</a>
+          <a href="research.html" class="btn-about alt">Research</a>
+          <a href="publications.html" class="btn-about alt">Publications</a>
+        </div>
       </div>
-
-      <a href="about.html" class="btn-about" style="color: white;">About Me</a>
     </div>
-
 
   </section><!-- End Hero -->
 
@@ -129,6 +158,7 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
   <script data-goatcounter="https://nidhi4358.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
 </body>
