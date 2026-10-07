@@ -12,6 +12,14 @@ const publications = [
     link: ""
   },
   {
+    authors: "L.K. Sahu, Mansi Gupta, Nidhi Tripathi, Dibyani Singh, Ravi Yadav, T.K. Sunil Kumar",
+    title: "Sources of ambient air isoprene during winter and summer seasons and impact of COVID-19 pandemic lockdown at an urban site in western India",
+    journal: "Atmospheric Environment",
+    year: 2026,
+    nidhiFirstAuthor: false,
+    link: "https://doi.org/10.1016/j.atmosenv.2026.122206"
+  },
+  {
     authors: "Nidhi Tripathi, Bianca E. Krumm, Achim Edtbauer, Akima Ringsdorf, Nijing Wang, Matthias Kohl, Ryan Vella, Luiz A. T. Machado, Andrea Pozzer, Jos Lelieveld, Jonathan Williams",
     title: "Impacts of convection, chemistry, and forest clearing on biogenic volatile organic compounds over the Amazon",
     journal: "Nat Commun",
@@ -36,6 +44,14 @@ const publications = [
     link: "https://doi.org/10.1029/2024JD042547"
   },
   {
+    authors: "V. Lalchandani, S.N. Tripathi, D. Srivastava, G. Mishra, N.M. Thamban, S. Mishra, Nidhi Tripathi, L. Wang, A.S.H. Prévôt, H.S. Bhowmik, K. Dixit, L.K. Sahu, S.S. Gunthe",
+    title: "Semi-volatile oxygenated organics and ammonium chloride increasing sub-micron aerosol hygroscopicity, cloud condensation nuclei and PM1 mass in the Delhi region",
+    journal: "Atmospheric Environment",
+    year: 2025,
+    nidhiFirstAuthor: false,
+    link: "https://doi.org/10.1016/j.atmosenv.2025.121356"
+  },
+  {
     authors: "Joachim Curtius, Martin Heinritzi, Lisa J. Beck, Mira L. Pöhlker, Nidhi Tripathi, et. al.",
     title: "Isoprene nitrates drive new particle formation in Amazon's upper troposphere",
     journal: "Nature",
@@ -55,9 +71,25 @@ const publications = [
     authors: "Tanzil Gaffar Malik, Mansi Gupta, Nidhi Tripathi, Lokesh Kumar Sahu",
     title: "Change in monoterpene concentrations during winter-to-summer transition period and impact of COVID-19 lockdown at an urban site in India",
     journal: "Atmospheric Environment",
-    year: 2024,
+    year: 2025,
     nidhiFirstAuthor: false,
     link: "https://doi.org/10.1016/j.atmosenv.2025.121141"
+  },
+  {
+    authors: "Vikas Goel, Nidhi Tripathi, Mansi Gupta, Lokesh Kumar Sahu, Vikram Singh, Mayank Kumar",
+    title: "Study of secondary organic aerosol formation and aging using ambient air in an oxidation flow reactor during high pollution events over Delhi",
+    journal: "Environmental Research",
+    year: 2024,
+    nidhiFirstAuthor: false,
+    link: "https://doi.org/10.1016/j.envres.2024.118542"
+  },
+  {
+    authors: "Mansi Gupta, Nidhi Tripathi, T G Malik, L K Sahu",
+    title: "A review on air–sea exchange of reactive trace gases over the northern Indian Ocean",
+    journal: "Journal of Earth System Science",
+    year: 2024,
+    nidhiFirstAuthor: false,
+    link: "https://link.springer.com/article/10.1007/s12040-024-02268-5"
   },
   {
     authors: "Vaishali Jain, Nidhi Tripathi, Sachchida N. Tripathi, Mansi Gupta, Lokesh K. Sahu, Vishnu Murari, Sreenivas Gaddamidi, Ashutosh K. Shukla, Andre S. H. Prevot",
