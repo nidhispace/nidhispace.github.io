@@ -115,7 +115,7 @@
                           Joachim Curtius</a>
                         group.</p>
                       <div class="resume-logo ms-3">
-                        <img src="assets/img/goethe_university.png" alt="Frankfurt university Logo"
+                        <img src="assets/img/goethe_university.png" alt="Goethe University Frankfurt logo"
                           style="height:80px; object-fit:contain;">
                       </div>
                     </div>
@@ -155,7 +155,7 @@
                       <p>Research under the prestigious Humboldt Postdoctoral Fellowship.</p>
                       <ul>
                         <li>Joined <a href="https://www.mpic.de/3538105/Williams_Group" target="_blank">Prof. Jonathan
-                            Williams</a> (Max-Planck Institure for Chemsitry, Mainz, Germany), group.</li>
+                            Williams</a> (Max Planck Institute for Chemistry, Mainz, Germany), group.</li>
                         <li>Investigated VOC sources and sinks</li>
                         <li>Published 3 peer-reviewed papers</li>
                         <li>Presented at international conferences</li>
@@ -169,7 +169,7 @@
 
                 <div class="timeline-item-wide">
                   <div class="timeline-card-wide">
-                    <h4><a href="https://www.did.de/frankfurt" target="_blank">did deutsch-institut Frankfurt,
+                    <h4><a href="https://www.did.de/frankfurt" target="_blank">DID Deutsch-Institut Frankfurt,
                         Gutleutstr. 32 60329 Frankfurt am Main Germany</a></h4>
                     <p class="timeline-position">German Language Course</p>
                     <p class="timeline-date">Jan 2022 - Feb 2022</p>
@@ -181,7 +181,7 @@
                         <li>Cultural orientation program</li>
                       </ul>
                       <div class="resume-logo ms-3">
-                        <img src="assets/img/did_logo.png" alt="MPIC Logo" style="height:80px; object-fit:contain;">
+                        <img src="assets/img/did_logo.png" alt="DID Deutsch-Institut logo" style="height:80px; object-fit:contain;">
                       </div>
                     </div>
                   </div>
@@ -189,7 +189,7 @@
 
                 <div class="timeline-item-wide">
                   <div class="timeline-card-wide">
-                    <h4><a href="https://www.prl.res.in/" target="_blank">Physical Research Laboraotry, Ahmedababd,
+                    <h4><a href="https://www.prl.res.in/" target="_blank">Physical Research Laboratory, Ahmedabad,
                         India</a></h4>
                     <p class="timeline-position">Postdoctoral fellow</p>
                     <p class="timeline-date">Jul 2020 - Dec 2021</p>
@@ -231,9 +231,9 @@
               <h5>2015 - 2020</h5>
               <p><em><a href="https://www.iitgn.ac.in/" target="_blank">IIT-Gandhinagar (India)</a></em></p>
               <p><strong>(Worked at <a href="https://www.prl.res.in/prl-eng/" target="_blank">Physical Research
-                    Laboratory, Ahmedababd, India</a>)</strong></p>
-              <p>Ph.D. supervisor: <a href=="https://www.prl.res.in/~lokesh/" target="_blank">Prof. Lokesh Sahu</a>
-                (Physical Research Laboraotry, Ahmedabad, India)</p>
+                    Laboratory, Ahmedabad, India</a>)</strong></p>
+              <p>Ph.D. supervisor: <a href="https://www.prl.res.in/~lokesh/" target="_blank">Prof. Lokesh Sahu</a>
+                (Physical Research Laboratory, Ahmedabad, India)</p>
               <ul>
                 <li>Atmospheric chemistry and trace gases, precursors of ozone in the troposphere</li>
                 <li>Volatile organic compounds (VOCs) and measurements using PTR-TOF-MS</li>
@@ -841,6 +841,31 @@
         padding-left: 0;
       }
     </style>
+    <style>
+      /* ===== visual refresh: vertical timeline + consistent section headings ===== */
+      .resume .section-title { padding-bottom: 10px; }
+      .resume .resume-title, .campaigns-modern .section-header h2 {
+        font-family: "Raleway", sans-serif; font-size: 1.7rem; font-weight: 800; letter-spacing: 0; text-align: center;
+        color: #0a3d62; background: none; -webkit-text-fill-color: #0a3d62; display: block; margin: 46px 0 32px; padding: 0 0 16px; border: 0; position: relative; }
+      .resume .resume-title::after, .campaigns-modern .section-header h2::after {
+        content: ""; position: absolute; left: calc(50% - 25px); bottom: 0; width: 50px; height: 3px; background: #34b7a7; border-radius: 2px; }
+      .campaigns-modern .section-header .underline { display: none; }
+      .campaigns-modern .section-header { margin-bottom: 2.2rem; }
+      .campaigns-modern .section-header h2 { margin-top: 0; }
+
+      /* experience carousel: original horizontal scrolling, with the same card look as Education */
+      .timeline-card-wide { border-radius: 14px !important; border: 1px solid rgba(52, 183, 167, .12); box-shadow: 0 6px 22px rgba(0, 0, 0, .07) !important; }
+      .timeline-card-wide:hover { transform: translateY(-3px); }
+      .timeline-date { display: inline-block; font-size: .8rem; font-weight: 700; color: #1f8f82; background: #e7f8f6; border-radius: 20px; padding: 2px 12px; margin: 2px 0 4px; }
+
+      /* education: same card look */
+      .resume .resume-item { max-width: 900px; margin: 0 auto; background: #fff; border: 1px solid rgba(52, 183, 167, .12) !important; border-left: 2px solid #34b7a7 !important;
+        border-radius: 14px; box-shadow: 0 6px 22px rgba(0, 0, 0, .07); padding: 22px 26px !important; }
+      .resume .resume-item::before { display: none; }
+      .resume .resume-item .resume-logo img { height: 56px !important; }
+      @media (max-width: 600px) { }
+    </style>
+
 
     <!-- End Resume Section -->
   </main><!-- End #main -->
