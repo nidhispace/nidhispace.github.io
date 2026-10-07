@@ -58,6 +58,17 @@
     .ychip.zero { opacity: .4; }
     #journalFilter { max-width: 240px; }
 
+    /* manuscripts under review (not numbered, not counted in the totals or the chart) */
+    .ur-wrap { margin-bottom: 34px; text-align: left; }
+    .ur-wrap[hidden] { display: none; }
+    .ur-card { background: #fff; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, .05); border-left: 4px solid #e0a526; padding: 1.1rem 1.4rem; margin-bottom: 1rem; }
+    .ur-badge { display: inline-flex; gap: 6px; align-items: center; font-size: .72rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: #8a5a00; background: #fff4d6; border-radius: 12px; padding: 3px 11px; margin-bottom: .6rem; }
+    .ur-card .ur-title { font-size: 1.05rem; font-weight: 600; line-height: 1.4; color: #2c3e50; margin-bottom: .5rem; }
+    .ur-card .ur-authors { font-size: .9rem; color: #555; line-height: 1.5; margin-bottom: .6rem; }
+    .ur-card .ur-meta { font-size: .9rem; color: #666; display: flex; flex-wrap: wrap; gap: .4rem .7rem; align-items: center; }
+    .ur-authors .me { color: #1e40af; font-weight: 700; }
+    .ur-note { font-size: .78rem; color: #888; margin: -2px 2px 0; }
+
     /* papers-per-year chart (Google Scholar style) */
     .pub-chart { background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, .05); padding: 16px 22px 12px; margin-bottom: 18px; text-align: left; }
     .pc-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px 20px; flex-wrap: wrap; margin-bottom: 6px; }
@@ -179,6 +190,12 @@
     <!-- ======= Services Section ======= -->
     <section id="services" class="services">
       <div class="container" data-aos="fade-up">
+        <div class="ur-wrap" id="urWrap" hidden>
+          <h2>Manuscripts under review</h2>
+          <div id="urList"></div>
+          <p class="ur-note">Submitted, not yet peer-reviewed or accepted. Titles and author lists may change before publication.</p>
+        </div>
+
         <h2>Published Research articles</h2>
 
         <div class="pub-stats" aria-label="Publication summary">
@@ -553,6 +570,17 @@
       }
     ];
 
+    // Manuscripts currently under review. Not numbered or counted in the totals/chart.
+    // When one is accepted: delete it here and add it to `publications` above (put it first in the list).
+    const underReview = [
+      {
+        authors: "Nidhi Tripathi, Andrea Pozzer, Rolf Sander, Sergey Gromov, Bianca Krumm, Nijing Wang, Achim Edtbauer, Akima Ringsdorf, Clara Nussbaumer, Philip Holzbeck, Joseph Byron, Antonia Hartmann, Linda Ort, Florian Obersteiner, Hartwig Harder, Horst Fischer, Joachim Curtius, Jos Lelieveld, Jonathan Williams",
+        title: "Convective transport amplifies tropical upper-tropospheric oxidation through VOC-NO synergy",
+        journal: "Environmental Science & Technology",
+        status: "Under review"
+      }
+    ];
+
     // ── helpers ──
     const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     // one canonical name per journal (the data spells some of them several ways)
@@ -735,6 +763,23 @@
     });
 
     render();
+
+    // ── under review ──
+    (function () {
+      const wrap = document.getElementById('urWrap');
+      if (!underReview.length) return;
+      document.getElementById('urList').innerHTML = underReview.map(u => {
+        const names = u.authors.split(/,\s*/).filter(Boolean).map(n => esc(n).replace(/Nidhi Tripathi/, '<span class="me">Nidhi Tripathi</span>')).join(', ');
+        const first = /^\s*Nidhi Tripathi/.test(u.authors);
+        return `<article class="ur-card">
+          <span class="ur-badge"><i class="bi bi-hourglass-split"></i> ${esc(u.status)}</span>
+          <div class="ur-title">${esc(u.title)}</div>
+          <div class="ur-authors">${names}</div>
+          <div class="ur-meta"><span class="pub-journal">${esc(u.journal)}</span>${first ? '<span class="pub-first-badge">First author</span>' : ''}</div>
+        </article>`;
+      }).join('');
+      wrap.hidden = false;
+    })();
   </script>
   <script data-goatcounter="https://nidhi4358.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
