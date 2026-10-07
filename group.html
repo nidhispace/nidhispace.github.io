@@ -122,8 +122,8 @@
       </section>
 
       <section class="join">
-        <h3><i class="bi bi-envelope-heart"></i> Join or collaborate</h3>
-        <p>Interested in atmospheric chemistry, measurements or modelling? I am happy to hear from students, researchers and collaborators.</p>
+        <h3><i class="bi bi-envelope-heart"></i> Collaborate</h3>
+        <p>Working on atmospheric chemistry, measurements or modelling and interested in a joint project or data exchange? I would be glad to hear from you.</p>
         <div class="btns">
           <a class="btn-j" href="mailto:Tripathi@iau.uni-frankfurt.de"><i class="bi bi-envelope"></i> Get in touch</a>
           <a class="btn-j alt" href="collaborators.html"><i class="bi bi-people"></i> Collaborators</a>
@@ -170,7 +170,7 @@
     const box = document.getElementById('team');
     if (!MEMBERS.length) {
       box.style.display = 'block';
-      box.innerHTML = '<div class="empty-team"><i class="bi bi-person-plus"></i><b>The group is growing</b>Members will be listed here. If you would like to join, please get in touch below.</div>';
+      box.innerHTML = '<div class="empty-team"><i class="bi bi-person-plus"></i><b>Group members will be listed here</b>For research collaborations, please get in touch below.</div>';
     } else {
       box.innerHTML = MEMBERS.map(m => `<div class="team-card"><div class="avatar">${m.photo ? `<img src="${esc(m.photo)}" alt="${esc(m.name)}">` : '<i class="bi bi-person"></i>'}</div>
         <h5>${esc(m.name)}</h5><div class="role">${esc(m.role || '')}</div><div class="bio">${esc(m.bio || '')}</div>
