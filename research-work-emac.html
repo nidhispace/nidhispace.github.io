@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>EMAC Model | Nidhi</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap"
+    rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/img/favicon.png" rel="icon">
+
+  <style>
+    :root {
+      --teal: #34b7a7;
+      --teal-light: #51cdbe;
+      --teal-pale: #e7f8f6;
+      --dark: #222222;
+      --mid: #555555;
+      --light-bg: #e9e8e6;
+      --white: #ffffff;
+      --navy: #0a3d62;
+      --text-muted: #888888;
+      --card-shadow: 0 8px 32px rgba(52, 183, 167, .10), 0 2px 8px rgba(0, 0, 0, .06);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Open Sans", sans-serif;
+      color: var(--dark);
+      background: #f5f5f3;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--teal-light);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Raleway", sans-serif;
+    }
+
+    /* ── HEADER ── */
+    #header {
+      background: var(--light-bg);
+      box-shadow: 0 0 25px rgba(0, 0, 0, .08);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 997;
+      padding: 15px 0;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .logo a {
+      color: var(--dark);
+    }
+
+    .navbar ul {
+      display: flex;
+      list-style: none;
+    }
+
+    .navbar li {
+      padding: 10px 0 10px 28px;
+      position: relative;
+    }
+
+    .navbar a {
+      font-family: "Raleway", sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: .3s;
+      position: relative;
+    }
+
+    .navbar a::before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: var(--teal);
+      visibility: hidden;
+      transition: all .3s ease-in-out;
+    }
+
+    .navbar a:hover::before,
+    .navbar a.active::before {
+      visibility: visible;
+      width: 25px;
+    }
+
+    .navbar a:hover,
+    .navbar a.active {
+      color: var(--dark);
+    }
+
+    .header-social-links a {
+      color: #6f6f6f;
+      padding-left: 6px;
+      font-size: 16px;
+      line-height: 0;
+      display: inline-block;
+      transition: .3s;
+    }
+
+    .header-social-links a:hover {
+      color: var(--teal);
+    }
+
+    .mobile-nav-toggle {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--dark);
+    }
+
+    @media(max-width:991px) {
+      .navbar ul {
+        display: none;
+      }
+
+      .mobile-nav-toggle {
+        display: block;
+      }
+    }
+
+    /* ── MAIN ── */
+    #main {
+      margin-top: 70px;
+      padding: 70px 20px 90px;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      text-align: center;
+      padding-bottom: 40px;
+    }
+
+    .section-title .eyebrow {
+      display: inline-block;
+      font-size: .75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .section-title h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 16px;
+      position: relative;
+      padding-bottom: 20px;
+    }
+
+    .section-title h2::after {
+      content: "";
+      position: absolute;
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: var(--teal);
+      bottom: 0;
+      left: calc(50% - 25px);
+    }
+
+    .section-title p {
+      color: var(--mid);
+      max-width: 820px;
+      margin: 0 auto;
+      font-size: .95rem;
+      line-height: 1.7;
+    }
+
+    /* ── HISTORY CARDS GRID ── */
+    .history-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 40px 50px;
+      justify-items: center;
+      margin-top: 20px;
+    }
+
+    /* ── INDIVIDUAL CARD ── */
+    .history-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 30px 24px 26px;
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(52, 183, 167, .08);
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .history-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 20px 48px rgba(52, 183, 167, .18), 0 6px 16px rgba(0, 0, 0, .08);
+      border-color: rgba(52, 183, 167, .3);
+    }
+
+    /* Flag / icon area */
+    .card-visual {
+      width: 110px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f8f8f8;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .10);
+      transition: transform .28s ease, box-shadow .28s ease;
+      flex-shrink: 0;
+    }
+
+    .history-card:hover .card-visual {
+      transform: scale(1.06);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .15);
+    }
+
+    /* Inline flag strips */
+    .flag-strip {
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+
+    .flag-strip span {
+      flex: 1;
+      display: block;
+    }
+
+    /* Germany */
+    .de-black {
+      background: #000;
+    }
+
+    .de-red {
+      background: #de0000;
+    }
+
+    .de-gold {
+      background: #ffce00;
+    }
+
+    /* India */
+    .in-saffron {
+      background: #FF9933;
+    }
+
+    .in-white {
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .in-green {
+      background: #138808;
+    }
+
+    /* Ashoka Chakra inside white stripe */
+    .in-white svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    /* Country label */
+    .card-label {
+      font-family: "Raleway", sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .history-card:hover .card-label {
+      color: var(--teal);
+    }
+
+    .card-sub {
+      font-size: .82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    /* Explore pill */
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--teal-pale);
+      color: var(--teal);
+      font-size: .78rem;
+      font-weight: 700;
+      font-family: "Raleway", sans-serif;
+      letter-spacing: .5px;
+      padding: 6px 16px;
+      border-radius: 30px;
+      transition: background .25s, color .25s;
+    }
+
+    .history-card:hover .card-cta {
+      background: var(--teal);
+      color: #fff;
+    }
+
+    /* ── DIVIDER ── */
+    .or-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      gap: 14px;
+      margin: 0 auto;
+    }
+
+    .or-divider::before,
+    .or-divider::after {
+      content: "";
+      flex: 1;
+      max-width: 40px;
+      height: 1px;
+      background: var(--text-muted);
+      opacity: .4;
+    }
+
+    /* ── TEASER STATS ── */
+    .card-stats {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .cs {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cs .cn {
+      font-family: "Raleway", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--teal);
+      line-height: 1;
+    }
+
+    .cs .cl {
+      font-size: .65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-top: 2px;
+    }
+
+    /* ── FOOTER ── */
+    #footer {
+      background: var(--light-bg);
+      padding: 30px 0;
+      color: var(--dark);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 15px;
+      bottom: 15px;
+      z-index: 996;
+      background: var(--teal);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 22px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all .4s;
+      box-shadow: 0 4px 14px rgba(52, 183, 167, .4);
+    }
+
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--teal-light);
+    }
+
+    /* ── RESEARCH-WORK HUB ── */
+    .rw-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 34px 30px; }
+    .rw-card { position: relative; max-width: 320px; padding-top: 46px; }
+    .rw-card .card-stats { gap: 12px; flex-wrap: nowrap; }
+    .rw-card .cs .cl { letter-spacing: .4px; white-space: nowrap; font-size: .6rem; }
+    .rw-step { position: absolute; top: 14px; left: 14px; font-size: .66rem; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--teal); background: var(--teal-pale); border-radius: 20px; padding: 3px 11px; font-family: "Raleway", sans-serif; }
+    .rw-card .card-visual { color: #fff; font-size: 2.2rem; }
+    .rw-card .card-sub { min-height: 4.4em; }
+    .rw-back { text-align: center; margin-top: 46px; }
+    .rw-back a { display: inline-flex; align-items: center; gap: 8px; font-family: "Raleway", sans-serif; font-weight: 700; font-size: .85rem; color: var(--mid); border: 1px solid #d9dde2; border-radius: 30px; padding: 8px 20px; background: #fff; transition: all .2s; }
+    .rw-back a:hover { color: var(--teal); border-color: var(--teal); }
+    .rw-path { text-align: center; font-size: .8rem; color: var(--text-muted); margin: -14px auto 6px; }
+
+    /* ── BOX MODEL PAGE ── */
+    #main { max-width: 1320px; }
+    .bm { max-width: none; margin: 0 auto; text-align: left; }
+    .bm .parts { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 900px) { .bm .parts { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .bm .parts { grid-template-columns: 1fr; } }
+    .bm h3 { font-size: 1.25rem; font-weight: 800; color: var(--navy); margin: 44px 0 12px; display: flex; gap: 10px; align-items: center; }
+    .bm h3 i { color: var(--teal); }
+    .bm p, .bm li { font-size: .95rem; line-height: 1.75; color: var(--mid); }
+    .bm ul { padding-left: 1.2rem; }
+    .bm .card-box { background: #fff; border-radius: 14px; box-shadow: var(--card-shadow); padding: 20px 24px; margin: 16px 0; }
+    .bm .parts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin: 16px 0; }
+    .bm .part { background: #fff; border-radius: 12px; box-shadow: var(--card-shadow); padding: 16px 18px; border-top: 3px solid var(--teal); }
+    .bm .part b { display: block; font-family: "Raleway", sans-serif; color: var(--dark); margin-bottom: 4px; }
+    .bm .part span { font-size: .85rem; line-height: 1.55; color: var(--mid); }
+    .bm table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: var(--card-shadow); font-size: .85rem; }
+    .bm th { text-align: left; background: var(--teal-pale); color: var(--navy); padding: 10px 14px; font-family: "Raleway", sans-serif; font-size: .72rem; letter-spacing: .8px; text-transform: uppercase; }
+    .bm td { padding: 10px 14px; border-top: 1px solid #f0efea; color: var(--mid); vertical-align: top; }
+    .bm td:first-child { font-weight: 700; color: var(--dark); white-space: nowrap; }
+    .bm .eq { background: #f3f7fa; border-left: 4px solid var(--teal); border-radius: 0 10px 10px 0; padding: 12px 18px; font-family: "Courier New", monospace; font-size: .88rem; color: var(--navy); margin: 12px 0; overflow-x: auto; }
+    .bm .note { font-size: .82rem; color: var(--text-muted); background: #fff8e6; border-radius: 10px; padding: 12px 16px; margin-top: 30px; }
+    .bm .refs li { font-size: .85rem; }
+
+    .bm details.dd { background: #fff; border-radius: 14px; box-shadow: var(--card-shadow); margin: 18px 0; border: 1px solid rgba(52,183,167,.15); }
+    .bm details.dd > summary { cursor: pointer; list-style: none; padding: 16px 22px; font-family: "Raleway", sans-serif; font-weight: 800; color: var(--navy); display: flex; align-items: center; gap: 10px; }
+    .bm details.dd > summary::-webkit-details-marker { display: none; }
+    .bm details.dd > summary::after { content: "\F282"; font-family: "bootstrap-icons"; margin-left: auto; color: var(--teal); transition: transform .25s; }
+    .bm details.dd[open] > summary::after { transform: rotate(180deg); }
+    .bm details.dd > summary small { font-weight: 600; color: var(--text-muted); font-size: .75rem; margin-left: 4px; }
+    .bm .dd-body { padding: 0 24px 20px; border-top: 1px solid #f0efea; }
+    .bm .dd-body h4 { font-size: 1rem; font-weight: 800; color: var(--dark); margin: 22px 0 6px; }
+    .bm ol.steps { counter-reset: st; list-style: none; padding: 0; }
+    .bm ol.steps > li { counter-increment: st; position: relative; padding: 4px 0 14px 46px; }
+    .bm ol.steps > li::before { content: counter(st); position: absolute; left: 0; top: 2px; width: 32px; height: 32px; border-radius: 50%; background: var(--teal); color: #fff; font-family: "Raleway", sans-serif; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+    .bm ol.steps b { color: var(--dark); }
+    .bm code { background: #eef3f6; padding: 1px 6px; border-radius: 5px; font-size: .85em; color: var(--navy); }
+    .bm pre { background: #1f2d3a; color: #e8eef2; padding: 14px 18px; border-radius: 10px; overflow-x: auto; font-size: .82rem; line-height: 1.6; margin: 10px 0; }
+    .bm .flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 14px 0; font-size: .82rem; }
+    .bm .flow span { background: var(--teal-pale); color: var(--navy); font-weight: 700; padding: 6px 12px; border-radius: 20px; }
+    .bm .flow i { color: var(--text-muted); }
+
+    .bm figure.dg { background: #fff; border-radius: 14px; box-shadow: var(--card-shadow); margin: 20px 0; padding: 14px 16px 10px; }
+    .bm figure.dg svg { display: block; width: 100%; height: auto; max-height: 340px; }
+    .bm figure.dg figcaption { font-size: .8rem; color: var(--text-muted); text-align: center; margin-top: 6px; line-height: 1.5; }
+    .bm .dg text { font-family: "Open Sans", sans-serif; fill: #2c3e50; }
+    .bm .dg .t-s { font-size: 12px; } .bm .dg .t-m { font-size: 14px; font-weight: 700; } .bm .dg .t-l { font-size: 16px; font-weight: 800; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── HEADER ── -->
+  <header id="header">
+    <div class="header-inner">
+      <h1 class="logo"><a href="index.html">Nidhi</a></h1>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.html">Bio Sketch</a></li>
+          <li><a class="active" href="research.html">Research</a></li>
+          <li><a href="highlights.html">Highlights</a></li>
+          <li><a href="group.html">Group</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="history.html">History</a></li>
+        </ul>
+      </nav>
+      <div class="header-social-links">
+        <a href="https://twitter.com/nidhispace" target="_blank"><i class="bi bi-twitter"></i></a>
+        <a href="https://www.linkedin.com/in/nidhispace/" target="_blank"><i class="bi bi-linkedin"></i></a>
+      </div>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </div>
+  </header>
+
+  <!-- ── MAIN ── -->
+  <main id="main">
+
+    <div cl    <div class="section-title">
+      <span class="eyebrow">Research · Modelling</span>
+      <h2>EMAC Global Chemistry-Climate Model</h2>
+      <p>A general introduction to EMAC: a global model that simulates weather-scale atmospheric dynamics together with detailed chemistry.</p>
+    </div>
+
+    <div class="bm">
+      <h3><i class="bi bi-globe-europe-africa"></i> What is EMAC?</h3>
+      <p><b>EMAC</b> (ECHAM/MESSy Atmospheric Chemistry) is a numerical chemistry-climate model. It couples the <b>ECHAM5</b> atmospheric general circulation model, which computes winds, temperature, clouds and radiation on a 3-D global grid, with the <b>Modular Earth Submodel System (MESSy)</b>, which supplies chemistry, emissions, aerosol and other processes as interchangeable submodels. It is used to study the composition of the atmosphere from the surface to the middle atmosphere, and how it responds to emissions and climate change.</p>
+
+      <figure class="dg">
+        <svg viewBox="0 0 900 330" role="img" aria-label="Structure of EMAC: a base model with ECHAM5 dynamics, connected through the MESSy interface to submodels for chemistry, emissions, deposition, convection, photolysis and aerosol">
+          <rect x="20" y="20" width="860" height="290" rx="14" fill="#f3f7fa" stroke="#9fb4c2"/>
+          <text x="450" y="48" text-anchor="middle" class="t-l">EMAC</text>
+          <rect x="50" y="85" width="220" height="190" rx="12" fill="#2e86c1"/>
+          <text x="160" y="125" text-anchor="middle" class="t-m" style="fill:#fff">Base model</text>
+          <text x="160" y="160" text-anchor="middle" class="t-s" style="fill:#fff">ECHAM5</text>
+          <text x="160" y="182" text-anchor="middle" class="t-s" style="fill:#fff">winds, temperature,</text>
+          <text x="160" y="202" text-anchor="middle" class="t-s" style="fill:#fff">clouds, radiation</text>
+          <text x="160" y="224" text-anchor="middle" class="t-s" style="fill:#fff">on a global 3-D grid</text>
+          <rect x="285" y="150" width="50" height="60" rx="8" fill="#e0a526"/>
+          <text x="310" y="176" text-anchor="middle" class="t-s" style="font-weight:700">MESSy</text><text x="310" y="194" text-anchor="middle" class="t-s">interface</text>
+          <g class="t-s">
+            <rect x="360" y="85" width="150" height="50" rx="10" fill="#e7f8f6" stroke="#34b7a7"/><text x="435" y="115" text-anchor="middle">Gas-phase chemistry</text>
+            <rect x="525" y="85" width="150" height="50" rx="10" fill="#e7f8f6" stroke="#34b7a7"/><text x="600" y="115" text-anchor="middle">Photolysis</text>
+            <rect x="690" y="85" width="170" height="50" rx="10" fill="#e7f8f6" stroke="#34b7a7"/><text x="775" y="115" text-anchor="middle">Aerosol</text>
+            <rect x="360" y="150" width="150" height="50" rx="10" fill="#e7f8f6" stroke="#34b7a7"/><text x="435" y="180" text-anchor="middle">Emissions</text>
+            <rect x="525" y="150" width="150" height="50" rx="10" fill="#e7f8f6" stroke="#34b7a7"/><text x="600" y="180" text-anchor="middle">Deposition, scavenging</text>
+            <rect x="690" y="150" width="170" height="50" rx="10" fill="#e7f8f6" stroke="#34b7a7"/><text x="775" y="180" text-anchor="middle">Convection, lightning</text>
+            <rect x="360" y="215" width="500" height="60" rx="10" fill="#fff8e6" stroke="#e0a526"/><text x="610" y="240" text-anchor="middle" style="font-weight:700">Output &amp; tracers</text><text x="610" y="260" text-anchor="middle">trace-gas transport, netCDF output, diagnostics</text>
+          </g>
+          <path d="M270 180 L285 180 M335 180 L360 180" stroke="#2c3e50" stroke-width="2"/>
+        </svg>
+        <figcaption>Figure A. Simplified structure of EMAC: a climate-model core plus swappable MESSy submodels. Schematic, not an exhaustive list of submodels.</figcaption>
+      </figure>
+
+      <h3><i class="bi bi-gear-wide-connected"></i> How it works</h3>
+      <p>The atmosphere is divided into a grid of boxes in longitude, latitude and height. In every time step, the model:</p>
+      <ol class="steps">
+        <li><b>Computes the physics</b> of the atmosphere (winds, temperature, humidity, clouds, radiation).</li>
+        <li><b>Transports</b> every chemical species with the winds, including vertical transport by convection and mixing in the boundary layer.</li>
+        <li><b>Adds emissions</b> from the surface (anthropogenic, biomass burning, vegetation), and lightning NO<sub>x</sub>.</li>
+        <li><b>Runs the chemistry</b> in each grid box: the same kind of calculation as in a box model, but done for every box.</li>
+        <li><b>Removes material</b> by dry deposition and wet scavenging.</li>
+        <li><b>Writes output</b> such as 3-D fields of ozone, OH, VOCs and aerosol.</li>
+      </ol>
+
+      <details class="dd" id="more">
+        <summary><i class="bi bi-sliders2"></i> Technical details <small>(click to open)</small></summary>
+        <div class="dd-body">
+          <h4>Resolution and vertical range</h4>
+          <p>EMAC is run at a chosen horizontal resolution (set by the spectral truncation, for example T42, roughly 2.8° × 2.8°) and a chosen number of vertical levels, from the surface up to the middle atmosphere in some configurations. Finer resolution captures more detail but needs far more computing time, so it is chosen according to the question.</p>
+          <h4>Free-running vs. "nudged" simulations</h4>
+          <ul>
+            <li><b>Free-running</b> simulations compute their own weather. They are suited to long-term climate questions and statistics.</li>
+            <li><b>Nudged</b> (specified-dynamics) simulations push the model's winds and temperature towards meteorological reanalysis data, so that the simulated weather follows real events. This allows direct comparison with measurements from a given day, flight or campaign.</li>
+          </ul>
+          <h4>Chemistry</h4>
+          <p>Chemistry is handled by MECCA, the same module used in the CAABA box model, so the mechanism can be shared between the two. Detailed organic chemistry can be added with the Mainz Organic Mechanism, described in Pozzer et al. (2022), who evaluated EMAC with it.</p>
+          <h4>Computing</h4>
+          <p>EMAC is a large Fortran code run in parallel on supercomputers. A typical set-up involves choosing a configuration, preparing input files (emissions, boundary conditions) and submitting a batch job. Output is stored as netCDF files and analysed with tools such as Python, Ferret or NCL.</p>
+        </div>
+      </details>
+
+      <h3><i class="bi bi-arrow-left-right"></i> EMAC and the box model</h3>
+      <table>
+        <thead><tr><th></th><th>CAABA/MECCA box model</th><th>EMAC</th></tr></thead>
+        <tbody>
+          <tr><td>Scope</td><td>One air parcel</td><td>The whole globe, 3-D</td></tr>
+          <tr><td>Transport</td><td>None</td><td>Winds, convection, mixing</td></tr>
+          <tr><td>Chemistry</td><td>MECCA</td><td>MECCA (same mechanism)</td></tr>
+          <tr><td>Cost</td><td>Seconds to minutes on a laptop</td><td>Hours to days on a supercomputer</td></tr>
+          <tr><td>Best for</td><td>Understanding the chemistry in detail</td><td>Regional and global distributions, budgets, scenarios</td></tr>
+        </tbody>
+      </table>
+      <p>The two complement each other: a box model reveals <i>which</i> reactions matter in an observed air mass, and a global model like EMAC shows <i>how widely</i> that matters once transport and emissions are included.</p>
+
+      <h3><i class="bi bi-journal-text"></i> Key references</h3>
+      <ul class="refs">
+        <li>Jöckel, P. et al. (2006). The atmospheric chemistry general circulation model ECHAM5/MESSy1. <i>Atmos. Chem. Phys.</i>, 6, 5067–5104.</li>
+        <li>Jöckel, P. et al. (2010). Development cycle 2 of the Modular Earth Submodel System (MESSy2). <i>Geosci. Model Dev.</i>, 3, 717–752.</li>
+        <li>Roeckner, E. et al. (2006). Sensitivity of simulated climate to horizontal and vertical resolution in the ECHAM5 atmosphere model. <i>J. Climate</i>, 19, 3771–3791.</li>
+        <li>Pozzer, A. et al. (2022). Simulation of organics in the atmosphere: evaluation of EMACv2.54 with the Mainz Organic Mechanism. <i>Geosci. Model Dev.</i>, 15, 2673–2710. <a href="https://doi.org/10.5194/gmd-15-2673-2022" target="_blank" rel="noopener">doi:10.5194/gmd-15-2673-2022</a></li>
+      </ul>
+
+      <p class="note"><i class="bi bi-info-circle"></i> This is a general technical overview of the model, not a description of specific simulations. For details, consult the references above and the MESSy documentation.</p>
+    </div>
+
+    <div class="rw-back"><a href="research-work.html"><i class="bi bi-grid"></i> All research topics</a></div>
+
+  <!-- ── FOOTER ── -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; <span id="current-year"></span>
+        <strong><span>Nidhi</span></strong>. All Rights Reserved
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top" id="backTop"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    const btn = document.getElementById('backTop');
+    window.addEventListener('scroll', () => btn.classList.toggle('active', window.scrollY > 200));
+    btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  </script>
+  <script data-goatcounter="https://nidhi4358.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+
+</html>

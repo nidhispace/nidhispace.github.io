@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>CAABA/MECCA Box Model | Nidhi</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap"
+    rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/img/favicon.png" rel="icon">
+
+  <style>
+    :root {
+      --teal: #34b7a7;
+      --teal-light: #51cdbe;
+      --teal-pale: #e7f8f6;
+      --dark: #222222;
+      --mid: #555555;
+      --light-bg: #e9e8e6;
+      --white: #ffffff;
+      --navy: #0a3d62;
+      --text-muted: #888888;
+      --card-shadow: 0 8px 32px rgba(52, 183, 167, .10), 0 2px 8px rgba(0, 0, 0, .06);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Open Sans", sans-serif;
+      color: var(--dark);
+      background: #f5f5f3;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--teal-light);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Raleway", sans-serif;
+    }
+
+    /* ── HEADER ── */
+    #header {
+      background: var(--light-bg);
+      box-shadow: 0 0 25px rgba(0, 0, 0, .08);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 997;
+      padding: 15px 0;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .logo a {
+      color: var(--dark);
+    }
+
+    .navbar ul {
+      display: flex;
+      list-style: none;
+    }
+
+    .navbar li {
+      padding: 10px 0 10px 28px;
+      position: relative;
+    }
+
+    .navbar a {
+      font-family: "Raleway", sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: .3s;
+      position: relative;
+    }
+
+    .navbar a::before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: var(--teal);
+      visibility: hidden;
+      transition: all .3s ease-in-out;
+    }
+
+    .navbar a:hover::before,
+    .navbar a.active::before {
+      visibility: visible;
+      width: 25px;
+    }
+
+    .navbar a:hover,
+    .navbar a.active {
+      color: var(--dark);
+    }
+
+    .header-social-links a {
+      color: #6f6f6f;
+      padding-left: 6px;
+      font-size: 16px;
+      line-height: 0;
+      display: inline-block;
+      transition: .3s;
+    }
+
+    .header-social-links a:hover {
+      color: var(--teal);
+    }
+
+    .mobile-nav-toggle {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--dark);
+    }
+
+    @media(max-width:991px) {
+      .navbar ul {
+        display: none;
+      }
+
+      .mobile-nav-toggle {
+        display: block;
+      }
+    }
+
+    /* ── MAIN ── */
+    #main {
+      margin-top: 70px;
+      padding: 70px 20px 90px;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      text-align: center;
+      padding-bottom: 40px;
+    }
+
+    .section-title .eyebrow {
+      display: inline-block;
+      font-size: .75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .section-title h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 16px;
+      position: relative;
+      padding-bottom: 20px;
+    }
+
+    .section-title h2::after {
+      content: "";
+      position: absolute;
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: var(--teal);
+      bottom: 0;
+      left: calc(50% - 25px);
+    }
+
+    .section-title p {
+      color: var(--mid);
+      max-width: 820px;
+      margin: 0 auto;
+      font-size: .95rem;
+      line-height: 1.7;
+    }
+
+    /* ── HISTORY CARDS GRID ── */
+    .history-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 40px 50px;
+      justify-items: center;
+      margin-top: 20px;
+    }
+
+    /* ── INDIVIDUAL CARD ── */
+    .history-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 30px 24px 26px;
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(52, 183, 167, .08);
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .history-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 20px 48px rgba(52, 183, 167, .18), 0 6px 16px rgba(0, 0, 0, .08);
+      border-color: rgba(52, 183, 167, .3);
+    }
+
+    /* Flag / icon area */
+    .card-visual {
+      width: 110px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f8f8f8;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .10);
+      transition: transform .28s ease, box-shadow .28s ease;
+      flex-shrink: 0;
+    }
+
+    .history-card:hover .card-visual {
+      transform: scale(1.06);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .15);
+    }
+
+    /* Inline flag strips */
+    .flag-strip {
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+
+    .flag-strip span {
+      flex: 1;
+      display: block;
+    }
+
+    /* Germany */
+    .de-black {
+      background: #000;
+    }
+
+    .de-red {
+      background: #de0000;
+    }
+
+    .de-gold {
+      background: #ffce00;
+    }
+
+    /* India */
+    .in-saffron {
+      background: #FF9933;
+    }
+
+    .in-white {
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .in-green {
+      background: #138808;
+    }
+
+    /* Ashoka Chakra inside white stripe */
+    .in-white svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    /* Country label */
+    .card-label {
+      font-family: "Raleway", sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .history-card:hover .card-label {
+      color: var(--teal);
+    }
+
+    .card-sub {
+      font-size: .82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    /* Explore pill */
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--teal-pale);
+      color: var(--teal);
+      font-size: .78rem;
+      font-weight: 700;
+      font-family: "Raleway", sans-serif;
+      letter-spacing: .5px;
+      padding: 6px 16px;
+      border-radius: 30px;
+      transition: background .25s, color .25s;
+    }
+
+    .history-card:hover .card-cta {
+      background: var(--teal);
+      color: #fff;
+    }
+
+    /* ── DIVIDER ── */
+    .or-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      gap: 14px;
+      margin: 0 auto;
+    }
+
+    .or-divider::before,
+    .or-divider::after {
+      content: "";
+      flex: 1;
+      max-width: 40px;
+      height: 1px;
+      background: var(--text-muted);
+      opacity: .4;
+    }
+
+    /* ── TEASER STATS ── */
+    .card-stats {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .cs {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cs .cn {
+      font-family: "Raleway", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--teal);
+      line-height: 1;
+    }
+
+    .cs .cl {
+      font-size: .65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-top: 2px;
+    }
+
+    /* ── FOOTER ── */
+    #footer {
+      background: var(--light-bg);
+      padding: 30px 0;
+      color: var(--dark);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 15px;
+      bottom: 15px;
+      z-index: 996;
+      background: var(--teal);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 22px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all .4s;
+      box-shadow: 0 4px 14px rgba(52, 183, 167, .4);
+    }
+
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--teal-light);
+    }
+
+    /* ── RESEARCH-WORK HUB ── */
+    .rw-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 34px 30px; }
+    .rw-card { position: relative; max-width: 320px; padding-top: 46px; }
+    .rw-card .card-stats { gap: 12px; flex-wrap: nowrap; }
+    .rw-card .cs .cl { letter-spacing: .4px; white-space: nowrap; font-size: .6rem; }
+    .rw-step { position: absolute; top: 14px; left: 14px; font-size: .66rem; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--teal); background: var(--teal-pale); border-radius: 20px; padding: 3px 11px; font-family: "Raleway", sans-serif; }
+    .rw-card .card-visual { color: #fff; font-size: 2.2rem; }
+    .rw-card .card-sub { min-height: 4.4em; }
+    .rw-back { text-align: center; margin-top: 46px; }
+    .rw-back a { display: inline-flex; align-items: center; gap: 8px; font-family: "Raleway", sans-serif; font-weight: 700; font-size: .85rem; color: var(--mid); border: 1px solid #d9dde2; border-radius: 30px; padding: 8px 20px; background: #fff; transition: all .2s; }
+    .rw-back a:hover { color: var(--teal); border-color: var(--teal); }
+    .rw-path { text-align: center; font-size: .8rem; color: var(--text-muted); margin: -14px auto 6px; }
+
+    /* ── BOX MODEL PAGE ── */
+    #main { max-width: 1320px; }
+    .bm { max-width: none; margin: 0 auto; text-align: left; }
+    .bm .parts { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 900px) { .bm .parts { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 520px) { .bm .parts { grid-template-columns: 1fr; } }
+    .bm h3 { font-size: 1.25rem; font-weight: 800; color: var(--navy); margin: 44px 0 12px; display: flex; gap: 10px; align-items: center; }
+    .bm h3 i { color: var(--teal); }
+    .bm p, .bm li { font-size: .95rem; line-height: 1.75; color: var(--mid); }
+    .bm ul { padding-left: 1.2rem; }
+    .bm .card-box { background: #fff; border-radius: 14px; box-shadow: var(--card-shadow); padding: 20px 24px; margin: 16px 0; }
+    .bm .parts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; margin: 16px 0; }
+    .bm .part { background: #fff; border-radius: 12px; box-shadow: var(--card-shadow); padding: 16px 18px; border-top: 3px solid var(--teal); }
+    .bm .part b { display: block; font-family: "Raleway", sans-serif; color: var(--dark); margin-bottom: 4px; }
+    .bm .part span { font-size: .85rem; line-height: 1.55; color: var(--mid); }
+    .bm table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: var(--card-shadow); font-size: .85rem; }
+    .bm th { text-align: left; background: var(--teal-pale); color: var(--navy); padding: 10px 14px; font-family: "Raleway", sans-serif; font-size: .72rem; letter-spacing: .8px; text-transform: uppercase; }
+    .bm td { padding: 10px 14px; border-top: 1px solid #f0efea; color: var(--mid); vertical-align: top; }
+    .bm td:first-child { font-weight: 700; color: var(--dark); white-space: nowrap; }
+    .bm .eq { background: #f3f7fa; border-left: 4px solid var(--teal); border-radius: 0 10px 10px 0; padding: 12px 18px; font-family: "Courier New", monospace; font-size: .88rem; color: var(--navy); margin: 12px 0; overflow-x: auto; }
+    .bm .note { font-size: .82rem; color: var(--text-muted); background: #fff8e6; border-radius: 10px; padding: 12px 16px; margin-top: 30px; }
+    .bm .refs li { font-size: .85rem; }
+
+    .bm details.dd { background: #fff; border-radius: 14px; box-shadow: var(--card-shadow); margin: 18px 0; border: 1px solid rgba(52,183,167,.15); }
+    .bm details.dd > summary { cursor: pointer; list-style: none; padding: 16px 22px; font-family: "Raleway", sans-serif; font-weight: 800; color: var(--navy); display: flex; align-items: center; gap: 10px; }
+    .bm details.dd > summary::-webkit-details-marker { display: none; }
+    .bm details.dd > summary::after { content: "\F282"; font-family: "bootstrap-icons"; margin-left: auto; color: var(--teal); transition: transform .25s; }
+    .bm details.dd[open] > summary::after { transform: rotate(180deg); }
+    .bm details.dd > summary small { font-weight: 600; color: var(--text-muted); font-size: .75rem; margin-left: 4px; }
+    .bm .dd-body { padding: 0 24px 20px; border-top: 1px solid #f0efea; }
+    .bm .dd-body h4 { font-size: 1rem; font-weight: 800; color: var(--dark); margin: 22px 0 6px; }
+    .bm ol.steps { counter-reset: st; list-style: none; padding: 0; }
+    .bm ol.steps > li { counter-increment: st; position: relative; padding: 4px 0 14px 46px; }
+    .bm ol.steps > li::before { content: counter(st); position: absolute; left: 0; top: 2px; width: 32px; height: 32px; border-radius: 50%; background: var(--teal); color: #fff; font-family: "Raleway", sans-serif; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+    .bm ol.steps b { color: var(--dark); }
+    .bm code { background: #eef3f6; padding: 1px 6px; border-radius: 5px; font-size: .85em; color: var(--navy); }
+    .bm pre { background: #1f2d3a; color: #e8eef2; padding: 14px 18px; border-radius: 10px; overflow-x: auto; font-size: .82rem; line-height: 1.6; margin: 10px 0; }
+    .bm .flow { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 14px 0; font-size: .82rem; }
+    .bm .flow span { background: var(--teal-pale); color: var(--navy); font-weight: 700; padding: 6px 12px; border-radius: 20px; }
+    .bm .flow i { color: var(--text-muted); }
+
+    .bm figure.dg { background: #fff; border-radius: 14px; box-shadow: var(--card-shadow); margin: 20px 0; padding: 14px 16px 10px; }
+    .bm figure.dg svg { display: block; width: 100%; height: auto; max-height: 340px; }
+    .bm figure.dg figcaption { font-size: .8rem; color: var(--text-muted); text-align: center; margin-top: 6px; line-height: 1.5; }
+    .bm .dg text { font-family: "Open Sans", sans-serif; fill: #2c3e50; }
+    .bm .dg .t-s { font-size: 12px; } .bm .dg .t-m { font-size: 14px; font-weight: 700; } .bm .dg .t-l { font-size: 16px; font-weight: 800; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── HEADER ── -->
+  <header id="header">
+    <div class="header-inner">
+      <h1 class="logo"><a href="index.html">Nidhi</a></h1>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.html">Bio Sketch</a></li>
+          <li><a class="active" href="research.html">Research</a></li>
+          <li><a href="highlights.html">Highlights</a></li>
+          <li><a href="group.html">Group</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="history.html">History</a></li>
+        </ul>
+      </nav>
+      <div class="header-social-links">
+        <a href="https://twitter.com/nidhispace" target="_blank"><i class="bi bi-twitter"></i></a>
+        <a href="https://www.linkedin.com/in/nidhispace/" target="_blank"><i class="bi bi-linkedin"></i></a>
+      </div>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </div>
+  </header>
+
+  <!-- ── MAIN ── -->
+  <main id="main">
+
+    <div class="section-title">
+      <span class="eyebrow">Research · Modelling</span>
+      <h2>CAABA/MECCA Box Model</h2>
+      <p>A zero-dimensional photochemical model for studying how trace gases react in an isolated air parcel, and how I use it to interpret aircraft measurements.</p>
+    </div>
+
+    <div class="bm">
+      <h3><i class="bi bi-box"></i> What is a box model?</h3>
+      <p>A box model treats a chunk of air as a single well-mixed "box" with no transport, mixing or dilution. Given starting concentrations, temperature, pressure and sunlight, it follows only the chemistry through time. This makes it a clean laboratory for asking "what do these molecules do to each other?", with every reaction visible, something a 3-D global model cannot easily offer.</p>
+
+      <figure class="dg">
+        <svg viewBox="0 0 900 300" role="img" aria-label="Diagram of a box model: inputs go in, chemistry runs inside the box, outputs come out, and transport and mixing are excluded">
+          <defs><marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#34b7a7"/></marker></defs>
+          <rect x="20" y="40" width="210" height="190" rx="12" fill="#eaf6f4" stroke="#34b7a7"/>
+          <text x="125" y="68" text-anchor="middle" class="t-m">Inputs</text>
+          <text x="125" y="98" text-anchor="middle" class="t-s">Measured trace gases</text>
+          <text x="125" y="120" text-anchor="middle" class="t-s">Temperature, pressure</text>
+          <text x="125" y="142" text-anchor="middle" class="t-s">Place, date, time</text>
+          <text x="125" y="164" text-anchor="middle" class="t-s">Chemical mechanism</text>
+          <line x1="235" y1="135" x2="320" y2="135" stroke="#34b7a7" stroke-width="3" marker-end="url(#ar)"/>
+          <rect x="325" y="30" width="250" height="210" rx="14" fill="#fff8e6" stroke="#e0a526" stroke-width="2.5"/>
+          <text x="450" y="60" text-anchor="middle" class="t-l">The "box"</text>
+          <text x="450" y="84" text-anchor="middle" class="t-s">one well-mixed air parcel</text>
+          <circle cx="385" cy="130" r="14" fill="#e2703a"/><text x="385" y="135" text-anchor="middle" class="t-s" style="fill:#fff;font-weight:700">VOC</text>
+          <circle cx="450" cy="170" r="14" fill="#2e86c1"/><text x="450" y="175" text-anchor="middle" class="t-s" style="fill:#fff;font-weight:700">OH</text>
+          <circle cx="515" cy="130" r="14" fill="#8e5bd1"/><text x="515" y="135" text-anchor="middle" class="t-s" style="fill:#fff;font-weight:700">NO</text>
+          <path d="M398 136 Q420 160 436 168 M464 168 Q490 160 502 138" fill="none" stroke="#999" stroke-dasharray="4 3"/>
+          <text x="450" y="212" text-anchor="middle" class="t-s">reactions + sunlight only</text>
+          <line x1="580" y1="135" x2="665" y2="135" stroke="#34b7a7" stroke-width="3" marker-end="url(#ar)"/>
+          <rect x="670" y="40" width="210" height="190" rx="12" fill="#eaf6f4" stroke="#34b7a7"/>
+          <text x="775" y="68" text-anchor="middle" class="t-m">Outputs</text>
+          <text x="775" y="98" text-anchor="middle" class="t-s">Every species vs. time</text>
+          <text x="775" y="120" text-anchor="middle" class="t-s">OH, HO&#8322; over the day</text>
+          <text x="775" y="142" text-anchor="middle" class="t-s">Each reaction's rate</text>
+          <text x="775" y="164" text-anchor="middle" class="t-s">Production / loss budgets</text>
+          <g stroke="#c0392b" stroke-width="3" stroke-linecap="round"><line x1="345" y1="262" x2="360" y2="277"/><line x1="360" y1="262" x2="345" y2="277"/></g>
+          <text x="372" y="275" class="t-s">No transport, mixing, dilution or deposition</text>
+        </svg>
+        <figcaption>Figure A. The box-model idea: only chemistry changes the air parcel.</figcaption>
+      </figure>
+
+      <h3><i class="bi bi-diagram-3"></i> CAABA and MECCA</h3>
+      <p><b>CAABA</b> (Chemistry As A Box model Application) is the framework that runs the box. <b>MECCA</b> (Module Efficiently Calculating the Chemistry of the Atmosphere) supplies the chemistry. Together they are part of the MESSy modelling system. I used version 4.7.5.</p>
+      <div class="parts">
+        <div class="part"><b>CAABA</b><span>Zero-dimensional model that evolves an air parcel in time under prescribed physical conditions.</span></div>
+        <div class="part"><b>MECCA</b><span>Chemical mechanism covering troposphere and stratosphere, gas and aqueous phase, HO<sub>x</sub>-NO<sub>x</sub> and methane chemistry.</span></div>
+        <div class="part"><b>MOM</b><span>Mainz Organic Mechanism: detailed oxidation of VOCs such as isoprene, their products and RO<sub>2</sub> chemistry.</span></div>
+        <div class="part"><b>JVAL</b><span>Photolysis module that computes photolysis frequencies and the solar zenith angle for a given place and time.</span></div>
+      </div>
+
+      <h3><i class="bi bi-airplane"></i> Pairing the model with aircraft data</h3>
+      <p>In my work, the box is initialised with trace-gas mixing ratios measured on research aircraft, for example VOCs from PTR-ToF-MS and GC-MS together with NO, CO, ozone and others. The model then runs the day forward, so the observed air mass can be examined chemically: which species produce the radicals (OH, HO<sub>2</sub>) that drive oxidation, and how do they interact?</p>
+
+      <details class="dd" id="how">
+        <summary><i class="bi bi-gear-wide-connected"></i> How it works, in detail <small>(click to open)</small></summary>
+        <div class="dd-body">
+          <h4>1. The core idea: a set of coupled rate equations</h4>
+          <p>Every species in the mechanism gets one equation describing how its concentration changes with time. Chemistry adds or removes molecules through reactions; the box adds nothing else (no transport):</p>
+          <div class="eq">dC<sub>i</sub>/dt = Σ (production by reactions) − Σ (loss by reactions)</div>
+          <p>A reaction such as <code>A + B → C</code> proceeds at a rate <code>k · [A] · [B]</code>. The rate constant <code>k</code> depends on temperature and pressure; photolysis reactions use a photolysis frequency <code>J</code> instead, which depends on sunlight. With hundreds to thousands of species and reactions, this becomes a large system of equations that must be solved numerically.</p>
+
+          <figure class="dg">
+            <svg viewBox="0 0 900 340" role="img" aria-label="Schematic of the HOx cycle: OH reacts with a VOC to form RO2; RO2 reacts with NO to form HO2; HO2 reacts with NO to regenerate OH; photolysis of carbonyls adds new HOx">
+              <defs><marker id="a2" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2c3e50"/></marker></defs>
+              <circle cx="150" cy="170" r="52" fill="#2e86c1"/><text x="150" y="178" text-anchor="middle" class="t-l" style="fill:#fff">OH</text>
+              <circle cx="450" cy="60" r="48" fill="#e2703a"/><text x="450" y="68" text-anchor="middle" class="t-l" style="fill:#fff">RO&#8322;</text>
+              <circle cx="750" cy="170" r="52" fill="#16a085"/><text x="750" y="178" text-anchor="middle" class="t-l" style="fill:#fff">HO&#8322;</text>
+              <path d="M185 130 Q300 40 400 55" fill="none" stroke="#2c3e50" stroke-width="2.5" marker-end="url(#a2)"/>
+              <text x="215" y="36" class="t-s">+ VOC (e.g. isoprene)</text>
+              <path d="M495 75 Q660 80 715 130" fill="none" stroke="#2c3e50" stroke-width="2.5" marker-end="url(#a2)"/>
+              <text x="585" y="36" class="t-s">+ NO &#8594; NO&#8322;, carbonyls (HCHO&#8230;)</text>
+              <path d="M715 215 Q450 330 185 215" fill="none" stroke="#2c3e50" stroke-width="2.5" marker-end="url(#a2)"/>
+              <text x="450" y="300" text-anchor="middle" class="t-s">+ NO &#8594; OH + NO&#8322;   (this is the recycling step)</text>
+              <rect x="350" y="150" width="200" height="62" rx="10" fill="#fff8e6" stroke="#e0a526"/>
+              <text x="450" y="174" text-anchor="middle" class="t-s" style="font-weight:700">Extra HO&#8339; from photolysis</text>
+              <text x="450" y="194" text-anchor="middle" class="t-s">of carbonyls, peroxides</text>
+              <path d="M450 150 L450 112" fill="none" stroke="#e0a526" stroke-width="2" stroke-dasharray="4 3"/>
+              <path d="M550 181 L690 181" fill="none" stroke="#e0a526" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#a2)"/>
+            </svg>
+            <figcaption>Figure B. Simplified HO<sub>x</sub> cycle. NO lets radicals be passed around the loop instead of ending as peroxides; photolysis can add new radicals. Schematic only, not every reaction is shown.</figcaption>
+          </figure>
+
+          <h4>2. From a reaction list to running code (KPP)</h4>
+          <p>MECCA stores the chemistry as a plain-text list of reactions with rate expressions. A tool called <b>KPP</b> (Kinetic PreProcessor) turns that list into efficient Fortran code for the equations above, including a solver suited to <i>stiff</i> systems, where some reactions are millions of times faster than others (radicals such as OH live for about a second, ozone for weeks).</p>
+          <div class="flow"><span>Reaction list (MECCA)</span><i class="bi bi-arrow-right"></i><span>KPP</span><i class="bi bi-arrow-right"></i><span>Fortran chemistry code</span><i class="bi bi-arrow-right"></i><span>Compile with CAABA</span><i class="bi bi-arrow-right"></i><span>Run</span></div>
+
+          <h4>3. What happens in each time step</h4>
+          <ol class="steps">
+            <li><b>Update the physical state.</b> Temperature, pressure and humidity are prescribed (fixed or from a given profile); the model does not compute them.</li>
+            <li><b>Update photolysis.</b> The JVAL module calculates photolysis frequencies from the solar zenith angle at the chosen latitude, longitude and date, so the Sun rises and sets in the simulation.</li>
+            <li><b>Update rate constants</b> for the current temperature and pressure.</li>
+            <li><b>Integrate the chemistry</b> over the step with the stiff solver to get the new concentrations of all species.</li>
+            <li><b>Write output</b> (concentrations, reaction rates, photolysis rates) to a file, then repeat until the end time.</li>
+          </ol>
+
+          <h4>4. What you must supply, and what you get</h4>
+          <table>
+            <thead><tr><th>Input</th><th>Examples</th></tr></thead>
+            <tbody>
+              <tr><td>Starting concentrations</td><td>Measured VOCs, NO, CO, O<sub>3</sub>, H<sub>2</sub>O<sub>2</sub> and so on</td></tr>
+              <tr><td>Physical conditions</td><td>Temperature, pressure, humidity</td></tr>
+              <tr><td>Place and time</td><td>Latitude, longitude, date, start time (sets sunlight)</td></tr>
+              <tr><td>Chemistry choice</td><td>Which mechanism and which species are included</td></tr>
+            </tbody>
+          </table>
+          <p><b>Output:</b> time series of every species (for example OH and HO<sub>2</sub> over the day) and of each reaction's rate, which is what allows production and loss budgets to be built.</p>
+
+          <h4>5. Important modelling choices</h4>
+          <ul>
+            <li><b>Constant or relaxing species.</b> Species can be held fixed at measured values (representing a continuous source) or left free to react away. This choice changes results and should be justified.</li>
+            <li><b>Spin-up.</b> Radicals and short-lived intermediates need some time to reach a realistic state before the output is interpreted.</li>
+            <li><b>Mechanism size.</b> A detailed organic mechanism is more realistic but slower and harder to analyse; a reduced one is faster but may miss pathways.</li>
+          </ul>
+        </div>
+      </details>
+
+      <h3><i class="bi bi-sliders"></i> Sensitivity experiments</h3>
+      <p>The central idea is to switch groups of species off and compare. Each run isolates one contribution:</p>
+      <table>
+        <thead><tr><th>Run</th><th>What is included</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td>Reference</td><td>All measured species</td><td>Full scenario</td></tr>
+          <tr><td>Single-VOC + NO runs</td><td>NO plus one VOC at a time (the others set to zero)</td><td>Isolate each VOC's contribution</td></tr>
+          <tr><td>NO only</td><td>NO, CO, O<sub>3</sub>, H<sub>2</sub>O<sub>2</sub>, no organics</td><td>Effect of NO alone</td></tr>
+          <tr><td>Background</td><td>Values measured away from the event</td><td>Baseline without the input being studied</td></tr>
+        </tbody>
+      </table>
+
+      <h3><i class="bi bi-calculator"></i> Attributing radical production</h3>
+      <p>To find how much each compound matters, I remove it from the full simulation and compare the daytime-integrated gross HO<sub>x</sub> production:</p>
+      <div class="eq">ΔP_VOC = P_full − P_(full − VOC)      f_VOC = ΔP_VOC / P_full × 100</div>
+      <p>Some effects are non-linear: two ingredients together can give more (or less) than the sum of each alone. This is captured by a <b>synergy term</b>:</p>
+      <div class="eq">ΔP_syn = ΔP_total − ΔP_NO − ΔP_VOC</div>
+      <p>A positive synergy means the interaction amplifies production; zero means the effects simply add; negative means competition.</p>
+      <figure class="dg">
+        <svg viewBox="0 0 900 260" role="img" aria-label="Illustrative schematic of the synergy term: the total effect is larger than the sum of the effect of NO alone and the effect of the VOC alone">
+          <line x1="60" y1="215" x2="860" y2="215" stroke="#999"/>
+          <rect x="110" y="165" width="130" height="50" fill="#e2703a"/><text x="175" y="238" text-anchor="middle" class="t-s">VOC alone</text>
+          <rect x="300" y="125" width="130" height="90" fill="#8e5bd1"/><text x="365" y="238" text-anchor="middle" class="t-s">NO alone</text>
+          <text x="480" y="180" text-anchor="middle" class="t-l">+</text>
+          <rect x="530" y="125" width="130" height="90" fill="#8e5bd1"/><rect x="530" y="75" width="130" height="50" fill="#e2703a"/>
+          <text x="595" y="238" text-anchor="middle" class="t-s">Sum of the parts</text>
+          <rect x="720" y="125" width="130" height="90" fill="#8e5bd1"/><rect x="720" y="75" width="130" height="50" fill="#e2703a"/>
+          <rect x="720" y="25" width="130" height="50" fill="#34b7a7" stroke="#117a65" stroke-dasharray="5 3"/>
+          <text x="785" y="55" text-anchor="middle" class="t-s" style="fill:#fff;font-weight:700">Synergy</text>
+          <text x="785" y="238" text-anchor="middle" class="t-s">Together (full run)</text>
+          <text x="660" y="190" class="t-l" text-anchor="middle">vs.</text>
+        </svg>
+        <figcaption>Figure C. Synergy = total &minus; (NO alone + VOC alone). Bar heights are illustrative, not model results.</figcaption>
+      </figure>
+
+
+
+      <details class="dd" id="guide">
+        <summary><i class="bi bi-signpost-split"></i> Step-by-step guide to get started <small>(click to open)</small></summary>
+        <div class="dd-body">
+          <p>This is a general outline of a first project. Exact file names, options and commands change between versions, so always follow the manual that comes with your version of CAABA/MECCA.</p>
+          <ol class="steps">
+            <li><b>Get comfortable with the prerequisites.</b> You will need a Linux or Unix-like system, a Fortran compiler, the netCDF library, and basic comfort with the command line. Python or Ferret/ncview helps for plotting.</li>
+            <li><b>Obtain the model.</b> CAABA/MECCA is distributed as part of the MESSy system. Check the MESSy website (<a href="https://messy-interface.org" target="_blank" rel="noopener">messy-interface.org</a>) for the current licence terms and how to download it.</li>
+            <li><b>Read the model description.</b> Sander et al. (2019) in <i>Geoscientific Model Development</i> explains the design and is the best single introduction; the manual covers installation.</li>
+            <li><b>Pick or create a configuration.</b> MECCA comes with ready-made chemistry setups, for example methane-only or full tropospheric chemistry. Start with a small one so that runs finish in seconds and you can understand every reaction.</li>
+            <li><b>Generate the chemistry code.</b> A helper tool (<code>xmecca</code> in the standard distribution) lets you choose the mechanism and generate the code with KPP. Compile the model.</li>
+            <li><b>Set up the experiment.</b> Edit the model's settings file: start date and time, latitude and longitude, temperature, pressure, humidity, run length, and initial concentrations. First run a "do-nothing" test: default values, to confirm it works.</li>
+            <li><b>Run it and look at the output.</b> Plot a few species against time, such as O<sub>3</sub>, NO, NO<sub>2</sub>, OH, HO<sub>2</sub>. Check that OH is zero at night and peaks near midday. If not, something is mis-set.</li>
+            <li><b>Change one thing at a time.</b> Double NO, or remove one VOC, and compare with the base run. This is the sensitivity approach described above and is how most insight is gained.</li>
+            <li><b>Move to real data.</b> Initialise the model with measured values from an aircraft or ground site, check the unit conversions (ppbv, pptv, mol/mol), and run reference and sensitivity cases.</li>
+            <li><b>Check and document.</b> Compare modelled species with any you did not use as input, run perturbation tests for measurement uncertainty, and record every setting so the run can be reproduced.</li>
+          </ol>
+          <h4>Common first-time pitfalls</h4>
+          <ul>
+            <li>Mixing up units for initial concentrations (ppbv vs. pptv vs. molecules cm<sup>-3</sup>).</li>
+            <li>Forgetting that the box has no sinks other than chemistry, so long runs drift away from reality.</li>
+            <li>Reading results from the first hours of a run before radicals have settled.</li>
+            <li>Changing several inputs at once, so the cause of a change cannot be identified.</li>
+          </ul>
+          <h4>Where to learn more</h4>
+          <ul>
+            <li>Sander et al. (2019), GMD, 12, 1365–1385: model description.</li>
+            <li>The MESSy and KPP documentation for installation and options.</li>
+            <li>Textbook background: Jacob, <i>Introduction to Atmospheric Chemistry</i> (free online), for HO<sub>x</sub>, NO<sub>x</sub> and ozone chemistry.</li>
+          </ul>
+        </div>
+      </details>
+
+      <h3><i class="bi bi-exclamation-triangle"></i> Limitations</h3>
+      <ul>
+        <li>The box has no mixing, dilution, continued transport, heterogeneous loss or deposition, so results describe the chemical evolution of one air parcel, not the whole atmosphere.</li>
+        <li>The answer depends on the quality of the input measurements and their uncertainties; this is why sensitivity tests with perturbed inputs are run.</li>
+        <li>Natural next step: couple box-model insight with a chemical transport model that includes transport.</li>
+      </ul>
+
+      <h3><i class="bi bi-journal-text"></i> Key references</h3>
+      <ul class="refs">
+        <li>Sander, R. et al. (2019). The community atmospheric chemistry box model CAABA/MECCA-4.0. <i>Geosci. Model Dev.</i>, 12, 1365–1385. <a href="https://doi.org/10.5194/gmd-12-1365-2019" target="_blank" rel="noopener">doi:10.5194/gmd-12-1365-2019</a></li>
+        <li>Pozzer, A. et al. (2022). Simulation of organics in the atmosphere: evaluation of EMACv2.54 with the Mainz Organic Mechanism (MOM). <i>Geosci. Model Dev.</i>, 15, 2673–2710. <a href="https://doi.org/10.5194/gmd-15-2673-2022" target="_blank" rel="noopener">doi:10.5194/gmd-15-2673-2022</a></li>
+        <li>Sander, R. et al. (2014). The photolysis module JVAL-14. <i>Geosci. Model Dev.</i>, 7, 2653–2662. <a href="https://doi.org/10.5194/gmd-7-2653-2014" target="_blank" rel="noopener">doi:10.5194/gmd-7-2653-2014</a></li>
+      </ul>
+
+      <p class="note"><i class="bi bi-hourglass-split"></i> This page describes the model and method. Results from my application of it to aircraft data (CAFE-Pacific) are in a manuscript currently under review and are not shown here.</p>
+    </div>
+
+    <div class="rw-back"><a href="research-work.html"><i class="bi bi-grid"></i> All research topics</a></div>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; <span id="current-year"></span>
+        <strong><span>Nidhi</span></strong>. All Rights Reserved
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top" id="backTop"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    const btn = document.getElementById('backTop');
+    window.addEventListener('scroll', () => btn.classList.toggle('active', window.scrollY > 200));
+    btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  </script>
+  <script data-goatcounter="https://nidhi4358.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+
+</html>
