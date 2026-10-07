@@ -62,7 +62,19 @@
     }
 
     /* Hero image: size by width so the VOC graphic and portrait are not cropped */
-    #hero { height: min(100vh, 58.3vw); min-height: 560px; background-size: cover; background-position: center 18%; background-attachment: scroll !important; }
+    /* Page = hero + footer, filling the window: no empty band, whatever the window shape.
+       The image keeps its full width (nothing cropped sideways); any spare height is the image's own black sky. */
+    body { display: flex; flex-direction: column; min-height: 100vh; }
+    #hero { flex: 1 0 auto; height: auto; min-height: 520px; background-color: #000; background-repeat: no-repeat;
+      background-size: 100% auto; background-position: center 40%; background-attachment: scroll !important; }
+    #footer { flex: none; }
+    #hero:before { display: none !important; }   /* template's white wash on small screens hid the white text */
+    /* Narrow windows: picture on top at full width, text underneath, so nothing covers the faces */
+    @media (max-width: 992px) {
+      #hero { background-position: center top; align-items: flex-start !important; min-height: 0; }
+      #hero::after { display: none; }
+      #hero .container.hero-box { padding: calc(58.3vw + 28px) 20px 40px; }
+    }
 
   </style>
 </head>
