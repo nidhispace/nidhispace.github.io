@@ -58,17 +58,6 @@
     .ychip.zero { opacity: .4; }
     #journalFilter { max-width: 240px; }
 
-    /* manuscripts under review (not numbered, not counted in the totals or the chart) */
-    .ur-wrap { margin-bottom: 34px; text-align: left; }
-    .ur-wrap[hidden] { display: none; }
-    .ur-card { background: #fff; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, .05); border-left: 4px solid #e0a526; padding: 1.1rem 1.4rem; margin-bottom: 1rem; }
-    .ur-badge { display: inline-flex; gap: 6px; align-items: center; font-size: .72rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: #8a5a00; background: #fff4d6; border-radius: 12px; padding: 3px 11px; margin-bottom: .6rem; }
-    .ur-card .ur-title { font-size: 1.05rem; font-weight: 600; line-height: 1.4; color: #2c3e50; margin-bottom: .5rem; }
-    .ur-card .ur-authors { font-size: .9rem; color: #555; line-height: 1.5; margin-bottom: .6rem; }
-    .ur-card .ur-meta { font-size: .9rem; color: #666; display: flex; flex-wrap: wrap; gap: .4rem .7rem; align-items: center; }
-    .ur-authors .me { color: #1e40af; font-weight: 700; }
-    .ur-note { font-size: .78rem; color: #888; margin: -2px 2px 0; }
-
     /* papers-per-year chart (Google Scholar style) */
     .pub-chart { background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, .05); padding: 16px 22px 12px; margin-bottom: 18px; text-align: left; }
     .pc-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px 20px; flex-wrap: wrap; margin-bottom: 6px; }
@@ -81,11 +70,17 @@
     .pc-grid span { position: absolute; right: -34px; top: -9px; width: 28px; text-align: left; font-size: .72rem; color: #888; }
     .pc-bars { position: absolute; inset: 0; display: flex; gap: 10px; }
     .pc-col { flex: 1; min-width: 0; position: relative; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; background: none; border: 0; padding: 0; cursor: pointer; font: inherit; }
-    .pc-barwrap { flex: 1; width: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding-bottom: 0; position: relative; }
-    .pc-bar { width: min(100%, 46px); display: flex; flex-direction: column; justify-content: flex-end; border-radius: 3px 3px 0 0; overflow: hidden; transition: height .35s ease, opacity .2s, filter .2s; min-height: 0; }
+    .pc-barwrap { flex: 1; width: 100%; position: relative; }
+    .pc-bar { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: min(100%, 46px); display: flex; flex-direction: column; justify-content: flex-end; border-radius: 3px 3px 0 0; overflow: hidden; transition: height .35s ease, opacity .2s, filter .2s; min-height: 3px; }
     .pc-bar .rest { background: #8a8f94; }
     .pc-bar .first { background: #34b7a7; }
-    .pc-n { font-size: .72rem; font-weight: 700; color: #666; margin-bottom: 3px; height: 14px; }
+    .pc-bar .urseg { background: repeating-linear-gradient(135deg, #f3c557 0 4px, #fff4d6 4px 8px); }
+    .pc-legend i.hatch { background: repeating-linear-gradient(135deg, #f3c557 0 3px, #fff4d6 3px 6px); border: 1px solid #e0a526; }
+    #pubsList .pub.ur, #pubsList .pub.first.ur { border-left-color: #e0a526; }
+    #pubsList .pub.ur .pub-num, #pubsList .pub.first.ur .pub-num { background: #fff4d6; color: #b8800f; font-size: 1.1rem; }
+    .st-ur { display: block; font-style: normal; font-size: .68rem; font-weight: 700; color: #b8800f; margin-top: 2px; }
+    .pub-ur-badge { display: inline-flex; gap: 5px; align-items: center; font-size: .7rem; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; color: #8a5a00; background: #fff4d6; border-radius: 12px; padding: 2px 9px; }
+    .pc-n { position: absolute; left: 0; right: 0; text-align: center; font-size: .72rem; font-weight: 700; color: #666; line-height: 14px; }
     .pc-yr { height: 26px; line-height: 26px; font-size: .78rem; color: #666; }
     .pc-col:hover .pc-bar, .pc-col:focus-visible .pc-bar { filter: brightness(.88); }
     .pc-col:focus-visible { outline: 2px solid #34b7a7; outline-offset: 2px; border-radius: 4px; }
@@ -190,12 +185,6 @@
     <!-- ======= Services Section ======= -->
     <section id="services" class="services">
       <div class="container" data-aos="fade-up">
-        <div class="ur-wrap" id="urWrap" hidden>
-          <h2>Manuscripts under review</h2>
-          <div id="urList"></div>
-          <p class="ur-note">Submitted, not yet peer-reviewed or accepted. Titles and author lists may change before publication.</p>
-        </div>
-
         <h2>Published Research articles</h2>
 
         <div class="pub-stats" aria-label="Publication summary">
@@ -209,7 +198,7 @@
         <section class="pub-chart" aria-labelledby="pcTitle">
           <div class="pc-head">
             <h3 id="pcTitle">Publications per year</h3>
-            <div class="pc-legend"><span><i style="background:#34b7a7"></i>First author</span><span><i style="background:#8a8f94"></i>Co-author</span></div>
+            <div class="pc-legend"><span><i style="background:#34b7a7"></i>First author</span><span><i style="background:#8a8f94"></i>Co-author</span><span><i class="hatch"></i>Under review</span></div>
           </div>
           <div class="pc-plot" id="pcPlot"></div>
           <p class="pc-hint" id="pcHint">Click a bar to show that year's papers; click it again to clear. The chart follows your search and filters.</p>
@@ -312,6 +301,15 @@
 
   <script>
     const publications = [
+      // status: "under review" = submitted, not yet accepted. When accepted: delete the status line (and add link/journal details).
+      {
+        authors: "Nidhi Tripathi, Andrea Pozzer, Rolf Sander, Sergey Gromov, Bianca Krumm, Nijing Wang, Achim Edtbauer, Akima Ringsdorf, Clara Nussbaumer, Philip Holzbeck, Joseph Byron, Antonia Hartmann, Linda Ort, Florian Obersteiner, Hartwig Harder, Horst Fischer, Joachim Curtius, Jos Lelieveld, Jonathan Williams",
+        title: "Convective transport amplifies tropical upper-tropospheric oxidation through VOC-NO synergy",
+        journal: "Environmental Science & Technology",
+        year: 2026,
+        status: "under review",
+        link: ""
+      },
       {
         authors: "Nidhi Tripathi, Bianca E. Krumm, Achim Edtbauer, Akima Ringsdorf, Nijing Wang, Matthias Kohl, Ryan Vella, Luiz A. T. Machado, Andrea Pozzer, Jos Lelieveld, Jonathan Williams",
         title: "Impacts of convection, chemistry, and forest clearing on biogenic volatile organic compounds over the Amazon",
@@ -570,17 +568,6 @@
       }
     ];
 
-    // Manuscripts currently under review. Not numbered or counted in the totals/chart.
-    // When one is accepted: delete it here and add it to `publications` above (put it first in the list).
-    const underReview = [
-      {
-        authors: "Nidhi Tripathi, Andrea Pozzer, Rolf Sander, Sergey Gromov, Bianca Krumm, Nijing Wang, Achim Edtbauer, Akima Ringsdorf, Clara Nussbaumer, Philip Holzbeck, Joseph Byron, Antonia Hartmann, Linda Ort, Florian Obersteiner, Hartwig Harder, Horst Fischer, Joachim Curtius, Jos Lelieveld, Jonathan Williams",
-        title: "Convective transport amplifies tropical upper-tropospheric oxidation through VOC-NO synergy",
-        journal: "Environmental Science & Technology",
-        status: "Under review"
-      }
-    ];
-
     // ── helpers ──
     const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     // one canonical name per journal (the data spells some of them several ways)
@@ -590,10 +577,15 @@
     // stable numbers: #1 = oldest paper, so a paper keeps its number whatever filter or sort is active
     // Nidhi's position in the author list (1 = first author). Papers whose list is cut off with "et al." can set nidhiPosition: n by hand; otherwise null.
     const authorPos = a => { const k = a.split(/,\s*/).findIndex(n => /Nidhi Tripathi/.test(n)); return k < 0 ? null : k + 1; };
-    const ranked = publications.map((p, i) => ({ ...p, i, venue: venue(p.journal), pos: p.nidhiPosition || authorPos(p.authors), etal: /et\.?\s*al/i.test(p.authors), nAuth: p.authors.split(/,\s*/).filter(n => n && !/^et\.?\s*al\.?$/i.test(n)).length }))
+    const ranked = publications.map((p, i) => ({ ...p, i, ur: p.status === 'under review', venue: venue(p.journal), pos: p.nidhiPosition || authorPos(p.authors), etal: /et\.?\s*al/i.test(p.authors), nAuth: p.authors.split(/,\s*/).filter(n => n && !/^et\.?\s*al\.?$/i.test(n)).length }))
       .sort((a, b) => a.year - b.year || b.i - a.i);
-    ranked.forEach((p, k) => p.num = k + 1);
-    const total = ranked.length;
+    // numbers (#1 = oldest) are given to published papers only; papers under review get the next numbers once accepted
+    const pubd = ranked.filter(p => !p.ur);
+    pubd.forEach((p, k) => { p.num = k + 1; p.ord = p.num; });
+    const total = pubd.length;
+    const urList = ranked.filter(p => p.ur).sort((a, b) => b.i - a.i);   // oldest array position = newest paper = highest order
+    urList.forEach((p, k) => { p.num = null; p.ord = total + k + 1; });
+    const nUR = urList.length;
 
     // Journal Impact Factor (Clarivate JCR), keyed by the canonical journal name above.
     // Only add a number here after checking it in JCR; journals without an entry simply show no badge.
@@ -607,11 +599,13 @@
 
     // ── summary ──
     const years = [...new Set(ranked.map(p => p.year))].sort((a, b) => b - a);
+    const pyears = pubd.map(p => p.year);
     document.getElementById('stTotal').textContent = total;
-    document.getElementById('stFirst').textContent = ranked.filter(p => p.pos === 1).length;
-    document.getElementById('stTop5').textContent = ranked.filter(p => p.pos && p.pos <= 5).length;
-    document.getElementById('stJournals').textContent = new Set(ranked.map(p => p.venue)).size;
-    document.getElementById('stSpan').textContent = Math.min(...years) + '–' + Math.max(...years);
+    if (nUR) document.querySelector('#stTotal + span').insertAdjacentHTML('afterend', '<em class="st-ur">+' + nUR + ' under review</em>');
+    document.getElementById('stFirst').textContent = pubd.filter(p => p.pos === 1).length;
+    document.getElementById('stTop5').textContent = pubd.filter(p => p.pos && p.pos <= 5).length;
+    document.getElementById('stJournals').textContent = new Set(pubd.map(p => p.venue)).size;
+    document.getElementById('stSpan').textContent = Math.min(...pyears) + '–' + Math.max(...pyears);
 
     // ── controls ──
     const $ = id => document.getElementById(id);
@@ -629,7 +623,7 @@
       if (state.journal && p.venue !== state.journal) return false;
       if (!ignoreYear && state.year !== 'all' && p.year !== +state.year) return false;
       if (state.q) {
-        const hay = (p.title + ' ' + p.authors + ' ' + p.journal + ' ' + p.venue + ' ' + p.year).toLowerCase();
+        const hay = (p.title + ' ' + p.authors + ' ' + p.journal + ' ' + p.venue + ' ' + p.year + ' ' + (p.ur ? 'under review submitted' : '')).toLowerCase();
         if (!state.q.toLowerCase().split(/\s+/).every(t => hay.includes(t))) return false;
       }
       return true;
@@ -652,19 +646,19 @@
     function buildChart() {
       const base = ranked.filter(p => matches(p, true));
       const yrs = [...years].sort((a, b) => a - b);
-      const data = yrs.map(y => { const L = base.filter(p => p.year === y); return { y, n: L.length, f: L.filter(p => p.pos === 1).length }; });
-      const maxN = Math.max(1, ...data.map(d => d.n));
+      const data = yrs.map(y => { const L = base.filter(p => p.year === y); const P = L.filter(p => !p.ur); return { y, n: P.length, u: L.length - P.length, f: P.filter(p => p.pos === 1).length }; });
+      const maxN = Math.max(1, ...data.map(d => d.n + d.u));
       const step = [1, 2, 5, 10, 20].find(s => maxN / s <= 4);
       const top = Math.ceil(maxN / step) * step;
       let grid = '';
       for (let v = 0; v <= top; v += step) grid += `<div style="bottom:${v / top * 100}%"><span>${v}</span></div>`;
       const cols = data.map(d => {
-        const h = d.n / top * 100, hf = d.n ? d.f / d.n * 100 : 0;
-        const tip = `<b>${d.y}</b><br>${d.n} ${d.n === 1 ? 'paper' : 'papers'}${d.f ? '<br>' + d.f + ' first-authored' : ''}`;
-        return `<button type="button" class="pc-col ${String(state.year) === String(d.y) ? 'sel' : ''}" data-y="${d.y}" aria-pressed="${String(state.year) === String(d.y)}" aria-label="${d.y}: ${d.n} papers, ${d.f} first-authored. Click to filter.">
+        const h = (d.n + d.u) / top * 100;
+        const tip = `<b>${d.y}</b><br>${d.n} ${d.n === 1 ? 'paper' : 'papers'}${d.f ? '<br>' + d.f + ' first-authored' : ''}${d.u ? '<br>' + d.u + ' under review' : ''}`;
+        return `<button type="button" class="pc-col ${String(state.year) === String(d.y) ? 'sel' : ''}" data-y="${d.y}" aria-pressed="${String(state.year) === String(d.y)}" aria-label="${d.y}: ${d.n} papers, ${d.f} first-authored${d.u ? ', ' + d.u + ' under review' : ''}. Click to filter.">
           <span class="pc-tip">${tip}</span>
-          <span class="pc-barwrap"><span class="pc-n">${d.n || ''}</span>
-            <span class="pc-bar" style="height:calc(${h}% - 17px)"><span class="rest" style="flex:${100 - hf}"></span><span class="first" style="flex:${hf}"></span></span></span>
+          <span class="pc-barwrap"><span class="pc-n" style="bottom:calc(${h}% + 3px)">${d.n + d.u || ''}</span>
+            <span class="pc-bar" style="height:${h}%"><span class="urseg" style="flex:${d.u}"></span><span class="rest" style="flex:${d.n - d.f}"></span><span class="first" style="flex:${d.f}"></span></span></span>
           <span class="pc-yr">${d.y}</span></button>`;
       }).join('');
       const plot = $('pcPlot');
@@ -696,25 +690,26 @@
       const long = names.length > 8 && !expanded;
       const shown = long ? names.slice(0, 6) : names;
       let h = shown.map(n => hl(n, terms).replace(/Nidhi Tripathi/g, '<span class="me">Nidhi Tripathi</span>')).join(', ');
-      if (long) h += ` <button type="button" class="pub-more" data-more="${p.num}">… +${names.length - 6} more</button>`;
-      else if (names.length > 8) h += ` <button type="button" class="pub-more" data-less="${p.num}">show fewer</button>`;
+      if (long) h += ` <button type="button" class="pub-more" data-more="${p.ord}">… +${names.length - 6} more</button>`;
+      else if (names.length > 8) h += ` <button type="button" class="pub-more" data-less="${p.ord}">show fewer</button>`;
       return h;
     }
     const expanded = new Set();
     function cardHTML(p, terms) {
-      return `<article class="pub ${p.pos === 1 ? 'first' : ''}" id="pub-${p.num}">
-        <div class="pub-num" title="Publication #${p.num} of ${total}">${p.num}</div>
+      return `<article class="pub ${p.pos === 1 ? 'first' : ''} ${p.ur ? 'ur' : ''}" id="pub-${p.ord}">
+        <div class="pub-num" title="${p.ur ? 'Under review: it gets number ' + (total + 1) + ' once published' : 'Publication #' + p.num + ' of ' + total}">${p.ur ? '<i class="bi bi-hourglass-split"></i>' : p.num}</div>
         <div class="pub-main">
-          <div class="pub-title"><a href="${esc(p.link)}" target="_blank" rel="noopener">${hl(p.title, terms)}</a></div>
-          <div class="pub-authors">${authorsHTML(p, terms, expanded.has(p.num) || terms.some(t => t.length > 1 && p.authors.toLowerCase().includes(t.toLowerCase()) && p.authors.split(/,\s*/).slice(0, 6).join(', ').toLowerCase().indexOf(t.toLowerCase()) < 0))}</div>
+          <div class="pub-title">${p.link ? `<a href="${esc(p.link)}" target="_blank" rel="noopener">${hl(p.title, terms)}</a>` : hl(p.title, terms)}</div>
+          <div class="pub-authors">${authorsHTML(p, terms, expanded.has(p.ord) || terms.some(t => t.length > 1 && p.authors.toLowerCase().includes(t.toLowerCase()) && p.authors.split(/,\s*/).slice(0, 6).join(', ').toLowerCase().indexOf(t.toLowerCase()) < 0))}</div>
           <div class="pub-meta">
             <span class="pub-journal">${hl(p.journal, terms)}</span><span class="pub-yr">(${p.year})</span>
             ${JIF[p.venue] ? `<span class="pub-if" title="Journal Impact Factor ${IF_YEAR} (Clarivate JCR) of ${esc(p.venue)}">IF ${JIF[p.venue].toFixed(1)}</span>` : ''}
+            ${p.ur ? '<span class="pub-ur-badge"><i class="bi bi-hourglass-split"></i> Under review</span>' : ''}
             ${p.pos === 1 ? '<span class="pub-first-badge">First author</span>' : (!p.pos ? '<span class="pub-pos" title="The author list is shortened (et al.), so her position is unknown and the paper is left out of the position filters">Position not listed</span>' : `<span class="pub-pos" title="Nidhi Tripathi is author number ${p.pos}">Author ${p.pos} of ${p.nAuth}${p.etal ? '+' : ''}</span>`)}
-            <span class="pub-actions">
+            ${p.ur ? '' : `<span class="pub-actions">
               <button type="button" class="pub-cite" data-cite="${p.num}" title="Copy a plain-text citation"><i class="bi bi-clipboard"></i> Cite</button>
-              <a href="${esc(p.link)}" target="_blank" rel="noopener" class="pub-link">View Publication</a>
-            </span>
+              ${p.link ? `<a href="${esc(p.link)}" target="_blank" rel="noopener" class="pub-link">View Publication</a>` : ''}
+            </span>`}
           </div>
         </div>
       </article>`;
@@ -723,19 +718,20 @@
     function render() {
       buildChips(); buildPosChips(); buildChart();
       const terms = state.q.trim().split(/\s+/).filter(Boolean);
-      const list = ranked.filter(p => matches(p)).sort((a, b) => state.sort === 'asc' ? a.num - b.num : b.num - a.num);
+      const list = ranked.filter(p => matches(p)).sort((a, b) => state.sort === 'asc' ? a.ord - b.ord : b.ord - a.ord);
       let html = '', lastYear = null;
       list.forEach(p => {
         if (p.year !== lastYear) {
           lastYear = p.year;
-          const n = list.filter(x => x.year === p.year).length;
-          html += `<div class="pub-year-head">${p.year}<span>${n} ${n === 1 ? 'paper' : 'papers'}</span></div>`;
+          const yl = list.filter(x => x.year === p.year), n = yl.filter(x => !x.ur).length, u = yl.length - n;
+          const lab = [n ? n + (n === 1 ? ' paper' : ' papers') : '', u ? u + ' under review' : ''].filter(Boolean).join(' · ');
+          html += `<div class="pub-year-head">${p.year}<span>${lab}</span></div>`;
         }
         html += cardHTML(p, terms);
       });
       $('pubsList').innerHTML = html || '<div class="pub-empty"><i class="bi bi-search"></i> No publications match these filters. <button type="button" class="pub-more" id="emptyReset">Reset filters</button></div>';
       const filtered = state.q || state.year !== 'all' || state.pos !== 'any' || state.journal;
-      $('pubCount').innerHTML = filtered ? `Showing <b>${list.length}</b> of <b>${total}</b> publications` : `<b>${total}</b> publications, numbered from oldest (#1) to newest (#${total})`;
+      $('pubCount').innerHTML = filtered ? `Showing <b>${list.length}</b> of <b>${ranked.length}</b> entries` : `<b>${total}</b> publications${nUR ? ` (+${nUR} under review)` : ''}, numbered from oldest (#1) to newest (#${total})`;
       $('ifNote').hidden = !Object.keys(JIF).length;
       document.querySelector('.pt-search').classList.toggle('has-text', !!$('pubSearch').value);
     }
@@ -763,23 +759,6 @@
     });
 
     render();
-
-    // ── under review ──
-    (function () {
-      const wrap = document.getElementById('urWrap');
-      if (!underReview.length) return;
-      document.getElementById('urList').innerHTML = underReview.map(u => {
-        const names = u.authors.split(/,\s*/).filter(Boolean).map(n => esc(n).replace(/Nidhi Tripathi/, '<span class="me">Nidhi Tripathi</span>')).join(', ');
-        const first = /^\s*Nidhi Tripathi/.test(u.authors);
-        return `<article class="ur-card">
-          <span class="ur-badge"><i class="bi bi-hourglass-split"></i> ${esc(u.status)}</span>
-          <div class="ur-title">${esc(u.title)}</div>
-          <div class="ur-authors">${names}</div>
-          <div class="ur-meta"><span class="pub-journal">${esc(u.journal)}</span>${first ? '<span class="pub-first-badge">First author</span>' : ''}</div>
-        </article>`;
-      }).join('');
-      wrap.hidden = false;
-    })();
   </script>
   <script data-goatcounter="https://nidhi4358.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
