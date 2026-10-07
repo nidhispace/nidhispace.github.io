@@ -33,6 +33,110 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <style>
+    /* Publications page (scoped; shared style.css is left untouched) */
+    #services .pub-stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin: 6px 0 22px; }
+    #services .pub-stats > div { background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, .05); padding: 14px 10px; text-align: center; }
+    #services .pub-stats b { display: block; font-family: "Raleway", sans-serif; font-size: 1.7rem; font-weight: 800; color: #34b7a7; line-height: 1.1; }
+    #services .pub-stats span { font-size: .72rem; letter-spacing: 1px; text-transform: uppercase; color: #888; }
+
+    #services .pub-tools { background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, .05); padding: 16px 20px; margin-bottom: 18px; text-align: left; }
+    .pt-row { display: flex; gap: 14px 22px; align-items: center; flex-wrap: wrap; }
+    .pt-row + .pt-row { margin-top: 14px; }
+    .pt-search { position: relative; flex: 1 1 100%; }
+    .pt-search i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #999; pointer-events: none; }
+    .pt-search input { width: 100%; font: inherit; font-size: .95rem; padding: 10px 40px 10px 40px; border: 2px solid #e1e4e8; border-radius: 30px; background: #fafbfc; color: #2c3e50; }
+    .pt-search input:focus { outline: none; border-color: #34b7a7; box-shadow: 0 0 0 3px rgba(52, 183, 167, .18); background: #fff; }
+    .pt-clear { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); border: 0; background: none; font-size: 1.3rem; color: #999; cursor: pointer; display: none; line-height: 1; padding: 2px 8px; }
+    .pt-search.has-text .pt-clear { display: block; }
+    .pt-years { display: flex; gap: 8px; flex-wrap: wrap; }
+    .ychip { font: inherit; font-size: .8rem; font-weight: 600; color: #555; background: #fff; border: 1px solid #d9dde2; border-radius: 30px; padding: 4px 12px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; transition: all .2s; }
+    .ychip b { font-size: .68rem; background: #f0f2f4; border-radius: 10px; padding: 0 7px; color: #666; }
+    .ychip:hover, .ychip:focus-visible { border-color: #34b7a7; color: #34b7a7; outline: none; }
+    .ychip.on { background: #34b7a7; border-color: #34b7a7; color: #fff; }
+    .ychip.on b { background: rgba(255, 255, 255, .25); color: #fff; }
+    .ychip.zero { opacity: .4; }
+    #journalFilter { max-width: 240px; }
+
+    /* papers-per-year chart (Google Scholar style) */
+    .pub-chart { background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, .05); padding: 16px 22px 12px; margin-bottom: 18px; text-align: left; }
+    .pc-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px 20px; flex-wrap: wrap; margin-bottom: 6px; }
+    .pc-head h3 { font-size: 1rem; font-weight: 700; color: #2c3e50; margin: 0; }
+    .pc-legend { display: flex; gap: 14px; font-size: .78rem; color: #666; }
+    .pc-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+    .pc-plot { position: relative; height: 190px; margin-right: 34px; margin-top: 14px; }
+    .pc-grid { position: absolute; inset: 0 0 26px 0; pointer-events: none; }
+    .pc-grid div { position: absolute; left: 0; right: 0; border-top: 1px solid #eef0f2; }
+    .pc-grid span { position: absolute; right: -34px; top: -9px; width: 28px; text-align: left; font-size: .72rem; color: #888; }
+    .pc-bars { position: absolute; inset: 0; display: flex; gap: 10px; }
+    .pc-col { flex: 1; min-width: 0; position: relative; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; background: none; border: 0; padding: 0; cursor: pointer; font: inherit; }
+    .pc-barwrap { flex: 1; width: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; padding-bottom: 0; position: relative; }
+    .pc-bar { width: min(100%, 46px); display: flex; flex-direction: column; justify-content: flex-end; border-radius: 3px 3px 0 0; overflow: hidden; transition: height .35s ease, opacity .2s, filter .2s; min-height: 0; }
+    .pc-bar .rest { background: #8a8f94; }
+    .pc-bar .first { background: #34b7a7; }
+    .pc-n { font-size: .72rem; font-weight: 700; color: #666; margin-bottom: 3px; height: 14px; }
+    .pc-yr { height: 26px; line-height: 26px; font-size: .78rem; color: #666; }
+    .pc-col:hover .pc-bar, .pc-col:focus-visible .pc-bar { filter: brightness(.88); }
+    .pc-col:focus-visible { outline: 2px solid #34b7a7; outline-offset: 2px; border-radius: 4px; }
+    .pc-plot.has-sel .pc-col:not(.sel) .pc-bar { opacity: .35; }
+    .pc-col.sel .pc-yr { color: #1f8f82; font-weight: 700; }
+    .pc-col.sel .pc-n { color: #1f8f82; }
+    .pc-tip { position: absolute; bottom: 100%; left: 50%; transform: translate(-50%, -4px); background: #2c3e50; color: #fff; font-size: .75rem; line-height: 1.35; padding: 6px 10px; border-radius: 6px; white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity .15s; z-index: 5; text-align: left; }
+    .pc-col:hover .pc-tip, .pc-col:focus-visible .pc-tip { opacity: 1; }
+    .pc-hint { font-size: .74rem; color: #999; margin: 2px 0 0; }
+    .pub-if { font-size: .72rem; font-weight: 700; color: #8a5a00; background: #fff4d6; border-radius: 12px; padding: 2px 9px; cursor: help; }
+    .if-note { font-size: .74rem; color: #888; margin: -8px 2px 14px; }
+    @media (max-width: 700px) { .pc-plot { height: 150px; margin-right: 28px; } .pc-bars { gap: 4px; } .pc-yr { font-size: .66rem; } .pub-chart { padding: 14px 12px 10px; } }
+    .pos-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .pos-label { font-size: .95rem; color: #4b5563; margin-right: 2px; }
+    .pub-pos { font-size: .72rem; font-weight: 600; color: #666; background: #f0f2f4; border-radius: 12px; padding: 2px 9px; }
+    .pt-btn { font: inherit; font-size: .82rem; font-weight: 600; color: #555; background: #fff; border: 1px solid #d9dde2; border-radius: 8px; padding: 6px 14px; cursor: pointer; margin-left: auto; }
+    .pt-btn:hover { border-color: #34b7a7; color: #34b7a7; }
+    .pt-count { font-size: .85rem; color: #666; margin: 4px 2px 14px; text-align: left; min-height: 1.3em; }
+    .pt-count b { color: #2c3e50; }
+
+    #pubsList { text-align: left; }
+    .pub-year-head { display: flex; align-items: center; gap: 12px; margin: 26px 0 12px; font-family: "Raleway", sans-serif; font-size: 1.15rem; font-weight: 800; color: #2c3e50; }
+    .pub-year-head:first-child { margin-top: 6px; }
+    .pub-year-head::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, #cfd6dc, transparent); }
+    .pub-year-head span { font-size: .72rem; font-weight: 600; color: #888; background: #eef1f3; border-radius: 12px; padding: 2px 10px; order: 1; }
+    .pub-year-head::after { order: 2; }
+
+    #pubsList .pub { display: flex; gap: 16px; align-items: flex-start; padding: 1.1rem 1.4rem 1.1rem 1.1rem; border-left: 4px solid transparent; }
+    #pubsList .pub.first { border-left-color: #34b7a7; }
+    .pub-num { flex: 0 0 auto; min-width: 42px; height: 42px; padding: 0 8px; border-radius: 21px; background: #e7f8f6; color: #1f8f82; font-family: "Raleway", sans-serif; font-weight: 800; font-size: .95rem; display: flex; align-items: center; justify-content: center; }
+    #pubsList .pub.first .pub-num { background: #34b7a7; color: #fff; }
+    .pub-main { flex: 1; min-width: 0; }
+    #pubsList .pub-title { font-size: 1.05rem; line-height: 1.4; }
+    #pubsList .pub-title a { color: #2c3e50; text-decoration: none; }
+    #pubsList .pub-title a:hover { color: #1f8f82; text-decoration: underline; }
+    #pubsList .pub-authors { font-size: .9rem; }
+    .pub-authors .me { color: #1e40af; font-weight: 700; }
+    .pub-more { font: inherit; font-size: .8rem; font-weight: 600; color: #1f8f82; background: none; border: 0; padding: 0 4px; cursor: pointer; }
+    .pub-more:hover { text-decoration: underline; }
+    #pubsList .pub-meta { flex-wrap: wrap; gap: .5rem .6rem; margin-top: .6rem; }
+    .pub-journal { font-style: italic; color: #444; font-weight: 600; }
+    .pub-yr { color: #888; }
+    .pub-first-badge { font-size: .7rem; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; color: #1f8f82; background: #e7f8f6; border-radius: 12px; padding: 2px 9px; }
+    .pub-actions { margin-left: auto; display: inline-flex; gap: 8px; align-items: center; }
+    .pub-cite { font: inherit; font-size: .8rem; font-weight: 600; color: #555; background: #f4f6f8; border: 1px solid #e1e4e8; border-radius: 20px; padding: 3px 12px; cursor: pointer; }
+    .pub-cite:hover { background: #e7f8f6; color: #1f8f82; border-color: #34b7a7; }
+    mark.hit { background: #ffe08a; color: inherit; padding: 0 1px; border-radius: 3px; }
+    .pub-empty { text-align: center; padding: 38px 10px; color: #666; background: #fff; border-radius: 12px; }
+
+    ol.conf-list { list-style: none; counter-reset: conf; padding: 0; text-align: left; }
+    ol.conf-list li { counter-increment: conf; position: relative; background: #fff; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, .05); padding: 1rem 1.4rem 1rem 4.2rem; margin-bottom: .9rem; font-size: .92rem; line-height: 1.5; color: #444; }
+    ol.conf-list li::before { content: counter(conf); position: absolute; left: 1rem; top: 1rem; min-width: 34px; height: 34px; border-radius: 17px; background: #eef1f3; color: #555; font-family: "Raleway", sans-serif; font-weight: 800; font-size: .85rem; display: flex; align-items: center; justify-content: center; }
+
+    @media (max-width: 700px) {
+      #services .pub-stats { grid-template-columns: repeat(2, 1fr); }
+      #services .pub-stats > div:last-child { grid-column: 1 / -1; }
+      #pubsList .pub { gap: 10px; padding: 1rem .9rem .9rem .8rem; }
+      .pub-num { min-width: 34px; height: 34px; font-size: .8rem; }
+      .pub-actions { margin-left: 0; width: 100%; }
+      ol.conf-list li { padding-left: 3.6rem; }
+    }
+  </style>
 </head>
 
 <body>
@@ -76,22 +180,61 @@
     <section id="services" class="services">
       <div class="container" data-aos="fade-up">
         <h2>Published Research articles</h2>
-        <div class="filters">
-          <label><input type="checkbox" id="firstAuthorFilter"> First-authored by <strong>Nidhi
-              Tripathi</strong></label>
 
-          <label>Sort by year:
-            <select id="yearSort">
-              <option value="desc">Newest First</option>
-              <option value="asc">Oldest First</option>
-            </select>
-          </label>
+        <div class="pub-stats" aria-label="Publication summary">
+          <div><b id="stTotal">0</b><span>Publications</span></div>
+          <div><b id="stFirst">0</b><span>First-authored</span></div>
+          <div><b id="stTop5">0</b><span>Top-5 author</span></div>
+          <div><b id="stJournals">0</b><span>Journals</span></div>
+          <div><b id="stSpan">–</b><span>Years active</span></div>
         </div>
+
+        <section class="pub-chart" aria-labelledby="pcTitle">
+          <div class="pc-head">
+            <h3 id="pcTitle">Publications per year</h3>
+            <div class="pc-legend"><span><i style="background:#34b7a7"></i>First author</span><span><i style="background:#8a8f94"></i>Co-author</span></div>
+          </div>
+          <div class="pc-plot" id="pcPlot"></div>
+          <p class="pc-hint" id="pcHint">Click a bar to show that year's papers; click it again to clear. The chart follows your search and filters.</p>
+        </section>
+
+        <div class="pub-tools">
+          <div class="pt-row">
+            <label class="pt-search"><span class="visually-hidden">Search publications</span>
+              <i class="bi bi-search"></i>
+              <input id="pubSearch" type="search" placeholder="Search title, author, journal…  ( / )" autocomplete="off">
+              <button type="button" class="pt-clear" id="pubSearchClear" aria-label="Clear search">&times;</button>
+            </label>
+          </div>
+          <div class="pt-row">
+            <div class="pt-years" id="yearChips" role="group" aria-label="Filter by year"></div>
+          </div>
+          <div class="pt-row filters" style="box-shadow:none;padding:0;margin:14px 0 0;background:none;">
+            <div class="pos-group" id="posChips" role="group" aria-label="Filter by Nidhi Tripathi's author position">
+              <span class="pos-label">Author position of <strong>Nidhi Tripathi</strong>:</span>
+            </div>
+
+            <label>Journal:
+              <select id="journalFilter"><option value="">All journals</option></select>
+            </label>
+
+            <label>Sort by year:
+              <select id="yearSort">
+                <option value="desc">Newest First</option>
+                <option value="asc">Oldest First</option>
+              </select>
+            </label>
+            <button type="button" class="pt-btn" id="pubReset"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
+          </div>
+        </div>
+        <div class="pt-count" id="pubCount" aria-live="polite"></div>
+
+        <div class="if-note" id="ifNote" hidden>IF = latest Journal Impact Factor of the journal (not of the year of publication). Shown only where a value is available.</div>
 
         <div id="pubsList"></div>
 
         <h2>Conference articles | Book chapters </h2>
-        <ol>
+        <ol class="conf-list">
           <li class="left-align"><strong>Nidhi Tripathi</strong>, Lokesh Sahu, Mansi Gupta, Sachchida Tripathi,
             Investigation of major emission sources of non-methane hydrocarbons and their role in ozone formation in New
             Delhi, India, <a href="https://ui.adsabs.harvard.edu/abs/2021AGUFM.A55J1524T/abstract" target="_blank">AGU
@@ -161,7 +304,7 @@
         link: "https://www.nature.com/articles/s41467-025-59953-2"
       },
       {
-        authors: "Mansi Gupta Lokesh Kumar Sahu, Nidhi Tripathi, Arvind Singh",
+        authors: "Mansi Gupta, Lokesh Kumar Sahu, Nidhi Tripathi, Arvind Singh",
         title: "Processes Controlling DMS Variability in Marine Boundary Layer of the Arabian Sea During Post‐Monsoon Season of 2021",
         journal: "JGR Atmosphere",
         year: 2025,
@@ -187,7 +330,7 @@
       {
         authors: "Nidhi Tripathi, Imran A. Girach, Sobhan Kumar Kompalli, Vishnu Murari, Prabha R. Nair, S. Suresh Babu, Lokesh Kumar Sahu",
         title: "Sources and Distribution of Light NMHCs in the Marine Boundary Layer of the Northern Indian Ocean During Winter: Implications to Aerosol Formation",
-        journal: "JGR Atmoshphere Volume129, Issue3",
+        journal: "JGR Atmosphere, Volume 129, Issue 3",
         year: 2024,
         nidhiFirstAuthor: true,
         link: "https://doi.org/10.1029/2023JD039433"
@@ -410,31 +553,188 @@
       }
     ];
 
-    function renderPublications() {
-      const filterFirst = document.getElementById('firstAuthorFilter').checked;
-      const sortOrder = document.getElementById('yearSort').value;
-      let filtered = [...publications];
+    // ── helpers ──
+    const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    // one canonical name per journal (the data spells some of them several ways)
+    const CANON = { 'JGR Atmosphere': 'JGR: Atmospheres', 'Journal of Geophysical Research: Atmospheres': 'JGR: Atmospheres', 'Journal of Geophysical Research Atmospheres': 'JGR: Atmospheres', 'Nat Commun': 'Nature Communications', 'Atmospheric Environment X': 'Atmospheric Environment: X' };
+    const venue = j => { const base = j.replace(/[, ]*Volume\s*\d+.*$/i, '').trim(); return CANON[base] || base; };
 
-      if (filterFirst) {
-        filtered = filtered.filter(p => p.nidhiFirstAuthor);
+    // stable numbers: #1 = oldest paper, so a paper keeps its number whatever filter or sort is active
+    // Nidhi's position in the author list (1 = first author). Papers whose list is cut off with "et al." can set nidhiPosition: n by hand; otherwise null.
+    const authorPos = a => { const k = a.split(/,\s*/).findIndex(n => /Nidhi Tripathi/.test(n)); return k < 0 ? null : k + 1; };
+    const ranked = publications.map((p, i) => ({ ...p, i, venue: venue(p.journal), pos: p.nidhiPosition || authorPos(p.authors), etal: /et\.?\s*al/i.test(p.authors), nAuth: p.authors.split(/,\s*/).filter(n => n && !/^et\.?\s*al\.?$/i.test(n)).length }))
+      .sort((a, b) => a.year - b.year || b.i - a.i);
+    ranked.forEach((p, k) => p.num = k + 1);
+    const total = ranked.length;
+
+    // Journal Impact Factor (Clarivate JCR), keyed by the canonical journal name above.
+    // Only add a number here after checking it in JCR; journals without an entry simply show no badge.
+    // NOTE: the three values below come from a third-party aggregator (journalmetrics.org), NOT from JCR itself - verify them.
+    const IF_YEAR = 2025;
+    const JIF = {
+      'Atmospheric Chemistry and Physics': 5.1,
+      'Nature Communications': 18.1,
+      'JGR: Atmospheres': 3.4
+    };
+
+    // ── summary ──
+    const years = [...new Set(ranked.map(p => p.year))].sort((a, b) => b - a);
+    document.getElementById('stTotal').textContent = total;
+    document.getElementById('stFirst').textContent = ranked.filter(p => p.pos === 1).length;
+    document.getElementById('stTop5').textContent = ranked.filter(p => p.pos && p.pos <= 5).length;
+    document.getElementById('stJournals').textContent = new Set(ranked.map(p => p.venue)).size;
+    document.getElementById('stSpan').textContent = Math.min(...years) + '–' + Math.max(...years);
+
+    // ── controls ──
+    const $ = id => document.getElementById(id);
+    const state = { q: '', year: 'all', pos: 'any', journal: '', sort: 'desc' };
+    const chipsEl = $('yearChips');
+    const posEl = $('posChips');
+    const jSel = $('journalFilter');
+    const jCounts = {}; ranked.forEach(p => jCounts[p.venue] = (jCounts[p.venue] || 0) + 1);
+    Object.keys(jCounts).sort((a, b) => jCounts[b] - jCounts[a] || a.localeCompare(b)).forEach(j => {
+      const o = document.createElement('option'); o.value = j; o.textContent = j + ' (' + jCounts[j] + ')'; jSel.appendChild(o);
+    });
+
+    function matches(p, ignoreYear) {
+      if (state.pos !== 'any' && !(p.pos && p.pos <= state.pos)) return false;
+      if (state.journal && p.venue !== state.journal) return false;
+      if (!ignoreYear && state.year !== 'all' && p.year !== +state.year) return false;
+      if (state.q) {
+        const hay = (p.title + ' ' + p.authors + ' ' + p.journal + ' ' + p.venue + ' ' + p.year).toLowerCase();
+        if (!state.q.toLowerCase().split(/\s+/).every(t => hay.includes(t))) return false;
       }
-
-      filtered.sort((a, b) => sortOrder === 'asc' ? a.year - b.year : b.year - a.year);
-
-      const container = document.getElementById('pubsList');
-      container.innerHTML = filtered.map(p => `
-      <div class="pub">
-        <div class="pub-title">${p.title}</div>
-        <div class="pub-authors">${p.authors}</div>
-        <div class="pub-meta">${p.journal} (${p.year}) <a href="${p.link}" target="_blank" class="pub-link">View Publication</a></div>
-      </div>
-    `).join('');
+      return true;
     }
 
-    document.getElementById('firstAuthorFilter').addEventListener('change', renderPublications);
-    document.getElementById('yearSort').addEventListener('change', renderPublications);
+    const POS = [['any', 'Any'], [1, 'First author'], [3, 'Top 3'], [5, 'Top 5']];
+    function buildPosChips() {
+      const base = ranked.filter(p => { const keep = state.pos; state.pos = 'any'; const ok = matches(p); state.pos = keep; return ok; });
+      const n = v => v === 'any' ? base.length : base.filter(p => p.pos && p.pos <= v).length;
+      posEl.querySelectorAll('.ychip').forEach(b => b.remove());
+      POS.forEach(([v, label]) => {
+        const b = document.createElement('button'); b.type = 'button'; b.dataset.v = v;
+        b.className = 'ychip' + (String(state.pos) === String(v) ? ' on' : '') + (n(v) ? '' : ' zero');
+        b.innerHTML = label + ' <b>' + n(v) + '</b>'; posEl.appendChild(b);
+      });
+    }
+    posEl.addEventListener('click', e => { const b = e.target.closest('.ychip'); if (!b) return; state.pos = b.dataset.v === 'any' ? 'any' : +b.dataset.v; render(); });
 
-    renderPublications();
+    // ── papers-per-year chart: follows every filter except the year itself ──
+    function buildChart() {
+      const base = ranked.filter(p => matches(p, true));
+      const yrs = [...years].sort((a, b) => a - b);
+      const data = yrs.map(y => { const L = base.filter(p => p.year === y); return { y, n: L.length, f: L.filter(p => p.pos === 1).length }; });
+      const maxN = Math.max(1, ...data.map(d => d.n));
+      const step = [1, 2, 5, 10, 20].find(s => maxN / s <= 4);
+      const top = Math.ceil(maxN / step) * step;
+      let grid = '';
+      for (let v = 0; v <= top; v += step) grid += `<div style="bottom:${v / top * 100}%"><span>${v}</span></div>`;
+      const cols = data.map(d => {
+        const h = d.n / top * 100, hf = d.n ? d.f / d.n * 100 : 0;
+        const tip = `<b>${d.y}</b><br>${d.n} ${d.n === 1 ? 'paper' : 'papers'}${d.f ? '<br>' + d.f + ' first-authored' : ''}`;
+        return `<button type="button" class="pc-col ${String(state.year) === String(d.y) ? 'sel' : ''}" data-y="${d.y}" aria-pressed="${String(state.year) === String(d.y)}" aria-label="${d.y}: ${d.n} papers, ${d.f} first-authored. Click to filter.">
+          <span class="pc-tip">${tip}</span>
+          <span class="pc-barwrap"><span class="pc-n">${d.n || ''}</span>
+            <span class="pc-bar" style="height:calc(${h}% - 17px)"><span class="rest" style="flex:${100 - hf}"></span><span class="first" style="flex:${hf}"></span></span></span>
+          <span class="pc-yr">${d.y}</span></button>`;
+      }).join('');
+      const plot = $('pcPlot');
+      plot.classList.toggle('has-sel', state.year !== 'all');
+      plot.innerHTML = `<div class="pc-grid">${grid}</div><div class="pc-bars">${cols}</div>`;
+    }
+    $('pcPlot').addEventListener('click', e => {
+      const c = e.target.closest('.pc-col'); if (!c) return;
+      state.year = String(state.year) === c.dataset.y ? 'all' : c.dataset.y; render();
+    });
+
+    function buildChips() {
+      const base = ranked.filter(p => matches(p, true));
+      const cnt = y => base.filter(p => p.year === y).length;
+      chipsEl.innerHTML = `<button type="button" class="ychip ${state.year === 'all' ? 'on' : ''}" data-y="all">All <b>${base.length}</b></button>` +
+        years.map(y => `<button type="button" class="ychip ${state.year == y ? 'on' : ''} ${cnt(y) ? '' : 'zero'}" data-y="${y}">${y} <b>${cnt(y)}</b></button>`).join('');
+    }
+    chipsEl.addEventListener('click', e => { const b = e.target.closest('.ychip'); if (!b) return; state.year = b.dataset.y; render(); });
+
+    // ── rendering ──
+    const hl = (text, terms) => {
+      let out = esc(text);
+      terms.forEach(t => { if (t.length > 1) out = out.replace(new RegExp('(' + esc(t).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')(?![^<]*>)', 'gi'), '<mark class="hit">$1</mark>'); });
+      return out;
+    };
+    const ME = /Nidhi Tripathi/g;
+    function authorsHTML(p, terms, expanded) {
+      const names = p.authors.split(/,\s*/).filter(Boolean);
+      const long = names.length > 8 && !expanded;
+      const shown = long ? names.slice(0, 6) : names;
+      let h = shown.map(n => hl(n, terms).replace(/Nidhi Tripathi/g, '<span class="me">Nidhi Tripathi</span>')).join(', ');
+      if (long) h += ` <button type="button" class="pub-more" data-more="${p.num}">… +${names.length - 6} more</button>`;
+      else if (names.length > 8) h += ` <button type="button" class="pub-more" data-less="${p.num}">show fewer</button>`;
+      return h;
+    }
+    const expanded = new Set();
+    function cardHTML(p, terms) {
+      return `<article class="pub ${p.pos === 1 ? 'first' : ''}" id="pub-${p.num}">
+        <div class="pub-num" title="Publication #${p.num} of ${total}">${p.num}</div>
+        <div class="pub-main">
+          <div class="pub-title"><a href="${esc(p.link)}" target="_blank" rel="noopener">${hl(p.title, terms)}</a></div>
+          <div class="pub-authors">${authorsHTML(p, terms, expanded.has(p.num) || terms.some(t => t.length > 1 && p.authors.toLowerCase().includes(t.toLowerCase()) && p.authors.split(/,\s*/).slice(0, 6).join(', ').toLowerCase().indexOf(t.toLowerCase()) < 0))}</div>
+          <div class="pub-meta">
+            <span class="pub-journal">${hl(p.journal, terms)}</span><span class="pub-yr">(${p.year})</span>
+            ${JIF[p.venue] ? `<span class="pub-if" title="Journal Impact Factor ${IF_YEAR} (Clarivate JCR) of ${esc(p.venue)}">IF ${JIF[p.venue].toFixed(1)}</span>` : ''}
+            ${p.pos === 1 ? '<span class="pub-first-badge">First author</span>' : (!p.pos ? '<span class="pub-pos" title="The author list is shortened (et al.), so her position is unknown and the paper is left out of the position filters">Position not listed</span>' : `<span class="pub-pos" title="Nidhi Tripathi is author number ${p.pos}">Author ${p.pos} of ${p.nAuth}${p.etal ? '+' : ''}</span>`)}
+            <span class="pub-actions">
+              <button type="button" class="pub-cite" data-cite="${p.num}" title="Copy a plain-text citation"><i class="bi bi-clipboard"></i> Cite</button>
+              <a href="${esc(p.link)}" target="_blank" rel="noopener" class="pub-link">View Publication</a>
+            </span>
+          </div>
+        </div>
+      </article>`;
+    }
+
+    function render() {
+      buildChips(); buildPosChips(); buildChart();
+      const terms = state.q.trim().split(/\s+/).filter(Boolean);
+      const list = ranked.filter(p => matches(p)).sort((a, b) => state.sort === 'asc' ? a.num - b.num : b.num - a.num);
+      let html = '', lastYear = null;
+      list.forEach(p => {
+        if (p.year !== lastYear) {
+          lastYear = p.year;
+          const n = list.filter(x => x.year === p.year).length;
+          html += `<div class="pub-year-head">${p.year}<span>${n} ${n === 1 ? 'paper' : 'papers'}</span></div>`;
+        }
+        html += cardHTML(p, terms);
+      });
+      $('pubsList').innerHTML = html || '<div class="pub-empty"><i class="bi bi-search"></i> No publications match these filters. <button type="button" class="pub-more" id="emptyReset">Reset filters</button></div>';
+      const filtered = state.q || state.year !== 'all' || state.pos !== 'any' || state.journal;
+      $('pubCount').innerHTML = filtered ? `Showing <b>${list.length}</b> of <b>${total}</b> publications` : `<b>${total}</b> publications, numbered from oldest (#1) to newest (#${total})`;
+      $('ifNote').hidden = !Object.keys(JIF).length;
+      document.querySelector('.pt-search').classList.toggle('has-text', !!$('pubSearch').value);
+    }
+
+    // ── events ──
+    let t; $('pubSearch').addEventListener('input', e => { clearTimeout(t); t = setTimeout(() => { state.q = e.target.value; render(); }, 120); });
+    $('pubSearchClear').addEventListener('click', () => { $('pubSearch').value = ''; state.q = ''; render(); $('pubSearch').focus(); });
+    $('journalFilter').addEventListener('change', e => { state.journal = e.target.value; render(); });
+    $('yearSort').addEventListener('change', e => { state.sort = e.target.value; render(); });
+    function resetAll() { Object.assign(state, { q: '', year: 'all', pos: 'any', journal: '', sort: 'desc' }); $('pubSearch').value = ''; jSel.value = ''; $('yearSort').value = 'desc'; render(); }
+    $('pubReset').addEventListener('click', resetAll);
+    document.addEventListener('keydown', e => { if (e.key === '/' && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) { e.preventDefault(); $('pubSearch').focus(); } if (e.key === 'Escape' && document.activeElement === $('pubSearch')) { $('pubSearchClear').click(); $('pubSearch').blur(); } });
+
+    $('pubsList').addEventListener('click', e => {
+      const more = e.target.closest('[data-more],[data-less]');
+      if (more) { const n = +(more.dataset.more || more.dataset.less); more.dataset.more ? expanded.add(n) : expanded.delete(n); render(); return; }
+      if (e.target.id === 'emptyReset') { resetAll(); return; }
+      const c = e.target.closest('[data-cite]'); if (!c) return;
+      const p = ranked.find(x => x.num === +c.dataset.cite);
+      const text = `${p.authors} (${p.year}). ${p.title}. ${p.journal}. ${p.link}`;
+      const done = () => { const old = c.innerHTML; c.innerHTML = '<i class="bi bi-check2"></i> Copied'; setTimeout(() => { c.innerHTML = old; }, 1500); };
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, () => fallback());
+      else fallback();
+      function fallback() { const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = 0; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch (_) { } ta.remove(); }
+    });
+
+    render();
   </script>
   <script data-goatcounter="https://nidhi4358.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
