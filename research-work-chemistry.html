@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>EMAC Model | Nidhi</title>
+  <title>Atmospheric Chemistry | Nidhi</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap"
     rel="stylesheet">
@@ -515,6 +515,20 @@
     .bm figure.dg figcaption { font-size: .8rem; color: var(--text-muted); text-align: center; margin-top: 6px; line-height: 1.5; }
     .bm .dg text { font-family: "Open Sans", sans-serif; fill: #2c3e50; }
     .bm .dg .t-s { font-size: 12px; } .bm .dg .t-m { font-size: 14px; font-weight: 700; } .bm .dg .t-l { font-size: 16px; font-weight: 800; }
+
+    .bm .themes { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px; margin: 18px 0; }
+    .bm .theme { background: #fff; border-radius: 14px; box-shadow: var(--card-shadow); padding: 20px 22px; border-top: 4px solid var(--c, var(--teal)); }
+    .bm .theme h4 { font-size: 1.05rem; font-weight: 800; color: var(--dark); margin: 0 0 6px; display: flex; gap: 8px; align-items: center; }
+    .bm .theme h4 i { color: var(--c, var(--teal)); }
+    .bm .theme p { font-size: .88rem; margin-bottom: 10px; }
+    .bm .theme ul { padding-left: 1.1rem; margin: 0; }
+    .bm .theme li { font-size: .8rem; line-height: 1.5; margin-bottom: 4px; }
+    .bm .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .bm .tags span { font-size: .72rem; font-weight: 600; color: var(--c, var(--teal)); background: color-mix(in srgb, var(--c, #34b7a7) 10%, #fff); border-radius: 20px; padding: 2px 10px; }
+    .bm .toolrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 14px 0; }
+    .bm .toolrow a { display: block; background: #fff; border-radius: 12px; box-shadow: var(--card-shadow); padding: 14px 18px; color: var(--mid); font-size: .85rem; border-left: 4px solid var(--teal); }
+    .bm .toolrow a b { display: block; color: var(--navy); font-family: "Raleway", sans-serif; margin-bottom: 2px; }
+    .bm .toolrow a:hover { box-shadow: 0 10px 28px rgba(0,0,0,.12); }
   </style>
 </head>
 
@@ -547,92 +561,112 @@
   <!-- ── MAIN ── -->
   <main id="main">
 
-    <div cl    <div class="section-title">
-      <span class="eyebrow">Research · Modelling</span>
-      <h2>EMAC Global Chemistry-Climate Model</h2>
-      <p>A general introduction to EMAC: a global model that simulates weather-scale atmospheric dynamics together with detailed chemistry.</p>
+    <div class="section-title">
+      <span class="eyebrow">Research</span>
+      <h2>Atmospheric Chemistry</h2>
+      <p>The chemistry that controls what we breathe and how the atmosphere cleans itself: from basic principles to the themes of my research, from Indian megacities to the Amazon and the tropical upper troposphere.</p>
     </div>
 
     <div class="bm">
-      <h3><i class="bi bi-globe-europe-africa"></i> What is EMAC?</h3>
-      <p><b>EMAC</b> (ECHAM/MESSy Atmospheric Chemistry) is a numerical chemistry-climate model. It couples the <b>ECHAM5</b> atmospheric general circulation model, which computes winds, temperature, clouds and radiation on a 3-D global grid, with the <b>Modular Earth Submodel System (MESSy)</b>, which supplies chemistry, emissions, aerosol and other processes as interchangeable submodels. It is used to study the composition of the atmosphere from the surface to the middle atmosphere, and how it responds to emissions and climate change.</p>
+      <h3><i class="bi bi-lightbulb"></i> The big picture</h3>
+      <p>Gases and particles are constantly emitted into the atmosphere by vegetation, oceans, fires, traffic, industry and homes. Sunlight and reactive molecules, above all the <b>hydroxyl radical (OH)</b>, then transform them. These reactions produce ozone and aerosol, remove pollutants, and influence climate. Atmospheric chemistry asks which emissions matter, how fast they react, and what they turn into.</p>
 
       <figure class="dg">
-        <svg viewBox="0 0 900 330" role="img" aria-label="Structure of EMAC: a base model with ECHAM5 dynamics, connected through the MESSy interface to submodels for chemistry, emissions, deposition, convection, photolysis and aerosol">
-          <rect x="20" y="20" width="860" height="290" rx="14" fill="#f3f7fa" stroke="#9fb4c2"/>
-          <text x="450" y="48" text-anchor="middle" class="t-l">EMAC</text>
-          <rect x="50" y="85" width="220" height="190" rx="12" fill="#2e86c1"/>
-          <text x="160" y="125" text-anchor="middle" class="t-m" style="fill:#fff">Base model</text>
-          <text x="160" y="160" text-anchor="middle" class="t-s" style="fill:#fff">ECHAM5</text>
-          <text x="160" y="182" text-anchor="middle" class="t-s" style="fill:#fff">winds, temperature,</text>
-          <text x="160" y="202" text-anchor="middle" class="t-s" style="fill:#fff">clouds, radiation</text>
-          <text x="160" y="224" text-anchor="middle" class="t-s" style="fill:#fff">on a global 3-D grid</text>
-          <rect x="285" y="150" width="50" height="60" rx="8" fill="#e0a526"/>
-          <text x="310" y="176" text-anchor="middle" class="t-s" style="font-weight:700">MESSy</text><text x="310" y="194" text-anchor="middle" class="t-s">interface</text>
-          <g class="t-s">
-            <rect x="360" y="85" width="150" height="50" rx="10" fill="#e7f8f6" stroke="#34b7a7"/><text x="435" y="115" text-anchor="middle">Gas-phase chemistry</text>
-            <rect x="525" y="85" width="150" height="50" rx="10" fill="#e7f8f6" stroke="#34b7a7"/><text x="600" y="115" text-anchor="middle">Photolysis</text>
-            <rect x="690" y="85" width="170" height="50" rx="10" fill="#e7f8f6" stroke="#34b7a7"/><text x="775" y="115" text-anchor="middle">Aerosol</text>
-            <rect x="360" y="150" width="150" height="50" rx="10" fill="#e7f8f6" stroke="#34b7a7"/><text x="435" y="180" text-anchor="middle">Emissions</text>
-            <rect x="525" y="150" width="150" height="50" rx="10" fill="#e7f8f6" stroke="#34b7a7"/><text x="600" y="180" text-anchor="middle">Deposition, scavenging</text>
-            <rect x="690" y="150" width="170" height="50" rx="10" fill="#e7f8f6" stroke="#34b7a7"/><text x="775" y="180" text-anchor="middle">Convection, lightning</text>
-            <rect x="360" y="215" width="500" height="60" rx="10" fill="#fff8e6" stroke="#e0a526"/><text x="610" y="240" text-anchor="middle" style="font-weight:700">Output &amp; tracers</text><text x="610" y="260" text-anchor="middle">trace-gas transport, netCDF output, diagnostics</text>
-          </g>
-          <path d="M270 180 L285 180 M335 180 L360 180" stroke="#2c3e50" stroke-width="2"/>
+        <svg viewBox="0 0 900 300" role="img" aria-label="Overview: emissions are transformed by sunlight and OH into ozone and aerosol, which affect air quality and climate">
+          <defs><marker id="a3" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2c3e50"/></marker></defs>
+          <rect x="20" y="40" width="200" height="220" rx="12" fill="#eaf6f4" stroke="#34b7a7"/>
+          <text x="120" y="68" text-anchor="middle" class="t-m">Emissions</text>
+          <text x="120" y="100" text-anchor="middle" class="t-s">VOCs (plants, traffic, fuels)</text>
+          <text x="120" y="124" text-anchor="middle" class="t-s">NOx (combustion, lightning)</text>
+          <text x="120" y="148" text-anchor="middle" class="t-s">CO, methane</text>
+          <text x="120" y="172" text-anchor="middle" class="t-s">Ocean gases (DMS)</text>
+          <text x="120" y="196" text-anchor="middle" class="t-s">Smoke and dust</text>
+          <line x1="225" y1="150" x2="320" y2="150" stroke="#2c3e50" stroke-width="2.5" marker-end="url(#a3)"/>
+          <rect x="325" y="40" width="250" height="220" rx="14" fill="#fff8e6" stroke="#e0a526" stroke-width="2"/>
+          <text x="450" y="68" text-anchor="middle" class="t-m">Chemistry</text>
+          <circle cx="450" cy="130" r="30" fill="#2e86c1"/><text x="450" y="136" text-anchor="middle" class="t-m" style="fill:#fff">OH</text>
+          <text x="450" y="185" text-anchor="middle" class="t-s">sunlight + radicals</text>
+          <text x="450" y="206" text-anchor="middle" class="t-s">oxidation, photolysis</text>
+          <text x="450" y="228" text-anchor="middle" class="t-s">transport and mixing</text>
+          <line x1="580" y1="150" x2="675" y2="150" stroke="#2c3e50" stroke-width="2.5" marker-end="url(#a3)"/>
+          <rect x="680" y="40" width="200" height="220" rx="12" fill="#eaf6f4" stroke="#34b7a7"/>
+          <text x="780" y="68" text-anchor="middle" class="t-m">Outcomes</text>
+          <text x="780" y="100" text-anchor="middle" class="t-s">Ground-level ozone</text>
+          <text x="780" y="124" text-anchor="middle" class="t-s">Secondary aerosol (PM)</text>
+          <text x="780" y="148" text-anchor="middle" class="t-s">New particles, clouds</text>
+          <text x="780" y="172" text-anchor="middle" class="t-s">Removal of pollutants</text>
+          <text x="780" y="196" text-anchor="middle" class="t-s">Health and climate effects</text>
         </svg>
-        <figcaption>Figure A. Simplified structure of EMAC: a climate-model core plus swappable MESSy submodels. Schematic, not an exhaustive list of submodels.</figcaption>
+        <figcaption>Figure A. From emissions to outcomes: a simplified view of atmospheric chemistry.</figcaption>
       </figure>
 
-      <h3><i class="bi bi-gear-wide-connected"></i> How it works</h3>
-      <p>The atmosphere is divided into a grid of boxes in longitude, latitude and height. In every time step, the model:</p>
-      <ol class="steps">
-        <li><b>Computes the physics</b> of the atmosphere (winds, temperature, humidity, clouds, radiation).</li>
-        <li><b>Transports</b> every chemical species with the winds, including vertical transport by convection and mixing in the boundary layer.</li>
-        <li><b>Adds emissions</b> from the surface (anthropogenic, biomass burning, vegetation), and lightning NO<sub>x</sub>.</li>
-        <li><b>Runs the chemistry</b> in each grid box: the same kind of calculation as in a box model, but done for every box.</li>
-        <li><b>Removes material</b> by dry deposition and wet scavenging.</li>
-        <li><b>Writes output</b> such as 3-D fields of ozone, OH, VOCs and aerosol.</li>
-      </ol>
-
-      <details class="dd" id="more">
-        <summary><i class="bi bi-sliders2"></i> Technical details <small>(click to open)</small></summary>
+      <details class="dd" id="basics">
+        <summary><i class="bi bi-mortarboard"></i> Chemistry basics <small>(click to open)</small></summary>
         <div class="dd-body">
-          <h4>Resolution and vertical range</h4>
-          <p>EMAC is run at a chosen horizontal resolution (set by the spectral truncation, for example T42, roughly 2.8° × 2.8°) and a chosen number of vertical levels, from the surface up to the middle atmosphere in some configurations. Finer resolution captures more detail but needs far more computing time, so it is chosen according to the question.</p>
-          <h4>Free-running vs. "nudged" simulations</h4>
-          <ul>
-            <li><b>Free-running</b> simulations compute their own weather. They are suited to long-term climate questions and statistics.</li>
-            <li><b>Nudged</b> (specified-dynamics) simulations push the model's winds and temperature towards meteorological reanalysis data, so that the simulated weather follows real events. This allows direct comparison with measurements from a given day, flight or campaign.</li>
-          </ul>
-          <h4>Chemistry</h4>
-          <p>Chemistry is handled by MECCA, the same module used in the CAABA box model, so the mechanism can be shared between the two. Detailed organic chemistry can be added with the Mainz Organic Mechanism, described in Pozzer et al. (2022), who evaluated EMAC with it.</p>
-          <h4>Computing</h4>
-          <p>EMAC is a large Fortran code run in parallel on supercomputers. A typical set-up involves choosing a configuration, preparing input files (emissions, boundary conditions) and submitting a batch job. Output is stored as netCDF files and analysed with tools such as Python, Ferret or NCL.</p>
+          <h4>OH, the atmosphere's "detergent"</h4>
+          <p>OH forms when sunlight splits ozone in the presence of water vapour, and it reacts with almost every trace gas, usually within seconds. It sets how long methane, VOCs and many pollutants survive, so it is often called the atmosphere's oxidising capacity. OH and HO<sub>2</sub> together are called HO<sub>x</sub>, and they are rapidly interconverted.</p>
+          <h4>VOC oxidation</h4>
+          <p>Volatile organic compounds (VOCs) react with OH to form organic peroxy radicals (RO<sub>2</sub>). What RO<sub>2</sub> does next decides the outcome: with NO it produces NO<sub>2</sub>, carbonyl compounds and HO<sub>2</sub>, which leads to ozone; with HO<sub>2</sub> it often forms peroxides; and some also undergo internal rearrangements.</p>
+          <h4>Ozone formation</h4>
+          <p>Near the ground, NO<sub>2</sub> splits in sunlight and the oxygen atom forms ozone. VOCs speed up the conversion of NO to NO<sub>2</sub> without consuming ozone, so ozone builds up. Whether VOCs or NO<sub>x</sub> limit the production changes from place to place (the "NO<sub>x</sub>-limited" and "VOC-limited" regimes), which matters for pollution control.</p>
+          <h4>From gas to particle</h4>
+          <p>Oxidation makes VOC products less volatile, so some condense onto existing particles (secondary organic aerosol) or help create new ones (new particle formation). Particles affect health through PM<sub>2.5</sub> and influence clouds and climate.</p>
+          <h4>Why the tropics and the upper troposphere matter</h4>
+          <p>The tropics have strong sunshine, abundant water vapour and large natural emissions, so a large part of global oxidation happens there. Deep convection carries gases quickly aloft, where chemistry differs from near the ground and small changes can affect ozone and particle formation.</p>
         </div>
       </details>
 
-      <h3><i class="bi bi-arrow-left-right"></i> EMAC and the box model</h3>
-      <table>
-        <thead><tr><th></th><th>CAABA/MECCA box model</th><th>EMAC</th></tr></thead>
-        <tbody>
-          <tr><td>Scope</td><td>One air parcel</td><td>The whole globe, 3-D</td></tr>
-          <tr><td>Transport</td><td>None</td><td>Winds, convection, mixing</td></tr>
-          <tr><td>Chemistry</td><td>MECCA</td><td>MECCA (same mechanism)</td></tr>
-          <tr><td>Cost</td><td>Seconds to minutes on a laptop</td><td>Hours to days on a supercomputer</td></tr>
-          <tr><td>Best for</td><td>Understanding the chemistry in detail</td><td>Regional and global distributions, budgets, scenarios</td></tr>
-        </tbody>
-      </table>
-      <p>The two complement each other: a box model reveals <i>which</i> reactions matter in an observed air mass, and a global model like EMAC shows <i>how widely</i> that matters once transport and emissions are included.</p>
+      <h3><i class="bi bi-compass"></i> Research themes</h3>
+      <p>My work spans several environments. Below are the main themes with representative published papers; the full list is on the <a href="publications.html">Publications</a> page.</p>
+      <div class="themes">
+        <div class="theme" style="--c:#c0392b">
+          <h4><i class="bi bi-buildings"></i> Urban air quality in India</h4>
+          <div class="tags"><span>VOC sources</span><span>Ozone</span><span>Secondary organic aerosol</span><span>Delhi</span></div>
+          <p>Real-time measurements in Delhi, Lucknow and western India: what emits VOCs in a megacity, how they turn into ozone and secondary aerosol, and how meteorology and events such as COVID-19 lockdowns change the picture.</p>
+          <ul><li>Seasonal variability and source apportionment of non-methane VOCs using PTR-TOF-MS measurements in Delhi, India</li><li>Insights into the Regional Transport and Local Formation of Secondary Organic Aerosol in Delhi, India</li><li>Non-methane volatile organic compounds emitted from domestic fuels in Delhi: emission factors and total city-wide emissions</li><li>Impact of COVID-19 pandemic lockdown in ambient concentrations of aromatic volatile organic compounds in a metropolitan city of western India</li></ul>
+        </div>
+        <div class="theme" style="--c:#27ae60">
+          <h4><i class="bi bi-tree"></i> Biogenic VOCs and forests</h4>
+          <div class="tags"><span>Isoprene</span><span>Monoterpenes</span><span>Amazon</span><span>Western Ghats</span></div>
+          <p>Plants emit large amounts of reactive gases such as isoprene and monoterpenes. This theme studies their emissions, their dependence on weather, and how land-use change such as forest clearing alters them.</p>
+          <ul><li>Impacts of convection, chemistry, and forest clearing on biogenic volatile organic compounds over the Amazon</li><li>Ambient air characteristics of biogenic volatile organic compounds at a tropical evergreen forest site in Central Western Ghats of India</li><li>Emissions and atmospheric concentrations of α-pinene at an urban site of India: role of changes in meteorology</li></ul>
+        </div>
+        <div class="theme" style="--c:#2e86c1">
+          <h4><i class="bi bi-water"></i> Marine atmosphere</h4>
+          <div class="tags"><span>DMS</span><span>Marine isoprene</span><span>Arabian Sea</span><span>Aerosol formation</span></div>
+          <p>Gases from the ocean, including dimethyl sulfide (DMS) and isoprene from phytoplankton, and how they relate to the formation of aerosol over the Arabian Sea and northern Indian Ocean.</p>
+          <ul><li>Processes Controlling DMS Variability in Marine Boundary Layer of the Arabian Sea During Post-Monsoon Season of 2021</li><li>High levels of isoprene in the marine boundary layer of the Arabian Sea during spring inter-monsoon: role of phytoplankton blooms</li><li>Sources and Distribution of Light NMHCs in the Marine Boundary Layer of the Northern Indian Ocean During Winter</li></ul>
+        </div>
+        <div class="theme" style="--c:#8e5bd1">
+          <h4><i class="bi bi-cloud-lightning-rain"></i> Convection and the upper troposphere</h4>
+          <div class="tags"><span>Deep convection</span><span>HOx</span><span>NOx</span><span>New particle formation</span></div>
+          <p>Deep convection lifts surface gases to the upper troposphere within minutes. There, low temperatures and different chemistry control radicals, ozone and new particle formation.</p>
+          <ul><li>Isoprene nitrates drive new particle formation in Amazon’s upper troposphere</li><li>Impacts of convection, chemistry, and forest clearing on biogenic volatile organic compounds over the Amazon</li></ul>
+        </div>
+        <div class="theme" style="--c:#e2703a">
+          <h4><i class="bi bi-wind"></i> Aerosols and haze</h4>
+          <div class="tags"><span>PM2.5</span><span>Biomass burning</span><span>SOA</span></div>
+          <p>How gases become particles: secondary organic aerosol, biomass-burning haze and the composition of fine particulate matter in polluted cities.</p>
+          <ul><li>Effect of Biomass Burning on PM2.5 Composition and Secondary Aerosol Formation During Post-Monsoon and Winter Haze Episodes in Delhi</li><li>Real-time quantification and source apportionment of fine particulate matter including organics and elements in Delhi during summertime</li><li>Air Pollution in New Delhi during Late Winter: An Overview of a Group of Campaign Studies</li></ul>
+        </div>
+        <div class="theme" style="--c:#16a085">
+          <h4><i class="bi bi-cloud-haze2"></i> Meteorology and trace gases</h4>
+          <div class="tags"><span>Carbon monoxide</span><span>Meteorology</span><span>Cyclone</span></div>
+          <p>Local weather, convection and cyclones shape the distribution of pollutants such as carbon monoxide and particulates.</p>
+          <ul><li>The influence of local meteorology and convection on carbon monoxide distribution over Chennai</li><li>The role of local meteorology on ambient particulate and gaseous species at an urban site of western India</li></ul>
+        </div>
+      </div>
 
-      <h3><i class="bi bi-journal-text"></i> Key references</h3>
-      <ul class="refs">
-        <li>Jöckel, P. et al. (2006). The atmospheric chemistry general circulation model ECHAM5/MESSy1. <i>Atmos. Chem. Phys.</i>, 6, 5067–5104.</li>
-        <li>Jöckel, P. et al. (2010). Development cycle 2 of the Modular Earth Submodel System (MESSy2). <i>Geosci. Model Dev.</i>, 3, 717–752.</li>
-        <li>Roeckner, E. et al. (2006). Sensitivity of simulated climate to horizontal and vertical resolution in the ECHAM5 atmosphere model. <i>J. Climate</i>, 19, 3771–3791.</li>
-        <li>Pozzer, A. et al. (2022). Simulation of organics in the atmosphere: evaluation of EMACv2.54 with the Mainz Organic Mechanism. <i>Geosci. Model Dev.</i>, 15, 2673–2710. <a href="https://doi.org/10.5194/gmd-15-2673-2022" target="_blank" rel="noopener">doi:10.5194/gmd-15-2673-2022</a></li>
-      </ul>
+      <h3><i class="bi bi-tools"></i> Tools</h3>
+      <p>Observations and models complement each other.</p>
+      <div class="toolrow">
+        <a href="research-work-3.html"><b>VOC measurements</b>PTR-ToF-MS, GC-MS/FID and field campaigns.</a>
+        <a href="research-work-2.html"><b>Volatile organic compounds</b>Sources, oxidation and effects.</a>
+        <a href="research-work-box-model.html"><b>CAABA/MECCA box model</b>Process-level chemistry of an air parcel.</a>
+        <a href="research-work-emac.html"><b>EMAC global model</b>Chemistry and transport on the whole globe.</a>
+      </div>
 
-      <p class="note"><i class="bi bi-info-circle"></i> This is a general technical overview of the model, not a description of specific simulations. For details, consult the references above and the MESSy documentation.</p>
+      <p class="note"><i class="bi bi-info-circle"></i> This page is an overview. The paper currently under review is listed on the Publications page but its results are not summarised here.</p>
     </div>
 
     <div class="rw-back"><a href="research-work.html"><i class="bi bi-grid"></i> All research topics</a></div>
