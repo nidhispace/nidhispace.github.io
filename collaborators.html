@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Research</title>
+  <title>Collaborators</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -36,6 +36,50 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <style>
+    .collab { --t: #34b7a7; text-align: left; }
+    .collab-head { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: end; justify-content: space-between; margin-bottom: 18px; }
+    .collab-head h2 { margin: 0; text-align: left; }
+    .collab-head p { margin: 4px 0 0; font-size: .92rem; color: #666; }
+    .collab-search { position: relative; flex: 0 1 300px; }
+    .collab-search i { position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: #999; pointer-events: none; }
+    .collab-search input { width: 100%; font: inherit; font-size: .9rem; padding: 9px 14px 9px 36px; border: 2px solid #e1e4e8; border-radius: 30px; background: #fff; }
+    .collab-search input:focus { outline: none; border-color: var(--t); box-shadow: 0 0 0 3px rgba(52,183,167,.18); }
+    .collab h3 { font-size: 1.05rem; font-weight: 800; color: #2c3e50; margin: 26px 0 12px; display: flex; align-items: center; gap: 10px; }
+    .collab h3 small { font-size: .75rem; font-weight: 600; color: #888; background: #eef1f3; border-radius: 12px; padding: 2px 10px; }
+    .pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px; }
+    .pcard { display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 12px; box-shadow: 0 3px 10px rgba(0,0,0,.06); padding: 10px 12px; text-decoration: none; transition: transform .2s, box-shadow .2s; min-width: 0; }
+    .pcard:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,.1); }
+    .pcard img { width: 58px; height: 58px; border-radius: 50%; object-fit: cover; object-position: center 20%; flex-shrink: 0; border: 2px solid #e7f8f6; }
+    .pcard .pn { min-width: 0; }
+    .pcard .pn b { display: block; font-size: .88rem; line-height: 1.25; color: #2c3e50; font-weight: 700; }
+    .pcard .pn span { font-size: .74rem; color: #888; }
+    .pcard .pn em { font-style: normal; font-size: .72rem; font-weight: 700; color: #1f8f82; background: #e7f8f6; border-radius: 10px; padding: 1px 8px; margin-left: 2px; white-space: nowrap; }
+    .az-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-bottom: 14px; }
+    .seg { display: inline-flex; border: 1px solid #dcdcd6; border-radius: 30px; overflow: hidden; background: #fff; }
+    .seg button { font: inherit; font-size: .8rem; font-weight: 600; border: 0; background: transparent; color: #555; padding: 6px 14px; cursor: pointer; }
+    .seg button.on { background: #34b7a7; color: #fff; }
+    .az { display: flex; flex-wrap: wrap; gap: 4px; }
+    .az button { font: inherit; font-size: .78rem; font-weight: 700; min-width: 30px; height: 30px; padding: 0 8px; border: 1px solid #dcdcd6; border-radius: 8px; background: #fff; color: #2c3e50; cursor: pointer; }
+    .az button:hover:not(:disabled), .az button:focus-visible { border-color: #34b7a7; color: #1f8f82; outline: none; }
+    .az button.on { background: #34b7a7; border-color: #34b7a7; color: #fff; }
+    .az button:disabled { color: #bbb; background: #f6f6f4; cursor: default; }
+    .letter-head { grid-column: 1 / -1; font-family: "Raleway", sans-serif; font-weight: 800; font-size: 1.1rem; color: #34b7a7; border-bottom: 2px solid #e7f8f6; padding: 6px 2px 2px; margin-top: 8px; }
+    .sec-note { font-size: .8rem; color: #888; margin: -6px 2px 12px; }
+    .collab h3[hidden], .sec-note[hidden] { display: none; }
+    .count-line { font-size: .82rem; color: #888; margin: 0 2px 12px; }
+    .collab button[onclick] { margin-top: 28px; }
+    .count-line b { color: #2c3e50; }
+    .pcard .av { width: 58px; height: 58px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: "Raleway", sans-serif; font-weight: 800; font-size: 1.05rem; color: #fff; }
+    div.pcard { cursor: default; }
+    .ogrid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ochip { display: inline-flex; align-items: center; gap: 8px; background: #fff; border-radius: 30px; box-shadow: 0 2px 6px rgba(0,0,0,.06); padding: 4px 12px 4px 4px; font-size: .82rem; color: #2c3e50; }
+    .ochip .av { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .66rem; font-weight: 700; color: #fff; }
+    .ochip em { font-style: normal; font-size: .68rem; font-weight: 700; color: #888; background: #f0f2f4; border-radius: 10px; padding: 0 7px; }
+    .collab [hidden] { display: none !important; }
+    .collab-note { font-size: .8rem; color: #888; margin-top: 24px; }
+    .collab-empty { text-align: center; color: #666; padding: 24px; }
+  </style>
 </head>
 
 <body>
@@ -76,122 +120,34 @@
   <main id="main">
 
     <section id="services" class="services">
-      <div class="container" data-aos="fade-up">
-        <h2>List of people with whom I have worked on various research topics (randomly arranged):</h2>
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="profile">
-              <img src="assets/img/testimonials/testimonials-1.jpg" alt="Lokesh Kumar Sahu">
-              <div class="name"><a href="https://www.prl.res.in/~lokesh/" target="_blank">Prof. Lokesh Kumar Sahu</a>
-              </div>
-            </div>
-            <div class="profile">
-              <img src="assets/img/testimonials/testimonials-7.jpg" alt="arvind">
-              <div class="name"><a href="https://www.prl.res.in/~arvinds/" target="_blank"> Prof. Arvind Singh</a></div>
-            </div>
-            <div class="profile">
-              <img src="assets/img/pozzer_andrea.webp" alt="Andrea">
-              <div class="name"><a href="https://www.mpic.de/4493122/andrea-pozzer" target="_blank"> Asso. Prof. Andrea
-                  Pozzer</a></div>
-            </div>
-
-
-
-            <div class="profile">
-              <img src="assets/img/testimonials/testimonials-5.jpg" alt="Gufran beig">
-              <div class="name"><a href="https://scholar.google.com/citations?user=m4SiW6EAAAAJ&hl=en"
-                  target="_blank">Prof. Gufran Beig</a></div>
-            </div>
-            <div class="profile">
-              <img src="assets/img/testimonials/testimonials-6.jpg" alt="Narendra ojha">
-              <div class="name"><a href="https://www.prl.res.in/~ojha/" target="_blank">Prof. Narendra Ojha</a></div>
-            </div>
-
-            <div class="profile">
-              <img src="assets/img/testimonials/testimonials-10.jpg" alt="Ravi Yadav">
-              <div class="name"><a href="https://www.prl.res.in/~nrastogi/" target="_blank">Prof. Neeraj Rastogi</a>
-              </div>
-            </div>
-            <div class="profile">
-              <img src="assets/img/testimonials/testimonials-8.jpg" alt="Ravi Yadav">
-              <div class="name"><a href="https://scholar.google.co.in/citations?user=Zwk4xocAAAAJ&hl=en"
-                  target="_blank">Prof. S N A Jaaffrey</a></div>
-            </div>
-            <div class="profile">
-              <img src="assets/img/testimonials/testimonials-11.jpg" alt="Venkata">
-              <div class="name"><a href="https://scholar.google.com/citations?user=dIZNjpwAAAAJ&hl=en"
-                  target="_blank">Dr. Venkata Satish K Rangu</a></div>
-            </div>
-            <!-- <div class="profile">
-            <img src="assets/img/testimonials/andrea_pozzar.png" alt="Venkata">
-            <div class="name"><a href="https://www.mpic.de/4493122/andrea-pozzer" target="_blank">Prof. Dr. Andrea Pozzer</a></div>
-          </div> -->
-            <!-- Add more profiles here -->
+      <div class="container collab" data-aos="fade-up">
+        <div class="collab-head">
+          <div>
+            <h2>Collaborators</h2>
+            <p>People I have worked with on research. The number shows how many of my publications we share.</p>
           </div>
-          <div class="col-lg-6">
-            <div class="col-lg-6">
-              <div class="profile">
-                <img src="assets/img/testimonials/testimonials-3.jpg" alt="jonathan">
-                <div class="name"><a href="https://www.mpic.de/3489797/Williams_Group" target="_blank">Dr. Jonathan
-                    Williams</a></div>
-              </div>
-
-              <div class="profile">
-                <img src="assets/img/JOS_original.webp" alt="Jos">
-                <div class="name"><a href="https://www.mpic.de/3783327/profile-jos-lelieveld" target="_blank"> Prof. Jos
-                    Lelieveld</a></div>
-              </div>
-
-              <div class="profile">
-                <img src="assets/img/JC-1_small.jpg" alt="Joachim">
-                <div class="name"><a href="https://www.goethe-university-frankfurt.de/46300616/ContentPage_46300616"
-                    target="_blank">Prof. Dr. Joachim Curtius</a></div>
-              </div>
-
-              <div class="profile">
-                <img src="assets/img/2659-Achim_PhotoDomJack.jpg" alt="Achim">
-                <div class="name"><a href="https://www.mpic.de/person/50030/3537962" target="_blank">Dr. Achim
-                    Edtbauer</a></div>
-              </div>
-
-              <div class="profile">
-                <img src="assets/img/testimonials/testimonials-12.jpg" alt="Andre">
-                <div class="name"><a href="https://www.psi.ch/en/lac/people/andre-prevot" target="_blank">Dr. Andre
-                    Prevot</a></div>
-              </div>
-              <div class="profile">
-                <img src="assets/img/testimonials/testimonials-4.jpg" alt="Ravi Yadav">
-                <div class="name"><a href="https://scholar.google.com/citations?user=5hE-ofEAAAAJ&hl=en"
-                    target="_blank">Dr. Ravi Yadav</a></div>
-              </div>
-              <div class="profile">
-                <img src="assets/img/testimonials/testimonials-9.jpg" alt="Ravi Yadav">
-                <div class="name"><a href="https://scholar.google.co.in/citations?user=Erj94zMAAAAJ&hl=en"
-                    target="_blank">Dr. Imran Girach</a></div>
-              </div>
-
-              <div class="profile">
-                <img src="assets/img/testimonials/testimonials-13.jpg" alt="dilip">
-                <div class="name"><a href="https://web.iitd.ac.in/~dilipganguly/" target="_blank">Prof. Dilip
-                    Ganguly</a></div>
-              </div>
-
-
-
-              <div class="profile">
-                <img src="assets/img/testimonials/testimonials-14.jpg" alt="Ravi Yadav">
-                <div class="name"><a href="http://home.iitk.ac.in/~snt" target="_blank">Prof. Sachchida Nand
-                    Tripathi</a></div>
-              </div>
-              <!-- Add more profiles here -->
-            </div>
-            <!-- Add more columns and profiles here -->
-          </div>
+          <label class="collab-search"><span class="visually-hidden">Search collaborators</span><i class="bi bi-search"></i>
+            <input id="cs" type="search" placeholder="Search by name…" autocomplete="off"></label>
         </div>
+
+        <div class="az-bar">
+          <div class="seg" role="group" aria-label="Sort order">
+            <button type="button" id="sortN" class="on">Most papers</button>
+            <button type="button" id="sortA">A–Z</button>
+          </div>
+          <div class="az" id="az" role="group" aria-label="Filter by first letter of surname"></div>
+        </div>
+        <h3 id="h1"><i class="bi bi-people-fill"></i> Key collaborators <small id="c1"></small></h3>
+        <p class="sec-note">People on papers where I am among the first five authors.</p>
+        <div class="pgrid" id="mgrid"></div>
+
+        <h3 id="h2"><i class="bi bi-person-lines-fill"></i> Other co-authors <small id="c2"></small></h3>
+        <div class="pgrid" id="ogrid"></div>
+        <p class="collab-empty" id="ce" hidden>No one matches your search.</p>
+
         <button onclick="redirectToResearch()"><i class="bi bi-arrow-left-circle-fill"></i> Go back </button>
+      </div>
     </section>
-
-
 
   </main><!-- End #main -->
 
@@ -231,6 +187,57 @@
   <script data-goatcounter="https://nidhi4358.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
 
+
+  <script>
+    const MAIN = [{"name": "Lokesh Kumar Sahu", "title": "Prof.", "img": "assets/img/testimonials/testimonials-1.jpg", "url": "https://www.prl.res.in/~lokesh/", "n": 28, "key": true, "k": 23}, {"name": "Ravi Yadav", "title": "Dr.", "img": "assets/img/testimonials/testimonials-4.jpg", "url": "https://scholar.google.com/citations?user=5hE-ofEAAAAJ&hl=en", "n": 14, "key": true, "k": 13}, {"name": "Sachchida Nand Tripathi", "title": "Prof.", "img": "assets/img/testimonials/testimonials-14.jpg", "url": "http://home.iitk.ac.in/~snt", "n": 6, "key": true, "k": 4}, {"name": "Dilip Ganguly", "title": "Prof.", "img": "assets/img/testimonials/testimonials-13.jpg", "url": "https://web.iitd.ac.in/~dilipganguly/", "n": 4, "key": true, "k": 3}, {"name": "Gufran Beig", "title": "Prof.", "img": "assets/img/testimonials/testimonials-5.jpg", "url": "https://scholar.google.com/citations?user=m4SiW6EAAAAJ&hl=en", "n": 4, "key": true, "k": 3}, {"name": "Neeraj Rastogi", "title": "Prof.", "img": "assets/img/testimonials/testimonials-10.jpg", "url": "https://www.prl.res.in/~nrastogi/", "n": 4, "key": true, "k": 2}, {"name": "S. N. A. Jaaffrey", "title": "Prof.", "img": "assets/img/testimonials/testimonials-8.jpg", "url": "https://scholar.google.co.in/citations?user=Zwk4xocAAAAJ&hl=en", "n": 4, "key": true, "k": 3}, {"name": "Arvind Singh", "title": "Prof.", "img": "assets/img/testimonials/testimonials-7.jpg", "url": "https://www.prl.res.in/~arvinds/", "n": 3, "key": true, "k": 3}, {"name": "Achim Edtbauer", "title": "Dr.", "img": "assets/img/2659-Achim_PhotoDomJack.jpg", "url": "https://www.mpic.de/person/50030/3537962", "n": 2, "key": true, "k": 2}, {"name": "Andre Prevot", "title": "Dr.", "img": "assets/img/testimonials/testimonials-12.jpg", "url": "https://www.psi.ch/en/lac/people/andre-prevot", "n": 2, "key": true, "k": 2}, {"name": "Andrea Pozzer", "title": "Assoc. Prof.", "img": "assets/img/pozzer_andrea.webp", "url": "https://www.mpic.de/4493122/andrea-pozzer", "n": 2, "key": true, "k": 2}, {"name": "Joachim Curtius", "title": "Prof. Dr.", "img": "assets/img/JC-1_small.jpg", "url": "https://www.goethe-university-frankfurt.de/46300616/ContentPage_46300616", "n": 2, "key": true, "k": 2}, {"name": "Jonathan Williams", "title": "Dr.", "img": "assets/img/testimonials/testimonials-3.jpg", "url": "https://www.mpic.de/3489797/Williams_Group", "n": 2, "key": true, "k": 2}, {"name": "Jos Lelieveld", "title": "Prof.", "img": "assets/img/JOS_original.webp", "url": "https://www.mpic.de/3783327/profile-jos-lelieveld", "n": 2, "key": true, "k": 2}, {"name": "Narendra Ojha", "title": "Prof.", "img": "assets/img/testimonials/testimonials-6.jpg", "url": "https://www.prl.res.in/~ojha/", "n": 2, "key": true, "k": 2}, {"name": "Venkata Satish K Rangu", "title": "Dr.", "img": "assets/img/testimonials/testimonials-11.jpg", "url": "https://scholar.google.com/citations?user=dIZNjpwAAAAJ&hl=en", "n": 2, "key": true, "k": 2}, {"name": "Imran Girach", "title": "Dr.", "img": "assets/img/testimonials/testimonials-9.jpg", "url": "https://scholar.google.co.in/citations?user=Erj94zMAAAAJ&hl=en", "n": 1, "key": true, "k": 1}];
+    const OTHERS = [{"name": "Ashutosh K. Shukla", "n": 6, "key": true, "k": 3}, {"name": "Mansi Gupta", "n": 6, "key": true, "k": 5}, {"name": "Kashyap Patel", "n": 5, "key": false, "k": 5}, {"name": "Deepika Bhattu", "n": 4, "key": false, "k": 3}, {"name": "Ravi Sahu", "n": 4, "key": false, "k": 2}, {"name": "Sreenivas Gaddamidi", "n": 4, "key": false, "k": 3}, {"name": "Vipul Lalchandani", "n": 4, "key": false, "k": 1}, {"name": "Jay S. Dave", "n": 3, "key": true, "k": 1}, {"name": "Pawan Vats", "n": 3, "key": true, "k": 2}, {"name": "Pragati Rai", "n": 3, "key": false, "k": 2}, {"name": "Vaishali Jain", "n": 3, "key": false, "k": 2}, {"name": "Vishnu Murari", "n": 3, "key": true, "k": 2}, {"name": "Adam R. Vaughan", "n": 2, "key": false, "k": 0}, {"name": "Akima Ringsdorf", "n": 2, "key": true, "k": 2}, {"name": "Beth S. Nelson", "n": 2, "key": false, "k": 0}, {"name": "Bianca E. Krumm", "n": 2, "key": true, "k": 2}, {"name": "Gareth J. Stewart", "n": 2, "key": false, "k": 0}, {"name": "Himadri Sekhar Bhowmik", "n": 2, "key": false, "k": 0}, {"name": "James R. Hopkins", "n": 2, "key": false, "k": 0}, {"name": "Jay Slowik", "n": 2, "key": false, "k": 2}, {"name": "Liwei Wang", "n": 2, "key": false, "k": 2}, {"name": "Mizuo Kajino", "n": 2, "key": false, "k": 2}, {"name": "Navaneeth M. Thamban", "n": 2, "key": false, "k": 1}, {"name": "Nijing Wang", "n": 2, "key": true, "k": 2}, {"name": "Pragnesh N. Dave", "n": 2, "key": false, "k": 1}, {"name": "Prashant Gargava", "n": 2, "key": false, "k": 1}, {"name": "Rahul Arya", "n": 2, "key": false, "k": 0}, {"name": "Shamitaksha Talukdar", "n": 2, "key": false, "k": 0}, {"name": "Shashi Tiwari", "n": 2, "key": false, "k": 2}, {"name": "Suneeti Mishra", "n": 2, "key": false, "k": 1}, {"name": "Tanzil Gaffar Malik", "n": 2, "key": false, "k": 2}, {"name": "Varun Kumar", "n": 2, "key": false, "k": 2}, {"name": "Vikram Singh", "n": 2, "key": false, "k": 0}, {"name": "W. Joe F. Acton", "n": 2, "key": false, "k": 0}, {"name": "Akansha Rai", "n": 1, "key": false, "k": 0}, {"name": "Antonia Hartmann", "n": 1, "key": false, "k": 1}, {"name": "Arnab Mondal", "n": 1, "key": false, "k": 0}, {"name": "C. Nicholas Hewitt", "n": 1, "key": false, "k": 0}, {"name": "Clara Nussbaumer", "n": 1, "key": true, "k": 1}, {"name": "Devendra Singh Rathore", "n": 1, "key": false, "k": 0}, {"name": "Florian Obersteiner", "n": 1, "key": false, "k": 1}, {"name": "Garima Kotnala", "n": 1, "key": false, "k": 0}, {"name": "Hartwig Harder", "n": 1, "key": true, "k": 1}, {"name": "Horst Fischer", "n": 1, "key": true, "k": 1}, {"name": "Jacqueline F. Hamilton", "n": 1, "key": false, "k": 0}, {"name": "Joseph Byron", "n": 1, "key": false, "k": 1}, {"name": "Linda Ort", "n": 1, "key": true, "k": 1}, {"name": "Lisa J. Beck", "n": 1, "key": true, "k": 1}, {"name": "Lokesh Yadav", "n": 1, "key": false, "k": 0}, {"name": "Luiz A. T. Machado", "n": 1, "key": true, "k": 1}, {"name": "Maheswar Rupakheti", "n": 1, "key": false, "k": 0}, {"name": "Martin Heinritzi", "n": 1, "key": true, "k": 1}, {"name": "Martina Rani", "n": 1, "key": false, "k": 0}, {"name": "Matthias Kohl", "n": 1, "key": true, "k": 1}, {"name": "Mayank Kumar", "n": 1, "key": false, "k": 0}, {"name": "Meghna Soni", "n": 1, "key": false, "k": 1}, {"name": "Mira L. Pöhlker", "n": 1, "key": true, "k": 1}, {"name": "Nikki Choudhary", "n": 1, "key": false, "k": 0}, {"name": "Philip Holzbeck", "n": 1, "key": true, "k": 1}, {"name": "Pooja Yadav", "n": 1, "key": false, "k": 0}, {"name": "Prabha R. Nair", "n": 1, "key": false, "k": 1}, {"name": "Praveen Kumar", "n": 1, "key": false, "k": 0}, {"name": "Purushottam Kumar", "n": 1, "key": false, "k": 1}, {"name": "Pushpendra Vyas", "n": 1, "key": false, "k": 0}, {"name": "Ritu Jangirh", "n": 1, "key": false, "k": 0}, {"name": "Rolf Sander", "n": 1, "key": true, "k": 1}, {"name": "Rubiya Banoo", "n": 1, "key": false, "k": 0}, {"name": "Ryan Vella", "n": 1, "key": false, "k": 1}, {"name": "S. Suresh Babu", "n": 1, "key": false, "k": 1}, {"name": "Sakshi Ahlawat", "n": 1, "key": false, "k": 0}, {"name": "Samiksha Bajaj", "n": 1, "key": false, "k": 1}, {"name": "Sergey Gromov", "n": 1, "key": false, "k": 1}, {"name": "Shyam Lal", "n": 1, "key": false, "k": 0}, {"name": "Sobhan Kumar Kompalli", "n": 1, "key": false, "k": 1}, {"name": "Tuhin K. Mandal", "n": 1, "key": false, "k": 0}, {"name": "Umangkumar Pandya", "n": 1, "key": false, "k": 0}, {"name": "Ummed Singh Saharan", "n": 1, "key": false, "k": 0}, {"name": "Vikas Singh", "n": 1, "key": false, "k": 1}];
+    const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const hue = n => { let h = 0; for (const c of n) h = (h * 31 + c.charCodeAt(0)) % 360; return h; };
+    const ini = n => { const p = n.replace(/[.]/g, '').split(/\s+/).filter(Boolean); return (p[0][0] + (p.length > 1 ? p[p.length - 1][0] : '')).toUpperCase(); };
+    const paper = n => n + (n === 1 ? ' paper' : ' papers');
+    const ALL = MAIN.map(p => ({ ...p, photo: true })).concat(OTHERS.map(p => ({ ...p, photo: false, title: '' })))
+      .sort((a, b) => b.n - a.n || b.photo - a.photo || a.name.localeCompare(b.name));
+    const plain = t => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const sur = p => plain(p.name.trim().split(/\s+/).pop());
+    ALL.forEach(p => p.letter = sur(p)[0].toUpperCase());
+    let sort = 'n', letter = 'all';
+    function buildAZ() {
+      const have = new Set(ALL.map(p => p.letter));
+      const az = document.getElementById('az');
+      az.innerHTML = `<button type="button" data-l="all" class="${letter === 'all' ? 'on' : ''}">All</button>` +
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(l => `<button type="button" data-l="${l}" class="${letter === l ? 'on' : ''}" ${have.has(l) ? '' : 'disabled'}>${l}</button>`).join('');
+    }
+    function card(p) {
+      const face = p.photo ? `<img src="${esc(p.img)}" alt="${esc(p.name)}" loading="lazy">` : `<span class="av" style="background:hsl(${hue(p.name)}, 45%, 48%)">${esc(ini(p.name))}</span>`;
+      const txt = `<div class="pn"><b>${esc((p.title ? p.title + ' ' : '') + p.name)}</b>${p.n ? `<em>${paper(p.n)}</em>` : ''}</div>`;
+      return p.url ? `<a class="pcard" href="${esc(p.url)}" target="_blank" rel="noopener" title="Open profile">${face}${txt}</a>` : `<div class="pcard">${face}${txt}</div>`;
+    }
+    function fill(gridId, list) {
+      let last = '';
+      document.getElementById(gridId).innerHTML = list.map(p => {
+        const head = sort === 'a' && p.letter !== last ? `<div class="letter-head">${p.letter}</div>` : ''; last = p.letter;
+        return head + card(p);
+      }).join('');
+    }
+    function draw() {
+      const q = document.getElementById('cs').value.trim().toLowerCase();
+      let m = ALL.filter(p => (!q || p.name.toLowerCase().includes(q)) && (letter === 'all' || p.letter === letter));
+      if (sort === 'a') m = m.slice().sort((a, b) => sur(a).localeCompare(sur(b)) || a.name.localeCompare(b.name));
+      const k = m.filter(p => p.key), o = m.filter(p => !p.key);
+      fill('mgrid', k); fill('ogrid', o);
+      document.getElementById('c1').textContent = k.length; document.getElementById('c2').textContent = o.length;
+      document.querySelectorAll('#h1, #h1 + .sec-note, #mgrid').forEach(e => e.hidden = !k.length);
+      document.querySelectorAll('#h2, #h2 + .sec-note, #ogrid').forEach(e => e.hidden = !o.length);
+      document.getElementById('ce').hidden = m.length > 0;
+      document.getElementById('sortN').classList.toggle('on', sort === 'n'); document.getElementById('sortA').classList.toggle('on', sort === 'a');
+      buildAZ();
+    }
+    document.getElementById('az').addEventListener('click', e => { const b = e.target.closest('button'); if (!b || b.disabled) return; letter = b.dataset.l; draw(); });
+    document.getElementById('sortN').addEventListener('click', () => { sort = 'n'; draw(); });
+    document.getElementById('sortA').addEventListener('click', () => { sort = 'a'; draw(); });
+    document.getElementById('cs').addEventListener('input', draw);
+    draw();
+  </script>
 </body>
 
 </html>
