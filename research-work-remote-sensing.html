@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Remote Sensing &amp; Satellite Data | Nidhi</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap"
+    rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/img/favicon.png" rel="icon">
+
+  <style>
+    :root {
+      --teal: #34b7a7;
+      --teal-light: #51cdbe;
+      --teal-pale: #e7f8f6;
+      --dark: #222222;
+      --mid: #555555;
+      --light-bg: #e9e8e6;
+      --white: #ffffff;
+      --navy: #0a3d62;
+      --text-muted: #888888;
+      --card-shadow: 0 8px 32px rgba(52, 183, 167, .10), 0 2px 8px rgba(0, 0, 0, .06);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Open Sans", sans-serif;
+      color: var(--dark);
+      background: #f5f5f3;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--teal-light);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: "Raleway", sans-serif;
+    }
+
+    /* ── HEADER ── */
+    #header {
+      background: var(--light-bg);
+      box-shadow: 0 0 25px rgba(0, 0, 0, .08);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 997;
+      padding: 15px 0;
+    }
+
+    .header-inner {
+      max-width: none;
+      margin: 0;
+      padding: 0 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .logo a {
+      color: var(--dark);
+    }
+
+    .navbar ul {
+      display: flex;
+      list-style: none;
+    }
+
+    .navbar li {
+      padding: 10px 0 10px 28px;
+      position: relative;
+    }
+
+    .navbar a {
+      font-family: "Raleway", sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: .3s;
+      position: relative;
+    }
+
+    .navbar a::before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: var(--teal);
+      visibility: hidden;
+      transition: all .3s ease-in-out;
+    }
+
+    .navbar a:hover::before,
+    .navbar a.active::before {
+      visibility: visible;
+      width: 25px;
+    }
+
+    .navbar a:hover,
+    .navbar a.active {
+      color: var(--dark);
+    }
+
+    .header-social-links a {
+      color: #6f6f6f;
+      padding-left: 6px;
+      font-size: 16px;
+      line-height: 0;
+      display: inline-block;
+      transition: .3s;
+    }
+
+    .header-social-links a:hover {
+      color: var(--teal);
+    }
+
+    .mobile-nav-toggle {
+      display: none;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--dark);
+    }
+
+    @media(max-width:991px) {
+      .navbar ul {
+        display: none;
+      }
+
+      .mobile-nav-toggle {
+        display: block;
+      }
+    }
+
+    /* ── MAIN ── */
+    #main {
+      margin-top: 70px;
+      padding: 70px 20px 90px;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      text-align: center;
+      padding-bottom: 40px;
+    }
+
+    .section-title .eyebrow {
+      display: inline-block;
+      font-size: .75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .section-title h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 16px;
+      position: relative;
+      padding-bottom: 20px;
+    }
+
+    .section-title h2::after {
+      content: "";
+      position: absolute;
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: var(--teal);
+      bottom: 0;
+      left: calc(50% - 25px);
+    }
+
+    .section-title p {
+      color: var(--mid);
+      max-width: 560px;
+      margin: 0 auto;
+      font-size: .95rem;
+      line-height: 1.7;
+    }
+
+    /* ── HISTORY CARDS GRID ── */
+    .history-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 40px 50px;
+      justify-items: center;
+      margin-top: 20px;
+    }
+
+    /* ── INDIVIDUAL CARD ── */
+    .history-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 30px 24px 26px;
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(52, 183, 167, .08);
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .history-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 20px 48px rgba(52, 183, 167, .18), 0 6px 16px rgba(0, 0, 0, .08);
+      border-color: rgba(52, 183, 167, .3);
+    }
+
+    /* Flag / icon area */
+    .card-visual {
+      width: 110px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #f8f8f8;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .10);
+      transition: transform .28s ease, box-shadow .28s ease;
+      flex-shrink: 0;
+    }
+
+    .history-card:hover .card-visual {
+      transform: scale(1.06);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .15);
+    }
+
+    /* Inline flag strips */
+    .flag-strip {
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+
+    .flag-strip span {
+      flex: 1;
+      display: block;
+    }
+
+    /* Germany */
+    .de-black {
+      background: #000;
+    }
+
+    .de-red {
+      background: #de0000;
+    }
+
+    .de-gold {
+      background: #ffce00;
+    }
+
+    /* India */
+    .in-saffron {
+      background: #FF9933;
+    }
+
+    .in-white {
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .in-green {
+      background: #138808;
+    }
+
+    /* Ashoka Chakra inside white stripe */
+    .in-white svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    /* Country label */
+    .card-label {
+      font-family: "Raleway", sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+
+    .history-card:hover .card-label {
+      color: var(--teal);
+    }
+
+    .card-sub {
+      font-size: .82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    /* Explore pill */
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--teal-pale);
+      color: var(--teal);
+      font-size: .78rem;
+      font-weight: 700;
+      font-family: "Raleway", sans-serif;
+      letter-spacing: .5px;
+      padding: 6px 16px;
+      border-radius: 30px;
+      transition: background .25s, color .25s;
+    }
+
+    .history-card:hover .card-cta {
+      background: var(--teal);
+      color: #fff;
+    }
+
+    /* ── DIVIDER ── */
+    .or-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      gap: 14px;
+      margin: 0 auto;
+    }
+
+    .or-divider::before,
+    .or-divider::after {
+      content: "";
+      flex: 1;
+      max-width: 40px;
+      height: 1px;
+      background: var(--text-muted);
+      opacity: .4;
+    }
+
+    /* ── TEASER STATS ── */
+    .card-stats {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .cs {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cs .cn {
+      font-family: "Raleway", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--teal);
+      line-height: 1;
+    }
+
+    .cs .cl {
+      font-size: .65rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      margin-top: 2px;
+    }
+
+    /* ── FOOTER ── */
+    #footer {
+      background: var(--light-bg);
+      padding: 12px 0;
+      color: var(--dark);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 15px;
+      bottom: 15px;
+      z-index: 996;
+      background: var(--teal);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 22px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all .4s;
+      box-shadow: 0 4px 14px rgba(52, 183, 167, .4);
+    }
+
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--teal-light);
+    }
+
+    /* ── RESEARCH-WORK HUB ── */
+    .rw-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 34px 30px; }
+    .rw-card { position: relative; max-width: 320px; padding-top: 46px; }
+    .rw-card .card-stats { gap: 12px; flex-wrap: nowrap; }
+    .rw-card .cs .cl { letter-spacing: .4px; white-space: nowrap; font-size: .6rem; }
+    .rw-step { position: absolute; top: 14px; left: 14px; font-size: .66rem; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--teal); background: var(--teal-pale); border-radius: 20px; padding: 3px 11px; font-family: "Raleway", sans-serif; }
+    .rw-card .card-visual { color: #fff; font-size: 2.2rem; }
+    .rw-card .card-sub { min-height: 4.4em; }
+    .rw-back { text-align: center; margin-top: 46px; }
+    .rw-back a { display: inline-flex; align-items: center; gap: 8px; font-family: "Raleway", sans-serif; font-weight: 700; font-size: .85rem; color: var(--mid); border: 1px solid #d9dde2; border-radius: 30px; padding: 8px 20px; background: #fff; transition: all .2s; }
+    .rw-back a:hover { color: var(--teal); border-color: var(--teal); }
+    .rw-path { text-align: center; font-size: .8rem; color: var(--text-muted); margin: -14px auto 6px; }
+
+    /* ── REMOTE SENSING PAGE ── */
+    #main.rs { max-width: 1000px; }
+    .rs-toc { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: -8px 0 34px; }
+    .rs-toc a { font-size: .74rem; font-weight: 700; font-family: "Raleway", sans-serif; color: var(--mid); background: #fff; border: 1px solid #d9dde2; border-radius: 30px; padding: 5px 13px; transition: all .2s; }
+    .rs-toc a:hover { color: var(--teal); border-color: var(--teal); }
+    .rs-sec { background: #fff; border-radius: 16px; box-shadow: var(--card-shadow); padding: 28px 30px 26px; margin-bottom: 26px; scroll-margin-top: 90px; }
+    .rs-sec h3 { font-size: 1.25rem; font-weight: 800; color: var(--navy); display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+    .rs-sec h3 .no { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%; background: var(--teal); color: #fff; font-size: .9rem; display: flex; align-items: center; justify-content: center; }
+    .rs-sec .lead { color: var(--mid); font-size: .92rem; line-height: 1.75; margin: 8px 0 14px; }
+    .rs-sec p { font-size: .9rem; line-height: 1.75; color: #444; margin-bottom: 10px; }
+    .rs-sec ul { margin: 6px 0 12px 20px; font-size: .9rem; line-height: 1.75; color: #444; }
+    .rs-fig { margin: 16px 0 6px; text-align: center; }
+    .rs-fig svg { width: 100%; height: auto; max-width: 860px; background: #fafcfc; border: 1px solid #e3eeed; border-radius: 12px; }
+    .rs-fig figcaption { font-size: .76rem; color: var(--text-muted); margin-top: 6px; line-height: 1.5; }
+    .rs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin: 14px 0 4px; }
+    .rs-box { background: #f6fbfa; border: 1px solid #dbefec; border-left: 4px solid var(--teal); border-radius: 10px; padding: 13px 15px; }
+    .rs-box h4 { font-size: .9rem; font-weight: 800; color: var(--navy); margin-bottom: 4px; }
+    .rs-box p, .rs-box li { font-size: .82rem; line-height: 1.6; color: #555; margin: 0; }
+    .rs-box ul { margin: 4px 0 0 16px; }
+    .rs-table-wrap { overflow-x: auto; margin: 12px 0 4px; }
+    table.rs-t { border-collapse: collapse; width: 100%; font-size: .8rem; min-width: 620px; }
+    table.rs-t th { text-align: left; background: var(--teal-pale); color: var(--navy); font-family: "Raleway", sans-serif; font-weight: 800; padding: 8px 10px; font-size: .74rem; letter-spacing: .4px; text-transform: uppercase; }
+    table.rs-t td { padding: 8px 10px; border-bottom: 1px solid #eef1f3; vertical-align: top; color: #444; line-height: 1.5; }
+    .rs-tip { background: #fff8e6; border-left: 4px solid #e0a526; border-radius: 8px; padding: 11px 14px; font-size: .84rem; line-height: 1.65; color: #5a4a1a; margin-top: 12px; }
+    .rs-logos { display: flex; gap: 20px; align-items: center; justify-content: center; flex-wrap: wrap; margin: 12px 0 2px; }
+    .rs-logos figure { text-align: center; }
+    .rs-logos img { height: 78px; width: auto; border-radius: 8px; border: 1px solid #e3eeed; background: #fff; padding: 4px; }
+    .rs-logos figcaption { font-size: .72rem; color: var(--text-muted); margin-top: 4px; }
+    .rs-gloss { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px 22px; font-size: .84rem; line-height: 1.55; color: #444; }
+    .rs-gloss b { color: var(--navy); }
+    @media (max-width: 600px) { .rs-sec { padding: 20px 16px; } }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── HEADER ── -->
+  <header id="header">
+    <div class="header-inner">
+      <h1 class="logo"><a href="index.html">Nidhi</a></h1>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="resume.html">Bio Sketch</a></li>
+          <li><a class="active" href="research.html">Research</a></li>
+          <li><a href="highlights.html">Highlights</a></li>
+          <li><a href="group.html">Group</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="history.html">History</a></li>
+        </ul>
+      </nav>
+      <div class="header-social-links">
+        <a href="https://twitter.com/nidhispace" target="_blank"><i class="bi bi-twitter"></i></a>
+        <a href="https://www.linkedin.com/in/nidhispace/" target="_blank"><i class="bi bi-linkedin"></i></a>
+      </div>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </div>
+  </header>
+
+
+  <main id="main" class="rs">
+    <div class="section-title">
+      <span class="eyebrow">Research · Primer</span>
+      <h2>Remote Sensing &amp; Satellite Data</h2>
+      <p>A short, practical guide for newcomers: how satellites observe the Earth, what they measure, where to get the data and how it is used, with a focus on the atmosphere.</p>
+    </div>
+    <nav class="rs-toc" aria-label="Sections">
+      <a href="#s1">1 · Basics</a><a href="#s2">2 · Physics</a><a href="#s3">3 · Platforms</a><a href="#s4">4 · Sensors</a><a href="#s5">5 · Missions</a><a href="#s6">6 · Retrievals</a><a href="#s7">7 · Processing</a><a href="#s8">8 · Applications</a><a href="#s9">9 · Data &amp; tools</a><a href="#s10">10 · Validation</a><a href="#s11">11 · Pitfalls</a><a href="#s12">12 · Glossary</a>
+    </nav>
+
+    <section class="rs-sec" id="s1"><h3><span class="no">1</span>What is remote sensing?</h3>
+      <p class="lead">Remote sensing is the science of learning about an object, surface or gas <b>without touching it</b>, by measuring the electromagnetic radiation it reflects, emits or scatters. Satellites do this over the whole globe, repeatedly, which no network of ground stations can match.</p>
+      <figure class="rs-fig"><svg viewBox="0 0 860 330" role="img" aria-label="How passive and active remote sensing work">
+<defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#e2703a"/></marker><marker id="ab" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#2e86c1"/></marker></defs>
+<rect x="0" y="236" width="860" height="94" fill="#c9dfb6"/><rect x="0" y="250" width="860" height="80" fill="#a9c98f"/>
+<rect x="0" y="120" width="860" height="116" fill="#e6f3fb"/><text x="12" y="140" font-size="12" fill="#2e86c1">Atmosphere (absorbs, scatters, emits)</text>
+<circle cx="70" cy="55" r="26" fill="#f6c343"/><text x="70" y="102" text-anchor="middle" font-size="12" fill="#555">Sun</text>
+<g transform="translate(560,26)"><rect x="-18" y="0" width="36" height="16" rx="3" fill="#0a3d62"/><rect x="-50" y="4" width="28" height="8" fill="#2e86c1"/><rect x="22" y="4" width="28" height="8" fill="#2e86c1"/><circle cx="0" cy="22" r="5" fill="#34b7a7"/></g>
+<text x="560" y="72" text-anchor="middle" font-size="12" fill="#555">Satellite sensor</text>
+<line x1="95" y1="70" x2="300" y2="248" stroke="#e2703a" stroke-width="2.5" marker-end="url(#ar)"/><text x="130" y="170" font-size="11.5" fill="#e2703a" transform="rotate(40 130 170)">1  Solar radiation</text>
+<line x1="320" y1="250" x2="520" y2="62" stroke="#e2703a" stroke-width="2.5" stroke-dasharray="7 4" marker-end="url(#ar)"/><text x="420" y="168" font-size="11.5" fill="#e2703a" transform="rotate(-43 420 168)">2  Reflected / emitted</text>
+<text x="300" y="276" text-anchor="middle" font-size="12" fill="#2d5a27" font-weight="700">Surface: land, ocean, ice, vegetation</text>
+<text x="300" y="296" text-anchor="middle" font-size="11" fill="#2d5a27">PASSIVE: measures natural energy</text>
+<line x1="610" y1="60" x2="700" y2="248" stroke="#2e86c1" stroke-width="2.5" marker-end="url(#ab)"/><line x1="725" y1="248" x2="635" y2="62" stroke="#2e86c1" stroke-width="2.5" stroke-dasharray="7 4" marker-end="url(#ab)"/>
+<text x="718" y="276" text-anchor="middle" font-size="12" fill="#1a5276" font-weight="700">ACTIVE: sends a pulse, listens</text>
+<text x="718" y="296" text-anchor="middle" font-size="11" fill="#1a5276">radar (SAR), lidar</text>
+<text x="780" y="170" font-size="11" fill="#1a5276">3  Echo returns</text>
+<text x="12" y="322" font-size="11" fill="#555">4  Signal is converted to radiance, then to a physical quantity (temperature, NO₂, vegetation, rainfall ...)</text></svg><figcaption>Passive sensors use the Sun (reflected light) or the Earth's own thermal emission; active sensors send their own signal and time the echo.</figcaption></figure>
+      <div class="rs-grid">
+        <div class="rs-box"><h4>Passive</h4><p>Records natural radiation. Examples: optical cameras, spectrometers (TROPOMI, MODIS), thermal and microwave radiometers. Needs sunlight for reflected bands.</p></div>
+        <div class="rs-box"><h4>Active</h4><p>Emits energy and measures the return. Examples: SAR radar (Sentinel-1), lidar (CALIPSO, ICESat-2), radar altimeters. Works day and night; radar sees through cloud.</p></div>
+        <div class="rs-box"><h4>Why it matters</h4><p>Global coverage, consistent long records, access to remote regions (oceans, poles, forests) and a view of how pollution and climate vary in space and time.</p></div>
+      </div>
+    </section>
+
+    <section class="rs-sec" id="s2"><h3><span class="no">2</span>The physics: spectrum, windows and signatures</h3>
+      <p class="lead">Every material interacts with light differently at different wavelengths. Gases absorb at narrow, characteristic wavelengths (their "fingerprints"), while surfaces have broad reflectance patterns.</p>
+      <figure class="rs-fig"><svg viewBox="0 0 860 300" role="img" aria-label="Electromagnetic spectrum and atmospheric windows">
+<text x="10" y="18" font-size="12" font-weight="700" fill="#0a3d62">Wavelength (log scale, not to exact scale)</text>
+<g font-size="11" text-anchor="middle">
+<rect x="10" y="30" width="95" height="44" fill="#8e5bd1"/><text x="57" y="49" fill="#fff">UV</text><text x="57" y="64" fill="#fff" font-size="9.5">0.1–0.4 µm</text>
+<rect x="105" y="30" width="105" height="44" fill="url(#vis)"/><text x="157" y="49" fill="#222">Visible</text><text x="157" y="64" fill="#222" font-size="9.5">0.4–0.7 µm</text>
+<rect x="210" y="30" width="100" height="44" fill="#b53a2a"/><text x="260" y="49" fill="#fff">Near-IR</text><text x="260" y="64" fill="#fff" font-size="9.5">0.7–1.3 µm</text>
+<rect x="310" y="30" width="100" height="44" fill="#d9772b"/><text x="360" y="49" fill="#fff">Shortwave IR</text><text x="360" y="64" fill="#fff" font-size="9.5">1.3–3 µm</text>
+<rect x="410" y="30" width="90" height="44" fill="#e8a33a"/><text x="455" y="49" fill="#222">Mid-IR</text><text x="455" y="64" fill="#222" font-size="9.5">3–8 µm</text>
+<rect x="500" y="30" width="110" height="44" fill="#6b8e9c"/><text x="555" y="49" fill="#fff">Thermal IR</text><text x="555" y="64" fill="#fff" font-size="9.5">8–15 µm</text>
+<rect x="610" y="30" width="240" height="44" fill="#2e86c1"/><text x="730" y="49" fill="#fff">Microwave / radar</text><text x="730" y="64" fill="#fff" font-size="9.5">1 mm – 1 m (P, L, S, C, X, Ku, Ka bands)</text></g>
+<defs><linearGradient id="vis" x1="0" x2="1"><stop offset="0" stop-color="#6a4bd8"/><stop offset=".3" stop-color="#2e9be0"/><stop offset=".5" stop-color="#3fc060"/><stop offset=".75" stop-color="#f0d030"/><stop offset="1" stop-color="#e03a2a"/></linearGradient></defs>
+<text x="10" y="102" font-size="12" font-weight="700" fill="#0a3d62">Atmospheric transmission (schematic): high = window usable from space</text>
+<path d="M10,185 L10,150 L60,150 L100,185 L110,120 L205,115 L215,140 L255,125 L300,175 L330,135 L360,165 L395,185 L420,160 L470,185 L505,185 L520,128 L600,125 L615,185 L640,185 L650,125 L850,118 L850,185 Z" fill="#cfe9e6" stroke="#34b7a7" stroke-width="1.5"/>
+<line x1="10" y1="185" x2="850" y2="185" stroke="#888"/>
+<g font-size="10.5" fill="#444" text-anchor="middle"><text x="57" y="205">O₃ absorbs UV</text><text x="157" y="205">visible window</text><text x="300" y="205">H₂O bands</text><text x="395" y="205">H₂O, CO₂</text><text x="560" y="205">thermal window</text><text x="740" y="205">microwave: sees through cloud</text></g>
+<g font-size="11" fill="#0a3d62"><text x="10" y="240" font-weight="700">What each region is used for</text>
+<text x="10" y="258">UV–Vis: ozone, NO₂, HCHO, aerosols, ocean colour    NIR/SWIR: vegetation, snow, CH₄, CO, CO₂    TIR: surface and cloud temperature, CO, O₃, NH₃</text>
+<text x="10" y="276">Microwave: rainfall, soil moisture, sea ice, SAR imaging (day, night, through clouds), temperature and humidity sounding</text></g></svg><figcaption>Atmospheric windows are wavelength ranges where the atmosphere is largely transparent; surface imaging uses windows, gas sensing deliberately uses absorption bands.</figcaption></figure>
+      <figure class="rs-fig"><svg viewBox="0 0 860 230" role="img" aria-label="Spectral signatures of water, soil and vegetation">
+<line x1="60" y1="190" x2="840" y2="190" stroke="#888"/><line x1="60" y1="20" x2="60" y2="190" stroke="#888"/>
+<text x="450" y="222" text-anchor="middle" font-size="11" fill="#555">Wavelength: visible (0.4–0.7 µm) → near-IR → shortwave IR (to ~2.4 µm)</text>
+<text x="18" y="108" font-size="11" fill="#555" transform="rotate(-90 18 108)" text-anchor="middle">Reflectance</text>
+<path d="M60,176 C130,166 170,158 200,152 C240,148 260,40 300,38 C420,34 520,36 560,40 C590,60 610,80 620,96 C660,110 700,70 730,64 C760,70 790,110 820,128" fill="none" stroke="#2f9e44" stroke-width="3"/>
+<path d="M60,150 C150,146 200,138 260,120 C380,100 520,80 620,78 C700,86 760,90 820,100" fill="none" stroke="#a0673a" stroke-width="3"/>
+<path d="M60,168 C120,166 180,172 240,180 C300,186 340,188 380,189 L820,189" fill="none" stroke="#2e86c1" stroke-width="3"/>
+<g font-size="11.5" font-weight="700"><text x="330" y="30" fill="#2f9e44">Healthy vegetation</text><text x="640" y="62" fill="#a0673a">Dry soil</text><text x="560" y="180" fill="#2e86c1">Clear water</text></g>
+<g font-size="10.5" fill="#555"><text x="150" y="130">green bump</text><text x="228" y="100" transform="rotate(-62 228 100)">red edge</text><text x="440" y="26">NIR plateau</text><text x="618" y="124">water absorption</text></g>
+<text x="460" y="16" text-anchor="middle" font-size="11" fill="#0a3d62" font-weight="700">NDVI = (NIR − Red) / (NIR + Red): high for vegetation, near zero for bare soil, negative for water</text></svg><figcaption>Schematic spectral signatures. Chlorophyll absorbs red light and leaves reflect strongly in the near-IR, which is why vegetation indices work.</figcaption></figure>
+      <ul>
+        <li><b>Absorption, scattering, emission:</b> the signal reaching the sensor is the surface signal modified by the atmosphere (Rayleigh and aerosol scattering, gas absorption, thermal emission).</li>
+        <li><b>Beer–Lambert law:</b> absorption by a gas grows with its amount along the light path. This is the basis for retrieving trace gas columns such as NO₂, O₃, HCHO and CH₄.</li>
+        <li><b>Radiance vs reflectance vs brightness temperature:</b> radiance is what is measured; reflectance normalises it by the Sun, brightness temperature is the equivalent blackbody temperature in the thermal IR.</li>
+      </ul>
+    </section>
+
+    <section class="rs-sec" id="s3"><h3><span class="no">3</span>Platforms and orbits</h3>
+      <p class="lead">Where the sensor sits decides what it can see and how often.</p>
+      <figure class="rs-fig"><svg viewBox="0 0 860 340" role="img" aria-label="Satellite orbits around Earth">
+<circle cx="260" cy="170" r="52" fill="#2e86c1"/><path d="M225,150 q18,-18 36,-4 q10,12 -4,22 q-18,6 -32,-18z M262,180 q18,2 24,18 q-10,14 -24,-4z" fill="#6fb36a"/>
+<text x="260" y="174" text-anchor="middle" font-size="12" fill="#fff" font-weight="700" opacity="0"></text>
+<ellipse cx="260" cy="170" rx="70" ry="70" fill="none" stroke="#34b7a7" stroke-width="2"/><circle cx="330" cy="170" r="6" fill="#34b7a7"/>
+<ellipse cx="260" cy="170" rx="68" ry="70" fill="none" stroke="#e2703a" stroke-width="2" stroke-dasharray="5 4" transform="rotate(80 260 170)"/><circle cx="260" cy="100" r="6" fill="#e2703a"/>
+<circle cx="260" cy="170" r="150" fill="none" stroke="#8e5bd1" stroke-width="1.5" stroke-dasharray="3 5"/><circle cx="410" cy="170" r="7" fill="#8e5bd1"/>
+<text x="260" y="340" text-anchor="middle" font-size="11" fill="#555">Distances are not to scale</text>
+<g font-size="12" fill="#333">
+<rect x="490" y="30" width="14" height="14" fill="#e2703a"/><text x="512" y="42" font-weight="700">Polar, sun-synchronous LEO · 600–830 km</text>
+<text x="512" y="60" font-size="11">Passes over the same local time every day; covers the whole globe in swaths.</text>
+<text x="512" y="76" font-size="11">Landsat, Sentinel-2/3/5P, MODIS, VIIRS, Metop (IASI), Aura (OMI)</text>
+<rect x="490" y="108" width="14" height="14" fill="#34b7a7"/><text x="512" y="120" font-weight="700">Inclined LEO · ~400–500 km</text>
+<text x="512" y="138" font-size="11">Samples all local times, limited to mid-latitudes; e.g. GPM Core, ISS instruments.</text>
+<rect x="490" y="168" width="14" height="14" fill="#8e5bd1"/><text x="512" y="180" font-weight="700">Geostationary (GEO) · 35,786 km</text>
+<text x="512" y="198" font-size="11">Stays above one point on the equator: a fixed view, images every 5–15 min.</text>
+<text x="512" y="214" font-size="11">GOES, Himawari, Meteosat (MSG, MTG), INSAT, GEMS, TEMPO, Sentinel-4</text>
+<text x="490" y="250" font-weight="700" font-size="12">Other vantage points</text>
+<text x="490" y="268" font-size="11">MEO (navigation and some constellations) · Lagrange point L1 (DSCOVR sees the full sunlit disk)</text>
+<text x="490" y="284" font-size="11">Aircraft, balloons, drones and ground-based instruments for validation and detail</text></g></svg><figcaption>Main orbit types used for Earth observation.</figcaption></figure>
+      <p><b>Trade-off in one line:</b> low orbits give fine detail and global coverage but infrequent looks; geostationary orbits give frequent looks but a coarser, fixed view that degrades towards high latitudes. Aircraft, balloons and drones fill the gap with high-detail, targeted measurements.</p>
+    </section>
+
+    <section class="rs-sec" id="s4"><h3><span class="no">4</span>Sensors and the four resolutions</h3>
+      <p class="lead">A sensor is described by what it can resolve in space, wavelength, time and brightness.</p>
+      <figure class="rs-fig"><svg viewBox="0 0 860 190" role="img" aria-label="Four types of resolution">
+<g font-size="12" text-anchor="middle" fill="#333">
+<g transform="translate(20,10)"><text x="85" y="14" font-weight="700" fill="#0a3d62">Spatial</text>
+<rect x="10" y="26" width="75" height="75" fill="#34b7a7" opacity=".3"/><g stroke="#34b7a7" opacity=".9"><line x1="10" y1="51" x2="85" y2="51"/><line x1="10" y1="76" x2="85" y2="76"/><line x1="35" y1="26" x2="35" y2="101"/><line x1="60" y1="26" x2="60" y2="101"/></g>
+<rect x="95" y="26" width="75" height="75" fill="#34b7a7" opacity=".3"/><g stroke="#34b7a7"><line x1="95" y1="63" x2="170" y2="63"/><line x1="132" y1="26" x2="132" y2="101"/></g>
+<text x="85" y="120" font-size="11">Pixel size on the ground</text><text x="85" y="136" font-size="10.5" fill="#777">10 m (fine) vs 1 km (coarse)</text></g>
+<g transform="translate(225,10)"><text x="85" y="14" font-weight="700" fill="#0a3d62">Spectral</text>
+<g><rect x="10" y="30" width="16" height="70" fill="#6a4bd8"/><rect x="32" y="50" width="16" height="50" fill="#2e9be0"/><rect x="54" y="38" width="16" height="62" fill="#3fc060"/><rect x="76" y="62" width="16" height="38" fill="#f0d030"/><rect x="98" y="46" width="16" height="54" fill="#e03a2a"/><rect x="120" y="70" width="16" height="30" fill="#b53a2a"/><rect x="142" y="56" width="16" height="44" fill="#d9772b"/></g>
+<text x="85" y="120" font-size="11">Number and width of bands</text><text x="85" y="136" font-size="10.5" fill="#777">few (RGB) → hundreds (hyperspectral)</text></g>
+<g transform="translate(430,10)"><text x="85" y="14" font-weight="700" fill="#0a3d62">Temporal</text>
+<line x1="10" y1="80" x2="170" y2="80" stroke="#888"/><g fill="#e2703a"><circle cx="20" cy="80" r="5"/><circle cx="70" cy="80" r="5"/><circle cx="120" cy="80" r="5"/><circle cx="165" cy="80" r="5"/></g><g fill="#34b7a7"><circle cx="30" cy="50" r="3"/><circle cx="40" cy="50" r="3"/><circle cx="50" cy="50" r="3"/><circle cx="60" cy="50" r="3"/><circle cx="80" cy="50" r="3"/><circle cx="90" cy="50" r="3"/><circle cx="100" cy="50" r="3"/><circle cx="110" cy="50" r="3"/><circle cx="130" cy="50" r="3"/><circle cx="140" cy="50" r="3"/><circle cx="150" cy="50" r="3"/></g>
+<text x="85" y="120" font-size="11">Revisit time</text><text x="85" y="136" font-size="10.5" fill="#777">minutes (GEO) → days (LEO)</text></g>
+<g transform="translate(635,10)"><text x="85" y="14" font-weight="700" fill="#0a3d62">Radiometric</text>
+<rect x="10" y="30" width="70" height="70" fill="url(#g2)"/><rect x="95" y="30" width="70" height="70" fill="url(#g16)"/>
+<defs><linearGradient id="g2"><stop offset="0" stop-color="#222"/><stop offset=".5" stop-color="#222"/><stop offset=".5" stop-color="#eee"/><stop offset="1" stop-color="#eee"/></linearGradient><linearGradient id="g16"><stop offset="0" stop-color="#000"/><stop offset="1" stop-color="#fff"/></linearGradient></defs>
+<text x="85" y="120" font-size="11">Brightness levels (bit depth)</text><text x="85" y="136" font-size="10.5" fill="#777">1-bit (2 levels) vs 12-bit (4096)</text></g></g>
+<text x="430" y="176" text-anchor="middle" font-size="11" fill="#666">No sensor is best at all four: improving one usually costs another.</text></svg><figcaption>The four resolutions that define any satellite dataset.</figcaption></figure>
+      <figure class="rs-fig"><svg viewBox="0 0 860 200" role="img" aria-label="Scanning geometries">
+<g font-size="11.5" fill="#333" text-anchor="middle">
+<g transform="translate(10,0)"><text x="130" y="20" font-weight="700" fill="#0a3d62">Whiskbroom (cross-track scanner)</text><rect x="116" y="34" width="28" height="10" fill="#0a3d62"/><polygon points="130,44 40,150 220,150" fill="#34b7a7" opacity=".18" stroke="#34b7a7"/><line x1="40" y1="150" x2="220" y2="150" stroke="#e2703a" stroke-width="3"/><text x="130" y="172">Mirror sweeps side to side;</text><text x="130" y="187">MODIS, Landsat 7, OMI-type</text></g>
+<g transform="translate(300,0)"><text x="130" y="20" font-weight="700" fill="#0a3d62">Pushbroom (along-track array)</text><rect x="116" y="34" width="28" height="10" fill="#0a3d62"/><polygon points="130,44 40,150 220,150" fill="#34b7a7" opacity=".18" stroke="#34b7a7"/><g fill="#e2703a"><rect x="40" y="146" width="180" height="8"/></g><text x="130" y="172">A line of detectors images</text><text x="130" y="187">the whole swath at once: Sentinel-2, TROPOMI</text></g>
+<g transform="translate(590,0)"><text x="130" y="20" font-weight="700" fill="#0a3d62">Side-looking radar (SAR)</text><rect x="116" y="34" width="28" height="10" fill="#0a3d62"/><polygon points="140,44 150,150 260,150" fill="#2e86c1" opacity=".2" stroke="#2e86c1"/><line x1="150" y1="150" x2="260" y2="150" stroke="#2e86c1" stroke-width="3"/><text x="130" y="172">Looks to one side; builds a high-</text><text x="130" y="187">resolution image from the echo: Sentinel-1</text></g></g></svg><figcaption>How images are built up: the scanning geometry affects pixel size across the swath.</figcaption></figure>
+      <div class="rs-grid">
+        <div class="rs-box"><h4>Imagers (multispectral)</h4><p>A handful to tens of broad bands. Land cover, clouds, vegetation, water: Landsat, Sentinel-2, MODIS, VIIRS.</p></div>
+        <div class="rs-box"><h4>Spectrometers (hyper-spectral)</h4><p>Hundreds to thousands of narrow channels. Trace gases and aerosols: TROPOMI, OMI, IASI, CrIS, GOSAT.</p></div>
+        <div class="rs-box"><h4>Radar and lidar</h4><p>Active measurements of surface roughness, deformation, topography, cloud and aerosol profiles, ice height.</p></div>
+        <div class="rs-box"><h4>Microwave radiometers &amp; sounders</h4><p>Rainfall, soil moisture, sea-surface temperature, sea ice, vertical temperature and humidity profiles.</p></div>
+      </div>
+    </section>
+
+    <section class="rs-sec" id="s5"><h3><span class="no">5</span>Key missions and datasets</h3>
+      <p class="lead">A starter map, not an exhaustive list. Always check the mission page for current status, resolution and versions.</p>
+      <div class="rs-table-wrap"><table class="rs-t">
+        <thead><tr><th>Mission / sensor</th><th>Type &amp; orbit</th><th>Typical resolution</th><th>Mainly used for</th></tr></thead>
+        <tbody>
+        <tr><td>Landsat 8/9 (NASA/USGS)</td><td>Optical + thermal, LEO</td><td>30 m, ~16-day revisit per satellite</td><td>Land cover, change detection, long records (back to 1972 with the series)</td></tr>
+        <tr><td>Sentinel-2 (Copernicus)</td><td>Optical, 13 bands, LEO</td><td>10–60 m, ~5 days with two satellites</td><td>Vegetation, agriculture, water, urban</td></tr>
+        <tr><td>Sentinel-1 (Copernicus)</td><td>C-band SAR, LEO</td><td>~5–20 m, 6–12 days</td><td>Floods, ground deformation, ships, sea ice, soil moisture</td></tr>
+        <tr><td>MODIS (Terra, Aqua), VIIRS</td><td>Wide-swath imagers, LEO</td><td>250 m – 1 km, daily</td><td>Aerosol optical depth, fires, vegetation, SST, snow, clouds</td></tr>
+        <tr><td>Sentinel-5P / TROPOMI</td><td>UV–SWIR spectrometer, LEO</td><td>~5.5 × 3.5 km, daily global</td><td>NO₂, O₃, HCHO, SO₂, CO, CH₄, aerosol index</td></tr>
+        <tr><td>OMI (Aura), OMPS, GOME-2</td><td>UV–Vis spectrometers, LEO</td><td>10s of km</td><td>Long NO₂, O₃, SO₂, HCHO records</td></tr>
+        <tr><td>IASI (Metop), CrIS, AIRS</td><td>Thermal-IR sounders, LEO</td><td>~12–50 km</td><td>Temperature/humidity profiles, CO, O₃, NH₃, CH₃OH, PAN</td></tr>
+        <tr><td>OCO-2/3, GOSAT</td><td>NIR/SWIR spectrometers</td><td>km scale</td><td>CO₂ and CH₄ columns</td></tr>
+        <tr><td>CALIPSO, EarthCARE</td><td>Lidar / radar, LEO</td><td>Vertical profiles along track</td><td>Aerosol and cloud layers</td></tr>
+        <tr><td>GOES, Himawari, Meteosat (MSG/MTG), INSAT</td><td>Geostationary imagers</td><td>0.5–2 km, every 5–15 min</td><td>Weather, clouds, dust, fires, rapid change</td></tr>
+        <tr><td>GEMS, TEMPO, Sentinel-4</td><td>Geostationary UV–Vis spectrometers</td><td>Few km, hourly</td><td>Diurnal cycle of NO₂, O₃, HCHO, aerosols</td></tr>
+        <tr><td>GPM, SMAP, GRACE-FO, ICESat-2</td><td>Radar / radiometer / gravity / lidar</td><td>Varies</td><td>Rainfall, soil moisture, groundwater and ice mass, ice and canopy height</td></tr>
+        <tr><td>ISRO: Resourcesat, Cartosat, Oceansat, INSAT-3D/3DR</td><td>Optical, ocean colour, geostationary</td><td>From sub-metre to km</td><td>India-focused land, ocean and weather applications</td></tr>
+        </tbody></table></div>
+      <figure class="rs-logos"><figure><img src="assets/img/cafe_brazil.png" alt="CAFE Brazil logo"><figcaption>CAFE Brazil</figcaption></figure><figure><img src="assets/img/Cafe_pasific.png" alt="CAFE Pacific logo"><figcaption>CAFE Pacific</figcaption></figure></figure>
+      <p style="text-align:center;font-size:.8rem;color:#888">Aircraft campaigns such as CAFE measure the same gases in situ, giving the detailed truth against which satellite columns and model fields can be compared.</p>
+    </section>
+
+    <section class="rs-sec" id="s6"><h3><span class="no">6</span>From light to numbers: retrievals</h3>
+      <p class="lead">A satellite measures radiance, not NO₂ or temperature. A <b>retrieval</b> (inverse problem) turns one into the other using a radiative-transfer model.</p>
+      <figure class="rs-fig"><svg viewBox="0 0 860 150" role="img" aria-label="Data processing levels from raw counts to gridded products">
+<defs><marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#34b7a7"/></marker></defs>
+<g font-size="11.5" text-anchor="middle">
+<rect x="6" y="22" width="150" height="86" rx="10" fill="#e7f8f6" stroke="#34b7a7"/><text x="81" y="44" font-weight="800" fill="#0a3d62">Level 0</text><text x="81" y="62" fill="#555">Raw instrument</text><text x="81" y="77" fill="#555">counts, as received</text><text x="81" y="92" fill="#555">from the satellite</text>
+<rect x="186" y="22" width="150" height="86" rx="10" fill="#e7f8f6" stroke="#34b7a7"/><text x="261" y="44" font-weight="800" fill="#0a3d62">Level 1</text><text x="261" y="62" fill="#555">Calibrated radiance,</text><text x="261" y="77" fill="#555">geolocated</text><text x="261" y="92" fill="#555">(L1B / TOA reflectance)</text>
+<rect x="366" y="22" width="150" height="86" rx="10" fill="#e7f8f6" stroke="#34b7a7"/><text x="441" y="44" font-weight="800" fill="#0a3d62">Level 2</text><text x="441" y="62" fill="#555">Physical quantity per</text><text x="441" y="77" fill="#555">pixel: NO₂, AOD, SST,</text><text x="441" y="92" fill="#555">NDVI (retrieval)</text>
+<rect x="546" y="22" width="150" height="86" rx="10" fill="#e7f8f6" stroke="#34b7a7"/><text x="621" y="44" font-weight="800" fill="#0a3d62">Level 3</text><text x="621" y="62" fill="#555">Gridded, averaged</text><text x="621" y="77" fill="#555">in space and time</text><text x="621" y="92" fill="#555">(daily/monthly maps)</text>
+<rect x="726" y="22" width="128" height="86" rx="10" fill="#fff8e6" stroke="#e0a526"/><text x="790" y="44" font-weight="800" fill="#7a5c1d">Level 4</text><text x="790" y="62" fill="#555">Model-merged or</text><text x="790" y="77" fill="#555">derived products</text><text x="790" y="92" fill="#555">(assimilation)</text></g>
+<g stroke="#34b7a7" stroke-width="2" marker-end="url(#a2)"><line x1="158" y1="65" x2="184" y2="65"/><line x1="338" y1="65" x2="364" y2="65"/><line x1="518" y1="65" x2="544" y2="65"/><line x1="698" y1="65" x2="724" y2="65"/></g>
+<text x="261" y="132" text-anchor="middle" font-size="10.5" fill="#777">calibration</text><text x="441" y="132" text-anchor="middle" font-size="10.5" fill="#777">inversion + cloud/QA screening</text><text x="621" y="132" text-anchor="middle" font-size="10.5" fill="#777">gridding, averaging</text></svg><figcaption>Standard processing levels (NASA/ESA conventions; details differ slightly by agency).</figcaption></figure>
+      <ul>
+        <li><b>Forward model:</b> predicts the radiance for an assumed atmosphere and surface; the retrieval adjusts the unknowns until prediction matches measurement.</li>
+        <li><b>Common methods:</b> DOAS (differential absorption, typical for UV–Vis trace gases), optimal estimation (profiles, thermal IR), look-up-table and dark-target/deep-blue algorithms (aerosols), machine-learning retrievals.</li>
+        <li><b>Columns vs profiles:</b> most UV–Vis sensors give a <b>vertical column</b> (molecules per area); sounders and lidars give coarse <b>profiles</b>. A column is dominated by the layer where the gas is most abundant.</li>
+        <li><b>Averaging kernels and a priori:</b> describe how sensitive the retrieval is at each altitude and how much it leans on prior information. Use them when comparing satellite data with models or in-situ data.</li>
+        <li><b>Quality flags:</b> every Level-2 product carries cloud fraction, solar zenith angle and a quality value (e.g. qa_value ≥ 0.75 for TROPOMI NO₂). Filter before analysing.</li>
+      </ul>
+    </section>
+
+    <section class="rs-sec" id="s7"><h3><span class="no">7</span>Typical processing workflow</h3>
+      <div class="rs-grid">
+        <div class="rs-box"><h4>1 · Choose and download</h4><p>Define the question, area, period, then pick a product with suitable resolution and version.</p></div>
+        <div class="rs-box"><h4>2 · Pre-process</h4><p>Radiometric calibration, <b>atmospheric correction</b> (surface reflectance), geometric correction and co-registration, cloud and shadow masking.</p></div>
+        <div class="rs-box"><h4>3 · Derive</h4><p>Indices (NDVI, EVI, NDWI, NBR), temperature, trace-gas maps, composites, regridding or oversampling to a common grid.</p></div>
+        <div class="rs-box"><h4>4 · Analyse</h4><p>Classification (maximum likelihood, random forest, deep learning), change detection, time series and trends, anomalies, source attribution.</p></div>
+        <div class="rs-box"><h4>5 · Validate &amp; report</h4><p>Compare with ground data, quantify uncertainty, document versions and filters so the work can be reproduced.</p></div>
+      </div>
+    </section>
+
+    <section class="rs-sec" id="s8"><h3><span class="no">8</span>Applications</h3>
+      <div class="rs-grid">
+        <div class="rs-box"><h4>Air quality &amp; atmospheric chemistry</h4><ul><li>NO₂, SO₂, CO, HCHO, aerosol optical depth, PM₂.₅ estimates</li><li>HCHO and glyoxal as proxies for VOC emissions; links to ozone formation</li><li>Fire and biomass-burning plumes, dust and volcanic ash</li></ul></div>
+        <div class="rs-box"><h4>Climate &amp; greenhouse gases</h4><ul><li>CO₂ and CH₄ columns, methane super-emitters</li><li>Clouds, aerosols, radiation budget, sea level</li><li>Glacier, ice-sheet and sea-ice change</li></ul></div>
+        <div class="rs-box"><h4>Weather &amp; forecasting</h4><ul><li>Temperature and humidity soundings assimilated into models</li><li>Geostationary nowcasting of storms, cyclones, fog</li><li>Rainfall estimates and monsoon monitoring</li></ul></div>
+        <div class="rs-box"><h4>Land, agriculture &amp; forests</h4><ul><li>Crop type, health and yield, drought stress</li><li>Deforestation, forest biomass, land-use change</li><li>Urban growth and heat islands</li></ul></div>
+        <div class="rs-box"><h4>Ocean &amp; water</h4><ul><li>Sea-surface temperature, chlorophyll and phytoplankton blooms</li><li>Oil spills, coastal change, water quality</li><li>Surface water, reservoirs, groundwater (gravity)</li></ul></div>
+        <div class="rs-box"><h4>Hazards &amp; society</h4><ul><li>Floods, landslides, earthquakes and subsidence (InSAR)</li><li>Wildfire, volcanic and heat-wave monitoring</li><li>Renewable energy (solar irradiance, wind), emission verification</li></ul></div>
+      </div>
+      <div class="rs-tip"><b>Link to my research:</b> satellite columns of HCHO, NO₂ and CO give the regional and seasonal context for the ground-based and aircraft VOC measurements described on the other pages of this section, and tell us where in-situ results can be extended.</div>
+    </section>
+
+    <section class="rs-sec" id="s9"><h3><span class="no">9</span>Where to get data and which tools to use</h3>
+      <div class="rs-grid">
+        <div class="rs-box"><h4>Data portals (free)</h4><ul><li>Copernicus Data Space (Sentinel)</li><li>NASA Earthdata, LAADS DAAC, GES DISC, Giovanni</li><li>USGS EarthExplorer (Landsat)</li><li>EUMETSAT Data Store, NOAA CLASS</li><li>ISRO MOSDAC and Bhuvan (India)</li><li>Google Earth Engine (cloud analysis)</li></ul></div>
+        <div class="rs-box"><h4>Python</h4><ul><li>xarray, netCDF4, h5py for NetCDF/HDF5</li><li>numpy, pandas, scipy, scikit-learn</li><li>rasterio, geopandas, rioxarray for rasters and vectors</li><li>cartopy, matplotlib for maps</li><li>satpy, harp for reading satellite products</li></ul></div>
+        <div class="rs-box"><h4>Desktop &amp; viewers</h4><ul><li>QGIS (GIS), SNAP (Sentinel toolbox)</li><li>Panoply (quick look at NetCDF)</li><li>ENVI / ERDAS (commercial)</li></ul></div>
+        <div class="rs-box"><h4>File formats</h4><ul><li>GeoTIFF (rasters)</li><li>NetCDF4 / HDF5 (multi-dimensional science data)</li><li>SAFE, JPEG2000 (Sentinel)</li><li>BUFR/GRIB (meteorology)</li></ul></div>
+      </div>
+    </section>
+
+    <section class="rs-sec" id="s10"><h3><span class="no">10</span>Validation and uncertainty</h3>
+      <p class="lead">A satellite number is an estimate with an error bar. Always ask how it was validated.</p>
+      <ul>
+        <li><b>Ground networks:</b> AERONET (aerosols), Pandora and MAX-DOAS (NO₂, HCHO columns), TCCON (CO₂/CH₄), ozonesondes, air-quality monitors.</li>
+        <li><b>Aircraft and ship campaigns:</b> detailed in-situ profiles for process understanding and for testing retrievals.</li>
+        <li><b>Error sources:</b> clouds, surface reflectance, aerosols, viewing geometry, a priori profiles, instrument degradation and sampling (clear-sky bias, overpass time).</li>
+        <li><b>Representativeness:</b> a 5 km pixel is not a point measurement; compare like with like using averaging kernels and matching times.</li>
+      </ul>
+    </section>
+
+    <section class="rs-sec" id="s11"><h3><span class="no">11</span>Common pitfalls for newcomers</h3>
+      <ul>
+        <li>Forgetting quality flags and cloud filters, then interpreting noise as signal.</li>
+        <li>Mixing product versions or sensors with different overpass times in one trend.</li>
+        <li>Comparing a column with a surface measurement without considering the vertical distribution.</li>
+        <li>Averaging in the wrong space (average radiances or columns, not ratios or indices computed on raw counts).</li>
+        <li>Ignoring the pixel size, swath position and projection when regridding.</li>
+        <li>Not reading the product user guide and known-issues page before using the data.</li>
+      </ul>
+      <div class="rs-tip"><b>Starter project:</b> download one month of TROPOMI NO₂ for your city, filter by <code>qa_value</code>, grid it to 0.05°, and map the monthly mean. Then compare weekdays with weekends.</div>
+    </section>
+
+    <section class="rs-sec" id="s12"><h3><span class="no">12</span>Glossary</h3>
+      <div class="rs-gloss">
+        <div><b>AOD</b>: aerosol optical depth, a measure of how much light aerosols block.</div>
+        <div><b>Swath</b>: the strip of ground imaged along the satellite track.</div>
+        <div><b>Revisit time</b>: how often the same place is observed.</div>
+        <div><b>TOA</b>: top of atmosphere, the level at which the satellite measures.</div>
+        <div><b>Radiance</b>: energy per area, solid angle and wavelength reaching the sensor.</div>
+        <div><b>SAR / InSAR</b>: synthetic aperture radar / its interferometry for surface motion.</div>
+        <div><b>DOAS</b>: differential optical absorption spectroscopy for trace gases.</div>
+        <div><b>Column</b>: total amount of a gas in a vertical column, e.g. molec cm⁻².</div>
+        <div><b>Averaging kernel</b>: the retrieval's sensitivity at each altitude.</div>
+        <div><b>NDVI</b>: normalised difference vegetation index.</div>
+        <div><b>Level 1/2/3</b>: processing levels from calibrated radiance to gridded products.</div>
+        <div><b>Hyperspectral</b>: hundreds of narrow spectral channels.</div>
+      </div>
+    </section>
+
+    <div class="rw-back"><a href="research-work.html"><i class="bi bi-arrow-left-circle"></i> Back to Research work</a></div>
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; <span id="current-year"></span>
+        <strong><span>Nidhi</span></strong>. All Rights Reserved
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top" id="backTop"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    const btn = document.getElementById('backTop');
+    window.addEventListener('scroll', () => btn.classList.toggle('active', window.scrollY > 200));
+    btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  </script>
+  <script data-goatcounter="https://nidhi4358.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+
+</html>
