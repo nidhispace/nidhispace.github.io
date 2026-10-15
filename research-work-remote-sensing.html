@@ -544,6 +544,22 @@
     <section class="rs-sec" id="s1"><h3><span class="no">1</span>What is remote sensing?</h3>
       <p class="lead">Remote sensing is the science of learning about an object, surface or gas <b>without touching it</b>, by measuring the electromagnetic radiation it reflects, emits or scatters. Satellites do this over the whole globe, repeatedly, which no network of ground stations can match.</p>
       <figure class="rs-fig"><img src="assets/img/remote-sensing/Active-passive.png" alt="Remote sensing system: energy source, passive and active sensors, ground receiver, processing station, product and users" style="max-width:860px" loading="lazy"><figcaption>Passive sensors (right) record reflected sunlight or emitted radiation; active sensors (left) send their own signal. Data are received on the ground (E), processed (F) and delivered as products to users (G).</figcaption></figure>
+      <figure class="rs-fig"><svg viewBox="0 0 860 330" role="img" aria-label="How passive and active remote sensing work">
+<defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#e2703a"/></marker><marker id="ab" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#2e86c1"/></marker></defs>
+<rect x="0" y="236" width="860" height="94" fill="#c9dfb6"/><rect x="0" y="250" width="860" height="80" fill="#a9c98f"/>
+<rect x="0" y="120" width="860" height="116" fill="#e6f3fb"/><text x="12" y="140" font-size="12" fill="#2e86c1">Atmosphere (absorbs, scatters, emits)</text>
+<circle cx="70" cy="55" r="26" fill="#f6c343"/><text x="70" y="102" text-anchor="middle" font-size="12" fill="#555">Sun</text>
+<g transform="translate(560,26)"><rect x="-18" y="0" width="36" height="16" rx="3" fill="#0a3d62"/><rect x="-50" y="4" width="28" height="8" fill="#2e86c1"/><rect x="22" y="4" width="28" height="8" fill="#2e86c1"/><circle cx="0" cy="22" r="5" fill="#34b7a7"/></g>
+<text x="560" y="72" text-anchor="middle" font-size="12" fill="#555">Satellite sensor</text>
+<line x1="95" y1="70" x2="300" y2="248" stroke="#e2703a" stroke-width="2.5" marker-end="url(#ar)"/><text x="130" y="170" font-size="11.5" fill="#e2703a" transform="rotate(40 130 170)">1  Solar radiation</text>
+<line x1="320" y1="250" x2="520" y2="62" stroke="#e2703a" stroke-width="2.5" stroke-dasharray="7 4" marker-end="url(#ar)"/><text x="420" y="168" font-size="11.5" fill="#e2703a" transform="rotate(-43 420 168)">2  Reflected / emitted</text>
+<text x="300" y="276" text-anchor="middle" font-size="12" fill="#2d5a27" font-weight="700">Surface: land, ocean, ice, vegetation</text>
+<text x="300" y="296" text-anchor="middle" font-size="11" fill="#2d5a27">PASSIVE: measures natural energy</text>
+<line x1="610" y1="60" x2="700" y2="248" stroke="#2e86c1" stroke-width="2.5" marker-end="url(#ab)"/><line x1="725" y1="248" x2="635" y2="62" stroke="#2e86c1" stroke-width="2.5" stroke-dasharray="7 4" marker-end="url(#ab)"/>
+<text x="718" y="276" text-anchor="middle" font-size="12" fill="#1a5276" font-weight="700">ACTIVE: sends a pulse, listens</text>
+<text x="718" y="296" text-anchor="middle" font-size="11" fill="#1a5276">radar (SAR), lidar</text>
+<text x="780" y="170" font-size="11" fill="#1a5276">3  Echo returns</text>
+<text x="12" y="322" font-size="11" fill="#555">4  Signal is converted to radiance, then to a physical quantity (temperature, NO₂, vegetation, rainfall ...)</text></svg><figcaption>Simplified view of the same idea: passive sensors use the Sun (reflected light) or the Earth's own thermal emission; active sensors send their own signal and time the echo.</figcaption></figure>
       <div class="rs-grid">
         <div class="rs-box"><h4>Passive</h4><p>Records natural radiation. Examples: optical cameras, spectrometers (TROPOMI, MODIS), thermal and microwave radiometers. Needs sunlight for reflected bands.</p></div>
         <div class="rs-box"><h4>Active</h4><p>Emits energy and measures the return. Examples: SAR radar (Sentinel-1), lidar (CALIPSO, ICESat-2), radar altimeters. Works day and night; radar sees through cloud.</p></div>
@@ -590,9 +606,25 @@
 
     <section class="rs-sec" id="s3"><h3><span class="no">3</span>Platforms and orbits</h3>
       <p class="lead">Where the sensor sits decides what it can see and how often.</p>
-      <figure class="rs-fig"><img src="assets/img/remote-sensing/orbit.png" alt="Polar and geostationary satellite orbits around Earth" style="max-width:520px" loading="lazy"><figcaption>Polar orbit (grey swath, pole to pole) versus geostationary orbit (fixed over the equator).</figcaption></figure><ul><li><b>Polar, sun-synchronous LEO (600–830 km):</b> passes over the same local time every day and covers the globe in swaths. Landsat, Sentinel-2/3/5P, MODIS, VIIRS, Metop, Aura.</li>
-        <li><b>Geostationary (35,786 km):</b> hovers over one point on the equator and images it every 5–15 min. GOES, Himawari, Meteosat, INSAT, GEMS, TEMPO, Sentinel-4.</li>
-        <li><b>Inclined LEO and others:</b> GPM, ISS instruments, MEO constellations, and DSCOVR at Lagrange point L1.</li></ul>
+      <figure class="rs-fig"><img src="assets/img/remote-sensing/orbit.png" alt="Polar and geostationary satellite orbits around Earth" style="max-width:520px" loading="lazy"><figcaption>Polar orbit (grey swath, pole to pole) versus geostationary orbit (fixed over the equator).</figcaption></figure><figure class="rs-fig"><svg viewBox="0 0 860 340" role="img" aria-label="Satellite orbits around Earth">
+<circle cx="260" cy="170" r="52" fill="#2e86c1"/><path d="M225,150 q18,-18 36,-4 q10,12 -4,22 q-18,6 -32,-18z M262,180 q18,2 24,18 q-10,14 -24,-4z" fill="#6fb36a"/>
+<text x="260" y="174" text-anchor="middle" font-size="12" fill="#fff" font-weight="700" opacity="0"></text>
+<ellipse cx="260" cy="170" rx="70" ry="70" fill="none" stroke="#34b7a7" stroke-width="2"/><circle cx="330" cy="170" r="6" fill="#34b7a7"/>
+<ellipse cx="260" cy="170" rx="68" ry="70" fill="none" stroke="#e2703a" stroke-width="2" stroke-dasharray="5 4" transform="rotate(80 260 170)"/><circle cx="260" cy="100" r="6" fill="#e2703a"/>
+<circle cx="260" cy="170" r="150" fill="none" stroke="#8e5bd1" stroke-width="1.5" stroke-dasharray="3 5"/><circle cx="410" cy="170" r="7" fill="#8e5bd1"/>
+<text x="260" y="340" text-anchor="middle" font-size="11" fill="#555">Distances are not to scale</text>
+<g font-size="12" fill="#333">
+<rect x="490" y="30" width="14" height="14" fill="#e2703a"/><text x="512" y="42" font-weight="700">Polar, sun-synchronous LEO · 600–830 km</text>
+<text x="512" y="60" font-size="11">Passes over the same local time every day; covers the whole globe in swaths.</text>
+<text x="512" y="76" font-size="11">Landsat, Sentinel-2/3/5P, MODIS, VIIRS, Metop (IASI), Aura (OMI)</text>
+<rect x="490" y="108" width="14" height="14" fill="#34b7a7"/><text x="512" y="120" font-weight="700">Inclined LEO · ~400–500 km</text>
+<text x="512" y="138" font-size="11">Samples all local times, limited to mid-latitudes; e.g. GPM Core, ISS instruments.</text>
+<rect x="490" y="168" width="14" height="14" fill="#8e5bd1"/><text x="512" y="180" font-weight="700">Geostationary (GEO) · 35,786 km</text>
+<text x="512" y="198" font-size="11">Stays above one point on the equator: a fixed view, images every 5–15 min.</text>
+<text x="512" y="214" font-size="11">GOES, Himawari, Meteosat (MSG, MTG), INSAT, GEMS, TEMPO, Sentinel-4</text>
+<text x="490" y="250" font-weight="700" font-size="12">Other vantage points</text>
+<text x="490" y="268" font-size="11">MEO (navigation and some constellations) · Lagrange point L1 (DSCOVR sees the full sunlit disk)</text>
+<text x="490" y="284" font-size="11">Aircraft, balloons, drones and ground-based instruments for validation and detail</text></g></svg><figcaption>Main orbit types used for Earth observation, with example missions (distances not to scale).</figcaption></figure>
       <p><b>Trade-off in one line:</b> low orbits give fine detail and global coverage but infrequent looks; geostationary orbits give frequent looks but a coarser, fixed view that degrades towards high latitudes. Aircraft, balloons and drones fill the gap with high-detail, targeted measurements.</p>
     </section>
 
