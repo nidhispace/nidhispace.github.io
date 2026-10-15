@@ -130,6 +130,8 @@
     mark.hit { background: #ffe08a; color: inherit; padding: 0 1px; border-radius: 3px; }
     .pub-empty { text-align: center; padding: 38px 10px; color: #666; background: #fff; border-radius: 12px; }
 
+    .pub-type { display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; color: #4b5563; background: #eef1f3; border-radius: 12px; padding: 2px 9px; margin-right: 6px; vertical-align: 1px; }
+    .pub-type.t-peer { color: #1f8f82; background: #e7f8f6; }
     ol.conf-list { list-style: none; counter-reset: conf; padding: 0; text-align: left; }
     ol.conf-list li { counter-increment: conf; position: relative; background: #fff; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, .05); padding: 1rem 1.4rem 1rem 4.2rem; margin-bottom: .9rem; font-size: .92rem; line-height: 1.5; color: #444; }
     ol.conf-list li::before { content: counter(conf); position: absolute; left: 1rem; top: 1rem; min-width: 34px; height: 34px; border-radius: 17px; background: #eef1f3; color: #555; font-family: "Raleway", sans-serif; font-weight: 800; font-size: .85rem; display: flex; align-items: center; justify-content: center; }
@@ -224,6 +226,19 @@
               <select id="journalFilter"><option value="">All journals</option></select>
             </label>
 
+            <label>Type:
+              <select id="typeFilter">
+                <option value="">All types</option>
+                <option>Peer-reviewed article</option>
+                <option>Review article</option>
+                <option>Book chapter</option>
+                <option>Conference abstract</option>
+                <option>Preprint / discussion paper</option>
+                <option>Correction</option>
+                <option>Thesis</option>
+              </select>
+            </label>
+
             <label>Sort by year:
               <select id="yearSort">
                 <option value="desc">Newest First</option>
@@ -241,28 +256,40 @@
 
         <h2>Conference articles | Book chapters </h2>
         <ol class="conf-list">
-          <li class="left-align"><strong>Nidhi Tripathi</strong>, Lokesh Sahu, Mansi Gupta, Sachchida Tripathi,
+          <li class="left-align" data-type="Conference abstract"><span class="pub-type">Conference abstract</span> <strong>Nidhi Tripathi</strong>, Lokesh Sahu, Mansi Gupta, Sachchida Tripathi,
             Investigation of major emission sources of non-methane hydrocarbons and their role in ozone formation in New
             Delhi, India, <a href="https://ui.adsabs.harvard.edu/abs/2021AGUFM.A55J1524T/abstract" target="_blank">AGU
               Fall Meeting Abstracts 2021, A55J-1524, (2022)</a></li>
-          <li class="left-align">R Yadav, LK Sahu, <strong>Nidhi Tripathi</strong>, D Pal, Emission sources of
+          <li class="left-align" data-type="Conference abstract"><span class="pub-type">Conference abstract</span> R Yadav, LK Sahu, <strong>Nidhi Tripathi</strong>, D Pal, Emission sources of
             non-methane volatile organic compounds (NMVOCs) and their contribution to photochemical ozone (O3) formation
             at an urban atmosphere in, <a
               href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=5x7vWOQAAAAJ&sortby=pubdate&citation_for_view=5x7vWOQAAAAJ:2osOgNQ5qMEC"
               target="_blank">AGU Fall Meeting Abstracts 2017, A23B-2345, 2017</a></li>
-          <li class="left-align">R Yadav, P Trivedi, LK Sahu, G Beig, <strong>Nidhi Tripathi</strong>, Air Pollution
+          <li class="left-align" data-type="Book chapter"><span class="pub-type">Book chapter</span> R Yadav, P Trivedi, LK Sahu, G Beig, <strong>Nidhi Tripathi</strong>, Air Pollution
             Modeling, <a href="https://doi.org/10.1007/978-981-15-3481-2_3" target="_blank">Air Pollution and
               Environmental Health, 37-55</a></li>
-          <li class="left-align">L Wang, JG Slowik, <strong>Nidhi Tripathi</strong>, D Bhattu, P Rai, V Kumar, P Vats, R
+          <li class="left-align" data-type="Preprint / discussion paper"><span class="pub-type">Preprint / discussion paper</span> L Wang, JG Slowik, <strong>Nidhi Tripathi</strong>, D Bhattu, P Rai, V Kumar, P Vats, R
             Satish, Source characterization of volatile organic compounds measured by PTR-ToF-MS in Delhi, India, <a
               href="https://oss.ptrms.cn/conference/Contributions_8th-PTR-MS-Conference-2019_web.pdf#page=59"
               target="_blank">Atmos. Chem. Phys. Discuss. 1</a></li>
-          <li class="left-align">Tripathi, N., Edtbauer, A., Wang, N., Ringsdorf, A., Krumm, B., Klüpfel, T., Lelieveld,
+          <li class="left-align" data-type="Conference abstract"><span class="pub-type">Conference abstract</span> Tripathi, N., Edtbauer, A., Wang, N., Ringsdorf, A., Krumm, B., Klüpfel, T., Lelieveld,
             J., and Williams, J.: Impact of deep convection on biogenic volatile organic compounds in the upper
             troposphere over the Amazon Rainforest, <a
-              href="https://doi.org/10.5194/egusphere-egu24-3572 target=_blank">EGU General Assembly 2024, Vienna,
+              href="https://doi.org/10.5194/egusphere-egu24-3572" target="_blank">EGU General Assembly 2024, Vienna,
               Austria (14–19 Apr 2024)</a></li>
-          <li class="left-align">Lokesh Sahu, Mansi Gupta, <strong>Nidhi Tripathi</strong>, Dibyani Singh, Sunilkumar Tharayil, Impact of anthropogenic and biogenic sources on ambient air isoprene during winter and summer seasons at an urban site in western India, <a href="https://doi.org/10.5194/egusphere-egu26-935" target="_blank">EGU General Assembly 2026, Vienna, Austria &amp; Online (3–8 May 2026), EGU26-935</a></li>
+          <li class="left-align" data-type="Conference abstract"><span class="pub-type">Conference abstract</span> Lokesh Sahu, Mansi Gupta, <strong>Nidhi Tripathi</strong>, Dibyani Singh, Sunilkumar Tharayil, Impact of anthropogenic and biogenic sources on ambient air isoprene during winter and summer seasons at an urban site in western India, <a href="https://doi.org/10.5194/egusphere-egu26-935" target="_blank">EGU General Assembly 2026, Vienna, Austria &amp; Online (3–8 May 2026), EGU26-935</a></li>
+          <li class="left-align" data-type="Conference abstract"><span class="pub-type">Conference abstract</span> Isoprene nitrates drive new particle formation in Amazon's upper troposphere, EGU General Assembly Conference Abstracts, EGU25-16087 (2025)</li>
+          <li class="left-align" data-type="Conference abstract"><span class="pub-type">Conference abstract</span> Vertical Transport and Chemistry of Biogenic Volatile Organic Compounds over the Amazon Rainforest, AGU24 (2024)</li>
+          <li class="left-align" data-type="Conference abstract"><span class="pub-type">Conference abstract</span> Measuring Hydroxyl Radicals: Aircraft Expeditions in the Tropical Troposphere, AGU Fall Meeting Abstracts 2024, A21H-1832 (2024)</li>
+          <li class="left-align" data-type="Conference abstract"><span class="pub-type">Conference abstract</span> Hydroxyl Radicals and Oxidation Capacity in the Tropical Troposphere: Measurements from CAFE Field Campaigns using HORUS, European Geosciences Union General Assembly (EGU24), EGU24-14641 (2024)</li>
+          <li class="left-align" data-type="Conference abstract"><span class="pub-type">Conference abstract</span> Changes in ambient concentrations of monoterpenes during the winter-summer transition period in an urban site of India, European Geosciences Union General Assembly (EGU24), EGU24-1147 (2024)</li>
+          <li class="left-align" data-type="Conference abstract"><span class="pub-type">Conference abstract</span> Effects of land-atmosphere interactions on trace gases over the Indian subcontinent: A modeling perspective, AGU23 (2023)</li>
+          <li class="left-align" data-type="Conference abstract"><span class="pub-type">Conference abstract</span> Comparison of real-time NMVOCs measurements using PTR-TOF-MS in two cities of IGB region, India: Sources identification and influence on SOA formation, EGU General Assembly Conference Abstracts, EGU23-585 (2023)</li>
+          <li class="left-align" data-type="Conference abstract"><span class="pub-type">Conference abstract</span> Real-time measurements of NMVOCs in the central IGB, Lucknow, India: Source characterization and their role in O3 and SOA formation, EGUsphere (2022)</li>
+          <li class="left-align" data-type="Preprint / discussion paper"><span class="pub-type">Preprint / discussion paper</span> Emissions of non-methane volatile organic compounds from combustion of domestic fuels in Delhi, India, Atmos. Chem. Phys. Discuss. (2020), discussion paper</li>
+          <li class="left-align" data-type="Preprint / discussion paper"><span class="pub-type">Preprint / discussion paper</span> Emissions of intermediate-volatility and semi-volatile organic compounds from domestic fuels used in Delhi, India, Atmos. Chem. Phys. Discuss. (2020), discussion paper</li>
+          <li class="left-align" data-type="Correction"><span class="pub-type">Correction</span> Author Correction: Isoprene nitrates drive new particle formation in Amazon's upper troposphere, <a href="https://doi.org/10.1038/s41586-025-08906-2" target="_blank">Nature 640, 30 (2025)</a></li>
+          <li class="left-align" data-type="Thesis"><span class="pub-type">Thesis</span> <strong>Nidhi Tripathi</strong>, Emission and atmospheric variability of volatile organic compounds over the Indian subcontinent and surrounding oceanic regions, Doctoral thesis, IIT Gandhinagar (2020)</li>
         </ol>
         <button onclick="redirectToResearch()"><i class="bi bi-arrow-left-circle-fill"></i> Go back </button>
       </div>
@@ -314,7 +341,8 @@
     // stable numbers: #1 = oldest paper, so a paper keeps its number whatever filter or sort is active
     // Nidhi's position in the author list (1 = first author). Papers whose list is cut off with "et al." can set nidhiPosition: n by hand; otherwise null.
     const authorPos = a => { const k = a.split(/,\s*/).findIndex(n => /Nidhi Tripathi/.test(n)); return k < 0 ? null : k + 1; };
-    const ranked = publications.map((p, i) => ({ ...p, i, ur: p.status === 'under review', venue: venue(p.journal), pos: p.nidhiPosition || authorPos(p.authors), etal: /et\.?\s*al/i.test(p.authors), nAuth: p.authors.split(/,\s*/).filter(n => n && !/^et\.?\s*al\.?$/i.test(n)).length }))
+    const typeOf = p => p.type || (/Discussions/i.test(p.journal) ? 'Preprint / discussion paper' : /^A review on/i.test(p.title) ? 'Review article' : 'Peer-reviewed article');
+    const ranked = publications.map((p, i) => ({ ...p, i, ptype: typeOf(p), ur: p.status === 'under review', venue: venue(p.journal), pos: p.nidhiPosition || authorPos(p.authors), etal: /et\.?\s*al/i.test(p.authors), nAuth: p.authors.split(/,\s*/).filter(n => n && !/^et\.?\s*al\.?$/i.test(n)).length }))
       .sort((a, b) => a.year - b.year || b.i - a.i);
     // numbers (#1 = oldest) are given to published papers only; papers under review get the next numbers once accepted
     const pubd = ranked.filter(p => !p.ur);
@@ -347,7 +375,7 @@
 
     // ── controls ──
     const $ = id => document.getElementById(id);
-    const state = { q: '', year: 'all', pos: 'any', journal: '', sort: 'desc' };
+    const state = { q: '', year: 'all', pos: 'any', journal: '', type: '', sort: 'desc' };
     const chipsEl = $('yearChips');
     const posEl = $('posChips');
     const jSel = $('journalFilter');
@@ -359,6 +387,7 @@
     function matches(p, ignoreYear) {
       if (state.pos !== 'any' && !(p.pos && p.pos <= state.pos)) return false;
       if (state.journal && p.venue !== state.journal) return false;
+      if (state.type && p.ptype !== state.type) return false;
       if (!ignoreYear && state.year !== 'all' && p.year !== +state.year) return false;
       if (state.q) {
         const hay = (p.title + ' ' + p.authors + ' ' + p.journal + ' ' + p.venue + ' ' + p.year + ' ' + (p.ur ? 'under review submitted' : '')).toLowerCase();
@@ -440,6 +469,7 @@
           <div class="pub-title">${p.link ? `<a href="${esc(p.link)}" target="_blank" rel="noopener">${hl(p.title, terms)}</a>` : hl(p.title, terms)}</div>
           <div class="pub-authors">${authorsHTML(p, terms, expanded.has(p.ord) || terms.some(t => t.length > 1 && p.authors.toLowerCase().includes(t.toLowerCase()) && p.authors.split(/,\s*/).slice(0, 6).join(', ').toLowerCase().indexOf(t.toLowerCase()) < 0))}</div>
           <div class="pub-meta">
+            <span class="pub-type ${p.ptype === 'Peer-reviewed article' ? 't-peer' : ''}">${p.ptype}</span>
             <span class="pub-journal">${hl(p.journal, terms)}</span><span class="pub-yr">(${p.year})</span>
             ${JIF[p.venue] ? `<span class="pub-if" title="Journal Impact Factor ${IF_YEAR} (Clarivate JCR) of ${esc(p.venue)}">IF ${JIF[p.venue].toFixed(1)}</span>` : ''}
             ${p.ur ? '<span class="pub-ur-badge"><i class="bi bi-hourglass-split"></i> Under review</span>' : ''}
@@ -468,7 +498,8 @@
         html += cardHTML(p, terms);
       });
       $('pubsList').innerHTML = html || '<div class="pub-empty"><i class="bi bi-search"></i> No publications match these filters. <button type="button" class="pub-more" id="emptyReset">Reset filters</button></div>';
-      const filtered = state.q || state.year !== 'all' || state.pos !== 'any' || state.journal;
+      document.querySelectorAll('ol.conf-list li').forEach(li => { li.hidden = !!state.type && li.dataset.type !== state.type; });
+      const filtered = state.q || state.year !== 'all' || state.pos !== 'any' || state.journal || state.type;
       $('pubCount').innerHTML = filtered ? `Showing <b>${list.length}</b> of <b>${ranked.length}</b> entries` : `<b>${total}</b> publications${nUR ? ` (+${nUR} under review)` : ''}, numbered from oldest (#1) to newest (#${total})`;
       $('ifNote').hidden = !Object.keys(JIF).length;
       document.querySelector('.pt-search').classList.toggle('has-text', !!$('pubSearch').value);
@@ -478,8 +509,9 @@
     let t; $('pubSearch').addEventListener('input', e => { clearTimeout(t); t = setTimeout(() => { state.q = e.target.value; render(); }, 120); });
     $('pubSearchClear').addEventListener('click', () => { $('pubSearch').value = ''; state.q = ''; render(); $('pubSearch').focus(); });
     $('journalFilter').addEventListener('change', e => { state.journal = e.target.value; render(); });
+    $('typeFilter').addEventListener('change', e => { state.type = e.target.value; render(); });
     $('yearSort').addEventListener('change', e => { state.sort = e.target.value; render(); });
-    function resetAll() { Object.assign(state, { q: '', year: 'all', pos: 'any', journal: '', sort: 'desc' }); $('pubSearch').value = ''; jSel.value = ''; $('yearSort').value = 'desc'; render(); }
+    function resetAll() { Object.assign(state, { q: '', year: 'all', pos: 'any', journal: '', type: '', sort: 'desc' }); $('typeFilter').value = ''; $('pubSearch').value = ''; jSel.value = ''; $('yearSort').value = 'desc'; render(); }
     $('pubReset').addEventListener('click', resetAll);
     document.addEventListener('keydown', e => { if (e.key === '/' && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) { e.preventDefault(); $('pubSearch').focus(); } if (e.key === 'Escape' && document.activeElement === $('pubSearch')) { $('pubSearchClear').click(); $('pubSearch').blur(); } });
 

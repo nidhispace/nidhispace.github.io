@@ -188,6 +188,14 @@ const publications = [
     link: "https://acp.copernicus.org/articles/21/2383/2021/"
   },
   {
+    authors: "Gareth J. Stewart, Beth S. Nelson, W. Joe F. Acton, Adam R. Vaughan, Naomi J. Farren, James R. Hopkins, Martyn W. Ward, Stefan J. Swift, Rahul Arya, Arnab Mondal, Ritu Jangirh, Sakshi Ahlawat, Lokesh Yadav, Sudhir K. Sharma, Siti S. M. Yunus, C. Nicholas Hewitt, Eiko Nemitz, Neil Mullinger, Ranu Gadi, Lokesh K. Sahu, Nidhi Tripathi, Andrew R. Rickard, James D. Lee, Tuhin K. Mandal, Jacqueline F. Hamilton",
+    title: "Emissions of intermediate-volatility and semi-volatile organic compounds from domestic fuels used in Delhi, India",
+    journal: "Atmospheric Chemistry and Physics",
+    year: 2021,
+    nidhiFirstAuthor: false,
+    link: "https://doi.org/10.5194/acp-21-2407-2021"
+  },
+  {
     authors: "LK Sahu, R Yadav, Nidhi Tripathi",
     title: "Aromatic compounds in a semi-urban site of western India: seasonal variability and emission ratios",
     journal: "Atmospheric Research",
