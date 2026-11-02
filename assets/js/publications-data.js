@@ -12,6 +12,14 @@ const publications = [
     link: ""
   },
   {
+    authors: "Carolina Nelson, Simone Andersen, Linda Ort, Clara Nussbaumer, Horst Fischer, Achim Edtbauer, Nijing Wang, Nidhi Tripathi, Akima Ringsdorf, Jonathan Williams, Mira Pöhlker, Thomas Klimach, Jos Lelieveld, Ulrich Pöschl, John N. Crowley",
+    title: "Peroxyacetyl nitrate (PAN) and peroxyacetic acid (PAA) over mainland and coastal Australia and the Indo-Pacific warm pool",
+    journal: "Environmental Science: Atmospheres",
+    year: 2026,
+    nidhiFirstAuthor: false,
+    link: "https://doi.org/10.1039/d6ea00115g"
+  },
+  {
     authors: "L.K. Sahu, Mansi Gupta, Nidhi Tripathi, Dibyani Singh, Ravi Yadav, T.K. Sunil Kumar",
     title: "Sources of ambient air isoprene during winter and summer seasons and impact of COVID-19 pandemic lockdown at an urban site in western India",
     journal: "Atmospheric Environment",
