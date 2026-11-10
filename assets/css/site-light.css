@@ -60,3 +60,15 @@
       *, *::before, *::after { animation-duration: .001s !important; transition-duration: .001s !important; }
       .reveal { opacity: 1; transform: none; }
     }
+
+/* generic helpers for simple content pages */
+.pg-top { padding-top: clamp(104px, 14vh, 132px); padding-bottom: clamp(8px, 2vw, 24px); }
+.pg-top h1 { font-family: "Fraunces", Georgia, serif; font-weight: 600; letter-spacing: -.03em; line-height: 1.06; font-size: clamp(2.2rem, 4.8vw, 3.8rem); margin: 12px 0 12px; }
+.pg-top h1 em { font-style: italic; font-weight: 400; color: var(--accent); }
+.back-row { margin-top: clamp(32px, 5vw, 56px); display: flex; flex-wrap: wrap; gap: 12px; }
+.btn.ghost { background: var(--card); color: var(--ink); border: 1px solid var(--line); }
+.btn.ghost:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+.btn.back i { transition: transform .3s var(--ease); } .btn.back:hover i { transform: translateX(-4px); }
+.pill-tag { display: inline-flex; align-items: center; gap: 6px; padding: 4px 11px; border-radius: 6px; font-size: 12.5px; font-weight: 500; background: var(--paper-2); }
+.pill-tag.teal { background: var(--accent-soft); color: #164c48; }
+.pill-tag.clay { background: var(--clay-soft); color: var(--clay); }
