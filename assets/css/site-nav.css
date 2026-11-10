@@ -1,0 +1,32 @@
+/* Shared top navigation (light, editorial). All selectors are prefixed .sn so they cannot clash with Bootstrap or the old template. */
+.sn { --sn-ink: #1b2430; --sn-muted: #5a6472; --sn-line: #ddd4c4; --sn-accent: #1f6b66; --sn-clay: #b24a26; --sn-paper: #f7f3ec;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  padding: 14px clamp(20px, 4vw, 56px); background: rgba(247, 243, 236, .92); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--sn-line); font-family: "Inter", system-ui, sans-serif; line-height: 1.4; }
+.sn *, .sn *::before, .sn *::after { box-sizing: border-box; }
+.sn .sn-logo { font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 1.45rem; letter-spacing: -.01em; color: var(--sn-ink); text-decoration: none; }
+.sn .sn-logo span { color: var(--sn-clay); }
+.sn .sn-links { display: flex; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.sn .sn-links li { margin: 0; padding: 0; }
+.sn .sn-links a { position: relative; display: block; white-space: nowrap; padding: 8px 12px; font-size: 14.5px; font-weight: 400; color: var(--sn-muted); text-decoration: none; transition: color .25s; }
+.sn .sn-links a::after { content: ""; position: absolute; left: 12px; right: 12px; bottom: 2px; height: 2px; background: var(--sn-accent); transform: scaleX(0); transform-origin: left; transition: transform .35s cubic-bezier(.2, .8, .2, 1); }
+.sn .sn-links a:hover { color: var(--sn-ink); }
+.sn .sn-links a:hover::after, .sn .sn-links a.active::after { transform: scaleX(1); }
+.sn .sn-links a.active { color: var(--sn-ink); font-weight: 600; }
+.sn .sn-burger { display: none; width: 42px; height: 42px; padding: 0; border-radius: 8px; border: 1px solid var(--sn-line); background: #fffdf9; cursor: pointer; position: relative; }
+.sn .sn-burger span { position: absolute; left: 11px; right: 11px; height: 2px; border-radius: 2px; background: var(--sn-ink); transition: transform .3s, opacity .3s; }
+.sn .sn-burger span:nth-child(1) { top: 14px; }
+.sn .sn-burger span:nth-child(2) { top: 20px; }
+.sn .sn-burger span:nth-child(3) { top: 26px; }
+.sn.open .sn-burger span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.sn.open .sn-burger span:nth-child(2) { opacity: 0; }
+.sn.open .sn-burger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+.sn .sn-burger:focus-visible, .sn .sn-links a:focus-visible, .sn .sn-logo:focus-visible { outline: 2px solid var(--sn-accent); outline-offset: 2px; }
+@media (max-width: 960px) {
+  .sn .sn-burger { display: block; }
+  .sn nav { position: absolute; top: 100%; left: 0; right: 0; display: none; background: var(--sn-paper); border-bottom: 1px solid var(--sn-line); padding: 8px clamp(20px, 4vw, 56px) 16px; }
+  .sn.open nav { display: block; }
+  .sn .sn-links { flex-direction: column; gap: 0; }
+  .sn .sn-links a::after { display: none; }
+  .sn .sn-links a { padding: 12px 4px; border-bottom: 1px solid rgba(221, 212, 196, .6); }
+}

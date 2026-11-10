@@ -1,0 +1,62 @@
+/* Shared light design system for the redesigned pages (paper background, Fraunces + Inter, flat cards, one teal accent). */
+    :root {
+      --paper: #f7f3ec;
+      --paper-2: #eee8dc;
+      --card: #fffdf9;
+      --ink: #1b2430;
+      --muted: #5a6472;
+      --line: #ddd4c4;
+      --accent: #1f6b66;
+      --accent-soft: #dcebe7;
+      --clay: #b24a26;
+      --clay-soft: #f5e1d8;
+      --ease: cubic-bezier(.2, .8, .2, 1);
+      --shadow: 0 14px 40px rgba(27, 36, 48, .09);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--paper); overflow-x: clip; scroll-behavior: smooth; }
+    body { font-family: "Inter", system-ui, sans-serif; color: var(--ink); background: var(--paper); overflow-x: clip; -webkit-font-smoothing: antialiased; line-height: 1.65; }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: var(--accent); color: #fff; }
+
+    /* isobar lines: weather-map contours as quiet decoration */
+    .iso { position: absolute; fill: none; stroke: var(--accent); stroke-width: 1.2; opacity: .16; pointer-events: none; z-index: 0; }
+    .iso-a { top: 40px; right: -260px; width: 1100px; }
+    .iso-b { top: 1050px; left: -420px; width: 1100px; opacity: .12; }
+    .page { position: relative; overflow: clip; }
+
+    /* ---------- Layout ---------- */
+    main { position: relative; z-index: 1; }
+    .wrap { width: min(1120px, 100% - 48px); margin-inline: auto; position: relative; z-index: 1; }
+    section { position: relative; padding: clamp(56px, 8vw, 104px) 0; }
+    section.band { background: var(--paper-2); }
+    .kicker { display: inline-flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--clay); }
+    .kicker b { font-family: "Fraunces", serif; font-weight: 600; font-size: 15px; letter-spacing: 0; }
+    .kicker::after { content: ""; width: 44px; height: 1px; background: var(--clay); opacity: .5; }
+    h2 { font-family: "Fraunces", Georgia, serif; font-weight: 600; letter-spacing: -.02em; line-height: 1.12; font-size: clamp(1.8rem, 3.6vw, 2.7rem); margin: 12px 0 36px; max-width: 18em; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .85s var(--ease), transform .85s var(--ease); transition-delay: var(--d, 0s); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    
+
+    /* footer, buttons */
+    footer { position: relative; z-index: 1; text-align: center; padding: 28px 20px 40px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); }
+    .btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 22px; border-radius: 10px; font-weight: 600; font-size: 14.5px; color: #fff; background: var(--accent); transition: transform .3s var(--ease), background .3s, box-shadow .3s; }
+    .btn:hover { background: var(--ink); transform: translateY(-3px); box-shadow: var(--shadow); }
+    .btn i { transition: transform .3s var(--ease); }
+    .btn:hover i { transform: translateX(4px); }
+    .lead { font-size: clamp(1.04rem, 1.4vw, 1.2rem); color: var(--muted); max-width: 40em; }
+    .lead a { color: var(--accent); font-weight: 500; border-bottom: 1px solid rgba(31, 107, 102, .35); }
+    .page-title { font-family: "Fraunces", Georgia, serif; font-weight: 600; letter-spacing: -.03em; line-height: 1.05; font-size: clamp(2.4rem, 5.2vw, 4.2rem); margin: 16px 0 24px; }
+    .page-title em { font-style: italic; font-weight: 400; color: var(--accent); }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; }
+    .chips li { padding: 8px 15px; border-radius: 6px; font-size: 13.5px; font-weight: 500; background: var(--card); border: 1px solid var(--line); }
+    .chips li i { color: var(--accent); margin-right: 7px; }
+    @media (max-width: 600px) { .wrap { width: calc(100% - 32px); } }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .001s !important; transition-duration: .001s !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
