@@ -502,32 +502,31 @@
     .rs-gloss b { color: var(--navy); }
     @media (max-width: 600px) { .rs-sec { padding: 20px 16px; } }
   </style>
+  <!-- Site navigation (shared) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="assets/css/site-nav.css" rel="stylesheet">
 </head>
 
 <body>
 
   <!-- ── HEADER ── -->
-  <header id="header">
-    <div class="header-inner">
-      <h1 class="logo"><a href="index.html">Nidhi</a></h1>
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a class="active" href="research.html">Research</a></li>
-          <li><a href="field-campaigns.html">Fieldwork</a></li>
-          <li><a href="highlights.html">Highlights</a></li>
-          <li><a href="group.html">Group</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="history.html">History</a></li>
-        </ul>
-      </nav>
-      <div class="header-social-links">
-        <a href="https://twitter.com/nidhispace" target="_blank"><i class="bi bi-twitter"></i></a>
-        <a href="https://www.linkedin.com/in/nidhispace/" target="_blank"><i class="bi bi-linkedin"></i></a>
-      </div>
-      <i class="bi bi-list mobile-nav-toggle"></i>
-    </div>
+  <header class="sn" id="sn-header">
+    <a class="sn-logo" href="index.html">Nidhi<span>.</span></a>
+    <nav aria-label="Main">
+      <ul class="sn-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a class="active" href="research.html" aria-current="page">Research</a></li>
+        <li><a href="field-campaigns.html">Fieldwork</a></li>
+        <li><a href="highlights.html">Highlights</a></li>
+        <li><a href="group.html">Group</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="history.html">History</a></li>
+      </ul>
+    </nav>
+    <button class="sn-burger" type="button" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
   </header>
 
 
@@ -798,6 +797,7 @@
     btn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
   </script>
   <script data-goatcounter="https://nidhi4358.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  <script src="assets/js/site-nav.js"></script>
 </body>
 
 </html>
